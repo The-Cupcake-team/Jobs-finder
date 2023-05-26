@@ -1,3 +1,28 @@
 <resources>
     <string name="app_name">Jobs Finder</string>
+
+    <!--    bottom navigation-->
+    <string name="post">Post</string>
+    <string name="home">Home</string>
+    <string name="messages">Messages</string>
+    <string name="jobs">Jobs</string>
+    <string name="my_network">My Network</string>
+
+    <!--    create post-->
+    <string name="normal_post">Normal Post</string>
+    <string name="job_post">Job Post</string>
+    <string name="anyone">Anyone</string>
+
+    <!--    home & post strings-->
+    <string name="search">Search</string>
+    <string name="follow">Follow</string>
+    <string name="followed">Followed</string>
+    <string name="comments">comments</string>
+    <string name="post_body">President cast election as choice between all our republicans who seek to impose a nationwide abortion ban and democrat</string>
+
+    <!--    job location strings-->
+    <string name="on_your_location">On your location</string>
+    <string name="on_site">On site</string>
+    <string name="remote">Remote</string>
+
 </resources>
