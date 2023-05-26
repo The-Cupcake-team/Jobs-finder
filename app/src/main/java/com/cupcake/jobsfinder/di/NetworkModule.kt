@@ -19,7 +19,8 @@ object NetworkModule {
 		okHttpClient: OkHttpClient,
 		gsonConverterFactory: GsonConverterFactory
 	): JobApiService {
-		return Retrofit.Builder().baseUrl("")
+		return Retrofit.Builder()
+			.baseUrl("")
 			.client(okHttpClient)
 			.addConverterFactory(gsonConverterFactory)
 			.build()
@@ -30,7 +31,9 @@ object NetworkModule {
 	fun provideOkHttpClient(
 		loggingInterceptor: HttpLoggingInterceptor
 	): OkHttpClient {
-		return OkHttpClient().newBuilder().addInterceptor(loggingInterceptor).build()
+		return OkHttpClient().newBuilder()
+			.addInterceptor(loggingInterceptor)
+			.build()
 	}
 
 	@Provides
