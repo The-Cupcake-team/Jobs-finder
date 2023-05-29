@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.cupcake.jobsfinder.BR
 
 
 abstract class BaseFragment<DB: ViewDataBinding, VM: BaseViewModel>(
@@ -18,8 +19,6 @@ abstract class BaseFragment<DB: ViewDataBinding, VM: BaseViewModel>(
 ): Fragment() {
 
     abstract val LOG_TAG: String
-
-    abstract fun onInitDataBinding()
 
     lateinit var viewModel: VM
 
@@ -38,10 +37,12 @@ abstract class BaseFragment<DB: ViewDataBinding, VM: BaseViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        onInitDataBinding()
-        _binding?.lifecycleOwner = viewLifecycleOwner
-        return binding?.root
+        _binding?.apply {
+            setVariable(BR.viewModel, viewModel)
+            lifecycleOwner = viewLifecycleOwner
+        }
 
+        return binding?.root
     }
 
     protected fun log(value: String) {
