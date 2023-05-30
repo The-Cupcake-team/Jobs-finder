@@ -8,9 +8,9 @@ import javax.inject.Inject
 class PostMapper @Inject constructor() : Mapper<PostDto, Post> {
     override fun mapTo(input: PostDto): Post {
         return Post(
-            username = input.username ,
-            description = input.description ,
-            imageUrl = input.imageUrl
+            id = 0,
+            content = input.description,
+            createdAt = input.createdAt
         )
     }
 }

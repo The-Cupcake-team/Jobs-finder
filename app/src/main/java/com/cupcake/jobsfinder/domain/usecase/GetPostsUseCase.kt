@@ -9,9 +9,9 @@ class GetPostsUseCase @Inject constructor(
     private val repository: Repository,
     private val postMapper: PostMapper
 ) {
-    operator suspend fun invoke(): List<Post> {
+    suspend operator fun invoke(): List<Post> {
         return repository.getAllPosts().map { postDto ->
             postMapper.mapTo(postDto)
-        }.sortedBy { it.username }
+        }.sortedByDescending { it.createdAt }
     }
 }
