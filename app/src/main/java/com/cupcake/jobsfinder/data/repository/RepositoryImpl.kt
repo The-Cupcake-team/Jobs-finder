@@ -10,32 +10,37 @@ class RepositoryImpl : Repository {
     private fun fakePosts(): List<PostDto> {
         return listOf(
             PostDto(
+                1,
                 "bilal",
                 "android developer",
-                "3d ago",
-                "bla bla bla",
+                212453L,
+                "bla bla 1",
                 "https://blabla.com",
                 10,
                 9
             ),
             PostDto(
-                "devid",
+                2,
+                "david",
                 "android developer",
-                "2w ago",
-                "bla bla bla",
-                "https://devid.com",
-                100,
+                662453L,
+                "bla bla 2",
+                "https://david.com",
+                1000,
                 90
             ),
             PostDto(
+                3,
                 "ameer",
                 "android developer",
-                "1d ago",
-                "",
-                "https://ameer.com",
-                1200,
+                855453L,
+                "bla bla 3",
+                "https://david.com",
+                10000,
                 900
-            )
+            ),
+
+
         )
     }
 }
