@@ -7,6 +7,13 @@ import com.cupcake.jobsfinder.ui.mapper.Mapper
 
 class JobTitleMapper @inject constructor() : Mapper<JobTitleDto, JobTitle> {
     override fun mapTo(input: JobTitleDto): JobTitle {
-        TODO("Not yet implemented")
+        return JobTitle(
+            companyName = input.companyName,
+            workType = input.workType,
+            location = input.location,
+            jobType = input.jobType,
+            jobDescription = input.jobDescription,
+            salary = input.salary
+        )
     }
 }
