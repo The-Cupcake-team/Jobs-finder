@@ -3,7 +3,7 @@ package com.cupcake.jobsfinder.data.repository
 import com.cupcake.jobsfinder.data.model.JobTitleDto
 
 class RepositoryImpl : Repository {
-    override suspend fun JobTitle(): List<JobTitleDto> {
+    override suspend fun getAllJobTitles(): List<JobTitleDto> {
         return listOf(
             JobTitleDto(
                 id = 0,
