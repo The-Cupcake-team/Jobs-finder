@@ -11,8 +11,8 @@ class GetAllJobTitleUseCase @Inject constructor(
     private val jobTitleMapper: JobTitleMapper
 ) {
     suspend operator fun invoke() : List<JobTitle>{
-        return jobTitleRepository.getAllJobTitles().map {
-            jobTitleMapper.mapTo(it)
+        return jobTitleRepository.getAllJobTitles().map { jobTitle ->
+            jobTitleMapper.mapTo(jobTitle)
         }
     }
 }
