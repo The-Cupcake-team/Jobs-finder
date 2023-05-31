@@ -9,12 +9,8 @@ import javax.inject.Inject
 class JobTitleMapper @Inject constructor() : Mapper<JobTitleDto, JobTitle> {
     override fun mapTo(input: JobTitleDto): JobTitle {
         return JobTitle(
-            companyName = input.companyName,
-            workType = input.workType,
-            location = input.location,
-            jobType = input.jobType,
-            jobDescription = input.jobDescription,
-            salary = input.salary
+            input.id,
+            input.title
         )
     }
 }
