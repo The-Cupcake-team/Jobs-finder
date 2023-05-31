@@ -1,26 +1,27 @@
 package com.cupcake.jobsfinder.data.repository
 
 import com.cupcake.jobsfinder.data.remote.modle.PostDto
+import javax.inject.Inject
 
-class RepositoryImpl : Repository {
+class RepositoryImpl @Inject constructor(): Repository {
     override suspend fun getAllPosts(): List<PostDto> {
-        return fakePosts()
+        return fakePosts() //todo:[ call getAllPosts from JopApiService]
     }
 
     private fun fakePosts(): List<PostDto> {
         return listOf(
             PostDto(
-                1,
+                "1",
                 "bilal",
                 "android developer",
-                212453L,
+                9992453L,
                 "bla bla 1",
                 "https://blabla.com",
                 10,
                 9
             ),
             PostDto(
-                2,
+                "2",
                 "david",
                 "android developer",
                 662453L,
@@ -30,7 +31,7 @@ class RepositoryImpl : Repository {
                 90
             ),
             PostDto(
-                3,
+                "3",
                 "ameer",
                 "android developer",
                 855453L,
