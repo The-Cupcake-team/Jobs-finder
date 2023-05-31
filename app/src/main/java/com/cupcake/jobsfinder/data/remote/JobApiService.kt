@@ -1,6 +1,6 @@
 package com.cupcake.jobsfinder.data.remote
 
-import com.cupcake.jobsfinder.data.remote.model.JobDto
+import com.cupcake.jobsfinder.data.remote.response.JobDto
 import retrofit2.http.Body
 import retrofit2.http.POST
 

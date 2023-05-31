@@ -1,11 +1,8 @@
 package com.cupcake.jobsfinder.data.repository
 
-import com.cupcake.jobsfinder.data.remote.ResultState
-import com.cupcake.jobsfinder.data.remote.model.JobDto
+import com.cupcake.jobsfinder.data.remote.response.JobDto
 
 interface Repository {
 
-    suspend fun createJob(
-         jobDto: JobDto
-    ): ResultState<JobDto>
+    suspend fun createJob(jobInfo: JobDto): Boolean
 }

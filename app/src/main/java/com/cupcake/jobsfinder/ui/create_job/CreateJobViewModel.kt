@@ -1,42 +1,60 @@
 package com.cupcake.jobsfinder.ui.create_job
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.data.remote.ResultState
-import com.cupcake.jobsfinder.data.remote.model.JobDto
-import com.cupcake.jobsfinder.domain.CreateJobUseCase
+import com.cupcake.jobsfinder.domain.useCase.CreateJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
-import kotlinx.coroutines.Job
+import com.cupcake.jobsfinder.ui.create_job.state.CreateJobUiState
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class CreateJobViewModel @Inject constructor(
-    private val createJobUseCase: CreateJobUseCase
+    private val createJob: CreateJobUseCase
 ) : BaseViewModel() {
 
-    private val _jobStateFlow =
-        MutableStateFlow<ResultState<JobDto>>(ResultState.Error(Throwable("Job not created")))
-    val jobStateFlow: StateFlow<ResultState<JobDto>> = _jobStateFlow
+    private val _jobUiState = MutableStateFlow(CreateJobUiState())
+    val jobUiState = _jobUiState.asStateFlow()
 
-    private lateinit var createJobJob: Job
 
-    fun createJobWithFlow(
-        jobDto: JobDto
-    ) {
-        createJobJob = viewModelScope.launch {
+    fun createJob() {
+        viewModelScope.launch {
             try {
-                _jobStateFlow.value = ResultState.Loading
-                val job = createJobUseCase.createJob(jobDto)
-                _jobStateFlow.value = job
+                _jobUiState.update { it.copy(isLoading = true) }
+                val job = createJob(
+                    CreateJobUseCase.ParamJobInfo(
+                        idJobTitle = _jobUiState.value.jobFormUiState.idJobTitle,
+                        company = _jobUiState.value.jobFormUiState.company,
+                        workType = _jobUiState.value.jobFormUiState.workType,
+                        jobLocation = _jobUiState.value.jobFormUiState.jobLocation,
+                        jobDescription = _jobUiState.value.jobFormUiState.jobDescription,
+                        price = _jobUiState.value.jobFormUiState.price,
+                    )
+                )
+
+                if (job) {
+                    onSuccessCreateJob()
+                }
+
             } catch (e: Exception) {
-                _jobStateFlow.value = ResultState.Error(e)
+                onCreateJobError(e.message.toString())
             }
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        createJobJob.cancel()
+    private fun onSuccessCreateJob() {
+        _jobUiState.update { it.copy(isLoading = true) }
+        // more logic
     }
+
+    private fun onCreateJobError(errorMessage: String) {
+        _jobUiState.update {
+            it.copy(
+                isLoading = false,
+                error = errorMessage,
+            )
+        }
+    }
+
 }
