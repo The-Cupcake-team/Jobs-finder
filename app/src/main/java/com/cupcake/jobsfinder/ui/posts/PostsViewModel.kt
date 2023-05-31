@@ -12,4 +12,17 @@ class PostsViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(PostsUIState())
     val uiState: StateFlow<PostsUIState> = _uiState
+
+    suspend fun onInternetDisconnected(){
+        _uiState.update { it.copy(isLoading = true) }
+    }
+
+    fun Post.toUIState(): PostItemUIState{
+        return PostItemUIState(
+            id = this.id,
+            createdAt = this.createdAt,
+            description = this.content,
+            postInteraction = PostInteraction()
+        )
+    }
 }
