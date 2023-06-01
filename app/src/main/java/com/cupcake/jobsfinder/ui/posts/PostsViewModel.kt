@@ -8,52 +8,56 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class PostsViewModel @Inject constructor(
     private val getPostsUseCase: GetPostsUseCase
-): BaseViewModel() {
+) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(PostsUIState())
     val uiState: StateFlow<PostsUIState> = _uiState
+
+    private val _errors: MutableList<ErrorUIState> = mutableListOf()
+
     init {
         onGetPosts()
     }
 
-    private fun onGetPosts(){
+    private fun onGetPosts() {
         _uiState.update { it.copy(isLoading = true) }
 
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val result = getPostsUseCase()
+        viewModelScope.launch {
+            getPostsUseCase().catch { throwable ->
                 _uiState.update {
-                    it.copy(isLoading = false, postsResult = result.map { post ->
-                        post.toUIState()
-                    })
+                    _errors.add(ErrorUIState(throwable.message.toString()))
+                    it.copy(errors = _errors)
                 }
-            } catch (e: Exception) {
+            }.collect { posts ->
                 _uiState.update {
-                    it.copy(errors = listOf(ErrorUIState(message = e.message.toString())))
+                    it.copy(
+                        isLoading = false,
+                        postsResult = posts.map { post -> post.toPostItemUIState() })
                 }
             }
-        }
+
 
         }
 
-    suspend fun onInternetDisconnected(){
+    }
+
+
+    suspend fun onInternetDisconnected() {
         _uiState.update { it.copy(isLoading = true) }
     }
 
-    fun Post.toUIState(): PostItemUIState{
+    private fun Post.toPostItemUIState(): PostItemUIState {
         return PostItemUIState(
             id = this.id,
             createdAt = this.createdAt,
             description = this.content,
-            postInteraction = PostInteraction()
         )
     }
 }
