@@ -1,11 +1,12 @@
 package com.cupcake.jobsfinder.domain.useCase
 
 import com.cupcake.jobsfinder.data.remote.response.JobDto
+import com.cupcake.jobsfinder.data.repository.Repository
 import com.cupcake.jobsfinder.data.repository.RepositoryImpl
 import javax.inject.Inject
 
 class CreateJobUseCase @Inject constructor(
-    private val repository: RepositoryImpl
+    private val repository: Repository
 ) {
     suspend operator fun invoke(paramCreateJob: ParamJobInfo): Boolean {
         return repository.createJob(paramCreateJob.toJobDto())
