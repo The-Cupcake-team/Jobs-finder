@@ -16,4 +16,8 @@ class RepositoryImpl @Inject constructor(
             return false
         }
     }
+   	override suspend fun createPost(content: String): Boolean {
+		delay(2000)
+		return true
+	  }
 }
