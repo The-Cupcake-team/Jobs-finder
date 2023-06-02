@@ -1,5 +1,5 @@
 package com.cupcake.jobsfinder.data.repository
-
+import com.cupcake.jobsfinder.data.dto.JobTitleDto
 import com.cupcake.jobsfinder.data.remote.JobApiService
 import com.cupcake.jobsfinder.data.remote.response.JobDto
 import javax.inject.Inject
@@ -7,6 +7,16 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(
     private val api: JobApiService
 ) : Repository {
+  
+    override suspend fun getAllJobTitles(): List<JobTitleDto> {
+        return listOf(
+            JobTitleDto(
+                id = "ID HERE",
+                title = "Android"
+            )
+        )
+    }
+    
     override suspend fun createJob(jobInfo: JobDto): Boolean {
         return try {
             val job = api.createJob(jobInfo)
@@ -20,4 +30,6 @@ class RepositoryImpl @Inject constructor(
 		delay(2000)
 		return true
 	  }
+
+    
 }
