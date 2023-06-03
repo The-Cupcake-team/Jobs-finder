@@ -1,25 +1,17 @@
 package com.cupcake.jobsfinder.data.remote.response.job
 
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class JobDto(
-    @SerializedName("id")
-    val id: String?,
-    @SerializedName("jobTitleId")
+    val id: String? = null,
     val jobTitleId: Long?,
-    @SerializedName("company")
     val company: String?,
-    @SerializedName("createdAt")
-    val createdAt: Long?,
-    @SerializedName("workType")
+    val createdAt: Long? = null,
     val workType: String?,
-    @SerializedName("jobLocation")
     val jobLocation: String?,
-    @SerializedName("jobType")
     val jobType: String?,
-    @SerializedName("jobDescription")
     val jobDescription: String?,
-    @SerializedName("jobSalary")
-    val jobSalary: Long?
+    val jobSalary: String?
 )

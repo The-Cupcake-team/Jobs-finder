@@ -1,25 +1,15 @@
 package com.cupcake.jobsfinder.data.repository
 
-import com.cupcake.jobsfinder.data.dto.JobTitleDto
+import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
 import com.cupcake.jobsfinder.data.remote.JobApiService
-import com.cupcake.jobsfinder.data.remote.response.JobDto
 import javax.inject.Inject
-import com.cupcake.jobsfinder.data.remote.modle.PostDto
+import com.cupcake.jobsfinder.data.remote.response.PostDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject
-import android.util.Log
-import com.cupcake.jobsfinder.data.remote.JobApiService
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
-import com.cupcake.jobsfinder.domain.mapper.toJob
-import com.cupcake.jobsfinder.domain.model.Job
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import javax.inject.Inject
+import kotlinx.coroutines.delay
 
 
 class RepositoryImpl @Inject constructor(

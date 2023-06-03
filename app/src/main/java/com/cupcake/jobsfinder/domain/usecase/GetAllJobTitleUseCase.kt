@@ -1,6 +1,5 @@
 package com.cupcake.jobsfinder.domain.usecase
 
-import com.cupcake.jobsfinder.data.dto.JobTitleDto
 import com.cupcake.jobsfinder.data.repository.Repository
 import com.cupcake.jobsfinder.domain.mapper.JobTitleMapper
 import com.cupcake.jobsfinder.domain.model.JobTitle

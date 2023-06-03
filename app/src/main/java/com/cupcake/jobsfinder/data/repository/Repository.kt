@@ -1,10 +1,8 @@
 package com.cupcake.jobsfinder.data.repository
 
+import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
+import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
-import kotlinx.coroutines.flow.Flow
-import com.cupcake.jobsfinder.data.remote.response.JobDto
-import com.cupcake.jobsfinder.data.dto.JobTitleDto
-import com.cupcake.jobsfinder.data.remote.modle.PostDto
 import kotlinx.coroutines.flow.Flow
 
 interface Repository {

@@ -1,8 +1,7 @@
-package com.cupcake.jobsfinder.domain.useCase
+package com.cupcake.jobsfinder.domain.usecase
 
-import com.cupcake.jobsfinder.data.remote.response.JobDto
+import com.cupcake.jobsfinder.data.remote.response.job.JobDto
 import com.cupcake.jobsfinder.data.repository.Repository
-import com.cupcake.jobsfinder.data.repository.RepositoryImpl
 import javax.inject.Inject
 
 class CreateJobUseCase @Inject constructor(
@@ -13,22 +12,25 @@ class CreateJobUseCase @Inject constructor(
     }
 
     data class ParamJobInfo(
-        val idJobTitle: Int,
+        val jobTitleId: Long,
         val company: String,
         val workType: String,
+        val jobType: String,
         val jobLocation: String,
         val jobDescription: String,
-        val price: String,
+        val salary: String,
     )
 
     private fun ParamJobInfo.toJobDto(): JobDto {
         return JobDto(
-            idJobTitle = idJobTitle,
+            jobTitleId = jobTitleId,
             company = company,
             workType = workType,
+            jobType = jobType,
             jobLocation = jobLocation,
             jobDescription = jobDescription,
-            price = price,
-        )
+            jobSalary = salary,
+
+            )
     }
 }

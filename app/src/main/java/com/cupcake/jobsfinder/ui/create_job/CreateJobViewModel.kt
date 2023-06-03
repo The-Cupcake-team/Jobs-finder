@@ -1,7 +1,7 @@
 package com.cupcake.jobsfinder.ui.create_job
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.useCase.CreateJobUseCase
+import com.cupcake.jobsfinder.domain.usecase.CreateJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.create_job.state.CreateJobUiState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,12 +24,13 @@ class CreateJobViewModel @Inject constructor(
                 _jobUiState.update { it.copy(isLoading = true) }
                 val job = createJob(
                     CreateJobUseCase.ParamJobInfo(
-                        idJobTitle = _jobUiState.value.jobFormUiState.idJobTitle,
+                        jobTitleId = _jobUiState.value.jobFormUiState.idJobTitle,
                         company = _jobUiState.value.jobFormUiState.company,
                         workType = _jobUiState.value.jobFormUiState.workType,
+                        jobType = _jobUiState.value.jobFormUiState.jobType,
                         jobLocation = _jobUiState.value.jobFormUiState.jobLocation,
                         jobDescription = _jobUiState.value.jobFormUiState.jobDescription,
-                        price = _jobUiState.value.jobFormUiState.price,
+                        salary = _jobUiState.value.jobFormUiState.salary,
                     )
                 )
 
