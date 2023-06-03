@@ -25,6 +25,11 @@ interface JobApiService {
     // region Job
 
 
+    @GET("/job/{id}")
+    suspend fun getJobById(
+        @Path("id") jobId: Int
+    ): Response<BaseResponse<JobDto>>
+
     //endregion
 
 
@@ -37,5 +42,6 @@ interface JobApiService {
 
 
     //endregion
+
 
 }

@@ -19,7 +19,7 @@ interface Repository {
 
     // region Job
 
-
+    suspend fun getJobById(jobId: Int): JobDto
 
     //endregion
 

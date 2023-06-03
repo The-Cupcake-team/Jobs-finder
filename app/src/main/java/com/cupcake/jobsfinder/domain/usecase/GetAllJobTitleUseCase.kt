@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetAllJobTitleUseCase @Inject constructor(
     private val jobTitleRepository: Repository,
 ) {
-    suspend operator fun invoke() : List<JobTitle>{
+    suspend operator fun invoke(): List<JobTitle> {
         return jobTitleRepository.getAllJobTitles().map { jobTitleDto ->
             jobTitleDto.toJobTitle()
         }

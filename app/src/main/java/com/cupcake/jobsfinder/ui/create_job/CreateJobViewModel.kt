@@ -1,7 +1,7 @@
 package com.cupcake.jobsfinder.ui.create_job
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.usecase.CreateJobUseCase
+import com.cupcake.jobsfinder.domain.useCase.CreateJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.create_job.state.CreateJobUiState
 import kotlinx.coroutines.flow.MutableStateFlow

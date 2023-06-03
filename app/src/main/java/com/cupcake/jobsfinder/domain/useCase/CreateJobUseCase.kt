@@ -1,4 +1,4 @@
-package com.cupcake.jobsfinder.domain.usecase
+package com.cupcake.jobsfinder.domain.useCase
 
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
 import com.cupcake.jobsfinder.data.repository.Repository
@@ -30,7 +30,6 @@ class CreateJobUseCase @Inject constructor(
             jobLocation = jobLocation,
             jobDescription = jobDescription,
             jobSalary = salary,
-
-            )
+        )
     }
 }

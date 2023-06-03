@@ -4,7 +4,7 @@ import com.cupcake.jobsfinder.ui.base.ErrorUiState
 
 
 data class JobsUiState(
-    val jobs: List<JobUiState> = emptyList(),
+    val job: List<JobUiState> = emptyList(),
     val isLoading: Boolean = false,
     val error: List<ErrorUiState> = emptyList()
 )
