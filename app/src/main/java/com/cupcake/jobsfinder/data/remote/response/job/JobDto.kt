@@ -5,13 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class JobDto(
     @SerializedName("id")
-    val id: String?,
+    val id: String? = null,
     @SerializedName("jobTitleId")
     val jobTitleId: Long?,
     @SerializedName("company")
     val company: String?,
     @SerializedName("createdAt")
-    val createdAt: Long?,
+    val createdAt: Long? = null,
     @SerializedName("workType")
     val workType: String?,
     @SerializedName("jobLocation")
@@ -21,5 +21,5 @@ data class JobDto(
     @SerializedName("jobDescription")
     val jobDescription: String?,
     @SerializedName("jobSalary")
-    val jobSalary: Long?
+    val jobSalary: String?
 )

@@ -27,9 +27,10 @@ class CreateJobViewModel @Inject constructor(
                         idJobTitle = _jobUiState.value.jobFormUiState.idJobTitle,
                         company = _jobUiState.value.jobFormUiState.company,
                         workType = _jobUiState.value.jobFormUiState.workType,
+                        jobType = "",
                         jobLocation = _jobUiState.value.jobFormUiState.jobLocation,
                         jobDescription = _jobUiState.value.jobFormUiState.jobDescription,
-                        price = _jobUiState.value.jobFormUiState.price,
+                        jobSalary = _jobUiState.value.jobFormUiState.price,
                     )
                 )
 

@@ -50,7 +50,7 @@ class JobsViewModel @Inject constructor(
                         )
                     }
 
-                    _jobsUIState.update { it.copy(jobs = recommendedJobs, isLoading = false) }
+                    _jobsUIState.update { it.copy(job = recommendedJobs, isLoading = false) }
                 }
         }
     }
