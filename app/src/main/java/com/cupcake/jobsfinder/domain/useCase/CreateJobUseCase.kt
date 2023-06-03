@@ -12,24 +12,24 @@ class CreateJobUseCase @Inject constructor(
     }
 
     data class ParamJobInfo(
-        val idJobTitle: Long,
+        val jobTitleId: Long,
         val company: String,
         val workType: String,
         val jobType: String,
         val jobLocation: String,
         val jobDescription: String,
-        val jobSalary: String,
+        val salary: String,
     )
 
     private fun ParamJobInfo.toJobDto(): JobDto {
         return JobDto(
-            jobTitleId = idJobTitle,
+            jobTitleId = jobTitleId,
             company = company,
             workType = workType,
             jobType = jobType,
             jobLocation = jobLocation,
             jobDescription = jobDescription,
-            jobSalary = jobSalary,
+            jobSalary = salary,
         )
     }
 }

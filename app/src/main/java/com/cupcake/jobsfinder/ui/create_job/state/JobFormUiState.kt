@@ -5,7 +5,8 @@ data class JobFormUiState(
     val company: String = "",
     val createdTime: String = "",
     val workType: String = "",
+    val jobType: String = "",
     val jobLocation: String = "",
     val jobDescription: String = "",
-    val price: String = "",
+    val salary: String = "",
 )

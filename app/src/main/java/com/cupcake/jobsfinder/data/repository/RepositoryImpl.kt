@@ -1,32 +1,33 @@
 package com.cupcake.jobsfinder.data.repository
 
-import com.cupcake.jobsfinder.data.dto.JobTitleDto
 import com.cupcake.jobsfinder.data.remote.JobApiService
-import javax.inject.Inject
-import com.cupcake.jobsfinder.data.remote.modle.PostDto
+import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
+import com.cupcake.jobsfinder.data.remote.response.PostDto
+import com.cupcake.jobsfinder.data.remote.response.base.BaseResponse
+import com.cupcake.jobsfinder.data.remote.response.job.JobDto
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import com.cupcake.jobsfinder.data.remote.dtos.BaseResponse
-import kotlinx.coroutines.delay
 import retrofit2.Response
-import com.cupcake.jobsfinder.data.remote.response.job.JobDto
+import javax.inject.Inject
 
 
 class RepositoryImpl @Inject constructor(
 	private val api: JobApiService
 ) : Repository {
+  
+    override suspend fun getAllJobs(): Flow<List<JobDto>> {
+      return flow {
+          val response = api.getAllJobs()
+          if (response.isSuccessful) {
+              response.body()?.value?.let { emit(it) }
+          } else {
+			  throw Exception(response.message())
+		  }
+	  }.flowOn(Dispatchers.IO)
 
-	override suspend fun getAllJobs(): Flow<List<JobDto>> {
-		return flow {
-			val response = api.getAllJobs()
-			if (response.isSuccessful) {
-				response.body()?.value?.let { emit(it) }
-			} else {
-				throw Exception(response.message())
-			}
-		}.flowOn(Dispatchers.IO)
 	}
 
 	override suspend fun getAllPosts(): Flow<List<PostDto>> {
@@ -78,11 +79,59 @@ class RepositoryImpl @Inject constructor(
 	): T {
 		val response = function()
 		return if (response.isSuccessful) {
-			response.body()?.value?.first() ?: throw Throwable()
+			response.body()?.value ?: throw Throwable()
 		} else {
 			throw Throwable("response is not successful")
 		}
 	}
 
 
+	// region Job
+
+
+	//endregion
+
+
+	// region Post
+
+//    override suspend fun getPostById(id: String): PostDto {
+//
+//        return api.getPostById(id).let { response ->
+//            response.body().takeIf {
+//                it?.isSuccess ?: false
+//            }?.let { post ->
+//                post.value ?: throw Exception(response.code().toString())
+//            } ?: throw Exception(response.code().toString())
+//
+//        }
+//
+//    }
+
+    override suspend fun getPostById(id: String): PostDto {
+        return wrapResponseWithErrorHandler {
+            api.getPostById(id)
+        }
+    }
+
+
+
+    //endregion
+
+
+    private suspend fun <T : Any> wrapResponseWithErrorHandler(function: suspend () -> Response<BaseResponse<T>>): T {
+        val response = function()
+
+        if (response.isSuccessful) {
+            val baseResponse = response.body()
+            if (baseResponse != null && baseResponse.isSuccess) {
+                return baseResponse.value!!
+            } else {
+                throw Throwable("Invalid response")
+            }
+        } else {
+            val errorResponse =  response.errorBody()?.toString()
+            throw Throwable(errorResponse ?: "Error Network")
+        }
+
+    }
 }

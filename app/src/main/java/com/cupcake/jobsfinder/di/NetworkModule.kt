@@ -1,5 +1,6 @@
 package com.cupcake.jobsfinder.di
 
+import com.cupcake.jobsfinder.BuildConfig
 import com.cupcake.jobsfinder.data.remote.JobApiService
 import dagger.Module
 import dagger.Provides
@@ -20,7 +21,7 @@ object NetworkModule {
 		gsonConverterFactory: GsonConverterFactory
 	): JobApiService {
 		return Retrofit.Builder()
-			.baseUrl("")
+			.baseUrl(BuildConfig.BASE_URL)
 			.client(okHttpClient)
 			.addConverterFactory(gsonConverterFactory)
 			.build()
