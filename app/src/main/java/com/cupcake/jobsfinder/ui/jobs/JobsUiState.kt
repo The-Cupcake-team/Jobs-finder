@@ -1,5 +1,7 @@
 package com.cupcake.jobsfinder.ui.jobs
 
+import com.cupcake.jobsfinder.ui.base.ErrorUiState
+
 
 data class JobsUiState(
     val job: List<JobUiState> = emptyList(),
@@ -7,10 +9,6 @@ data class JobsUiState(
     val error: List<ErrorUiState> = emptyList()
 )
 
-data class ErrorUiState(
-    val code : Int,
-    val message : String
-)
 
 data class JobUiState(
     val image: String = "",
