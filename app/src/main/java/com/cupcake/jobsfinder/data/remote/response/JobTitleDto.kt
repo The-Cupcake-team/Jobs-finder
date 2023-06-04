@@ -1,6 +1,6 @@
 package com.cupcake.jobsfinder.data.remote.response
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 
 @Serializable
 data class JobTitleDto(
