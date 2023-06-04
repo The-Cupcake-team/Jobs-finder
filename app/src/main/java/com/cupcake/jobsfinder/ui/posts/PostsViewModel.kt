@@ -2,13 +2,13 @@ package com.cupcake.jobsfinder.ui.posts
 
 import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.domain.model.Post
-import com.cupcake.jobsfinder.domain.usecase.GetPostsUseCase
+import com.cupcake.jobsfinder.domain.useCase.GetPostsUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -55,9 +55,9 @@ class PostsViewModel @Inject constructor(
 
     private fun Post.toPostItemUIState(): PostItemUIState {
         return PostItemUIState(
-            id = this.id,
-            createdAt = this.createdAt,
-            description = this.content,
+            id = this.id ?: "",
+            createdAt = this.createdAt ?: 0,
+            description = this.content ?: "",
         )
     }
 }

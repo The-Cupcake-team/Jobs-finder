@@ -17,7 +17,7 @@ interface JobApiService {
     suspend fun getAllJobs(): Response<BaseResponse<List<JobDto>>>
 
     @GET("/posts")
-    suspend fun getAllPosts(): List<PostDto>
+    suspend fun getAllPosts(): Response<BaseResponse<List<PostDto>>>
 
     @POST("/jobs")
     suspend fun createJob(@Body job: JobDto): JobDto
