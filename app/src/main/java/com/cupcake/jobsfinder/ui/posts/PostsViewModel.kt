@@ -2,10 +2,11 @@ package com.cupcake.jobsfinder.ui.posts
 
 import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.domain.model.Post
-import com.cupcake.jobsfinder.domain.usecase.GetPostsUseCase
+import com.cupcake.jobsfinder.domain.useCase.GetPostsUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -33,10 +34,9 @@ class PostsViewModel @Inject constructor(
     private fun onGetPosts() {
         _uiState.update { it.copy(isLoading = true) }
 
-        viewModelScope.launch(handler) {
-            getPostsUseCase().collect { posts ->
-                onGetPostsSuccess(posts)
-            }
+        viewModelScope.launch(Dispatchers.IO + handler) {
+            val posts = getPostsUseCase()
+            onGetPostsSuccess(posts)
         }
 
     }
@@ -55,6 +55,7 @@ class PostsViewModel @Inject constructor(
             it.copy(errors = _errors)
         }
     }
+
 
     suspend fun onInternetDisconnected() {
         _uiState.update { it.copy(isLoading = true) }
