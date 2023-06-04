@@ -6,7 +6,6 @@ import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.base.BaseResponse
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -65,10 +64,6 @@ class RepositoryImpl @Inject constructor(
 		}
 	}
 
-	override suspend fun createPost(content: String): Boolean {
-		delay(2000)
-		return true
-	}
 
 	override suspend fun getJobById(jobId: Int): JobDto {
 		return wrapResponse { api.getJobById(jobId) }
@@ -93,6 +88,11 @@ class RepositoryImpl @Inject constructor(
 
 
 	// region Post
+	override suspend fun createPost(content: String): PostDto {
+		return wrapResponseWithErrorHandler {
+			api.createPost(content)
+		}
+	}
 
 //    override suspend fun getPostById(id: String): PostDto {
 //

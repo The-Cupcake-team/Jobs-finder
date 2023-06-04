@@ -15,8 +15,6 @@ interface Repository {
 
   suspend fun getAllJobs(): Flow<List<JobDto>>
 
-	suspend fun createPost(content: String): Boolean
-
     // region Job
 
     suspend fun getJobById(jobId: Int): JobDto
@@ -25,6 +23,7 @@ interface Repository {
 
 
     // region Post
+    suspend fun createPost(content: String): PostDto
 
 
 
