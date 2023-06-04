@@ -46,7 +46,7 @@ interface JobApiService {
 
     // region JobTitle
     @GET("/jobTitles")
-    suspend fun getAllJobTitle(): Response<BaseResponse<JobTitleDto>>
+    suspend fun getAllJobTitle(): Response<BaseResponse<List<JobTitleDto>>>
     // endregion
 
 }
