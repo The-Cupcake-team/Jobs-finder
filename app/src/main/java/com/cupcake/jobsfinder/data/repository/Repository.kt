@@ -7,8 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface Repository {
 
+  // region post
   suspend fun getAllPosts(): Flow<List<PostDto>>
-
+  //endregion
   suspend fun getAllJobTitles():List<JobTitleDto>
 
   suspend fun createJob(jobInfo: JobDto): Boolean

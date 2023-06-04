@@ -17,7 +17,7 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(
 	private val api: JobApiService
 ) : Repository {
-  
+
     override suspend fun getAllJobs(): Flow<List<JobDto>> {
       return flow {
           val response = api.getAllJobs()
@@ -28,22 +28,6 @@ class RepositoryImpl @Inject constructor(
 		  }
 	  }.flowOn(Dispatchers.IO)
 
-	}
-
-	override suspend fun getAllPosts(): Flow<List<PostDto>> {
-		return fakePosts() //todo:[ call getAllPosts from JopApiService]
-	}
-
-	private fun fakePosts(): Flow<List<PostDto>> {
-		return flow {
-			emit(
-				listOf(
-					PostDto("1", 9992453L, "android developer"),
-					PostDto("1", 9992453L, "android developer"),
-					PostDto("1", 9992453L, "android developer")
-				)
-			)
-		}.flowOn(Dispatchers.IO)
 	}
 
 	override suspend fun getAllJobTitles(): List<JobTitleDto> {
@@ -94,6 +78,9 @@ class RepositoryImpl @Inject constructor(
 
 	// region Post
 
+	override suspend fun getAllPosts(): Flow<List<PostDto>> {
+		return wrapFlowResponseWithErrorHandler { api.getAllPosts() }
+	}
 //    override suspend fun getPostById(id: String): PostDto {
 //
 //        return api.getPostById(id).let { response ->
@@ -134,4 +121,22 @@ class RepositoryImpl @Inject constructor(
         }
 
     }
+
+	private suspend fun <T : Any> wrapFlowResponseWithErrorHandler(function: suspend () -> Response<BaseResponse<T>>): Flow<T> {
+		return flow {
+			val response = function()
+
+			if (response.isSuccessful) {
+				val baseResponse = response.body()
+				if (baseResponse != null && baseResponse.isSuccess) {
+					emit(baseResponse.value!!)
+				} else {
+					throw Throwable("Invalid response")
+				}
+			} else {
+				val errorResponse = response.errorBody()?.toString()
+				throw Throwable(errorResponse ?: "Error Network")
+			}
+		}.flowOn(Dispatchers.IO)
+	}
 }
