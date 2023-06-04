@@ -5,6 +5,8 @@ import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
 import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.base.BaseResponse
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
+import com.cupcake.jobsfinder.data.remote.response.job.JobWithJobTitleDto
+import com.cupcake.jobsfinder.domain.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -15,84 +17,76 @@ import javax.inject.Inject
 
 
 class RepositoryImpl @Inject constructor(
-	private val api: JobApiService
+    private val api: JobApiService
 ) : Repository {
-  
-    override suspend fun getAllJobs(): Flow<List<JobDto>> {
-      return flow {
-          val response = api.getAllJobs()
-          if (response.isSuccessful) {
-              response.body()?.value?.let { emit(it) }
-          } else {
-			  throw Exception(response.message())
-		  }
-	  }.flowOn(Dispatchers.IO)
 
-	}
+    override suspend fun getJobs(): List<JobWithJobTitleDto> {
+        return wrapResponseWithErrorHandler { api.getJobs() }
+    }
 
-	override suspend fun getAllPosts(): Flow<List<PostDto>> {
-		return fakePosts() //todo:[ call getAllPosts from JopApiService]
-	}
+    override suspend fun getAllPosts(): Flow<List<PostDto>> {
+        return fakePosts() //todo:[ call getAllPosts from JopApiService]
+    }
 
-	private fun fakePosts(): Flow<List<PostDto>> {
-		return flow {
-			emit(
-				listOf(
-					PostDto("1", 9992453L, "android developer"),
-					PostDto("1", 9992453L, "android developer"),
-					PostDto("1", 9992453L, "android developer")
-				)
-			)
-		}.flowOn(Dispatchers.IO)
-	}
+    private fun fakePosts(): Flow<List<PostDto>> {
+        return flow {
+            emit(
+                listOf(
+                    PostDto("1", 9992453L, "android developer"),
+                    PostDto("1", 9992453L, "android developer"),
+                    PostDto("1", 9992453L, "android developer")
+                )
+            )
+        }.flowOn(Dispatchers.IO)
+    }
 
-	override suspend fun getAllJobTitles(): List<JobTitleDto> {
-		return listOf(
-			JobTitleDto(
-				id = "ID HERE",
-				title = "Android"
-			)
-		)
-	}
+    override suspend fun getAllJobTitles(): List<JobTitleDto> {
+        return listOf(
+            JobTitleDto(
+                id = "ID HERE",
+                title = "Android"
+            )
+        )
+    }
 
-	override suspend fun createJob(jobInfo: JobDto): Boolean {
-		return try {
-			val job = api.createJob(jobInfo)
-			// need more logic
-			return true
-		} catch (e: Throwable) {
-			return false
-		}
-	}
+    override suspend fun createJob(jobInfo: JobDto): Boolean {
+        return try {
+            val job = api.createJob(jobInfo)
+            // need more logic
+            return true
+        } catch (e: Throwable) {
+            return false
+        }
+    }
 
-	override suspend fun createPost(content: String): Boolean {
-		delay(2000)
-		return true
-	}
+    override suspend fun createPost(content: String): Boolean {
+        delay(2000)
+        return true
+    }
 
-	override suspend fun getJobById(jobId: Int): JobDto {
-		return wrapResponse { api.getJobById(jobId) }
-	}
+    override suspend fun getJobById(jobId: Int): JobDto {
+        return wrapResponse { api.getJobById(jobId) }
+    }
 
-	private suspend fun <T> wrapResponse(
-		function: suspend () -> Response<BaseResponse<T>>
-	): T {
-		val response = function()
-		return if (response.isSuccessful) {
-			response.body()?.value ?: throw Throwable()
-		} else {
-			throw Throwable("response is not successful")
-		}
-	}
+    private suspend fun <T> wrapResponse(
+        function: suspend () -> Response<BaseResponse<T>>
+    ): T {
+        val response = function()
+        return if (response.isSuccessful) {
+            response.body()?.value ?: throw Throwable()
+        } else {
+            throw Throwable("response is not successful")
+        }
+    }
 
 
-	// region Job
+    // region Job
 
 
-	//endregion
+    //endregion
 
 
-	// region Post
+    // region Post
 
 //    override suspend fun getPostById(id: String): PostDto {
 //
@@ -114,7 +108,6 @@ class RepositoryImpl @Inject constructor(
     }
 
 
-
     //endregion
 
 
@@ -129,7 +122,7 @@ class RepositoryImpl @Inject constructor(
                 throw Throwable("Invalid response")
             }
         } else {
-            val errorResponse =  response.errorBody()?.toString()
+            val errorResponse = response.errorBody()?.toString()
             throw Throwable(errorResponse ?: "Error Network")
         }
 
