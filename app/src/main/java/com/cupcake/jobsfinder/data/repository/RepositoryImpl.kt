@@ -78,8 +78,8 @@ class RepositoryImpl @Inject constructor(
 
 	// region Post
 
-	override suspend fun getAllPosts(): Flow<List<PostDto>> {
-		return wrapFlowResponseWithErrorHandler { api.getAllPosts() }
+	override suspend fun getAllPosts(): List<PostDto> {
+		return wrapResponseWithErrorHandler { api.getPosts() }
 	}
 //    override suspend fun getPostById(id: String): PostDto {
 //
@@ -121,22 +121,4 @@ class RepositoryImpl @Inject constructor(
         }
 
     }
-
-	private suspend fun <T : Any> wrapFlowResponseWithErrorHandler(function: suspend () -> Response<BaseResponse<T>>): Flow<T> {
-		return flow {
-			val response = function()
-
-			if (response.isSuccessful) {
-				val baseResponse = response.body()
-				if (baseResponse != null && baseResponse.isSuccess) {
-					emit(baseResponse.value!!)
-				} else {
-					throw Throwable("Invalid response")
-				}
-			} else {
-				val errorResponse = response.errorBody()?.toString()
-				throw Throwable(errorResponse ?: "Error Network")
-			}
-		}.flowOn(Dispatchers.IO)
-	}
 }
