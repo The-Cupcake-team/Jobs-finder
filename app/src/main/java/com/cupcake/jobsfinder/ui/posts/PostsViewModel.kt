@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,11 +19,9 @@ class PostsViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(PostsUIState())
-    val uiState: StateFlow<PostsUIState> = _uiState
+    val uiState = _uiState.asStateFlow()
 
-    private val _errors: MutableList<ErrorUIState> = mutableListOf()
-
-    val handler = CoroutineExceptionHandler { _, exception ->
+    private val handler = CoroutineExceptionHandler { _, exception ->
         onGetPostsFailure(exception)
     }
 
@@ -50,22 +48,11 @@ class PostsViewModel @Inject constructor(
     }
 
     private fun onGetPostsFailure(throwable: Throwable){
-        _uiState.update {
-            _errors.add(ErrorUIState(throwable.message.toString()))
-            it.copy(errors = _errors)
-        }
+        _uiState.update { it.copy(isLoading = false, errors = listOf(throwable.message.toString())) }
     }
 
 
     suspend fun onInternetDisconnected() {
         _uiState.update { it.copy(isLoading = true) }
-    }
-
-    private fun Post.toPostItemUIState(): PostItemUIState {
-        return PostItemUIState(
-            id = this.id ?: "",
-            createdAt = this.createdAt ?: 0,
-            description = this.content ?: "",
-        )
     }
 }
