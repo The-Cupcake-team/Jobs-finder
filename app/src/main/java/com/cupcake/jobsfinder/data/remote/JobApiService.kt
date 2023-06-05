@@ -5,25 +5,30 @@ import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.base.BaseResponse
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
 import retrofit2.Response
-import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
 
 interface JobApiService {
 
+    // region Job
+
+    @POST("/job")
+    @FormUrlEncoded
+    suspend fun createJob(
+        @Field("jobTitleId") jobTitleId: Int?,
+        @Field("company") company: String?,
+        @Field("workType") workType: String?,
+        @Field("jobLocation") jobLocation: String?,
+        @Field("jobType") jobType: String?,
+        @Field("jobDescription") jobDescription: String?,
+        @Field("jobSalary") jobSalary: Double?
+    ): Response<BaseResponse<JobDto>>
 
     @GET("/job")
     suspend fun getAllJobs(): Response<BaseResponse<List<JobDto>>>
-
-    @GET("/posts")
-    suspend fun getAllPosts(): List<PostDto>
-
-    @POST("/jobs")
-    suspend fun createJob(@Body job: JobDto): JobDto
-
-    // region Job
-
 
     @GET("/job/{id}")
     suspend fun getJobById(
@@ -40,6 +45,8 @@ interface JobApiService {
         @Path("postId") postId: String
     ): Response<BaseResponse<PostDto>>
 
+    @GET("/posts")
+    suspend fun getAllPosts(): List<PostDto>
 
     //endregion
 
