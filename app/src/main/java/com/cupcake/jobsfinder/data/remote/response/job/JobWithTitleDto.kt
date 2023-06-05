@@ -4,7 +4,7 @@ import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class JobWithJobTitleDto(
+data class JobWithTitleDto(
     val id: String,
     val jobTitle: JobTitleDto,
     val company: String,

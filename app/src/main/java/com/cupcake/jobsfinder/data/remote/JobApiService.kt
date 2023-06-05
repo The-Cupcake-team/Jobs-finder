@@ -4,7 +4,7 @@ package com.cupcake.jobsfinder.data.remote
 import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.base.BaseResponse
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
-import com.cupcake.jobsfinder.data.remote.response.job.JobWithJobTitleDto
+import com.cupcake.jobsfinder.data.remote.response.job.JobWithTitleDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -24,7 +24,7 @@ interface JobApiService {
     // region Job
 
     @GET("/job")
-    suspend fun getJobs(): Response<BaseResponse<List<JobWithJobTitleDto>>>
+    suspend fun getJobs(): Response<BaseResponse<List<JobWithTitleDto>>>
 
     @GET("/job/{id}")
     suspend fun getJobById(

@@ -5,7 +5,7 @@ import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
 import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.base.BaseResponse
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
-import com.cupcake.jobsfinder.data.remote.response.job.JobWithJobTitleDto
+import com.cupcake.jobsfinder.data.remote.response.job.JobWithTitleDto
 import com.cupcake.jobsfinder.domain.repository.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -20,7 +20,7 @@ class RepositoryImpl @Inject constructor(
     private val api: JobApiService
 ) : Repository {
 
-    override suspend fun getJobs(): List<JobWithJobTitleDto> {
+    override suspend fun getJobs(): List<JobWithTitleDto> {
         return wrapResponseWithErrorHandler { api.getJobs() }
     }
 

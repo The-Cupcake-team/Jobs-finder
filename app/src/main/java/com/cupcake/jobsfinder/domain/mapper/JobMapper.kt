@@ -1,10 +1,10 @@
 package com.cupcake.jobsfinder.domain.mapper
 
-import com.cupcake.jobsfinder.data.remote.response.job.JobWithJobTitleDto
+import com.cupcake.jobsfinder.data.remote.response.job.JobWithTitleDto
 import com.cupcake.jobsfinder.domain.model.JobTitle
 import com.cupcake.jobsfinder.domain.model.JobWithJobTitle
 
-fun JobWithJobTitleDto.toJobWithJobTitle(): JobWithJobTitle {
+fun JobWithTitleDto.toJobWithJobTitle(): JobWithJobTitle {
     return JobWithJobTitle(
         id = this.id,
         jobTitle = JobTitle(
