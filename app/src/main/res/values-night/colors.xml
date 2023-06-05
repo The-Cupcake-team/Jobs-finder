@@ -7,5 +7,8 @@
     <color name="tertiary">#61FFFFFF</color>
     <color name="accent">#14FFFFFF</color>
     <color name="cards">#1A1A1A</color>
-
+    <!-- Text colors -->
+    <color name="color_text_primary">#DEFFFFFF</color>
+    <color name="color_text_secondary">#99FFFFFF</color>
+    <color name="color_text_tertiary">#61FFFFFF</color>
 </resources>
