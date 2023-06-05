@@ -3,7 +3,7 @@ package com.cupcake.jobsfinder.domain.reposirory
 import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
 import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
-import kotlinx.coroutines.flow.Flow
+import com.cupcake.jobsfinder.data.remote.response.job.JobWithTitleDto
 
 interface Repository {
 
@@ -12,7 +12,7 @@ interface Repository {
 
     suspend fun createJob(jobInfo: JobDto): Boolean
 
-    suspend fun getAllJobs(): Flow<List<JobDto>>
+    suspend fun getJobs(): List<JobWithTitleDto>
 
     suspend fun getAllJobTitles(): List<JobTitleDto>
 
@@ -23,9 +23,9 @@ interface Repository {
 
     // region Post
 
-    suspend fun createPost(content: String): Boolean
+    suspend fun createPost(content: String): PostDto
 
-    suspend fun getAllPosts(): Flow<List<PostDto>>
+    suspend fun getAllPosts(): List<PostDto>
 
     suspend fun getPostById(id: String): PostDto
 

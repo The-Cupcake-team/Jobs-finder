@@ -5,8 +5,8 @@ import com.cupcake.jobsfinder.domain.model.Post
 
 fun PostDto.toPost(): Post{
     return Post(
-        id = this.id,
-        createdAt = this.createdAt,
-        content =  this.content
+        id = id ?: "",
+        createdAt = createdAt ?: 0,
+        content =  content ?: ""
     )
 }

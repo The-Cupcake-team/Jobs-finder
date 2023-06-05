@@ -1,14 +1,13 @@
 package com.cupcake.jobsfinder.domain.model
 
-import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
-
-class Job(
-    val jobTitleId: Int,
+data class JobWithTitle(
+    val id: String,
+    val jobTitle: JobTitle,
     val company: String,
-    val createdAt: Long,
+    val createdTime: String,
     val workType: String,
     val jobLocation: String,
     val jobType: String,
     val jobDescription: String,
-    val jobSalary: Double
+    val salary: String
 )

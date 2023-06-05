@@ -1,8 +1,7 @@
 package com.cupcake.jobsfinder.ui.create_job
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.model.Job
-import com.cupcake.jobsfinder.domain.useCase.CreateJobUseCase
+import com.cupcake.jobsfinder.domain.usecase.CreateJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.create_job.state.CreateJobUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,7 +24,7 @@ class CreateJobViewModel @Inject constructor(
             try {
                 _jobUiState.update { it.copy(isLoading = true) }
                 val jobState = createJob(
-                    Job(
+                    CreateJobUseCase.ParamJobInfo(
                         jobTitleId = _jobUiState.value.jobFormUiState.idJobTitle,
                         company = _jobUiState.value.jobFormUiState.company,
                         workType = _jobUiState.value.jobFormUiState.workType,
