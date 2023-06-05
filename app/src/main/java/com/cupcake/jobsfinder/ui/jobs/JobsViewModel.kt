@@ -38,11 +38,11 @@ class JobsViewModel @Inject constructor(
                 .map { job ->
                     JobUiState(
                         image = "",
-                        title = job.jobTitle?.title ?: "",
-                        companyName = job.company ?: "",
-                        detailsChip = listOf(job.workType.toString(), job.jobType.toString()),
-                        location = job.jobLocation ?: "",
-                        salary = job.salary ?: ""
+                        title = job.jobTitle.title,
+                        companyName = job.company,
+                        detailsChip = listOf(job.workType, job.jobType),
+                        location = job.jobLocation,
+                        salary = job.salary
                     )
                 }
             _jobsUIState.update { it.copy(job = jobs, isLoading = false) }
