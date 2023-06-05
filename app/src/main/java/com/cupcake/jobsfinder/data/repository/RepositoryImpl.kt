@@ -5,6 +5,7 @@ import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
 import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.base.BaseResponse
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
+import com.cupcake.jobsfinder.domain.reposirory.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -17,22 +18,49 @@ import javax.inject.Inject
 class RepositoryImpl @Inject constructor(
 	private val api: JobApiService
 ) : Repository {
-  
-    override suspend fun getAllJobs(): Flow<List<JobDto>> {
-      return flow {
-          val response = api.getAllJobs()
-          if (response.isSuccessful) {
-              response.body()?.value?.let { emit(it) }
-          } else {
-			  throw Exception(response.message())
-		  }
-	  }.flowOn(Dispatchers.IO)
+
+
+	// region Job
+
+	override suspend fun createJob(jobInfo: JobDto): Boolean {
+		val response = api.createJob(
+			jobInfo.jobTitleId,
+			jobInfo.company,
+			jobInfo.workType,
+			jobInfo.jobLocation,
+			jobInfo.jobType,
+			jobInfo.jobDescription,
+			jobInfo.jobSalary
+			)
+		return response.isSuccessful
+	}
+
+	override suspend fun getAllJobs(): Flow<List<JobDto>> {
+		return flow {
+			val response = api.getAllJobs()
+			if (response.isSuccessful) {
+				response.body()?.value?.let { emit(it) }
+			} else {
+				throw Exception(response.message())
+			}
+		}.flowOn(Dispatchers.IO)
 
 	}
 
-	override suspend fun getAllPosts(): Flow<List<PostDto>> {
-		return fakePosts() //todo:[ call getAllPosts from JopApiService]
+	override suspend fun getAllJobTitles(): List<JobTitleDto> {
+		return listOf(
+			JobTitleDto(
+				id = "ID HERE",
+				title = "Android"
+			)
+		)
 	}
+
+	override suspend fun getJobById(jobId: Int): JobDto {
+		return wrapResponseWithErrorHandler { api.getJobById(jobId) }
+	}
+
+	//endregion
 
 	private fun fakePosts(): Flow<List<PostDto>> {
 		return flow {
@@ -46,79 +74,30 @@ class RepositoryImpl @Inject constructor(
 		}.flowOn(Dispatchers.IO)
 	}
 
-	override suspend fun getAllJobTitles(): List<JobTitleDto> {
-		return listOf(
-			JobTitleDto(
-				id = "ID HERE",
-				title = "Android"
-			)
-		)
-	}
 
-	override suspend fun createJob(jobInfo: JobDto): Boolean {
-		return try {
-			val job = api.createJob(jobInfo)
-			// need more logic
-			return true
-		} catch (e: Throwable) {
-			return false
-		}
-	}
+	// region Post
 
 	override suspend fun createPost(content: String): Boolean {
 		delay(2000)
 		return true
 	}
 
-	override suspend fun getJobById(jobId: Int): JobDto {
-		return wrapResponse { api.getJobById(jobId) }
+	override suspend fun getAllPosts(): Flow<List<PostDto>> {
+		return fakePosts() //todo:[ call getAllPosts from JopApiService]
 	}
 
-	private suspend fun <T> wrapResponse(
-		function: suspend () -> Response<BaseResponse<T>>
-	): T {
-		val response = function()
-		return if (response.isSuccessful) {
-			response.body()?.value ?: throw Throwable()
-		} else {
-			throw Throwable("response is not successful")
+	override suspend fun getPostById(id: String): PostDto {
+		return wrapResponseWithErrorHandler {
+			api.getPostById(id)
 		}
 	}
-
-
-	// region Job
-
-
-	//endregion
-
-
-	// region Post
-
-//    override suspend fun getPostById(id: String): PostDto {
-//
-//        return api.getPostById(id).let { response ->
-//            response.body().takeIf {
-//                it?.isSuccess ?: false
-//            }?.let { post ->
-//                post.value ?: throw Exception(response.code().toString())
-//            } ?: throw Exception(response.code().toString())
-//
-//        }
-//
-//    }
-
-    override suspend fun getPostById(id: String): PostDto {
-        return wrapResponseWithErrorHandler {
-            api.getPostById(id)
-        }
-    }
-
-
 
     //endregion
 
 
-    private suspend fun <T : Any> wrapResponseWithErrorHandler(function: suspend () -> Response<BaseResponse<T>>): T {
+    private suspend fun <T> wrapResponseWithErrorHandler(
+		function: suspend () -> Response<BaseResponse<T>>
+	): T {
         val response = function()
 
         if (response.isSuccessful) {
