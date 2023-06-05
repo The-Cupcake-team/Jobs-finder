@@ -47,12 +47,7 @@ class RepositoryImpl @Inject constructor(
 	}
 
 	override suspend fun getAllJobTitles(): List<JobTitleDto> {
-		return listOf(
-			JobTitleDto(
-				id = "ID HERE",
-				title = "Android"
-			)
-		)
+		return wrapResponseWithErrorHandler { api.getAllJobTitle() }
 	}
 
 	override suspend fun createJob(jobInfo: JobDto): Boolean {

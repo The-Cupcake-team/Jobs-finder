@@ -1,6 +1,6 @@
 package com.cupcake.jobsfinder.ui.jobs
 
-import androidx.lifecycle.ViewModel
+
 import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.domain.usecase.GetAllJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class JobsViewModel @Inject constructor(
-    private val getAllJobUseCase: GetAllJobUseCase
+    private val getAllJobUseCase: GetAllJobUseCase,
 ) : BaseViewModel() {
 
     private val _jobsUIState = MutableStateFlow(JobsUiState())
