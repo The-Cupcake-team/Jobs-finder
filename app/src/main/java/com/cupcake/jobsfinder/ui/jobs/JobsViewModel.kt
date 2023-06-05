@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class JobsViewModel @Inject constructor(
-    private val getAllJobUseCase: GetAllJobUseCase
+    private val getAllJobUseCase: GetAllJobUseCase,
 ) : BaseViewModel() {
 
     private val _jobsUIState = MutableStateFlow(JobsUiState())

@@ -1,6 +1,7 @@
 package com.cupcake.jobsfinder.data.remote
 
 
+import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
 import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.base.BaseResponse
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
@@ -44,5 +45,9 @@ interface JobApiService {
 
     //endregion
 
+    // region JobTitle
+    @GET("/jobTitles")
+    suspend fun getAllJobTitle(): Response<BaseResponse<List<JobTitleDto>>>
+    // endregion
 
 }
