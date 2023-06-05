@@ -9,7 +9,7 @@ interface Repository {
 
   suspend fun getAllPosts(): Flow<List<PostDto>>
 
-  suspend fun getAllJobTitles():Flow<List<JobTitleDto>>
+  suspend fun getAllJobTitles():List<JobTitleDto>
 
   suspend fun createJob(jobInfo: JobDto): Boolean
 

@@ -33,9 +33,7 @@ class JobsViewModel @Inject constructor(
             getJobRecommended()
         }
         viewModelScope.launch {
-            val  x = GetAllJobTitleUseCase(repository).invoke().collect{
-                Log.i("ALI_HASAN", "$it")
-            }
+            Log.i("ALI_HASAN", "${GetAllJobTitleUseCase(repository).invoke()}")
         }
     }
 

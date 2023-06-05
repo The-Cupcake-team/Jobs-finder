@@ -46,15 +46,8 @@ class RepositoryImpl @Inject constructor(
 		}.flowOn(Dispatchers.IO)
 	}
 
-	override suspend fun getAllJobTitles(): Flow<List<JobTitleDto>> {
-		return flow {
-			val response = api.getAllJobTitle()
-			if (response.isSuccessful) {
-				response.body()?.value?.let { emit(it) }
-			} else {
-				throw Exception(response.message())
-			}
-		}.flowOn(Dispatchers.IO)
+	override suspend fun getAllJobTitles(): List<JobTitleDto> {
+		return wrapResponseWithErrorHandler { api.getAllJobTitle() }
 	}
 
 	override suspend fun createJob(jobInfo: JobDto): Boolean {
