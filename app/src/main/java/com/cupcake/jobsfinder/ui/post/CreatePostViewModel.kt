@@ -1,14 +1,18 @@
 package com.cupcake.jobsfinder.ui.post
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.cupcake.jobsfinder.domain.model.Post
 import com.cupcake.jobsfinder.domain.useCase.CreatePostUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class CreatePostViewModel @Inject constructor(
     private val createPostUseCase: CreatePostUseCase,
 ) : BaseViewModel() {
@@ -16,26 +20,28 @@ class CreatePostViewModel @Inject constructor(
     private val _postUiState = MutableStateFlow(CreatePostUiState())
     val postUiState = _postUiState.asStateFlow()
 
-    fun createPost() {
+    fun createPost(content: String) {
         viewModelScope.launch {
-            _postUiState.update { it.copy(isLoading = true) }
             try {
-                val post = createPostUseCase(
-                    content = _postUiState.value.content
-                )
-                if (post) {
-                    onSuccessCreatePost()
-                }
+                _postUiState.update { it.copy(isLoading = true, error = "") }
+                val post = createPostUseCase(content)
+                onSuccessCreatePost(post)
             } catch (e: Exception) {
-                onCreatePostError(e.message.toString())
+                onCreatePostError(e.message ?: "Unknown error")
             }
-            _postUiState.update { it.copy(isLoading = false) }
         }
     }
 
 
-    private fun onSuccessCreatePost() {
-        // Add logic for successful post creation
+    private fun onSuccessCreatePost(post: Post) {
+        _postUiState.update {
+            it.copy(
+                isLoading = false,
+                error = "",
+                post = post.toUiPost(),
+                isPostCreated = true
+            )
+        }
     }
 
     private fun onCreatePostError(errorMessage: String) {
@@ -46,4 +52,10 @@ class CreatePostViewModel @Inject constructor(
             )
         }
     }
+
+    private fun Post.toUiPost(): PostUiState {
+        return PostUiState(id, content, createdAt)
+    }
+
 }
+

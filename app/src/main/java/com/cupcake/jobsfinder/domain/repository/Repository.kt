@@ -16,8 +16,6 @@ interface Repository {
   suspend fun createJob(jobInfo: JobDto): Boolean
 
 
-	suspend fun createPost(content: String): Boolean
-
     // region Job
 
   suspend fun getJobs(): List<JobWithTitleDto>
@@ -28,6 +26,7 @@ interface Repository {
 
 
     // region Post
+    suspend fun createPost(content: String): PostDto
 
 
 

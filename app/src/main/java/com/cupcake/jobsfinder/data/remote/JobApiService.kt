@@ -8,6 +8,8 @@ import com.cupcake.jobsfinder.data.remote.response.job.JobDto
 import com.cupcake.jobsfinder.data.remote.response.job.JobWithTitleDto
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -36,6 +38,11 @@ interface JobApiService {
 
 
     // region Post
+    @FormUrlEncoded
+    @POST("/post")
+    suspend fun createPost(
+        @Field("content") content: String
+    ): Response<BaseResponse<PostDto>>
 
     @GET("post/{postId}")
     suspend fun getPostById(

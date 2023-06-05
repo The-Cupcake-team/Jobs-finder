@@ -8,7 +8,6 @@ import com.cupcake.jobsfinder.data.remote.response.job.JobDto
 import com.cupcake.jobsfinder.data.remote.response.job.JobWithTitleDto
 import com.cupcake.jobsfinder.domain.repository.Repository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
@@ -88,6 +87,11 @@ class RepositoryImpl @Inject constructor(
 
 
 	// region Post
+	override suspend fun createPost(content: String): PostDto {
+		return wrapResponseWithErrorHandler {
+			api.createPost(content)
+		}
+	}
 
 	override suspend fun getAllPosts(): List<PostDto> {
 		return wrapResponseWithErrorHandler { api.getPosts() }
