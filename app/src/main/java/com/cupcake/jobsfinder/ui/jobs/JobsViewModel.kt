@@ -1,57 +1,56 @@
 package com.cupcake.jobsfinder.ui.jobs
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.usecase.GetAllJobUseCase
+import com.cupcake.jobsfinder.domain.useCase.GetAllJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
-import com.cupcake.jobsfinder.ui.base.ErrorUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class JobsViewModel @Inject constructor(
-    private val getAllJobUseCase: GetAllJobUseCase
+    private val getAllJobUseCase: GetAllJobUseCase,
 ) : BaseViewModel() {
 
     private val _jobsUIState = MutableStateFlow(JobsUiState())
-    val jobsUIState: StateFlow<JobsUiState> = _jobsUIState
-
-    private val errors: MutableList<ErrorUiState> = mutableListOf()
+    val jobsUIState = _jobsUIState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            getJobRecommended()
+            getRecommendedJobs()
         }
     }
 
-    private suspend fun getJobRecommended() {
+    private fun getRecommendedJobs() {
         _jobsUIState.update { it.copy(isLoading = true) }
 
-        viewModelScope.launch {
-            getAllJobUseCase(10)
-                .catch { throwable ->
-                    errors.add(ErrorUiState(0, throwable.message.toString()))
-                    _jobsUIState.update { it.copy(error = errors) }
-                }
-                .collect { jobs ->
-                    val recommendedJobs = jobs.map { job ->
-                        JobUiState(
-                            image = "",
-                            title = "",
-                            companyName = job.company ?: "",
-                            detailsChip = listOf(job.workType.toString(), job.jobType.toString()),
-                            location = job.jobLocation ?: "",
-                            salary = job.salary ?: ""
-                        )
-                    }
-
-                    _jobsUIState.update { it.copy(job = recommendedJobs, isLoading = false) }
-                }
+        val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
+            _jobsUIState.update { it.copy(isLoading = false, error = listOf(throwable.message.toString())) }
         }
+
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            val jobs = getAllJobUseCase(RECOMMENDED_JOB_LIMIT)
+                .map { job ->
+                    JobUiState(
+                        image = "",
+                        title = job.jobTitle.title,
+                        companyName = job.company,
+                        detailsChip = listOf(job.workType, job.jobType),
+                        location = job.jobLocation,
+                        salary = job.salary
+                    )
+                }
+            _jobsUIState.update { it.copy(job = jobs, isLoading = false) }
+        }
+
+    }
+
+    companion object {
+        private const val RECOMMENDED_JOB_LIMIT = 10
     }
 }

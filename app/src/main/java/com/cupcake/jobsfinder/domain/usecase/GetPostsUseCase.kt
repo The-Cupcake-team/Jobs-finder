@@ -1,6 +1,6 @@
-package com.cupcake.jobsfinder.domain.usecase
+package com.cupcake.jobsfinder.domain.useCase
 
-import com.cupcake.jobsfinder.data.repository.Repository
+import com.cupcake.jobsfinder.domain.repository.Repository
 import com.cupcake.jobsfinder.domain.mapper.toPost
 import com.cupcake.jobsfinder.domain.model.Post
 import kotlinx.coroutines.flow.Flow

@@ -1,7 +1,7 @@
 package com.cupcake.jobsfinder.domain.useCase
 
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
-import com.cupcake.jobsfinder.data.repository.Repository
+import com.cupcake.jobsfinder.domain.repository.Repository
 import javax.inject.Inject
 
 class CreateJobUseCase @Inject constructor(
