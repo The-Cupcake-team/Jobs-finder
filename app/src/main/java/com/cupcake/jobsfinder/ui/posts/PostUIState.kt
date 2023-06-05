@@ -17,8 +17,8 @@ data class PostItemUIState(
 
 fun Post.toPostItemUIState(): PostItemUIState {
     return PostItemUIState(
-        id = id ?: "",
-        createdAt = createdAt ?: 0,
-        description = content ?: "",
+        id = id,
+        createdAt = createdAt,
+        description = content
     )
 }
