@@ -1,9 +1,11 @@
 package com.cupcake.jobsfinder.ui.posts
 
+import com.cupcake.jobsfinder.domain.model.Post
+
 data class PostsUIState(
     val postsResult: List<PostItemUIState> = emptyList(),
     val isLoading: Boolean = false,
-    val errors: List<ErrorUIState> = emptyList(),
+    val errors: List<String> = emptyList(),
 )
 
 data class PostItemUIState(
@@ -13,6 +15,10 @@ data class PostItemUIState(
 )
 
 
-data class ErrorUIState(
-    val message: String = "UNKNOWN ERROR"
-)
+fun Post.toPostItemUIState(): PostItemUIState {
+    return PostItemUIState(
+        id = id,
+        createdAt = createdAt,
+        description = content
+    )
+}
