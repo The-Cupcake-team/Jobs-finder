@@ -1,11 +1,7 @@
 package com.cupcake.jobsfinder.ui.jobs
 
-import android.util.Log
-import androidx.lifecycle.ViewModel
+
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.data.repository.Repository
-import com.cupcake.jobsfinder.data.repository.RepositoryImpl
-import com.cupcake.jobsfinder.domain.usecase.GetAllJobTitleUseCase
 import com.cupcake.jobsfinder.domain.usecase.GetAllJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.base.ErrorUiState
@@ -20,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class JobsViewModel @Inject constructor(
     private val getAllJobUseCase: GetAllJobUseCase,
-    private val repository: RepositoryImpl
 ) : BaseViewModel() {
 
     private val _jobsUIState = MutableStateFlow(JobsUiState())
@@ -31,9 +26,6 @@ class JobsViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             getJobRecommended()
-        }
-        viewModelScope.launch {
-            Log.i("ALI_HASAN", "${GetAllJobTitleUseCase(repository).invoke()}")
         }
     }
 
