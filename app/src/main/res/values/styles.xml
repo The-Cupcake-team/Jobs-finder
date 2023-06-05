@@ -9,7 +9,7 @@
     <style name="TextStyle.ToolBar" parent="TextStyle">
         <item name="android:fontFamily">@font/worksans_semibold</item>
         <item name="android:textSize">@dimen/text_size_headline</item>
-        <item name="android:textColor">@color/brand</item>
+        <item name="android:textColor">@color/color_text_primary</item>
     </style>
 
     <style name="TextStyle.Title" parent="TextStyle">

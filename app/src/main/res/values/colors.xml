@@ -9,8 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="background">#FBFCFE</color>
-    <color name="brand">#4B4DED</color>
-    <color name="primary">#0E0E2C</color>
+    <color name="primary">#4B4DED</color>
     <color name="secondary">#4A4A68</color>
     <color name="tertiary">#8C8CA1</color>
     <color name="accent">#ECF1F4</color>

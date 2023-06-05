@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#1C1C1C</color>
-    <color name="brand">#5D98EF</color>
-    <color name="primary">#DEFFFFFF</color>
+    <color name="primary">#5D98EF</color>
     <color name="secondary">#99FFFFFF</color>
     <color name="tertiary">#61FFFFFF</color>
     <color name="accent">#14FFFFFF</color>
