@@ -21,10 +21,6 @@ class RepositoryImpl @Inject constructor(
 ) : Repository {
 
 
-    override suspend fun getAllPosts(): Flow<List<PostDto>> {
-        return fakePosts() //todo:[ call getAllPosts from JopApiService]
-    }
-
     private fun fakePosts(): Flow<List<PostDto>> {
         return flow {
             emit(
@@ -35,25 +31,6 @@ class RepositoryImpl @Inject constructor(
                 )
             )
         }.flowOn(Dispatchers.IO)
-    }
-
-    override suspend fun getAllJobTitles(): List<JobTitleDto> {
-        return listOf(
-            JobTitleDto(
-                id = "ID HERE",
-                title = "Android"
-            )
-        )
-    }
-
-    override suspend fun createJob(jobInfo: JobDto): Boolean {
-        return try {
-            val job = api.createJob(jobInfo)
-            // need more logic
-            return true
-        } catch (e: Throwable) {
-            return false
-        }
     }
 
     override suspend fun createPost(content: String): Boolean {
@@ -87,35 +64,9 @@ class RepositoryImpl @Inject constructor(
 
 
     // region Post
-    override suspend fun getAllJobs(): Flow<List<JobDto>> {
-      return flow {
-          val response = api.getAllJobs()
-          if (response.isSuccessful) {
-              response.body()?.value?.let { emit(it) }
-          } else {
-			  throw Exception(response.message())
-		  }
-	  }.flowOn(Dispatchers.IO)
 
-	}
 
-	override suspend fun getAllPosts(): Flow<List<PostDto>> {
-		return fakePosts() //todo:[ call getAllPosts from JopApiService]
-	}
-
-	private fun fakePosts(): Flow<List<PostDto>> {
-		return flow {
-			emit(
-				listOf(
-					PostDto("1", 9992453L, "android developer"),
-					PostDto("1", 9992453L, "android developer"),
-					PostDto("1", 9992453L, "android developer")
-				)
-			)
-		}.flowOn(Dispatchers.IO)
-	}
-
-	override suspend fun getAllJobTitles(): List<JobTitleDto> {
+    override suspend fun getAllJobTitles(): List<JobTitleDto> {
 		return wrapResponseWithErrorHandler { api.getAllJobTitle() }
 	}
 
@@ -129,28 +80,8 @@ class RepositoryImpl @Inject constructor(
 		}
 	}
 
-	override suspend fun createPost(content: String): Boolean {
-		delay(2000)
-		return true
-	}
 
-	override suspend fun getJobById(jobId: Int): JobDto {
-		return wrapResponse { api.getJobById(jobId) }
-	}
-
-	private suspend fun <T> wrapResponse(
-		function: suspend () -> Response<BaseResponse<T>>
-	): T {
-		val response = function()
-		return if (response.isSuccessful) {
-			response.body()?.value ?: throw Throwable()
-		} else {
-			throw Throwable("response is not successful")
-		}
-	}
-
-
-	// region Job
+    // region Job
 
 
 	//endregion
@@ -158,6 +89,9 @@ class RepositoryImpl @Inject constructor(
 
 	// region Post
 
+	override suspend fun getAllPosts(): List<PostDto> {
+		return wrapResponseWithErrorHandler { api.getPosts() }
+	}
 
 //    override suspend fun getPostById(id: String): PostDto {
 //
