@@ -1,8 +1,7 @@
-package com.cupcake.jobsfinder.domain.usecase
+package com.cupcake.jobsfinder.domain.useCase
 
-import com.cupcake.jobsfinder.data.repository.Repository
+import com.cupcake.jobsfinder.domain.reposirory.Repository
 import com.cupcake.jobsfinder.domain.mapper.toJob
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.take
 import javax.inject.Inject

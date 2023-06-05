@@ -1,8 +1,7 @@
 package com.cupcake.jobsfinder.ui.jobs
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.usecase.GetAllJobUseCase
+import com.cupcake.jobsfinder.domain.useCase.GetAllJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.base.ErrorUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,7 +45,7 @@ class JobsViewModel @Inject constructor(
                             companyName = job.company ?: "",
                             detailsChip = listOf(job.workType.toString(), job.jobType.toString()),
                             location = job.jobLocation ?: "",
-                            salary = job.salary ?: ""
+                          //  salary = job.jobSalary ?: ""
                         )
                     }
 

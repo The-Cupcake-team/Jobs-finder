@@ -1,6 +1,6 @@
-package com.cupcake.jobsfinder.domain.usecase
+package com.cupcake.jobsfinder.domain.useCase
 
-import com.cupcake.jobsfinder.data.repository.Repository
+import com.cupcake.jobsfinder.domain.reposirory.Repository
 import javax.inject.Inject
 
 

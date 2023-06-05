@@ -1,6 +1,6 @@
 package com.cupcake.jobsfinder.di
 
-import com.cupcake.jobsfinder.data.repository.Repository
+import com.cupcake.jobsfinder.domain.reposirory.Repository
 import com.cupcake.jobsfinder.data.repository.RepositoryImpl
 import dagger.Binds
 import dagger.Module

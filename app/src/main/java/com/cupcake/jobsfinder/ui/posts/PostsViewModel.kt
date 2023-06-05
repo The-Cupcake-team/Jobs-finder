@@ -2,7 +2,7 @@ package com.cupcake.jobsfinder.ui.posts
 
 import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.domain.model.Post
-import com.cupcake.jobsfinder.domain.usecase.GetPostsUseCase
+import com.cupcake.jobsfinder.domain.useCase.GetPostsUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
