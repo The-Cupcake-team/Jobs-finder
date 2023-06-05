@@ -5,14 +5,24 @@ import com.cupcake.jobsfinder.domain.model.Job
 
 fun JobDto.toJob(): Job{
     return Job(
-        id = this.id,
-        jobTitleId = this.jobTitleId,
-        company = this.company,
-        createdTime = this.createdAt.toString(),
-        workType = this.workType,
-        jobLocation = this.jobLocation,
-        jobDescription = this.jobDescription,
-        jobType = this.jobType,
-        salary = this.jobSalary.toString()
+        jobTitleId = jobTitleId,
+        company = company,
+        workType = workType,
+        jobLocation = jobLocation,
+        jobDescription = jobDescription,
+        jobType = jobType,
+        jobSalary = jobSalary
+    )
+}
+
+fun Job.toJobDto(): JobDto {
+    return JobDto(
+        jobTitleId = jobTitleId,
+        company = company,
+        workType = workType,
+        jobLocation = jobLocation,
+        jobDescription = jobDescription,
+        jobType = jobType,
+        jobSalary = jobSalary
     )
 }
