@@ -20,9 +20,7 @@ class RepositoryImpl @Inject constructor(
     private val api: JobApiService
 ) : Repository {
 
-    override suspend fun getJobs(): List<JobWithTitleDto> {
-        return wrapResponseWithErrorHandler { api.getJobs() }
-    }
+
 
     override suspend fun getAllPosts(): Flow<List<PostDto>> {
         return fakePosts() //todo:[ call getAllPosts from JopApiService]
@@ -82,6 +80,9 @@ class RepositoryImpl @Inject constructor(
 
     // region Job
 
+    override suspend fun getJobs(): List<JobWithTitleDto> {
+        return wrapResponseWithErrorHandler { api.getJobs() }
+    }
 
     //endregion
 
