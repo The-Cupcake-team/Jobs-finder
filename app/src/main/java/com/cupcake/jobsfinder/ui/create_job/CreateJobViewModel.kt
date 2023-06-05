@@ -1,15 +1,17 @@
 package com.cupcake.jobsfinder.ui.create_job
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.useCase.CreateJobUseCase
+import com.cupcake.jobsfinder.domain.usecase.CreateJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.create_job.state.CreateJobUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class CreateJobViewModel @Inject constructor(
     private val createJob: CreateJobUseCase
 ) : BaseViewModel() {
@@ -17,12 +19,11 @@ class CreateJobViewModel @Inject constructor(
     private val _jobUiState = MutableStateFlow(CreateJobUiState())
     val jobUiState = _jobUiState.asStateFlow()
 
-
     fun createJob() {
         viewModelScope.launch {
             try {
                 _jobUiState.update { it.copy(isLoading = true) }
-                val job = createJob(
+                val jobState = createJob(
                     CreateJobUseCase.ParamJobInfo(
                         jobTitleId = _jobUiState.value.jobFormUiState.idJobTitle,
                         company = _jobUiState.value.jobFormUiState.company,
@@ -30,11 +31,11 @@ class CreateJobViewModel @Inject constructor(
                         jobType = _jobUiState.value.jobFormUiState.jobType,
                         jobLocation = _jobUiState.value.jobFormUiState.jobLocation,
                         jobDescription = _jobUiState.value.jobFormUiState.jobDescription,
-                        salary = _jobUiState.value.jobFormUiState.salary,
+                        jobSalary = _jobUiState.value.jobFormUiState.salary,
                     )
                 )
 
-                if (job) {
+                if (jobState) {
                     onSuccessCreateJob()
                 }
 
@@ -45,7 +46,7 @@ class CreateJobViewModel @Inject constructor(
     }
 
     private fun onSuccessCreateJob() {
-        _jobUiState.update { it.copy(isLoading = true) }
+        _jobUiState.update { it.copy(isLoading = false) }
         // more logic
     }
 

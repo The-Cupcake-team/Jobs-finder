@@ -7,6 +7,10 @@ data class JobsUiState(
     val error: List<String> = emptyList()
 )
 
+data class ErrorUiState(
+    val code : Int,
+    val message : String
+)
 
 data class JobUiState(
     val image: String = "",

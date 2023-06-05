@@ -1,8 +1,8 @@
-package com.cupcake.jobsfinder.domain.useCase
+package com.cupcake.jobsfinder.domain.usecase
 
-import com.cupcake.jobsfinder.data.repository.Repository
 import com.cupcake.jobsfinder.domain.mapper.toPost
 import com.cupcake.jobsfinder.domain.model.Post
+import com.cupcake.jobsfinder.domain.reposirory.Repository
 import javax.inject.Inject
 
 

@@ -4,11 +4,9 @@ package com.cupcake.jobsfinder.ui.jobs
 import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.domain.usecase.GetJobByIdUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
-import com.cupcake.jobsfinder.ui.base.ErrorUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -43,7 +41,10 @@ class JobViewModel @Inject constructor(
                 _jobsUIState.value = _jobsUIState.value.copy(job = listOf(jobUiState), isLoading = false)
             } catch (throwable: Throwable) {
                 errors.add(ErrorUiState(0, throwable.message.toString()))
-                _jobsUIState.value = _jobsUIState.value.copy(error = errors, isLoading = false)
+                _jobsUIState.value = _jobsUIState.value.copy(
+                    error = listOf(throwable.message.toString()),
+                    isLoading = false
+                )
             }
         }
     }

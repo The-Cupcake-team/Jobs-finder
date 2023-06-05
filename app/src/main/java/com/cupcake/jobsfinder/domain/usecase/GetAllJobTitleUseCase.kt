@@ -1,13 +1,12 @@
-package com.cupcake.jobsfinder.domain.useCase
+package com.cupcake.jobsfinder.domain.usecase
 
-import com.cupcake.jobsfinder.domain.repository.Repository
 import com.cupcake.jobsfinder.domain.mapper.toJobTitle
-import kotlinx.coroutines.flow.map
+import com.cupcake.jobsfinder.domain.reposirory.Repository
 import javax.inject.Inject
 
 class GetAllJobTitleUseCase @Inject constructor(
     private val jobTitleRepository: Repository,
 ) {
-    suspend operator fun invoke() =  jobTitleRepository.getAllJobTitles()
-        .map{jobTitleDto -> jobTitleDto.toJobTitle()}
-    }
+    suspend operator fun invoke() = jobTitleRepository.getAllJobTitles()
+        .map { jobTitleDto -> jobTitleDto.toJobTitle() }
+}

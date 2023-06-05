@@ -16,6 +16,19 @@ import retrofit2.http.Path
 
 interface JobApiService {
 
+    // region Job
+
+    @POST("/job")
+    @FormUrlEncoded
+    suspend fun createJob(
+        @Field("jobTitleId") jobTitleId: Int?,
+        @Field("company") company: String?,
+        @Field("workType") workType: String?,
+        @Field("jobLocation") jobLocation: String?,
+        @Field("jobType") jobType: String?,
+        @Field("jobDescription") jobDescription: String?,
+        @Field("jobSalary") jobSalary: Double?
+    ): Response<BaseResponse<JobDto>>
 
 
     @GET("/posts")
@@ -49,6 +62,8 @@ interface JobApiService {
         @Path("postId") postId: String
     ): Response<BaseResponse<PostDto>>
 
+    @GET("/posts")
+    suspend fun getAllPosts(): List<PostDto>
 
     //endregion
 

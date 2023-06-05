@@ -2,7 +2,7 @@ package com.cupcake.jobsfinder.ui.posts
 
 import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.domain.model.Post
-import com.cupcake.jobsfinder.domain.useCase.GetPostsUseCase
+import com.cupcake.jobsfinder.domain.usecase.GetPostsUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler

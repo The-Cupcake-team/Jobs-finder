@@ -1,6 +1,6 @@
-package com.cupcake.jobsfinder.domain.useCase
+package com.cupcake.jobsfinder.domain.usecase
 
-import com.cupcake.jobsfinder.domain.repository.Repository
+import com.cupcake.jobsfinder.domain.reposirory.Repository
 import javax.inject.Inject
 
 class GetJobByIdUseCase @Inject constructor(
