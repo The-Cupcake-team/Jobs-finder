@@ -45,5 +45,15 @@
     <string name="mid_level">Mid-level</string>
     <string name="senior_level">Senior-level</string>
     <string name="expert">Expert</string>
+    <string name="description">Description</string>
+    <string name="add_description">Add description</string>
+
+    <string name="qualification">Qualification</string>
+    <string name="education">Education</string>
+    <string name="experiences">Experiences</string>
+    <string name="skills">Skills</string>
+    <string name="salary">Salary</string>
+    <string name="usd_month">USD/Month</string>
+    <string name="add_skills">Add skills</string>
 
 </resources>
