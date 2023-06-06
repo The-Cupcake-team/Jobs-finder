@@ -9,193 +9,101 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="@dimen/spacing_medium"
         android:background="@color/background">
 
-        <TextView
-            android:id="@+id/labelDescription"
-            style="@style/TextStyle.Title"
-            android:layout_width="@dimen/zero"
-            android:layout_height="wrap_content"
-            android:text="@string/description"
-            app:layout_constraintBottom_toTopOf="@+id/editeTextDescription"
-            app:layout_constraintEnd_toEndOf="@+id/editeTextDescription"
-            app:layout_constraintStart_toStartOf="@+id/editeTextDescription" />
 
-        <EditText
-            android:id="@+id/editeTextDescription"
+        <TextView
+            android:id="@+id/textViewTitle"
             style="@style/TextStyle.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title"
+            android:textColor="@color/color_text_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextJobTitle"
+            style="@style/EditTextCreateJobStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/zero"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_large"
-            android:autofillHints=""
-            android:background="@drawable/card_background"
-            android:gravity="top"
-            android:hint="@string/add_description"
-            android:labelFor="@+id/labelDescription"
-            android:lines="3"
-            android:maxLines="5"
-            android:padding="@dimen/spacing_medium"
-            android:textColorHint="@color/color_text_tertiary"
+            android:hint="@string/add_job_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelDescription" />
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_background" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/labelQualification"
+            android:id="@+id/textViewCompany"
             style="@style/TextStyle.Title"
-            android:layout_width="@dimen/zero"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:text="@string/qualification"
-            app:layout_constraintEnd_toEndOf="@+id/editeTextDescription"
-            app:layout_constraintStart_toStartOf="@+id/editeTextDescription"
-            app:layout_constraintTop_toBottomOf="@+id/editeTextDescription" />
+            android:text="@string/company"
+            android:textColor="@color/color_text_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextJobTitle" />
 
-        <EditText
-            android:id="@+id/editeTextEducation"
-            style="@style/TextStyle.Title"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextCompanyName"
+            style="@style/EditTextCreateJobStyle"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/zero"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:layout_marginTop="8dp"
-            android:autofillHints=""
-            android:background="@drawable/edite_text_education_background"
-            android:hint="@string/education"
-            android:inputType="text"
-            android:labelFor="@+id/labelDescription"
-            android:lines="1"
-            android:padding="@dimen/spacing_medium"
-            android:textColorHint="@color/color_text_tertiary"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:hint="@string/add_company_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelQualification" />
+            app:layout_constraintTop_toBottomOf="@id/textViewCompany">
 
-        <EditText
-            android:id="@+id/editeTextExperiences"
-            style="@style/TextStyle.Title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:autofillHints=""
-            android:background="@color/cards"
-            android:hint="@string/experiences"
-            android:inputType="text"
-            android:lines="1"
-            android:padding="@dimen/spacing_medium"
-            android:textColorHint="@color/color_text_tertiary"
-            app:layout_constraintEnd_toEndOf="@+id/editeTextEducation"
-            app:layout_constraintStart_toStartOf="@+id/editeTextEducation"
-            app:layout_constraintTop_toBottomOf="@+id/editeTextEducation" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_background" />
 
-        <EditText
-            android:id="@+id/editeTextSkills"
-            style="@style/TextStyle.Title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:autofillHints=""
-            android:background="@drawable/edite_text_skills_background"
-            android:hint="@string/skills"
-            android:inputType="text"
-            android:lines="1"
-            android:padding="@dimen/spacing_medium"
-            android:textColorHint="@color/color_text_tertiary"
-            app:layout_constraintEnd_toEndOf="@+id/editeTextExperiences"
-            app:layout_constraintStart_toStartOf="@+id/editeTextExperiences"
-            app:layout_constraintTop_toBottomOf="@+id/editeTextExperiences" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/labelSalary"
+            android:id="@+id/textViewLocation"
             style="@style/TextStyle.Title"
-            android:layout_width="@dimen/zero"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:text="@string/salary"
-            app:layout_constraintEnd_toEndOf="@+id/editeTextSkills"
-            app:layout_constraintStart_toStartOf="@+id/editeTextSkills"
-            app:layout_constraintTop_toBottomOf="@+id/editeTextSkills" />
+            android:text="@string/location"
+            android:textColor="@color/color_text_primary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextCompanyName" />
 
-        <com.google.android.material.slider.RangeSlider
-            android:id="@+id/rangeSliderSalary"
-            android:layout_width="@dimen/zero"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:valueFrom="0.0"
-            android:valueTo="100.0"
-            app:layout_constraintEnd_toEndOf="@+id/labelSalary"
-            app:layout_constraintStart_toStartOf="@+id/labelSalary"
-            app:layout_constraintTop_toBottomOf="@+id/labelSalary"
-            app:values="@array/initial_rang_salary" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextLocation"
+            style="@style/EditTextCreateJobStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/edit_text_height"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:hint="@string/country_city"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewLocation">
 
-        <TextView
-            android:id="@+id/labelUsdMonth"
-            style="@style/TextStyle.body"
-            android:layout_width="@dimen/zero"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/usd_month"
-            android:textColor="@color/color_text_secondary"
-            app:layout_constraintEnd_toEndOf="@+id/rangeSliderSalary"
-            app:layout_constraintTop_toBottomOf="@+id/rangeSliderSalary" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_background" />
 
-        <TextView
-            android:id="@+id/minSalary"
-            style="@style/TextStyle.body"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/boarder_text_salary"
-            android:gravity="center"
-            android:paddingHorizontal="@dimen/spacing_medium"
-            android:text="345345"
-            android:textColor="@color/primary"
-            app:layout_constraintEnd_toStartOf="@+id/dividerRangSalary"
-            app:layout_constraintStart_toStartOf="@+id/rangeSliderSalary"
-            app:layout_constraintTop_toBottomOf="@+id/rangeSliderSalary" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/dividerRangSalary"
-            android:layout_width="16dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/minSalary"
-            app:layout_constraintEnd_toStartOf="@+id/maxSalary"
-            app:layout_constraintStart_toEndOf="@+id/minSalary"
-            app:layout_constraintTop_toTopOf="@+id/minSalary" />
+        <!--    <include-->
+        <!--        android:id="@+id/chipsPageOneStub"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:inflatedId="@+id/chipsPageOneLayout"-->
+        <!--        android:layout="@layout/item_create_job_chips"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/editTextLocation" />-->
 
-        <TextView
-            android:id="@+id/maxSalary"
-            style="@style/TextStyle.body"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/boarder_text_salary"
-            android:gravity="center"
-            android:paddingHorizontal="@dimen/spacing_medium"
-            android:text="3453"
-            android:textColor="@color/primary"
-            app:layout_constraintBottom_toBottomOf="@+id/minSalary"
-            app:layout_constraintStart_toEndOf="@+id/dividerRangSalary"
-            app:layout_constraintTop_toTopOf="@+id/minSalary"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/add_skill"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_marginTop="16dp"
-            android:paddingHorizontal="@dimen/spacing_medium"
-            android:text="@string/add_skills"
-            android:textAllCaps="false"
-            app:cornerRadius="@dimen/radius"
-            app:icon="@drawable/ic_add"
-            app:layout_constraintStart_toStartOf="@+id/rangeSliderSalary"
-            app:layout_constraintTop_toBottomOf="@+id/minSalary"
-            app:strokeColor="@color/primary"
-            app:strokeWidth="1dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
