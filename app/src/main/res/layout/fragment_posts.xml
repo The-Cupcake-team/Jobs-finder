@@ -15,11 +15,21 @@
         android:background="@color/background"
         >
 
-        <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
+            android:text="أي حااااااااااجة تيجي من ريحة الحبايب"
+            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPosts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             tools:listitem="@layout/item_post"
-
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="vertical"
+            app:items="@{viewModel.uiState.postsResult}"
+            app:layout_constraintTop_toBottomOf="@id/textView"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

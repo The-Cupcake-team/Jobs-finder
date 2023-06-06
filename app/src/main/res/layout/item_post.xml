@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.cupcake.jobsfinder.ui.posts.PostItemUIState" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -22,8 +24,8 @@
                 android:id="@+id/image_avatar"
                 android:layout_width="@dimen/profile_image_size"
                 android:layout_height="@dimen/profile_image_size"
-                android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewCreatedAt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -46,10 +48,10 @@
             <TextView
                 android:id="@+id/textViewJopTitle"
                 style="@style/TextStyle.body"
-                android:textColor="@color/color_text_secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/jop_title"
+                android:textColor="@color/color_text_secondary"
                 app:layout_constraintStart_toStartOf="@+id/textViewPersonName"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPersonName" />
 
@@ -59,9 +61,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_text_tertiary"
-                android:text="@string/created_at"
                 app:layout_constraintStart_toStartOf="@+id/textViewJopTitle"
-                app:layout_constraintTop_toBottomOf="@+id/textViewJopTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewJopTitle"
+                tools:text="@string/created_at"
+                android:text='@{String.valueOf(item.createdAt)}'
+                />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -79,13 +83,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
-
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:lines="2"
                 android:ellipsize="end"
-                android:text="@string/post_content"
+                android:lines="2"
                 android:textColor="@color/color_text_primary"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt"
+                tools:text="@string/post_content"
+                android:text="@{item.description}"
+                />
 
             <ImageView
                 android:id="@+id/imageViewPostImage"
@@ -94,9 +99,9 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_normal"
                 android:scaleType="centerCrop"
+                android:src="@drawable/test_post_image"
                 app:layout_constraintBottom_toTopOf="@+id/imageViewLike"
-                app:layout_constraintTop_toBottomOf="@+id/textViewContent"
-                android:src="@drawable/test_post_image" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewContent" />
 
             <ImageView
                 android:id="@+id/imageViewComment"
