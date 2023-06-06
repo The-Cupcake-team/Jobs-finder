@@ -14,16 +14,20 @@ import kotlinx.coroutines.launch
 class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
     R.layout.fragment_posts,
     PostsViewModel::class.java
-) {
+), PostListener {
     override val LOG_TAG: String = this.javaClass.name
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch() {
-            viewModel.uiState.collect { value ->
-                Log.e("bk", "onViewCreated: $value",)
-            }
-        }
+        setupSeriesRecyclerView()
+
     }
+
+
+    private fun setupSeriesRecyclerView() {
+        val adapter = PostsAdapter(this)
+        binding?.recyclerViewPosts?.adapter = adapter
+    }
+
 }
