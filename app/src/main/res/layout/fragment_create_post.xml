@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -11,7 +12,113 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/accent"
         tools:context=".ui.post.CreatePostFragment">
 
+        <View
+            android:id="@+id/viewBackground"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/zero"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:background="@drawable/create_post_card_background"
+            app:layout_constraintBottom_toTopOf="@+id/buttonPhoto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageViewAvatar"
+            android:layout_width="@dimen/profile_image_size"
+            android:layout_height="@dimen/profile_image_size"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:padding="1dp"
+            app:layout_constraintStart_toStartOf="@id/viewBackground"
+            app:layout_constraintTop_toTopOf="@id/viewBackground"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
+            app:strokeColor="#E5E7E9"
+            app:strokeWidth="1dp"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textViewUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:fontFamily="@font/worksans_semibold"
+            tools:text="Username"
+            android:textColor="@color/color_text_primary"
+            android:textSize="@dimen/text_size_title"
+            app:layout_constraintStart_toEndOf="@id/imageViewAvatar"
+            app:layout_constraintTop_toTopOf="@id/imageViewAvatar" />
+
+        <EditText
+            android:id="@+id/editTextContent"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/zero"
+            android:lineSpacingMultiplier="1.5"
+            android:layout_margin="@dimen/spacing_medium"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/worksans_regular"
+            android:gravity="top"
+            android:hint="What's on your mind ?"
+            android:inputType="textMultiLine"
+            android:textColor="@color/color_text_primary"
+            android:textColorHint="@color/color_text_tertiary"
+            android:textSize="@dimen/text_size_body"
+            app:layout_constraintBottom_toBottomOf="@id/viewBackground"
+            app:layout_constraintEnd_toEndOf="@id/viewBackground"
+            app:layout_constraintStart_toStartOf="@id/viewBackground"
+            app:layout_constraintTop_toBottomOf="@id/imageViewAvatar" />
+
+        <Button
+            android:id="@+id/buttonPhoto"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="1dp"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:background="@drawable/create_post_photo_button"
+            android:fontFamily="@font/worksans_regular"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:text="Video/Photo"
+            android:textAllCaps="false"
+            android:textColor="@color/color_text_primary"
+            android:textSize="@dimen/text_size_title"
+            app:backgroundTint="@color/cards"
+            app:icon="@drawable/ic_gallery"
+            app:iconPadding="@dimen/spacing_normal"
+            app:iconTint="#DE019310"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonCamera"
+            app:layout_constraintStart_toStartOf="@id/viewBackground"
+            app:layout_constraintTop_toBottomOf="@+id/viewBackground" />
+
+        <Button
+            android:id="@+id/buttonCamera"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/create_post_camera_button"
+            android:fontFamily="@font/worksans_regular"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:text="Camera"
+            android:textAllCaps="false"
+            android:textColor="@color/color_text_primary"
+            android:textSize="@dimen/text_size_title"
+            app:backgroundTint="@color/cards"
+            app:icon="@drawable/ic_camera_square"
+            app:iconPadding="@dimen/spacing_normal"
+            app:iconTint="#4B8CED"
+            app:layout_constraintEnd_toEndOf="@id/viewBackground"
+            app:layout_constraintStart_toEndOf="@+id/buttonPhoto"
+            app:layout_constraintTop_toBottomOf="@id/viewBackground" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
