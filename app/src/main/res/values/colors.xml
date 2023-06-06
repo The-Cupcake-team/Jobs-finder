@@ -19,4 +19,7 @@
     <color name="color_text_primary">#DE000000</color>
     <color name="color_text_secondary">#99000000</color>
     <color name="color_text_tertiary">#61000000</color>
+
+    <!--Transparent color -->
+    <color name="transparent_color">#00000000</color>
 </resources>
