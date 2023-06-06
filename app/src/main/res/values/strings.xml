@@ -24,5 +24,11 @@
     <string name="on_your_location">On your location</string>
     <string name="on_site">On site</string>
     <string name="remote">Remote</string>
+    <string name="personal_name">Bilal Alkhatib</string>
+    <string name="jop_title">Android Developer</string>
+    <string name="created_at">3hours ago</string>
+    <string name="post_content">President cast election as choice between all our republicans who seek to impose President cast election as choice between all our republicans who seek to impose</string>
+    <string name="likes_count">10.5K</string>
+    <string name="comments_count">350</string>
 
 </resources>
