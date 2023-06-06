@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewJobCard"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_horizontal_height"
+        android:background="@color/white"
+        app:cardCornerRadius="@dimen/radius"
+        app:cardElevation="@dimen/zero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></androidx.cardview.widget.CardView>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageViewCompanyProfile"
+        android:layout_width="@dimen/profile_image_size"
+        android:layout_height="@dimen/profile_image_size"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@+id/cardViewJobCard"
+        app:layout_constraintTop_toTopOf="@+id/cardViewJobCard"
+        app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewJobTitle"
+        style="@style/TextStyle.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:textColor="@color/color_text_primary"
+        app:layout_constraintStart_toEndOf="@+id/imageViewCompanyProfile"
+        app:layout_constraintTop_toTopOf="@+id/imageViewCompanyProfile"
+        tools:text="UI/UX Designer" />
+
+    <TextView
+        android:id="@+id/textViewCompanyName"
+        style="@style/TextStyle.body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:textColor="@color/color_text_secondary"
+        app:layout_constraintStart_toStartOf="@+id/textViewJobTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewJobTitle"
+        tools:text="Meta" />
+
+    <ImageView
+        android:id="@+id/imageViewMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:clickable="true"
+        android:focusable="true"
+        android:rotation="90"
+        app:layout_constraintEnd_toEndOf="@+id/cardViewJobCard"
+        app:layout_constraintTop_toTopOf="@+id/cardViewJobCard"
+        app:srcCompat="@drawable/ic_more" />
+
+    <TextView
+        android:id="@+id/textViewJobType"
+        style="@style/TextStyle.caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:background="@drawable/background_chips_job_card"
+        android:backgroundTint="#E7FEFF"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="@dimen/spacing_normal"
+        android:textColor="@color/color_text_secondary"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewWorkType"
+        app:layout_constraintStart_toEndOf="@+id/textViewWorkType"
+        tools:text="On site" />
+
+    <TextView
+        android:id="@+id/textViewWorkType"
+        style="@style/TextStyle.caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:background="@drawable/background_chips_job_card"
+        android:backgroundTint="#F5EFFF"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="@dimen/spacing_normal"
+        android:textColor="@color/color_text_secondary"
+        app:layout_constraintBottom_toBottomOf="@+id/cardViewJobCard"
+        app:layout_constraintStart_toStartOf="@+id/imageViewCompanyProfile"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCompanyName"
+        tools:text="Full time" />
+
+    <TextView
+        android:id="@+id/textViewSalary"
+        style="@style/TextStyle.body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_text_secondary"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textViewJobType"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewMore"
+        tools:text="$30/month" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
