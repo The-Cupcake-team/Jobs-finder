@@ -17,11 +17,11 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupSeriesRecyclerView()
+        setupPostsRecyclerView()
     }
 
 
-    private fun setupSeriesRecyclerView() {
+    private fun setupPostsRecyclerView() {
         val adapter = PostsAdapter(listOf(), this)
         binding?.recyclerViewPosts?.adapter = adapter
     }
