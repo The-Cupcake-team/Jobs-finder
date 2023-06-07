@@ -32,7 +32,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <include
-            android:id="@+id/include2"
+            android:id="@+id/card_view_job_info"
             layout="@layout/layout_card_job_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,16 +49,8 @@
             android:layout_marginVertical="@dimen/spacing_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include2" />
+            app:layout_constraintTop_toBottomOf="@+id/card_view_job_info" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            android:background="@drawable/button_background_drawable"
-            android:paddingVertical="@dimen/spacing_medium"
-            android:text="Apply"
-            app:layout_constraintBottom_toBottomOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
