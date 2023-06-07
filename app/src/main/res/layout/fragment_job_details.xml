@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,8 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/transparent_color"
-        tools:context=".ui.jobs.JobDetails">
+        android:background="@color/background"
+        tools:context=".ui.jobs.JobDetails"
+        >
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/top_bar"
             android:layout_width="match_parent"
@@ -25,10 +26,9 @@
                 android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:navigationIcon="@drawable/ic_back"
-                app:navigationIconTint="@color/color_text_secondary"
                 app:menu="@menu/job_details_menu"
-                 />
+                app:navigationIcon="@drawable/ic_back"
+                app:navigationIconTint="@color/color_text_secondary" />
         </com.google.android.material.appbar.AppBarLayout>
 
         <include
@@ -46,9 +46,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginVertical="@dimen/spacing_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginVertical="@dimen/spacing_medium"
             app:layout_constraintTop_toBottomOf="@+id/include2" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:background="@drawable/button_background_drawable"
+            android:paddingVertical="@dimen/spacing_medium"
+            android:text="Apply"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
