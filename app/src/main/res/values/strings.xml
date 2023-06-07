@@ -32,5 +32,6 @@
     <string name="work_place">Work place</string>
     <string name="Salary">Salary</string>
     <string name="posted_on">Posted on</string>
+    <string name="apply_btn">Apply</string>
 
 </resources>
