@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/transparent_color"
         tools:context=".ui.jobs.JobDetails">
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/top_bar"
@@ -30,5 +31,24 @@
                  />
         </com.google.android.material.appbar.AppBarLayout>
 
+        <include
+            android:id="@+id/include2"
+            layout="@layout/layout_card_job_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+        <include
+            layout="@layout/fragment_about_job_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginVertical="@dimen/spacing_medium"
+            app:layout_constraintTop_toBottomOf="@+id/include2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="328dp"
+    android:layout_height="wrap_content"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -12,47 +12,60 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/shapeableImageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="-30dp"
-            android:src="@drawable/metalogo"
+            android:id="@+id/image_view_logo_company"
+            android:layout_width="@dimen/company_logo_size"
+            android:layout_height="@dimen/company_logo_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/metalogo" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/text_view_job_title"
             style="@style/TextStyle.Headline"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:text="Junior UI/UX Designer"
+            android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shapeableImageView" />
+            app:layout_constraintTop_toBottomOf="@+id/image_view_logo_company"
+            tools:text="Junior UI/UX Designer" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/text_view_company_name"
             style="@style/TextStyle.caption"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
-            android:text="Meta inc."
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            android:gravity="center"
+            tools:text="Meta inc."
+            app:layout_constraintEnd_toEndOf="@+id/text_view_job_title"
+            app:layout_constraintStart_toStartOf="@+id/text_view_job_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_job_title" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_category"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginVertical="@dimen/spacing_medium"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_company_name"
+            app:tabIndicator="@drawable/tab_indicator_job_details"
+            app:tabIndicatorColor="@color/chip_color" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-
-        </androidx.viewpager2.widget.ViewPager2>
-
-
-
+            android:id="@+id/view_pager_category"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/zero"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tab_layout_category"
+            app:layout_constraintStart_toStartOf="@+id/tab_layout_category"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout_category" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
 

@@ -24,5 +24,13 @@
     <string name="on_your_location">On your location</string>
     <string name="on_site">On site</string>
     <string name="remote">Remote</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="description">Description</string>
+    <string name="contract_type">Contract type</string>
+    <string name="Location">Location</string>
+    <string name="work_place">Work place</string>
+    <string name="Salary">Salary</string>
+    <string name="posted_on">Posted on</string>
 
 </resources>

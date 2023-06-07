@@ -33,5 +33,7 @@
     <dimen name="search_home_height">40dp</dimen>
     <dimen name="bottom_navigation_height">52dp</dimen>
     <dimen name="button_height">42dp</dimen>
+    <dimen name="company_logo_size">60dp</dimen>
+    <dimen name="job_details_card_title">82dp</dimen>
 
 </resources>
