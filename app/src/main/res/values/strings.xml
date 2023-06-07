@@ -24,5 +24,8 @@
     <string name="on_your_location">On your location</string>
     <string name="on_site">On site</string>
     <string name="remote">Remote</string>
+    <string name="public_state">public</string>
+    <string name="post_hint">What\'s on your mind ?</string>
+
 
 </resources>
