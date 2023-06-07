@@ -8,6 +8,7 @@
     <dimen name="spacing_medium">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_xxlarge">40dp</dimen>
 
     <!--    text size-->
     <dimen name="text_size_headline">16sp</dimen>
@@ -25,6 +26,7 @@
 
     <!--    images-->
     <dimen name="profile_image_size">40dp</dimen>
+    <dimen name="profile_image_large_size">50dp</dimen>
     <dimen name="company_image_size">48dp</dimen>
     <dimen name="post_image_height">160dp</dimen>
 

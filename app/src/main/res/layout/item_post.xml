@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.cupcake.jobsfinder.ui.posts.PostItemUIState" />
+
         <variable
             name="listener"
             type="com.cupcake.jobsfinder.ui.posts.PostListener" />
@@ -15,9 +17,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/spacing_normal"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginHorizontal="@dimen/spacing_medium">
+        app:cardCornerRadius="@dimen/spacing_normal">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,18 +28,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/image_avatar"
+                android:id="@+id/imageViewPerson"
+                style="@style/personalImageStyle"
                 android:layout_width="@dimen/profile_image_size"
                 android:layout_height="@dimen/profile_image_size"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:layout_marginTop="@dimen/spacing_medium"
+                android:src="@drawable/test_personal_image"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewCreatedAt"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/circleImageView"
-                app:strokeColor="@color/light_border"
-                app:strokeWidth="@dimen/person_image_border_width"
-                tools:src="@tools:sample/avatars" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textViewPersonName"
@@ -47,7 +45,7 @@
                 android:layout_marginStart="@dimen/spacing_normal"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/personal_name"
-                app:layout_constraintStart_toEndOf="@+id/image_avatar"
+                app:layout_constraintStart_toEndOf="@+id/imageViewPerson"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -65,12 +63,11 @@
                 style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text='@{String.valueOf(item.createdAt)}'
                 android:textColor="@color/color_text_tertiary"
                 app:layout_constraintStart_toStartOf="@+id/textViewJopTitle"
                 app:layout_constraintTop_toBottomOf="@+id/textViewJopTitle"
-                tools:text="@string/created_at"
-                android:text='@{String.valueOf(item.createdAt)}'
-                />
+                tools:text="@string/created_at" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -91,11 +88,10 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:ellipsize="end"
                 android:maxLines="2"
+                android:text="@{item.description}"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt"
-                tools:text="@string/post_content"
-                android:text="@{item.description}"
-                />
+                tools:text="@string/post_content" />
 
             <ImageView
                 android:id="@+id/imageViewPostImage"
@@ -104,9 +100,9 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_normal"
                 android:scaleType="centerCrop"
-                tools:srcCompat="@tools:sample/backgrounds/scenic"
                 app:layout_constraintBottom_toTopOf="@+id/imageViewLike"
-                app:layout_constraintTop_toBottomOf="@+id/textViewContent" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewContent"
+                tools:srcCompat="@drawable/test_post_image" />
 
             <ImageView
                 android:id="@+id/imageViewComment"

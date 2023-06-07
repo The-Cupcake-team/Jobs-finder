@@ -10,24 +10,69 @@
             type="com.cupcake.jobsfinder.ui.posts.PostsViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/postsMotionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        android:background="@color/white"
+        app:layoutDescription="@xml/fragment_posts_xml_constraintlayout2_scene">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageViewProfileImage"
+            style="@style/personalLargeImageStyle"
+            android:layout_width="@dimen/profile_image_large_size"
+            android:layout_height="@dimen/profile_image_large_size"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:src="@drawable/test_personal_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextSearchInput"
+            style="@style/searchBarStyle"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/search_home_height"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewProfileImage"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewNotifications"
+            app:layout_constraintStart_toEndOf="@+id/imageViewProfileImage"
+            app:layout_constraintTop_toTopOf="@+id/imageViewProfileImage" />
+
+        <ImageView
+            android:id="@+id/imageViewNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextSearchInput"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextSearchInput"
+            app:srcCompat="@drawable/ic_bell" />
+
+        <ImageView
+            android:id="@+id/imageViewSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextSearchInput"
+            app:layout_constraintStart_toStartOf="@+id/editTextSearchInput"
+            app:layout_constraintTop_toTopOf="@+id/editTextSearchInput"
+            app:srcCompat="@drawable/ic_search" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewPosts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/zero"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:background="@color/background"
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingTop="@dimen/spacing_medium"
             app:items="@{viewModel.uiState.postsResult}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearchInput"
             tools:listitem="@layout/item_post" />
 
         <LinearLayout
@@ -53,6 +98,5 @@
                 app:showWhenLoading="@{viewModel.uiState.loading}" />
 
         </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>

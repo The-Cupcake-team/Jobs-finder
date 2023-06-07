@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="2053"
+        motion:motionInterpolator="cubic(0.21,0.19,0.8,0.8)">
+       <KeyFrameSet>
+           <KeyAttribute
+               motion:motionTarget="@+id/editTextSearchInput"
+               motion:framePosition="50"
+               android:alpha="0.25" />
+           <KeyAttribute
+               motion:motionTarget="@+id/editTextSearchInput"
+               motion:framePosition="100"
+               android:rotationX="0" />
+           <KeyAttribute
+               motion:motionTarget="@+id/editTextSearchInput"
+               motion:framePosition="100"
+               android:rotationY="0" />
+       </KeyFrameSet>
+        <OnSwipe motion:touchAnchorId="@+id/recyclerViewPosts"
+            motion:maxAcceleration="6.2199"
+            motion:maxVelocity="2.1199" />
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:layout_height="wrap_content"
+            motion:layout_constraintEnd_toStartOf="@+id/imageViewNotifications"
+            motion:layout_constraintTop_toTopOf="@+id/editTextSearchInput"
+            motion:layout_constraintBottom_toBottomOf="@+id/editTextSearchInput"
+            android:layout_width="wrap_content"
+            android:id="@+id/imageViewSearch"
+            android:layout_marginEnd="8dp" />
+        <Constraint
+            android:layout_width="@dimen/profile_image_size"
+            android:layout_height="@dimen/profile_image_size"
+            android:layout_marginStart="16dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:id="@+id/imageViewProfileImage" />
+        <Constraint
+            android:id="@+id/editTextSearchInput"
+            android:visibility="invisible"
+            android:hint=""
+            motion:layout_editor_absoluteY="15dp"
+            motion:layout_constraintTop_toTopOf="@+id/imageViewProfileImage"
+            motion:layout_constraintBottom_toBottomOf="@+id/imageViewProfileImage"
+            motion:layout_constraintEnd_toStartOf="@+id/imageViewNotifications"
+            motion:layout_editor_absoluteX="292dp" />
+        <Constraint
+            android:id="@+id/recyclerViewPosts"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/editTextSearchInput"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/spacing_normal" />
+
+
+    </ConstraintSet>
+</MotionScene>
