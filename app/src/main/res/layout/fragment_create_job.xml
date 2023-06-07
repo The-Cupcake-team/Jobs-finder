@@ -4,6 +4,10 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cupcake.jobsfinder.ui.create_job.CreateJobViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +29,8 @@
                 android:layout_height="?actionBarSize"
                 android:background="@color/background"
                 android:elevation="2dp"
+                app:setNavigationIcon="@{viewModel.jobUiState.activeIconToolBar}"
+
                 app:navigationIcon="@drawable/ic_close"
                 app:titleTextColor="@color/color_text_primary" />
 

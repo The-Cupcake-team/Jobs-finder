@@ -39,7 +39,7 @@ abstract class BaseFragment<DB: ViewDataBinding, VM: ViewModel>(
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         _binding?.apply {
-            //setVariable(BR.viewModel, viewModel)
+            setVariable(BR.viewModel, viewModel)
             lifecycleOwner = viewLifecycleOwner
         }
 

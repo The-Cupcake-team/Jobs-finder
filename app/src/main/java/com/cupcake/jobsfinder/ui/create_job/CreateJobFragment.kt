@@ -2,11 +2,11 @@ package com.cupcake.jobsfinder.ui.create_job
 
 import android.os.Bundle
 import android.view.View
+import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.jobsfinder.R
 import com.cupcake.jobsfinder.databinding.FragmentCreateJobBinding
 import com.cupcake.jobsfinder.ui.base.BaseFragment
 import com.cupcake.jobsfinder.ui.create_job.adapter.ViewPagerCreateJobAdapter
-import com.google.android.material.tabs.TabLayoutMediator
 
 class CreateJobFragment : BaseFragment<FragmentCreateJobBinding, CreateJobViewModel>(
     R.layout.fragment_create_job, CreateJobViewModel::class.java
@@ -19,7 +19,6 @@ class CreateJobFragment : BaseFragment<FragmentCreateJobBinding, CreateJobViewMo
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val titleTabTasks = resources.getStringArray(R.array.task)
 
         val adapter = ViewPagerCreateJobAdapter(
             fragmentManager = requireActivity().supportFragmentManager,
@@ -27,13 +26,20 @@ class CreateJobFragment : BaseFragment<FragmentCreateJobBinding, CreateJobViewMo
             lifecycle = lifecycle,
         )
         binding?.apply {
-
             viewPagerCreateJob.adapter = adapter
-
-
-//            buttonAddTask.root.setOnClickListener {
-//                onClickCreateTask(tabTasks)
-//            }
+            onChangePageSelected()
         }
     }
+
+    private fun onChangePageSelected() {
+        binding?.apply {
+            viewPagerCreateJob.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    viewModel?.handleEvent(CreateJobEvent.PageScrolled(position))
+                }
+            })
+        }
+    }
+
 }

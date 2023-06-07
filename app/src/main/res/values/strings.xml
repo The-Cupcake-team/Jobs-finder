@@ -55,9 +55,7 @@
     <string name="salary">Salary</string>
     <string name="usd_month">USD/Month</string>
     <string name="add_skills">Add skills</string>
+    <string name="next">Next</string>
 
-    <string-array name="task">
-        <item>Personal</item>
-        <item>Team</item>
-    </string-array>
+
 </resources>

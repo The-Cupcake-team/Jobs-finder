@@ -1,6 +1,9 @@
 package com.cupcake.jobsfinder.ui.create_job
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.cupcake.jobsfinder.R
 import com.cupcake.jobsfinder.domain.usecase.CreateJobUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.create_job.state.CreateJobUiState
@@ -18,6 +21,9 @@ class CreateJobViewModel @Inject constructor(
 
     private val _jobUiState = MutableStateFlow(CreateJobUiState())
     val jobUiState = _jobUiState.asStateFlow()
+
+    private val _event = MutableLiveData<CreateJobEvent>()
+    val event: LiveData<CreateJobEvent> = _event
 
     fun createJob() {
         viewModelScope.launch {
@@ -58,5 +64,27 @@ class CreateJobViewModel @Inject constructor(
             )
         }
     }
+
+    fun handleEvent(event: CreateJobEvent) {
+        when (event) {
+            is CreateJobEvent.PageScrolled -> {
+                onChangeIndexViewPager(event.index)
+            }
+
+        }
+    }
+
+    private fun onChangeIndexViewPager(index: Int) {
+        _jobUiState.update {
+            it.copy(
+                activeIconToolBar = getIconToolBar(index),
+            )
+        }
+    }
+
+    private fun getIconToolBar(index: Int): Int {
+        return if (index == 1) R.drawable.ic_arrow_down else R.drawable.ic_close
+    }
+
 
 }
