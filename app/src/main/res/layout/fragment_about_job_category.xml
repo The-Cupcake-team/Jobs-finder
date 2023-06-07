@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ui.jobs.AboutJobCategory">
 
         <include
@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing_medium"
             app:layout_constraintEnd_toStartOf="@+id/card_job_details_location"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toStartOf="@+id/card_job_details_work_place"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/card_job_details_contract_place"
             app:layout_constraintTop_toTopOf="@+id/card_job_details_contract_place" />
 
@@ -40,7 +38,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/card_job_details_location"
             app:layout_constraintTop_toTopOf="@+id/card_job_details_location" />
 
@@ -64,7 +61,7 @@
             app:layout_constraintTop_toTopOf="@+id/card_job_details_posted_on" />
 
         <include
-            android:id="@+id/include"
+            android:id="@+id/card_view_expandable_description"
             layout="@layout/layout_card_expandable_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,5 +71,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_job_details_posted_on" />
 
+        <Button
+            android:id="@+id/button_apply_job"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginVertical="@dimen/spacing_xlarge"
+            android:background="@drawable/button_background_drawable"
+            android:paddingVertical="@dimen/spacing_medium"
+            android:text="@string/apply_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/card_view_expandable_description"
+            app:layout_constraintStart_toStartOf="@+id/card_view_expandable_description"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_expandable_description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
