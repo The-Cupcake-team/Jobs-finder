@@ -98,5 +98,6 @@
                 app:showWhenLoading="@{viewModel.uiState.loading}" />
 
         </LinearLayout>
+
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
