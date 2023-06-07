@@ -40,17 +40,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_bar" />
-
-        <include
-            layout="@layout/fragment_about_job_category"
+        <androidx.fragment.app.FragmentContainerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginVertical="@dimen/spacing_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_view_job_info" />
-
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/card_view_job_info"
+            app:layout_constraintStart_toStartOf="@+id/card_view_job_info"
+            app:layout_constraintTop_toBottomOf="@+id/card_view_job_info"
+            android:name="com.cupcake.jobsfinder.ui.jobs.AboutJobCategory"
+            tools:layout="@layout/fragment_about_job_category"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
