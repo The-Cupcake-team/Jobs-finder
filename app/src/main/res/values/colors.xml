@@ -8,8 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="background">#FBFCFE</color>
-    <color name="primary">#4B4DED</color>
+    <color name="background">#F6F6F6</color>
+    <color name="primary">#4B8CED</color>
     <color name="secondary">#4A4A68</color>
     <color name="tertiary">#8C8CA1</color>
     <color name="accent">#ECF1F4</color>
