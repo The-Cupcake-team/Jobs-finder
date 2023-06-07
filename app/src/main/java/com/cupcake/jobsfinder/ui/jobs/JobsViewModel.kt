@@ -1,7 +1,7 @@
 package com.cupcake.jobsfinder.ui.jobs
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.usecase.GetAllJobUseCase
+import com.cupcake.jobsfinder.domain.useCase.job.GetRecommendedJobsUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class JobsViewModel @Inject constructor(
-    private val getAllJobUseCase: GetAllJobUseCase,
+    private val getRecommendedJobsUseCase: GetRecommendedJobsUseCase,
 ) : BaseViewModel() {
 
     private val _jobsUIState = MutableStateFlow(JobsUiState())
@@ -34,7 +34,7 @@ class JobsViewModel @Inject constructor(
         }
 
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val jobs = getAllJobUseCase(RECOMMENDED_JOB_LIMIT)
+            val jobs = getRecommendedJobsUseCase(RECOMMENDED_JOB_LIMIT)
                 .map { job ->
                     JobUiState(
                         image = "",
