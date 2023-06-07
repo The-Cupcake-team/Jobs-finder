@@ -15,7 +15,7 @@
         >
 
         <ImageView
-            android:id="@+id/image_view_icon_details_contract"
+            android:id="@+id/image_view_icon_details_contract_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_contract_type"
@@ -24,24 +24,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_view_details_contract_title"
+            android:id="@+id/text_view_details_contract_type_title"
             style="@style/TextStyle.caption"
             android:layout_width="82dp"
             android:layout_height="wrap_content"
             android:text="@string/contract_type"
-            app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_contract"
-            app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_contract"
-            app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_contract" />
+            app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_contract_type"
+            app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_contract_type"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_contract_type" />
 
         <TextView
-            android:id="@+id/text_view_details_contract_name"
+            android:id="@+id/text_view_details_contract_type"
             style="@style/TextStyle.body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:layout_constraintEnd_toEndOf="@+id/text_view_details_contract_title"
-            app:layout_constraintStart_toStartOf="@+id/text_view_details_contract_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_details_contract_title"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_details_contract_type_title"
+            app:layout_constraintStart_toStartOf="@+id/text_view_details_contract_type_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_details_contract_type_title"
             tools:text="Full time" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

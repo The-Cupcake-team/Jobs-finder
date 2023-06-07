@@ -14,7 +14,7 @@
         >
 
         <ImageView
-            android:id="@+id/image_view_icon_details_contract"
+            android:id="@+id/image_view_icon_details_work_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_xlarge"
@@ -23,25 +23,25 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_view_details_contract_title"
+            android:id="@+id/text_view_details_work_place_title"
             style="@style/TextStyle.caption"
             android:layout_width="@dimen/job_details_card_title"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/work_place"
-            app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_contract"
-            app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_contract"
-            app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_contract" />
+            app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_work_place"
+            app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_work_place"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_work_place" />
 
         <TextView
-            android:id="@+id/text_view_details_contract_name"
+            android:id="@+id/text_view_details_work_place"
             style="@style/TextStyle.body"
             android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:gravity="center"
-            app:layout_constraintEnd_toEndOf="@+id/text_view_details_contract_title"
-            app:layout_constraintStart_toStartOf="@+id/text_view_details_contract_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_details_contract_title"
+            app:layout_constraintEnd_toEndOf="@+id/text_view_details_work_place_title"
+            app:layout_constraintStart_toStartOf="@+id/text_view_details_work_place_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_details_work_place_title"
             tools:text="Full time" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
