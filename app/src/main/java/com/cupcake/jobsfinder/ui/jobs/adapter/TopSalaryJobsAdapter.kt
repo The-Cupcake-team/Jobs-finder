@@ -7,18 +7,18 @@ import com.cupcake.jobsfinder.ui.base.BaseAdapter
 import com.cupcake.jobsfinder.ui.jobs.JobUiState
 
 
-class RecommendedJobsAdapter(items: List<JobUiState>, listener: JobsListener) :
+class TopSalaryJobsAdapter(items: List<JobUiState>, listener: JobsListener) :
     BaseAdapter<JobUiState>(items, listener) {
     override var layoutId: Int = R.layout.item_job_card
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         ((holder as ItemViewHolder).binding as ViewGroup.LayoutParams).width =
-            holder.itemView.resources.getDimensionPixelOffset(R.dimen.card_vertical_width)
+           holder.itemView.resources.getDimensionPixelOffset(R.dimen.card_vertical_width)
         super.onBindViewHolder(holder, position)
     }
 }
 
-interface RecommendedJobsListener : BaseActionListener {
+interface TopSalaryJobsListener : BaseActionListener {
     fun onItemClickListener()
 }
 
