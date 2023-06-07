@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_large"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="10dp"
-    app:contentPadding="20dp">
+    app:cardCornerRadius="@dimen/job_details_card_cardCornerRadius"
+    app:cardElevation="@dimen/job_details_card_cardElevation"
+    app:contentPadding="@dimen/job_details_card_cardCornerRadius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         <TextView
             android:id="@+id/text_view_description_title"
             style="@style/TextStyle.Title"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:text="@string/description"
             app:drawableEndCompat="@drawable/ic_arrow_down"
