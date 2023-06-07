@@ -13,25 +13,16 @@
         android:background="@color/background">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/jobsRecycler"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/card_horizontal_height"
-            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:listitem="@layout/item_job_card" />
-
-        <TextView
-            android:id="@+id/textView"
-            style="@style/TextStyle.Headline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:text="@string/recommended"
-            android:textColor="@color/color_text_primary"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
