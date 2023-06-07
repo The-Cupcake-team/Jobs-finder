@@ -25,7 +25,7 @@
         <TextView
             android:id="@+id/text_view_job_title"
             style="@style/TextStyle.Headline"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
             android:gravity="center"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginVertical="@dimen/spacing_medium"
-            android:background="@color/white"
+            android:background="@color/transparent_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
