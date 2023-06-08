@@ -30,6 +30,8 @@ abstract class BaseAdapter<T>(
         newItem: T,
     ) = oldItem == newItem
 
+    fun getItems() = items
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = DataBindingUtil.inflate<ViewDataBinding>(inflater, layoutId, parent, false)
@@ -40,8 +42,8 @@ abstract class BaseAdapter<T>(
         val currentItem = items[position]
         when (holder) {
             is ItemViewHolder -> {
-                //holder.binding.setVariable(BR.item,currentItem)
-                // holder.binding.setVariable(BR.listener,listener)
+                holder.binding.setVariable(BR.item,currentItem)
+                 holder.binding.setVariable(BR.listener,listener)
             }
         }
     }

@@ -4,7 +4,7 @@ package com.cupcake.jobsfinder.ui.post_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.domain.model.Post
-import com.cupcake.jobsfinder.domain.useCase.GetPostByIdUseCase
+import com.cupcake.jobsfinder.domain.usecase.GetPostByIdUseCase
 import com.cupcake.jobsfinder.ui.post_details.state.PostDetailsUiState
 import com.cupcake.jobsfinder.ui.post_details.state.PostUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
