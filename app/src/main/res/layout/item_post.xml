@@ -132,10 +132,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_normal"
-                android:rotationY="180"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_like" />
+                app:srcCompat="@drawable/ic_heart" />
 
             <TextView
                 android:id="@+id/textViewCommentsCount"
