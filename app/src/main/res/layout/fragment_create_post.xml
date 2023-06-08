@@ -14,6 +14,30 @@
         android:layout_height="match_parent"
         android:background="@color/accent"
         tools:context=".ui.post.CreatePostFragment">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/postToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back">
+
+            <TextView
+                android:id="@+id/create"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="Post"
+                android:onClick="@{() -> viewModel.createPost(editTextContent.getText().toString())}"
+                android:textColor="@color/primary"
+                android:fontFamily="@font/worksans_semibold"
+                android:paddingHorizontal="8dp"
+                android:textSize="16sp" />
+        </androidx.appcompat.widget.Toolbar>
 
         <View
             android:id="@+id/viewBackground"
@@ -25,7 +49,7 @@
             app:layout_constraintBottom_toTopOf="@+id/buttonPhoto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/postToolbar"
             app:layout_constraintVertical_chainStyle="spread_inside" />
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -77,6 +101,7 @@
             android:id="@+id/editTextContent"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/zero"
+            android:padding="@dimen/spacing_normal"
             android:layout_margin="@dimen/spacing_medium"
             android:background="@android:color/transparent"
             android:fontFamily="@font/worksans_regular"
