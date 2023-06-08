@@ -32,7 +32,7 @@ class RepositoryImpl @Inject constructor(
 	}
 
 
-	override suspend fun getJobById(jobId: Int): JobDto {
+	override suspend fun getJobById(jobId: String): JobDto {
 		return wrapResponseWithErrorHandler { api.getJobById(jobId) }
 	}
 

@@ -16,7 +16,7 @@ interface Repository {
 
     suspend fun getAllJobTitles(): List<JobTitleDto>
 
-    suspend fun getJobById(jobId: Int): JobDto
+    suspend fun getJobById(jobId: String): JobDto
 
     //endregion
 
