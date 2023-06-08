@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.cupcake.jobsfinder.ui.jobs.JobViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,53 +14,270 @@
         android:layout_height="wrap_content"
         tools:context=".ui.jobs.AboutJobCategory">
 
-        <include
-            android:id="@+id/card_job_details_contract_place"
-            layout="@layout/card_job_details_contract_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_medium"
-            app:layout_constraintEnd_toStartOf="@+id/card_job_details_location"
-            app:layout_constraintHorizontal_chainStyle="spread"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_details_chip"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <include
-            android:id="@+id/card_job_details_location"
-            layout="@layout/card_job_details_location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/card_job_details_work_place"
-            app:layout_constraintStart_toEndOf="@+id/card_job_details_contract_place"
-            app:layout_constraintTop_toTopOf="@+id/card_job_details_contract_place" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_job_details_contract_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/spacing_medium"
+                android:background="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/card_job_details_location"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <include
-            android:id="@+id/card_job_details_work_place"
-            layout="@layout/card_job_details_work_place"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/card_job_details_location"
-            app:layout_constraintTop_toTopOf="@+id/card_job_details_location" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_tiny"
+                    android:paddingVertical="@dimen/spacing_medium">
 
-        <include
-            android:id="@+id/card_job_details_posted_on"
-            layout="@layout/card_job_details_posted_on"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_medium"
-            app:layout_constraintEnd_toEndOf="@+id/card_job_details_contract_place"
-            app:layout_constraintStart_toStartOf="@+id/card_job_details_contract_place"
-            app:layout_constraintTop_toBottomOf="@+id/card_job_details_contract_place" />
+                    <ImageView
+                        android:id="@+id/image_view_icon_details_contract_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xlarge"
+                        android:src="@drawable/ic_contract_type"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/card_job_details_salary"
-            layout="@layout/card_job_details_salary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/card_job_details_location"
-            app:layout_constraintStart_toStartOf="@+id/card_job_details_location"
-            app:layout_constraintTop_toTopOf="@+id/card_job_details_posted_on" />
+                    <TextView
+                        android:id="@+id/text_view_details_contract_type_title"
+                        style="@style/TextStyle.caption"
+                        android:layout_width="82dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contract_type"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_contract_type"
+                        app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_contract_type"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_contract_type" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_contract_type"
+                        style="@style/TextStyle.body"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{viewModel.jobsUIState.job.workType.toString()}"
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_details_contract_type_title"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_details_contract_type_title"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_details_contract_type_title"
+                        tools:text="Full time" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_job_details_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/card_job_details_work_place"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/card_job_details_contract_type"
+                app:layout_constraintTop_toTopOf="@+id/card_job_details_contract_type">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_tiny"
+                    android:paddingVertical="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/image_view_icon_details_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xlarge"
+                        android:src="@drawable/ic_location"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_location_title"
+                        style="@style/TextStyle.caption"
+                        android:layout_width="@dimen/job_details_card_title"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/Location"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_location"
+                        app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_location"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_location" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_location"
+                        style="@style/TextStyle.body"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{viewModel.jobsUIState.job.location}"
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_details_location_title"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_details_location_title"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_details_location_title"
+                        tools:text="Full time" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_job_details_work_place"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/card_job_details_location"
+                app:layout_constraintTop_toTopOf="@+id/card_job_details_location">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_tiny"
+                    android:paddingVertical="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/image_view_icon_details_work_place"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xlarge"
+                        android:src="@drawable/ic_work_place"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_work_place_title"
+                        style="@style/TextStyle.caption"
+                        android:layout_width="@dimen/job_details_card_title"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/work_place"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_work_place"
+                        app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_work_place"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_work_place" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_work_place"
+                        style="@style/TextStyle.body"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{viewModel.jobsUIState.job.jobType}"
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_details_work_place_title"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_details_work_place_title"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_details_work_place_title"
+                        tools:text="Full time" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_job_details_posted_on"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginVertical="@dimen/spacing_medium"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/card_job_details_contract_type"
+                app:layout_constraintStart_toStartOf="@+id/card_job_details_contract_type"
+                app:layout_constraintTop_toBottomOf="@+id/card_job_details_contract_type">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_tiny"
+                    android:paddingVertical="@dimen/spacing_medium"
+                    app:layout_constraintStart_toStartOf="@+id/card_job_details_contract_type"
+                    app:layout_constraintTop_toBottomOf="@+id/card_job_details_contract_type">
+
+                    <ImageView
+                        android:id="@+id/image_view_icon_details_posted_on"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xlarge"
+                        android:src="@drawable/ic_clock"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_posted_on_title"
+                        style="@style/TextStyle.caption"
+                        android:layout_width="76dp"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+                        android:text="@string/posted_on"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_posted_on"
+                        app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_posted_on"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_posted_on" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_posted_on"
+                        style="@style/TextStyle.body"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{String.valueOf(viewModel.jobsUIState.job.createdAt)}"
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_details_posted_on_title"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_details_posted_on_title"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_details_posted_on_title"
+                        tools:text="2023.6.6" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_job_details_salary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginVertical="@dimen/spacing_medium"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/card_job_details_posted_on"
+                app:layout_constraintEnd_toEndOf="@+id/card_job_details_location"
+                app:layout_constraintStart_toStartOf="@+id/card_job_details_location"
+                app:layout_constraintTop_toTopOf="@+id/card_job_details_posted_on">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_tiny"
+                    android:paddingVertical="@dimen/job_details_chips_padding_vertical">
+
+                    <ImageView
+                        android:id="@+id/image_view_icon_details_salary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xlarge"
+                        android:src="@drawable/baseline_monetization_on_24"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_salary_title"
+                        style="@style/TextStyle.caption"
+                        android:layout_width="@dimen/job_details_card_title"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/Salary"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_salary"
+                        app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_salary"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_salary" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_salary"
+                        style="@style/TextStyle.body"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{viewModel.jobsUIState.job.salary}"
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_details_salary_title"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_details_salary_title"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_details_salary_title"
+                        tools:text="$1500/mo" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
             android:id="@+id/card_view_expandable_description"
@@ -66,11 +285,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:layout_marginVertical="@dimen/spacing_medium"
+            android:layout_marginVertical="@dimen/spacing_large"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card_job_details_posted_on" />
-
+            app:layout_constraintTop_toBottomOf="@+id/layout_details_chip" />
         <Button
             android:id="@+id/button_apply_job"
             android:layout_width="match_parent"
