@@ -31,27 +31,83 @@
                 app:navigationIconTint="@color/color_text_secondary" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include
-            android:id="@+id/card_view_job_info"
-            layout="@layout/layout_card_job_details"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+            app:cardCornerRadius="@dimen/spacing_normal"
+            app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView2">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/image_view_logo_company"
+                    android:layout_width="@dimen/company_logo_size"
+                    android:layout_height="@dimen/company_logo_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/metalogo" />
+
+                <TextView
+                    android:id="@+id/text_view_job_title"
+                    style="@style/TextStyle.Headline"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_logo_company"
+                    tools:text="Junior UI/UX Designer" />
+
+                <TextView
+                    android:id="@+id/text_view_company_name"
+                    style="@style/TextStyle.caption"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="@+id/text_view_job_title"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_job_title"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_job_title"
+                    tools:text="Meta inc." />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout_category"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    android:layout_marginVertical="@dimen/spacing_medium"
+                    android:background="@color/transparent_color"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_company_name"
+                    app:tabIndicator="@drawable/tab_indicator_job_details"
+                    app:tabIndicatorColor="@color/chip_color" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/view_pager_category"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="@dimen/zero"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/tab_layout_category"
+                    app:layout_constraintStart_toStartOf="@+id/tab_layout_category"
+                    app:layout_constraintTop_toBottomOf="@id/tab_layout_category" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
         <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView2"
+            android:name="com.cupcake.jobsfinder.ui.jobs.AboutJobCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginVertical="@dimen/spacing_medium"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/card_view_job_info"
-            app:layout_constraintStart_toStartOf="@+id/card_view_job_info"
-            app:layout_constraintTop_toBottomOf="@+id/card_view_job_info"
-            android:name="com.cupcake.jobsfinder.ui.jobs.AboutJobCategory"
-            tools:layout="@layout/fragment_about_job_category"
-            />
+            tools:layout="@layout/fragment_about_job_category" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
