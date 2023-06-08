@@ -8,12 +8,14 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="background">#FBFCFE</color>
+    <color name="background">#F6F6F6</color>
     <color name="primary">#4B4DED</color>
     <color name="secondary">#4A4A68</color>
     <color name="tertiary">#8C8CA1</color>
     <color name="accent">#ECF1F4</color>
     <color name="cards">#FFFFFF</color>
+
+    <color name="light_border">#E5E7E9</color>
 
     <!-- Text colors -->
     <color name="color_text_primary">#DE000000</color>
