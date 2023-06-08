@@ -39,20 +39,20 @@
             motion:layout_constraintBottom_toBottomOf="@+id/editTextSearchInput"
             android:layout_width="wrap_content"
             android:id="@+id/imageViewSearch"
-            android:layout_marginEnd="8dp" />
+            android:layout_marginEnd="@dimen/spacing_normal" />
         <Constraint
             android:layout_width="@dimen/profile_image_size"
             android:layout_height="@dimen/profile_image_size"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/spacing_medium"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:id="@+id/imageViewProfileImage" />
         <Constraint
             android:id="@+id/editTextSearchInput"
             android:visibility="invisible"
             android:hint=""
-            motion:layout_editor_absoluteY="15dp"
+            motion:layout_editor_absoluteY="@dimen/spacing_medium"
             motion:layout_constraintTop_toTopOf="@+id/imageViewProfileImage"
             motion:layout_constraintBottom_toBottomOf="@+id/imageViewProfileImage"
             motion:layout_constraintEnd_toStartOf="@+id/imageViewNotifications"
