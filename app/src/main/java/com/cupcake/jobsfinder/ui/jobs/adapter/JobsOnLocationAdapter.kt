@@ -5,7 +5,7 @@ import com.cupcake.jobsfinder.ui.base.BaseAdapter
 import com.cupcake.jobsfinder.ui.jobs.JobUiState
 
 
-class TopSalaryJobsAdapter(items: List<JobUiState>, listener: JobsListener) :
+class JobsOnLocationAdapter(items: List<JobUiState>, listener: JobsListener) :
     BaseAdapter<JobUiState>(items, listener) {
     override var layoutId: Int = R.layout.item_job_card
 }
