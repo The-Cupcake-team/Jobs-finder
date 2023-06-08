@@ -26,6 +26,8 @@
     <string name="remote">Remote</string>
     <string name="public_state">public</string>
     <string name="post_hint">What\'s on your mind ?</string>
+    <string name="camera">Camera</string>
+    <string name="video_photo">Video/Photo</string>
 
 
 </resources>
