@@ -30,8 +30,6 @@ class PostsViewModel @Inject constructor(
     }
 
     private fun onGetPosts() {
-        _uiState.update { it.copy(isLoading = true) }
-
         viewModelScope.launch(Dispatchers.IO + handler) {
             val posts = getPostsUseCase()
             onGetPostsSuccess(posts)
