@@ -31,4 +31,8 @@
     <string name="likes_count">10.5K</string>
     <string name="comments_count">350</string>
 
+    <string name="recommended">Recommended</string>
+    <string name="top_salary">Top salary</string>
+
+
 </resources>
