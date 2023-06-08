@@ -1,9 +1,9 @@
 package com.cupcake.jobsfinder.ui.jobs
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.useCase.job.GetJobsInUserLocationUseCase
-import com.cupcake.jobsfinder.domain.useCase.job.GetRecommendedJobsUseCase
-import com.cupcake.jobsfinder.domain.useCase.job.GetTopSalaryInUserLocationUseCase
+import com.cupcake.jobsfinder.domain.usecase.job.GetJobsInUserLocationUseCase
+import com.cupcake.jobsfinder.domain.usecase.job.GetRecommendedJobsUseCase
+import com.cupcake.jobsfinder.domain.usecase.job.GetTopSalaryInUserLocationUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.jobs.adapter.JobsListener
 import dagger.hilt.android.lifecycle.HiltViewModel

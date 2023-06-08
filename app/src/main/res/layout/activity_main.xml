@@ -15,7 +15,7 @@
 <!--        androidx.navigation.fragment.NavHostFragment-->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
-            android:name="com.cupcake.jobsfinder.ui.post.CreatePostFragment"
+            android:name="com.cupcake.jobsfinder.ui.jobs.JobsFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
