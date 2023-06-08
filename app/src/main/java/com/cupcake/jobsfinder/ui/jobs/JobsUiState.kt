@@ -26,7 +26,7 @@ data class JobUiState(
 )
 
 fun JobWithTitle.toJobUiState() = JobUiState(
-        image = "",
+        image = "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/e3/f27630d13511e88dd241e68ded0cea/K_logo_800x800.png?auto=format%2Ccompress&dpr=1",
         title = this.jobTitle.title,
         companyName = this.company,
         detailsChip = listOf(this.workType, this.jobType),
