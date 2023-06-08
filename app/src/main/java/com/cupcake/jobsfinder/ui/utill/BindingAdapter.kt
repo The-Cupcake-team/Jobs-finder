@@ -13,7 +13,7 @@ fun setNavigationIcon(toolbar: Toolbar, idIcon: Int?) {
     toolbar.setNavigationIcon(
         idIcon.takeIf { it != null }?.let {
             idIcon
-        } ?: R.drawable.ic_arrow_down
+        } ?: R.drawable.ic_close
     );
 
 }

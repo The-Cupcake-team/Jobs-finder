@@ -89,11 +89,11 @@ class CreateJobViewModel @Inject constructor(
     }
 
     private fun getIconToolBar(index: Int): Int {
-        return if (index == 1) R.drawable.ic_arrow_down else R.drawable.ic_close
+        return if (index == 0) R.drawable.ic_close else R.drawable.back
     }
 
     private fun getTitleToolBar(index: Int): Int {
-        return if (index == 1) R.string.next else R.string.post
+        return if (index == 0) R.string.next else R.string.post
     }
 
 
