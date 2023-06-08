@@ -45,7 +45,7 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginBottom="8dp"
-            android:text="@string/page_number_one"
+            app:showFormNumber="@{viewModel.jobUiState.formNumber}"
             android:textColor="@color/tertiary"
             app:layout_constraintBottom_toTopOf="@+id/viewPagerCreateJob"
             app:layout_constraintStart_toStartOf="parent"

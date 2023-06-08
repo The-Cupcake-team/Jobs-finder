@@ -8,7 +8,7 @@ data class CreateJobUiState(
     val iconCloseToolBar: Int = R.drawable.ic_close,
     val iconBackToolBar: Int = R.drawable.ic_arrow_down,
     val titleToolBar: Int = R.string.next,
-    val stepForm: Int = 1,
+    val formNumber: Int = 1,
     val isLoading: Boolean = false,
     val isValidForm: Boolean = false,
     val error: String = "",

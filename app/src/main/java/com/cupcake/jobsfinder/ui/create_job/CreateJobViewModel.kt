@@ -78,6 +78,7 @@ class CreateJobViewModel @Inject constructor(
         _jobUiState.update {
             it.copy(
                 activeIconToolBar = getIconToolBar(index),
+                formNumber = index
             )
         }
     }
