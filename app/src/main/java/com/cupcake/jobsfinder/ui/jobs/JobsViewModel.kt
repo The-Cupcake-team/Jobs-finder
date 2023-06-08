@@ -1,9 +1,9 @@
 package com.cupcake.jobsfinder.ui.jobs
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.usecase.job.GetJobsInUserLocationUseCase
-import com.cupcake.jobsfinder.domain.usecase.job.GetRecommendedJobsUseCase
-import com.cupcake.jobsfinder.domain.usecase.job.GetTopSalaryInUserLocationUseCase
+import com.cupcake.jobsfinder.domain.useCase.job.GetJobsInUserLocationUseCase
+import com.cupcake.jobsfinder.domain.useCase.job.GetRecommendedJobsUseCase
+import com.cupcake.jobsfinder.domain.useCase.job.GetTopSalaryInUserLocationUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.jobs.adapter.JobsListener
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,28 +37,20 @@ class JobsViewModel @Inject constructor(
     }
 
     private fun getRecommendedJobs() {
-        _jobsUIState.update { it.copy(isLoading = true) }
-
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val jobs = getRecommendedJobsUseCase(RECOMMENDED_JOB_LIMIT)
-                .map { it.toJobUiState() }
+            val jobs = getRecommendedJobsUseCase(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
             _jobsUIState.update { it.copy(recommendedJobs = jobs, isLoading = false) }
         }
-
     }
-    private fun getTopSalaryJobs() {
-        _jobsUIState.update { it.copy(isLoading = true) }
 
+    private fun getTopSalaryJobs() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val jobs = getTopSalaryInUserLocationUseCase(RECOMMENDED_JOB_LIMIT)
-                .map { it.toJobUiState() }
+            val jobs = getTopSalaryInUserLocationUseCase(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
             _jobsUIState.update { it.copy(topSalaryJobs = jobs, isLoading = false) }
         }
     }
 
     private fun getInLocationJobs() {
-        _jobsUIState.update { it.copy(isLoading = true) }
-
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             val jobs = getJobsInUserLocationUseCase(RECOMMENDED_JOB_LIMIT)
                 .map { it.toJobUiState() }
@@ -67,15 +59,15 @@ class JobsViewModel @Inject constructor(
     }
 
     override fun onItemClickListener() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onRecommendedJobClickListener() {
-        TODO("Not yet implemented")
+
     }
 
     override fun onTopSalaryJobClickListener() {
-        TODO("Not yet implemented")
+
     }
 
     companion object {
