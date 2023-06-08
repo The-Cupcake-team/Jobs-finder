@@ -20,7 +20,7 @@ class JobsViewModel @Inject constructor(
     private val getRecommendedJobsUseCase: GetRecommendedJobsUseCase,
     private val getJobsInUserLocationUseCase: GetJobsInUserLocationUseCase,
     private val getTopSalaryInUserLocationUseCase: GetTopSalaryInUserLocationUseCase
-) : BaseViewModel(), JobsListener {
+) : BaseViewModel<JobsUiState>(JobsUiState()), JobsListener {
 
     private val _jobsUIState = MutableStateFlow(JobsUiState())
     val jobsUIState = _jobsUIState.asStateFlow()

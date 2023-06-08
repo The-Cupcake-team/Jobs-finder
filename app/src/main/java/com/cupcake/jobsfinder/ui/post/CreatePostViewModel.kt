@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CreatePostViewModel @Inject constructor(
     private val createPostUseCase: CreatePostUseCase,
-) : BaseViewModel() {
+) : BaseViewModel<CreatePostUiState>(CreatePostUiState()) {
 
     private val _postUiState = MutableStateFlow(CreatePostUiState())
     val postUiState = _postUiState.asStateFlow()

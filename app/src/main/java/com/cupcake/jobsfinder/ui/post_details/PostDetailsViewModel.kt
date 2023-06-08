@@ -1,10 +1,10 @@
 package com.cupcake.jobsfinder.ui.post_details
 
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.domain.model.Post
 import com.cupcake.jobsfinder.domain.usecase.GetPostByIdUseCase
+import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import com.cupcake.jobsfinder.ui.post_details.state.PostDetailsUiState
 import com.cupcake.jobsfinder.ui.post_details.state.PostUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PostDetailsViewModel @Inject constructor(private val getPostById: GetPostByIdUseCase) :
-    ViewModel() {
+    BaseViewModel<PostDetailsUiState>(PostDetailsUiState()) {
     private val _postDetailsUiState = MutableStateFlow(PostDetailsUiState())
     val postDetailsUiState = _postDetailsUiState.asStateFlow()
 
