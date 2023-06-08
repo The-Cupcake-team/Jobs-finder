@@ -21,4 +21,6 @@
     <color name="color_text_primary">#DE000000</color>
     <color name="color_text_secondary">#99000000</color>
     <color name="color_text_tertiary">#61000000</color>
+    <color name="button_tint">#4B8CED</color>
+    <color name="button_tint_color">#DE019310</color>
 </resources>
