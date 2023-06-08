@@ -1,10 +1,9 @@
 package com.cupcake.jobsfinder.ui.jobs
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class JobPagerAdapter(container: FragmentActivity, private val fragmentList: List<Fragment>) :
+class JobPagerAdapter(container: Fragment, private val fragmentList: List<Fragment>) :
     FragmentStateAdapter(container) {
     override fun getItemCount() = fragmentList.size
 
