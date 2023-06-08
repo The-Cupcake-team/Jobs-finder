@@ -1,4 +1,4 @@
-package com.cupcake.jobsfinder.domain.usecase.job
+package com.cupcake.jobsfinder.domain.useCase.job
 
 import com.cupcake.jobsfinder.domain.mapper.toJobWithJobTitle
 import com.cupcake.jobsfinder.domain.model.JobWithTitle
@@ -10,7 +10,7 @@ class GetJobsInUserLocationUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(limit: Int): List<JobWithTitle> {
         return repository.getJobs()
-            .filter { it.jobLocation == "Syria" }
+            .filter { it.jobLocation == "Iraq" }
             .take(limit)
             .map { it.toJobWithJobTitle() }
     }

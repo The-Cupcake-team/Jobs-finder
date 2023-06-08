@@ -1,4 +1,4 @@
-package com.cupcake.jobsfinder.domain.usecase.job
+package com.cupcake.jobsfinder.domain.useCase.job
 
 import com.cupcake.jobsfinder.domain.mapper.toJobWithJobTitle
 import com.cupcake.jobsfinder.domain.model.JobWithTitle
