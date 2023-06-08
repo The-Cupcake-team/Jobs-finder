@@ -8,16 +8,21 @@
         <variable
             name="item"
             type="com.cupcake.jobsfinder.ui.jobs.JobUiState" />
+
+        <variable
+            name="listener"
+            type="com.cupcake.jobsfinder.ui.jobs.adapter.JobsListener" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/card_vertical_height"
-        android:background="@color/white"
-        app:cardCornerRadius="@dimen/radius"
+        android:layout_height="@dimen/card_horizontal_height"
         android:layout_marginHorizontal="@dimen/spacing_small"
         android:layout_marginVertical="@dimen/spacing_small"
-        android:elevation="@dimen/zero">
+        android:background="@color/white"
+        android:elevation="@dimen/zero"
+        android:onClick="@{() -> listener.onRecommendedJobClickListener()}"
+        app:cardCornerRadius="@dimen/radius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -81,8 +86,8 @@
                 android:background="@drawable/background_chips_job_card"
                 android:backgroundTint="#E7FEFF"
                 android:paddingHorizontal="12dp"
-                android:text="@{item.detailsChip[1]}"
                 android:paddingVertical="@dimen/spacing_normal"
+                android:text="@{item.detailsChip[1]}"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewWorkType"
                 app:layout_constraintStart_toEndOf="@+id/textViewWorkType"
@@ -99,8 +104,8 @@
                 android:backgroundTint="#F5EFFF"
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="@dimen/spacing_normal"
-                android:textColor="@color/color_text_secondary"
                 android:text="@{item.detailsChip[0]}"
+                android:textColor="@color/color_text_secondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/imageViewCompanyProfile"
                 app:layout_constraintTop_toBottomOf="@+id/textViewCompanyName"
@@ -111,8 +116,8 @@
                 style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_text_secondary"
                 android:text="@{item.salary}"
+                android:textColor="@color/color_text_secondary"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewJobType"
                 app:layout_constraintEnd_toEndOf="@+id/imageViewMore"
                 tools:text="$30/month" />
