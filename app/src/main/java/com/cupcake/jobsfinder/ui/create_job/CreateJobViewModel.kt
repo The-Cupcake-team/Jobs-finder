@@ -78,13 +78,22 @@ class CreateJobViewModel @Inject constructor(
         _jobUiState.update {
             it.copy(
                 activeIconToolBar = getIconToolBar(index),
-                formNumber = index
+                formNumber = getFormNumber(index),
+                titleToolBar = getTitleToolBar(index)
             )
         }
     }
 
+    private fun getFormNumber(index: Int): Int {
+        return if (index == 0) R.string.page_number_one else R.string.page_number_two
+    }
+
     private fun getIconToolBar(index: Int): Int {
         return if (index == 1) R.drawable.ic_arrow_down else R.drawable.ic_close
+    }
+
+    private fun getTitleToolBar(index: Int): Int {
+        return if (index == 1) R.string.next else R.string.post
     }
 
 

@@ -25,6 +25,7 @@
     <string name="on_site">On-site</string>
     <string name="remote">Remote</string>
     <string name="page_number_one">1 of 2</string>
+    <string name="page_number_two">2 of 2</string>
     <string name="title">Title</string>
     <string name="add_job_title">add job title</string>
     <string name="company">Company</string>

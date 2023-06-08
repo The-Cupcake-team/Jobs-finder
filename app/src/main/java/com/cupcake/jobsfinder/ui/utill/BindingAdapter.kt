@@ -18,11 +18,8 @@ fun setNavigationIcon(toolbar: Toolbar, idIcon: Int?) {
 
 }
 
-@BindingAdapter("app:showFormNumber")
-fun showFormNumber(textView: TextView, formNumber: Int){
-    if(formNumber == 0){
-        textView.text = "1 of 2"
-    }else{
-        textView.text = "2 of 2"
-    }
+@BindingAdapter("app:showText")
+fun showText(textView: TextView, resId: Int?) {
+    textView.setText(resId.takeIf { it != null } ?: R.string.page_number_one)
 }
+
