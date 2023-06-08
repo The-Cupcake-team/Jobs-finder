@@ -1,15 +1,14 @@
 package com.cupcake.jobsfinder.ui.jobs
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.lifecycleScope
 import com.cupcake.jobsfinder.R
 import com.cupcake.jobsfinder.databinding.FragmentJobsBinding
 import com.cupcake.jobsfinder.ui.base.BaseFragment
 import com.cupcake.jobsfinder.ui.jobs.adapter.JobsAdapter
-import dagger.hilt.android.scopes.ViewModelScoped
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
@@ -25,45 +24,24 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     }
 
     private fun setUpAdapter() {
-        jobsAdapter = JobsAdapter(initialJobsItem(), viewModel)
+        jobsAdapter = JobsAdapter(emptyList(), viewModel)
         loadJobsToAdapter()
         binding?.jobsRecycler?.adapter = jobsAdapter
     }
 
     private fun loadJobsToAdapter() {
-        var jobs = mutableListOf<JobsItem>()
-        GlobalScope.launch {
+        lifecycleScope.launch(Dispatchers.Main) {
             viewModel.jobsUIState.collect {
-                val recommendedJobs = JobsItem.Recommended(it.recommendedJobs)
-                val topSalaryJobs = JobsItem.TopSalary(it.topSalaryJobs)
-
-                jobs = mutableListOf(recommendedJobs, topSalaryJobs, JobsItem.LocationJobs(JobUiState()))
-                jobs.addAll(it.inLocationJobs.map { jobUiState -> JobsItem.LocationJobs(jobUiState) })
-                Log.v("hassan", jobs.toString())
+                val recommendedJobs = async { JobsItem.Recommended(it.recommendedJobs) }
+                val topSalaryJobs = async { JobsItem.TopSalary(it.topSalaryJobs) }
+                val onLocationJobs = async { JobsItem.LocationJobs(it.inLocationJobs) }
+                val jobs = mutableListOf(
+                    recommendedJobs.await(),
+                    topSalaryJobs.await(),
+                    onLocationJobs.await()
+                )
+                jobsAdapter.setJobsItems(jobs)
             }
         }
     }
-
-    private fun initialJobsItem(): List<JobsItem> = listOf(
-        JobsItem.Recommended(listOf(
-            JobUiState("",
-                "Android",
-                companyName = "the chance",
-                detailsChip = listOf("full-time", "on site"),
-                location = "syria",
-                salary = "1000"))),
-        JobsItem.TopSalary(listOf(
-            JobUiState("",
-                "Android",
-                companyName = "the chance",
-                detailsChip = listOf("full-time", "on site"),
-                location = "syria",
-                salary = "1000"))),
-        JobsItem.LocationJobs( JobUiState("",
-            "Android",
-            companyName = "the chance",
-            detailsChip = listOf("full-time", "on site"),
-            location = "syria",
-            salary = "1000"))
-    )
 }
