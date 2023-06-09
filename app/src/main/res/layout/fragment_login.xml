@@ -30,7 +30,7 @@
                 android:layout_height="@dimen/login_welcome_image"
                 android:scaleType="centerCrop"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/background2"/>
+                android:background="@drawable/login_factory"/>
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
