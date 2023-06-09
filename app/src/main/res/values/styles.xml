@@ -110,4 +110,32 @@
         <item name="endIconDrawable">@drawable/ic_password_toggle</item>
     </style>
 
+    <style name="chipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="chipCornerRadius">@dimen/radius</item>
+        <item name="android:textColor">@drawable/chip_text_color</item>
+        <item name="android:fontFamily">@font/worksans_regular</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="chipStartPadding">@dimen/spacing_medium</item>
+        <item name="chipEndPadding">@dimen/spacing_medium</item>
+        <item name="chipBackgroundColor">@drawable/chip_background</item>
+    </style>
+
+    <style name="cancelableChip" parent="chipStyle">
+        <item name="android:drawableEnd">@drawable/ic_close</item>
+        <item name="android:drawablePadding">@dimen/spacing_small</item>
+        <item name="android:textColor">@color/color_text_secondary</item>
+        <item name="chipBackgroundColor">@color/blue_300</item>
+    </style>
+
+    <style name="addChipStyle" parent="chipStyle">
+        <item name="android:drawableEnd">@drawable/ic_add</item>
+        <item name="android:drawablePadding">@dimen/spacing_small</item>
+        <item name="android:textColor">@color/blue_500</item>
+        <item name="chipBackgroundColor">@color/background</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipStrokeColor">@color/blue_500</item>
+        <item name="drawableTint">@color/blue_500</item>
+    </style>
 </resources>
