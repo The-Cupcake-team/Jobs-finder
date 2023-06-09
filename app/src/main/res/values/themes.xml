@@ -14,5 +14,6 @@
         <item name="android:windowLightStatusBar">true</item>
 
         <!-- Customize your theme here. -->
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

@@ -1,4 +1,4 @@
-package com.cupcake.jobsfinder.domain.useCase
+package com.cupcake.jobsfinder.domain.usecase
 
 import com.cupcake.jobsfinder.domain.reposirory.Repository
 import com.cupcake.jobsfinder.domain.mapper.toPost

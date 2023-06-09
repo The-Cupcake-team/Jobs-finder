@@ -24,6 +24,7 @@
     <string name="on_your_location">On your location</string>
     <string name="on_site">On-site</string>
     <string name="remote">Remote</string>
+
     <string name="page_number_one">1 of 2</string>
     <string name="page_number_two">2 of 2</string>
     <string name="title">Title</string>
@@ -57,6 +58,23 @@
     <string name="usd_month">USD/Month</string>
     <string name="add_skills">Add skills</string>
     <string name="next">Next</string>
+
+    <string name="public_state">public</string>
+    <string name="post_hint">What\'s on your mind ?</string>
+    <string name="camera">Camera</string>
+    <string name="video_photo">Video/Photo</string>
+
+    <string name="personal_name">Bilal Alkhatib</string>
+    <string name="jop_title">Android Developer</string>
+    <string name="created_at">3hours ago</string>
+    <string name="post_content">President cast election as choice between all our republicans who seek to impose President cast election as choice between all our republicans who seek to impose</string>
+    <string name="likes_count">10.5K</string>
+    <string name="comments_count">350</string>
+
+    <string name="recommended">Recommended</string>
+    <string name="top_salary">Top salary</string>
+
+
 
 
 </resources>

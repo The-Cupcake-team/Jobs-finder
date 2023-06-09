@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class JobViewModel @Inject constructor(
     private val getJobByIdUseCase: GetJobByIdUseCase
-) : BaseViewModel() {
+) : BaseViewModel<JobsUiState>(JobsUiState()) {
 
     private val _jobsUIState = MutableStateFlow(JobsUiState())
     val jobsUIState: StateFlow<JobsUiState> = _jobsUIState
@@ -38,7 +38,7 @@ class JobViewModel @Inject constructor(
                     location = job.jobLocation ?: "",
                     salary = ""
                 )
-                _jobsUIState.value = _jobsUIState.value.copy(job = listOf(jobUiState), isLoading = false)
+                _jobsUIState.value = _jobsUIState.value.copy(recommendedJobs = listOf(jobUiState), isLoading = false)
             } catch (throwable: Throwable) {
                 errors.add(ErrorUiState(0, throwable.message.toString()))
                 _jobsUIState.value = _jobsUIState.value.copy(
