@@ -1,7 +1,6 @@
 package com.cupcake.jobsfinder.ui.jobs
 
 
-
 import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.domain.useCase.GetJobByIdUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel

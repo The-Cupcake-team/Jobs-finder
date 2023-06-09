@@ -34,5 +34,8 @@
     <string name="posted_on">Posted on</string>
     <string name="apply_btn">Apply</string>
     <string name="about_company">About company \n coming soon</string>
+    <string name="dialog_message">To complete the Application you need to send your Resume</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
