@@ -39,6 +39,16 @@
     <string name="recommended">Recommended</string>
     <string name="top_salary">Top salary</string>
 
-
-
+    <!--    signup strings-->
+    <string name="full_name">Full name</string>
+    <string name="last_name">Last name</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">Sign up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="already_have_account">Already have account?</string>
+    <string name="phone_number">Phone number</string>
+    <string name="more_feature">Fill the information for more feature</string>
+    <string name="sign_up">Sign up</string>
 </resources>
