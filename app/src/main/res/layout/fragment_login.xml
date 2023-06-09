@@ -10,37 +10,42 @@
             type="com.cupcake.jobsfinder.ui.login.LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true"
         android:background="@color/blue_tint">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageView2"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/login_welcome_image"
-            android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/welcome_image"/>
+            android:layout_height="match_parent"
+            android:background="@color/blue_tint"
+            >
 
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/zero"
-            android:layout_marginTop="@dimen/login_card_negative_margin"
-            android:layout_marginBottom="@dimen/login_card_negative_margin"
-            android:backgroundTint="@color/background"
-            app:cardCornerRadius="@dimen/login_card_radius"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2">
-
-            <ScrollView
+            <ImageView
+                android:id="@+id/imageBackground"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="@dimen/login_welcome_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/background2"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/zero"
+                android:layout_marginTop="@dimen/login_card_negative_margin"
+                android:layout_marginBottom="@dimen/login_card_negative_margin"
+                android:backgroundTint="@color/background"
+                app:cardCornerRadius="@dimen/login_card_radius"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageBackground">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                   >
 
                     <TextView
                         android:id="@+id/textViewWelcome"
@@ -161,8 +166,8 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </ScrollView>
+            </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.card.MaterialCardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
