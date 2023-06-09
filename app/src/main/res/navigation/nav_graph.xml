@@ -3,11 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainActivity">
+    app:startDestination="@id/createJobFragment">
 
     <activity
         android:id="@+id/mainActivity"
         android:name="com.cupcake.jobsfinder.MainActivity"
         tools:layout="@layout/activity_main"
         android:label="MainActivity" />
+
+    <fragment
+        android:id="@+id/createJobFragment"
+        android:name="com.cupcake.jobsfinder.ui.create_job.CreateJobFragment"
+        android:label="CreateJobFragment"
+        tools:layout="@layout/fragment_create_job" />
+
 </navigation>

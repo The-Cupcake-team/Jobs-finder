@@ -22,8 +22,43 @@
 
     <!--    job location strings-->
     <string name="on_your_location">On your location</string>
-    <string name="on_site">On site</string>
+    <string name="on_site">On-site</string>
     <string name="remote">Remote</string>
+
+    <string name="page_number_one">1 of 2</string>
+    <string name="page_number_two">2 of 2</string>
+    <string name="title">Title</string>
+    <string name="add_job_title">add job title</string>
+    <string name="company">Company</string>
+    <string name="add_company_name">add company name</string>
+    <string name="location">Location</string>
+    <string name="country_city">Country, City</string>
+    <string name="job_type">Job Type</string>
+    <string name="hybrid">Hybird</string>
+    <string name="work_type">Work Type</string>
+    <string name="full_time">Full-time</string>
+    <string name="part_time">Part-time</string>
+    <string name="internship">Internship</string>
+    <string name="volunteer">Volunteer</string>
+    <string name="temporary">Temporary</string>
+    <string name="experience">Experience</string>
+    <string name="entry">Entry</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="mid_level">Mid-level</string>
+    <string name="senior_level">Senior-level</string>
+    <string name="expert">Expert</string>
+    <string name="description">Description</string>
+    <string name="add_description">Add description</string>
+
+    <string name="qualification">Qualification</string>
+    <string name="education">Education</string>
+    <string name="experiences">Experiences</string>
+    <string name="skills">Skills</string>
+    <string name="salary">Salary</string>
+    <string name="usd_month">USD/Month</string>
+    <string name="add_skills">Add skills</string>
+    <string name="next">Next</string>
+
     <string name="public_state">public</string>
     <string name="post_hint">What\'s on your mind ?</string>
     <string name="camera">Camera</string>
@@ -38,6 +73,7 @@
 
     <string name="recommended">Recommended</string>
     <string name="top_salary">Top salary</string>
+
 
 
 
