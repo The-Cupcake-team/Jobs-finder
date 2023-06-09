@@ -15,15 +15,7 @@
         android:background="@color/background"
         tools:context=".ui.jobs.JobDetails"
         >
-        <View
-            android:id="@+id/image_view_logo_company"
-            android:layout_width="@dimen/company_logo_size"
-            android:layout_height="@dimen/company_logo_size"
-            android:background="@drawable/metalogo"
-            app:layout_constraintBottom_toTopOf="@+id/card"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/top_bar"
             android:layout_width="match_parent"
@@ -60,18 +52,27 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_medium">
 
+                <ImageView
+                    android:id="@+id/image_view_logo_company"
+                    android:layout_width="@dimen/company_logo_size"
+                    android:layout_height="@dimen/company_logo_size"
+                    android:background="@drawable/metalogo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_job_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
                 <TextView
                     android:id="@+id/text_view_job_title"
                     style="@style/TextStyle.Headline"
                     android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
                     android:gravity="center"
                     android:text="@{viewModel.jobsUIState.job.title}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="@dimen/spacing_tiny"
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_logo_company"
                     tools:text="Junior UI/UX Designer" />
 
                 <TextView
