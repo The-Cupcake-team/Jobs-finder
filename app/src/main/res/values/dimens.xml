@@ -12,6 +12,7 @@
 
     <!--    text size-->
     <dimen name="text_size_headline">16sp</dimen>
+    <dimen name="text_size_huge">24sp</dimen>
     <dimen name="text_size_title">14sp</dimen>
     <dimen name="text_size_body">14sp</dimen>
     <dimen name="text_size_caption">12sp</dimen>
@@ -29,12 +30,17 @@
     <dimen name="profile_image_large_size">48dp</dimen>
     <dimen name="company_image_size">48dp</dimen>
     <dimen name="post_image_height">160dp</dimen>
+    <dimen name="login_welcome_image">259dp</dimen>
 
     <!--    other dimens-->
     <dimen name="radius">8dp</dimen>
+    <dimen name="login_card_radius">32dp</dimen>
+    <dimen name="login_card_negative_margin">-24dp</dimen>
     <dimen name="search_bar_height">48dp</dimen>
     <dimen name="search_home_height">40dp</dimen>
     <dimen name="bottom_navigation_height">52dp</dimen>
     <dimen name="button_height">42dp</dimen>
+    <dimen name="login_card_height">540dp</dimen>
+    <dimen name="login_welcome_text_margin_top">80dp</dimen>
 
 </resources>
