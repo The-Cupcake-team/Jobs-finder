@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources >
 
     <style name="TextStyle" parent="@android:style/TextAppearance.Widget.TextView">
         <item name="android:textColor">@color/color_text_primary</item>
@@ -88,6 +88,21 @@
     <style name="personalLargeImageStyle" parent="personalImageStyle">
         <item name="strokeColor">@color/tertiary</item>
 
+    </style>
+
+    <style name="TextInputLayoutStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">@dimen/spacing_normal</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/spacing_normal</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/spacing_normal</item>
+        <item name="boxCornerRadiusTopStart">@dimen/spacing_normal</item>
+        <item name="boxBackgroundColor">@color/cards</item>
+        <item name="boxStrokeWidth">@dimen/zero</item>
+        <item name="boxStrokeWidthFocused">@dimen/zero</item>
+    </style>
+
+    <style name="PasswordTextInputLayoutStyle" parent="TextInputLayoutStyle">
+        <item name="endIconMode">password_toggle</item>
+        <item name="endIconDrawable">@drawable/ic_password_toggle</item>
     </style>
 
 </resources>
