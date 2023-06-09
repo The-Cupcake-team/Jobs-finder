@@ -40,5 +40,19 @@
     <string name="top_salary">Top salary</string>
 
 
+    <!--    signUp      -->
+    <string name="job_title">Job title</string>
+    <string name="education">Education</string>
+    <string name="experiences">Experiences</string>
+    <string name="experience_level">Experience Level</string>
+    <string name="entry">Entry</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="mid_level">Mid-level</string>
+    <string name="senior_leve">Senior-leve</string>
+    <string name="expert">Expert</string>
+    <string name="your_skills">Your skills</string>
+    <string name="add_skills">Add skills</string>
+    <string name="next">Next</string>
+
 
 </resources>
