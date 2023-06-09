@@ -18,7 +18,6 @@ class JobViewModel @Inject constructor(
 
     private val _jobsUIState = MutableStateFlow(JobDetailUiState(job =JobsDetailsUiState() ))
     val jobsUIState: StateFlow<JobDetailUiState> = _jobsUIState
-
     private val errors: MutableList<ErrorUiState> = mutableListOf()
 
     init {
@@ -38,8 +37,9 @@ class JobViewModel @Inject constructor(
                     workType = job.workType.toString(),
                     jobType=job.jobType.toString(),
                     location = job.jobLocation ?: "",
-                    salary = "",
+                    salary = job.jobSalary.toString() ?:"",
                     createdAt = job.createdAt ?: 0,
+                    jobDescription=job.jobDescription.toString(),
                 )
                 _jobsUIState.value = _jobsUIState.value.copy(job = jobUiState, isLoading = false)
             } catch (throwable: Throwable) {
