@@ -17,6 +17,11 @@
         <item name="android:textSize">@dimen/text_size_title</item>
     </style>
 
+    <style name="TextStyle.Heading" parent="TextStyle">
+        <item name="android:fontFamily">@font/worksans_semibold</item>
+        <item name="android:textSize">@dimen/text_size_heading</item>
+    </style>
+
     <style name="TextStyle.Headline" parent="TextStyle">
         <item name="android:fontFamily">@font/worksans_semibold</item>
         <item name="android:textSize">@dimen/text_size_headline</item>
