@@ -1,6 +1,7 @@
 package com.cupcake.jobsfinder.ui.jobs
 
 
+
 data class JobsUiState(
     val job: List<JobUiState> = emptyList(),
     val isLoading: Boolean = false,
@@ -35,4 +36,5 @@ data class JobsDetailsUiState(
     val location: String = "",
     val salary: String = "",
     val createdAt:Long=0,
+    val jobDescription:String=""
 )
