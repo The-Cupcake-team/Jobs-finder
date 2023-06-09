@@ -14,6 +14,9 @@
     <color name="tertiary">#8C8CA1</color>
     <color name="accent">#ECF1F4</color>
     <color name="cards">#FFFFFF</color>
+    <color name="blue_500">#5D97EF</color>
+    <color name="blue_300">#E9EFF6</color>
+
 
     <color name="light_border">#E5E7E9</color>
 
