@@ -1,7 +1,6 @@
 package com.cupcake.jobsfinder.ui.utill
 
 
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
@@ -15,7 +14,7 @@ fun setNavigationIcon(toolbar: Toolbar, idIcon: Int?) {
         idIcon.takeIf { it != null }?.let {
             idIcon
         } ?: R.drawable.ic_close
-    );
+    )
 
 }
 
@@ -26,7 +25,6 @@ fun showText(textView: TextView, resId: Int?) {
 
 @BindingAdapter("app:showButtonText")
 fun showButtonText(buttonView: Button, resId: Int?) {
-    Log.d("Tarek", "showButtonText: ${buttonView.context.getString(resId!!)}")
     buttonView.text = resId?.let(buttonView.context::getString)
         ?: buttonView.context.getString(R.string.next)
 }
