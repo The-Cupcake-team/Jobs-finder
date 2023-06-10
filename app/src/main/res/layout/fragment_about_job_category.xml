@@ -24,8 +24,6 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_job_details_contract_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                style="@style/card_view_details_chip_style"
                 app:layout_constraintEnd_toStartOf="@+id/card_job_details_location"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -51,7 +49,7 @@
                     <TextView
                         android:id="@+id/text_view_details_contract_type_title"
                         style="@style/TextStyle.caption"
-                        android:layout_width="82dp"
+                        android:layout_width="@dimen/job_details_card_title"
                         android:layout_height="wrap_content"
                         android:text="@string/contract_type"
                         app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_contract_type"
@@ -74,8 +72,6 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_job_details_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 style="@style/card_view_details_chip_style"
                 app:layout_constraintEnd_toStartOf="@+id/card_job_details_work_place"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -93,7 +89,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_xlarge"
-                        android:src="@drawable/ic_location"
+                        android:src="@drawable/ic_experience"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -102,8 +98,8 @@
                         style="@style/TextStyle.caption"
                         android:layout_width="@dimen/job_details_card_title"
                         android:layout_height="wrap_content"
+                        android:text="@string/Experience"
                         android:gravity="center"
-                        android:text="@string/Location"
                         app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_location"
                         app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_location"
                         app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_location" />
@@ -111,21 +107,19 @@
                     <TextView
                         android:id="@+id/text_view_details_location"
                         style="@style/TextStyle.body"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="@{viewModel.jobsUIState.job.location}"
                         app:layout_constraintEnd_toEndOf="@+id/text_view_details_location_title"
                         app:layout_constraintStart_toStartOf="@+id/text_view_details_location_title"
                         app:layout_constraintTop_toBottomOf="@+id/text_view_details_location_title"
-                        tools:text="Full time" />
+                        tools:text="Intermediate" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_job_details_work_place"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 style="@style/card_view_details_chip_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -143,7 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_xlarge"
-                        android:src="@drawable/ic_work_place"
+                        android:src="@drawable/ic_location"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -153,7 +147,7 @@
                         android:layout_width="@dimen/job_details_card_title"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/work_place"
+                        android:text="@string/Location"
                         app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_work_place"
                         app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_work_place"
                         app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_work_place" />
@@ -168,14 +162,12 @@
                         app:layout_constraintEnd_toEndOf="@+id/text_view_details_work_place_title"
                         app:layout_constraintStart_toStartOf="@+id/text_view_details_work_place_title"
                         app:layout_constraintTop_toBottomOf="@+id/text_view_details_work_place_title"
-                        tools:text="Full time" />
+                        tools:text="iraq" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_job_details_posted_on"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginVertical="@dimen/spacing_medium"
                 style="@style/card_view_details_chip_style"
@@ -196,7 +188,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_xlarge"
-                        android:src="@drawable/ic_clock"
+                        android:src="@drawable/ic_work_place"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -206,7 +198,7 @@
                         android:layout_width="76dp"
                         android:layout_height="24dp"
                         android:gravity="center"
-                        android:text="@string/posted_on"
+                        android:text="@string/work_place"
                         app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_posted_on"
                         app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_posted_on"
                         app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_posted_on" />
@@ -221,14 +213,14 @@
                         app:layout_constraintEnd_toEndOf="@+id/text_view_details_posted_on_title"
                         app:layout_constraintStart_toStartOf="@+id/text_view_details_posted_on_title"
                         app:layout_constraintTop_toBottomOf="@+id/text_view_details_posted_on_title"
-                        tools:text="2023.6.6" />
+                        tools:text="On-site"
+                        />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_job_details_salary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginVertical="@dimen/spacing_medium"
                 style="@style/card_view_details_chip_style"
@@ -248,7 +240,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/spacing_xlarge"
-                        android:src="@drawable/baseline_monetization_on_24"
+                        android:src="@drawable/ic_clock"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -258,7 +250,7 @@
                         android:layout_width="@dimen/job_details_card_title"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/Salary"
+                        android:text="@string/posted_on"
                         app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_salary"
                         app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_salary"
                         app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_salary" />
@@ -273,10 +265,56 @@
                         app:layout_constraintEnd_toEndOf="@+id/text_view_details_salary_title"
                         app:layout_constraintStart_toStartOf="@+id/text_view_details_salary_title"
                         app:layout_constraintTop_toBottomOf="@+id/text_view_details_salary_title"
-                        tools:text="$1500/mo" />
+                        tools:text="2023.6.6" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_job_details_Experience"
+                style="@style/card_view_details_chip_style"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/card_job_details_salary"
+                app:layout_constraintTop_toTopOf="@id/card_job_details_salary">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_tiny"
+                    android:paddingVertical="@dimen/spacing_medium">
+
+                    <ImageView
+                        android:id="@+id/image_view_icon_details_Experience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_xlarge"
+                        android:src="@drawable/ic_salary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_contract_Experience_title"
+                        style="@style/TextStyle.caption"
+                        android:layout_width="@dimen/job_details_card_title"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Salary"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_Experience"
+                        app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_Experience"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_Experience" />
+
+                    <TextView
+                        android:id="@+id/text_view_details_Experience"
+                        style="@style/TextStyle.body"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{viewModel.jobsUIState.job.workType.toString()}"
+                        app:layout_constraintEnd_toEndOf="@+id/text_view_details_contract_Experience_title"
+                        app:layout_constraintStart_toStartOf="@+id/text_view_details_contract_Experience_title"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_details_contract_Experience_title"
+                        tools:text="$1500/mo" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.card.MaterialCardView

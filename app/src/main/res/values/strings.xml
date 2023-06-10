@@ -29,7 +29,7 @@
     <string name="description">Description</string>
     <string name="contract_type">Contract type</string>
     <string name="Location">Location</string>
-    <string name="work_place">Work place</string>
+    <string name="work_place">job type</string>
     <string name="Salary">Salary</string>
     <string name="posted_on">Posted on</string>
     <string name="apply_btn">Apply</string>
@@ -37,5 +37,6 @@
     <string name="dialog_message">To complete the Application you need to send your Resume</string>
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
+    <string name="Experience">Experience</string>
 
 </resources>

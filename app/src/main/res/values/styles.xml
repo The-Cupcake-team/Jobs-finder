@@ -51,6 +51,9 @@
         <item name="background">@drawable/card_details_chip_background</item>
         <item name="backgroundTint">@color/white</item>
         <item name="cardCornerRadius">@dimen/spacing_normal</item>
+        <item name="android:layout_width">@dimen/card_details_chip_width</item>
+        <item name="android:layout_height">@dimen/card_details_chip_height</item>
+
    </style>
     <style name="button_cancel_send_cv_style" >
         <item name="background">@drawable/dialog_custom_button_cancel</item>
