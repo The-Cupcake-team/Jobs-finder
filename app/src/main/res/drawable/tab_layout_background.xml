@@ -4,5 +4,5 @@
         android:drawable="@drawable/on_tab_selected"
         android:state_selected="true"
         />
-    <item android:drawable= "@drawable/ontabchanged"/>
+    <item android:drawable= "@drawable/on_tab_un_selected"/>
 </selector>
