@@ -42,6 +42,7 @@
             android:elevation="1dp"
             app:layout_constraintBottom_toBottomOf="@+id/top_bar"
             app:layout_constraintEnd_toEndOf="@+id/card"
+            app:cardCornerRadius="@dimen/spacing_normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_bar">
 
@@ -58,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
             app:cardCornerRadius="@dimen/spacing_normal"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_bar">
