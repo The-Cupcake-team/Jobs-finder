@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
 
+
     <style name="TextStyle" parent="@android:style/TextAppearance.Widget.TextView">
         <item name="android:textColor">@color/color_text_primary</item>
         <item name="android:fontFamily">@font/worksans_regular</item>
@@ -15,6 +16,11 @@
     <style name="TextStyle.Title" parent="TextStyle">
         <item name="android:fontFamily">@font/worksans_semibold</item>
         <item name="android:textSize">@dimen/text_size_title</item>
+    </style>
+
+    <style name="TextStyle.Heading" parent="TextStyle">
+        <item name="android:fontFamily">@font/worksans_semibold</item>
+        <item name="android:textSize">@dimen/text_size_heading</item>
     </style>
 
     <style name="TextStyle.Headline" parent="TextStyle">
@@ -62,6 +68,37 @@
 
     </style>
 
+    <style name="EditTextCreateJobStyle">
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textColorHint">@color/color_text_tertiary</item>
+        <item name="android:autofillHints">""</item>
+        <item name="android:paddingHorizontal">@dimen/spacing_medium</item>
+        <item name="android:fontFamily">@font/worksans_semibold</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+    </style>
+
+    <style name="ChipStyle">
+        <item name="chipBackgroundColor">@color/chip_color</item>
+        <item name="chipCornerRadius">@dimen/radius</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="fontFamily">@font/worksans_regular</item>
+        <item name="android:textColor">@color/color_text_secondary</item>
+        <item name="chipStartPadding">@dimen/spacing_medium</item>
+        <item name="chipEndPadding">@dimen/spacing_medium</item>
+    </style>
+
+    <style name="CustomEditTextStyle" parent="android:Widget.EditText">
+        <item name="android:background">@drawable/card_background</item>
+        <item name="android:drawablePadding">@dimen/spacing_medium</item>
+        <item name="android:drawableTint">@color/color_text_tertiary</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/color_text_primary</item>
+        <item name="android:textColorHint">@color/color_text_tertiary</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+
+
     <style name="SharedButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:layout_marginTop">2dp</item>
         <item name="android:layout_marginEnd">1dp</item>
@@ -73,6 +110,12 @@
         <item name="android:textSize">@dimen/text_size_title</item>
     </style>
 
+    <style name="normalButtonStyle" parent="">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/worksans_semibold</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+    </style>
 
 
     <style name="circleImageView" parent="">
@@ -105,7 +148,16 @@
 
     <style name="personalLargeImageStyle" parent="personalImageStyle">
         <item name="strokeColor">@color/tertiary</item>
+    </style>
 
+    <style name="TextInputLayoutStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusBottomEnd">@dimen/spacing_normal</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/spacing_normal</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/spacing_normal</item>
+        <item name="boxCornerRadiusTopStart">@dimen/spacing_normal</item>
+        <item name="boxBackgroundColor">@color/cards</item>
+        <item name="boxStrokeWidth">@dimen/zero</item>
+        <item name="boxStrokeWidthFocused">@dimen/zero</item>
     </style>
 
     <style name="loginButtonStyle" parent="Widget.Material3.Button">
@@ -121,4 +173,39 @@
     </style>
 
     <string name="login_to_jo">Login to join the community</string>
+
+    <style name="PasswordTextInputLayoutStyle" parent="TextInputLayoutStyle">
+        <item name="endIconMode">password_toggle</item>
+        <item name="endIconDrawable">@drawable/ic_password_toggle</item>
+    </style>
+
+    <style name="chipStyle" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="chipCornerRadius">@dimen/radius</item>
+        <item name="android:textColor">@drawable/chip_text_color</item>
+        <item name="android:fontFamily">@font/worksans_regular</item>
+        <item name="android:textSize">@dimen/text_size_body</item>
+        <item name="chipStartPadding">@dimen/spacing_medium</item>
+        <item name="chipEndPadding">@dimen/spacing_medium</item>
+        <item name="chipBackgroundColor">@drawable/chip_background</item>
+    </style>
+
+    <style name="cancelableChip" parent="chipStyle">
+        <item name="android:drawableEnd">@drawable/ic_close</item>
+        <item name="android:drawablePadding">@dimen/spacing_small</item>
+        <item name="android:textColor">@color/color_text_secondary</item>
+        <item name="chipBackgroundColor">@color/blue_300</item>
+    </style>
+
+    <style name="addChipStyle" parent="chipStyle">
+        <item name="android:drawableEnd">@drawable/ic_add</item>
+        <item name="android:drawablePadding">@dimen/spacing_small</item>
+        <item name="android:textColor">@color/blue_500</item>
+        <item name="chipBackgroundColor">@color/background</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipStrokeColor">@color/blue_500</item>
+        <item name="drawableTint">@color/blue_500</item>
+    </style>
+
 </resources>

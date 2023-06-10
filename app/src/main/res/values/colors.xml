@@ -9,20 +9,29 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="background">#F6F6F6</color>
-    <color name="primary">#4B4DED</color>
+    <color name="primary">#4B8CED</color>
     <color name="secondary">#4A4A68</color>
     <color name="tertiary">#8C8CA1</color>
     <color name="accent">#ECF1F4</color>
     <color name="cards">#FFFFFF</color>
+    <color name="blue_500">#5D97EF</color>
+    <color name="blue_300">#E9EFF6</color>
 
+
+
+    <color name="chip_color">#E7EDF5</color>
     <color name="light_border">#E5E7E9</color>
+
 
     <!-- Text colors -->
     <color name="color_text_primary">#DE000000</color>
     <color name="color_text_secondary">#99000000</color>
     <color name="color_text_tertiary">#61000000</color>
+
+    <color name="boarder">#E5E7E9</color>
     <color name="button_tint">#4B8CED</color>
     <color name="blue_tint">#97BFFB</color>
     <color name="button_tint_color">#DE019310</color>
     <color name="accent_red">#FF0000</color>
+
 </resources>

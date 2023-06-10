@@ -2,9 +2,6 @@ package com.cupcake.jobsfinder
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import com.cupcake.jobsfinder.ui.create_job.CreateJobViewModel
-import com.cupcake.jobsfinder.ui.jobs.JobViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
