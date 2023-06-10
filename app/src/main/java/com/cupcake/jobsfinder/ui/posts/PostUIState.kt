@@ -4,7 +4,7 @@ import com.cupcake.jobsfinder.domain.model.Post
 
 data class PostsUIState(
     val postsResult: List<PostItemUIState> = emptyList(),
-    val isLoading: Boolean = false,
+    val isLoading: Boolean = true,
     val errors: List<String> = emptyList(),
 )
 

@@ -12,10 +12,10 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-<!--        androidx.navigation.fragment.NavHostFragment-->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
             android:name="com.cupcake.jobsfinder.ui.jobs.JobDetails"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:defaultNavHost="true"
