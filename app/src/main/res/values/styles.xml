@@ -47,9 +47,29 @@
         <item name="android:textSize">@dimen/text_size_body</item>
         <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
     </style>
-    <style name="card_view_expandable_style" >
-        <item name="background">@drawable/card_detials_chip</item>
+    <style name="card_view_details_chip_style" >
+        <item name="background">@drawable/card_details_chip</item>
         <item name="backgroundTint">@color/white</item>
         <item name="cardCornerRadius">@dimen/spacing_normal</item>
    </style>
+    <style name="button_cancel_send_cv_style" >
+        <item name="background">@drawable/dialog_custom_button_cancel</item>
+        <item name="backgroundTint">@color/button_cancel</item>
+        <item name="fontFamily">@font/worksans_semibold</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:text">"Cancel"</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
+    </style>
+    <style name="button_send_cv_style" >
+        <item name="background">@drawable/dialog_custom_button_send</item>
+        <item name="backgroundTint">@color/button_apply_color</item>
+        <item name="fontFamily">@font/worksans_semibold</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:text">"send"</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
+    </style>
 </resources>
