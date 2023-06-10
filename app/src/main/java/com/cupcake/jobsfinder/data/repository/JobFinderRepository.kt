@@ -1,11 +1,11 @@
-package com.cupcake.jobsfinder.domain.reposirory
+package com.cupcake.jobsfinder.data.repository
 
 import com.cupcake.jobsfinder.data.remote.response.JobTitleDto
 import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
 import com.cupcake.jobsfinder.data.remote.response.job.JobWithTitleDto
 
-interface Repository {
+interface JobFinderRepository {
 
 
     // region Job

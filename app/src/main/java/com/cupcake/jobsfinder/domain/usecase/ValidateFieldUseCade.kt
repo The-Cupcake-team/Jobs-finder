@@ -1,4 +1,4 @@
-package com.cupcake.jobsfinder.domain.useCase
+package com.cupcake.jobsfinder.domain.usecase
 
 import javax.inject.Inject
 

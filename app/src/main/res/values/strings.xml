@@ -24,7 +24,6 @@
     <string name="on_your_location">On your location</string>
     <string name="on_site">On-site</string>
     <string name="remote">Remote</string>
-
     <string name="page_number_one">1 of 2</string>
     <string name="page_number_two">2 of 2</string>
     <string name="title">Title</string>
@@ -42,43 +41,25 @@
     <string name="volunteer">Volunteer</string>
     <string name="temporary">Temporary</string>
     <string name="experience">Experience</string>
-    <string name="entry">Entry</string>
-    <string name="intermediate">Intermediate</string>
-    <string name="mid_level">Mid-level</string>
     <string name="senior_level">Senior-level</string>
-    <string name="expert">Expert</string>
     <string name="description">Description</string>
     <string name="add_description">Add description</string>
-
     <string name="qualification">Qualification</string>
-    <string name="education">Education</string>
-    <string name="experiences">Experiences</string>
     <string name="skills">Skills</string>
     <string name="salary">Salary</string>
     <string name="usd_month">USD/Month</string>
-    <string name="add_skills">Add skills</string>
-    <string name="next">Next</string>
-
     <string name="public_state">public</string>
     <string name="post_hint">What\'s on your mind ?</string>
     <string name="camera">Camera</string>
     <string name="video_photo">Video/Photo</string>
-
     <string name="personal_name">Bilal Alkhatib</string>
     <string name="jop_title">Android Developer</string>
     <string name="created_at">3hours ago</string>
     <string name="post_content">President cast election as choice between all our republicans who seek to impose President cast election as choice between all our republicans who seek to impose</string>
     <string name="likes_count">10.5K</string>
     <string name="comments_count">350</string>
-
     <string name="recommended">Recommended</string>
     <string name="top_salary">Top salary</string>
-
-    <string name="login_welcome_text">Welcome Back</string>
-    <string name="user_name">Username</string>
-    <string name="password">Password</string>
-    <string name="don_t_have_account">Don’t have account?</string>
-    <string name="sign_up_here">Sign up here</string>
 
 
     <!--    signup strings-->
@@ -93,6 +74,8 @@
     <string name="phone_number">Phone number</string>
     <string name="more_feature">Fill the information for more feature</string>
     <string name="sign_up">Sign up</string>
+    <string name="don_t_have_account">Don’t have account?</string>
+    <string name="sign_up_here">Sign up here</string>
 
     <!--    signUp      -->
     <string name="job_title">Job title</string>
