@@ -48,7 +48,7 @@
         <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
     </style>
     <style name="card_view_details_chip_style" >
-        <item name="background">@drawable/card_details_chip</item>
+        <item name="background">@drawable/card_details_chip_background</item>
         <item name="backgroundTint">@color/white</item>
         <item name="cardCornerRadius">@dimen/spacing_normal</item>
    </style>
