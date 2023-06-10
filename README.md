@@ -48,9 +48,7 @@
 3. 🏗️ Build the project.
 4. ▶️ Run the app on an emulator or a connected device.
 
-## License
 
-📄 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 
 ## Contributors
@@ -59,5 +57,9 @@
 </a>
 <br>
 <br>
-<br>
 🤝 Contributions are welcome! If you find any issues or want to contribute to the project, feel free to open a pull request or submit an issue.
+
+
+## License
+
+📄 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
