@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.View
+import android.widget.TextView
 import com.cupcake.jobsfinder.R
 import com.cupcake.jobsfinder.databinding.FragmentAboutJobCategoryBinding
 import com.cupcake.jobsfinder.ui.base.BaseFragment
@@ -17,11 +18,11 @@ class AboutJobCategory : BaseFragment<FragmentAboutJobCategoryBinding, JobViewMo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        exapandapleCard()
+        expandCard(binding!!.textViewDescriptionTitle,binding!!.textViewDescription)
     }
 
-    private fun exapandapleCard() {
-        binding?.textViewDescriptionTitle?.setOnClickListener {
+    private fun expandCard(textViewTitle : TextView, textViewDescription: TextView) {
+        textViewTitle.setOnClickListener {
             binding?.apply {
                 if (textViewDescription.visibility == View.GONE) {
                     TransitionManager.beginDelayedTransition(
