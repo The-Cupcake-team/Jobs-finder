@@ -52,6 +52,12 @@
 
 📄 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Contributing
 
+## Contributors
+<a href="https://github.com/The-Cupcake-team/Jobs-finder/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=The-Cupcake-team/Jobs-finder" />
+</a>
+<br>
+<br>
+<br>
 🤝 Contributions are welcome! If you find any issues or want to contribute to the project, feel free to open a pull request or submit an issue.
