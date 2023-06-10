@@ -2,7 +2,7 @@ package com.cupcake.jobsfinder.ui.jobs
 
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.jobsfinder.domain.useCase.GetJobByIdUseCase
+import com.cupcake.jobsfinder.domain.usecase.GetJobByIdUseCase
 import com.cupcake.jobsfinder.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

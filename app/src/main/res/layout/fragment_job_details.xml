@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginVertical="@dimen/spacing_xlarge"
-            android:background="@drawable/button_background_drawable"
+            style="@style/apply_job_button_Style"
             android:paddingVertical="@dimen/spacing_medium"
             android:text="@string/apply_btn"
             app:layout_constraintBottom_toBottomOf="parent"

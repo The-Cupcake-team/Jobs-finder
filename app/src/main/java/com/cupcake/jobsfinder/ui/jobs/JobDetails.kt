@@ -2,14 +2,12 @@ package com.cupcake.jobsfinder.ui.jobs
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.jobsfinder.R
 import com.cupcake.jobsfinder.databinding.FragmentJobDetailsBinding
 import com.cupcake.jobsfinder.ui.base.BaseFragment
 import com.cupcake.jobsfinder.ui.jobs.adapter.ViewPagerJobDetailsAdapter
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.Tab
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
