@@ -23,6 +23,7 @@
 
     <!--Transparent color -->
     <color name="transparent_color">#00000000</color>
-    <color name="chip_color">#E7EDF5</color>
-    <color name="button_apply_color">#4B8CED</color>
+    <color name="chip_color_and_tab_layout_color">#E7EDF5</color>
+    <color name="button_apply_color">#4B8CED</color>add<color name="button_cancel">#E5E7E9</color>
+
 </resources>
