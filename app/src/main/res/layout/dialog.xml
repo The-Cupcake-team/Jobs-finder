@@ -50,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/spacing_tiny"
                 android:text="Send"
+                style="@style/apply_job_button_Style"
                 android:background="@color/primary"
                 app:layout_constraintBottom_toBottomOf="@+id/cancel_button"
                 app:layout_constraintEnd_toEndOf="parent"
