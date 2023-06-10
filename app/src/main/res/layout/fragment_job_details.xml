@@ -15,7 +15,6 @@
         android:background="@color/background"
         tools:context=".ui.jobs.JobDetails"
         >
-
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/top_bar"
             android:layout_width="match_parent"
@@ -35,14 +34,28 @@
                 app:navigationIconTint="@color/color_text_secondary" />
         </com.google.android.material.appbar.AppBarLayout>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/image_view_logo_company"
+            android:layout_width="@dimen/company_logo_size"
+            android:layout_height="@dimen/company_logo_size"
+            android:elevation="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/top_bar"
+            app:layout_constraintEnd_toEndOf="@+id/card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar">
 
-
+            <ImageView
+                android:layout_width="@dimen/company_logo_size"
+                android:layout_height="@dimen/company_logo_size"
+                android:src="@drawable/metalogo" />
+        </androidx.cardview.widget.CardView>
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_medium"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/top_bar">
@@ -52,15 +65,6 @@
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_medium">
 
-                <ImageView
-                    android:id="@+id/image_view_logo_company"
-                    android:layout_width="@dimen/company_logo_size"
-                    android:layout_height="@dimen/company_logo_size"
-                    android:background="@drawable/metalogo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/text_view_job_title"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
 
                 <TextView
                     android:id="@+id/text_view_job_title"
@@ -71,8 +75,8 @@
                     android:text="@{viewModel.jobsUIState.job.title}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="@dimen/spacing_tiny"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_logo_company"
+                 android:layout_marginTop="@dimen/spacing_large"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="Junior UI/UX Designer" />
 
                 <TextView
@@ -100,8 +104,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/text_view_company_name"
                     app:tabMode="fixed"
+                    android:scrollbars="none"
                     app:tabSelectedTextColor="@color/color_text_primary"
                     app:tabRippleColor="@color/chip_color"
+                    app:tabIndicatorColor="@null"
                     app:tabBackground="@drawable/tab_indicator_job_details"
                     />
             </androidx.constraintlayout.widget.ConstraintLayout>
