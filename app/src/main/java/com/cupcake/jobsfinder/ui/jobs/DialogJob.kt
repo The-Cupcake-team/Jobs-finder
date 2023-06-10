@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.cupcake.jobsfinder.R
 import com.cupcake.jobsfinder.databinding.DialogBinding
 
 class Dialog(
@@ -19,7 +18,7 @@ class Dialog(
         alertBuilder.setView(binding.root)
         alertDialog = alertBuilder.create()
         alertDialog.setCancelable(false)
-        binding.textViewMessageDialog.text = R.string.dialog_message.toString()
+        binding.textViewMessageDialog.text = "To complete the Application you need to send your Resume"
         binding.applyButton.setOnClickListener {
             Toast.makeText(context, "coming soon", Toast.LENGTH_SHORT).show()
             alertDialog.dismiss()
