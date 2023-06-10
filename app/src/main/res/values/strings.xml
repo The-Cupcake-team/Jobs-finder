@@ -38,5 +38,6 @@
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
     <string name="Experience">Experience</string>
+    <string name="intermediate">Intermediate</string>
 
 </resources>
