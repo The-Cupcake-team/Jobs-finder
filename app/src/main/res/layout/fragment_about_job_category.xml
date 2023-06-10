@@ -12,21 +12,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background"
         tools:context=".ui.jobs.AboutJobCategory">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_details_chip"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginVertical="@dimen/spacing_medium"
             app:layout_constraintTop_toTopOf="parent">
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_job_details_contract_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/spacing_medium"
-                android:background="@color/white"
+                style="@style/card_view_expandable_style"
                 app:layout_constraintEnd_toStartOf="@+id/card_job_details_location"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintHorizontal_chainStyle="spread"
@@ -76,7 +75,7 @@
                 android:id="@+id/card_job_details_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                style="@style/card_view_expandable_style"
                 app:layout_constraintEnd_toStartOf="@+id/card_job_details_work_place"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/card_job_details_contract_type"
@@ -126,7 +125,7 @@
                 android:id="@+id/card_job_details_work_place"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                style="@style/card_view_expandable_style"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/card_job_details_location"
@@ -137,7 +136,6 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/spacing_tiny"
                     android:paddingVertical="@dimen/spacing_medium">
-
                     <ImageView
                         android:id="@+id/image_view_icon_details_work_place"
                         android:layout_width="wrap_content"
@@ -178,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginVertical="@dimen/spacing_medium"
-                android:background="@color/white"
+                style="@style/card_view_expandable_style"
                 app:layout_constraintEnd_toEndOf="@+id/card_job_details_contract_type"
                 app:layout_constraintStart_toStartOf="@+id/card_job_details_contract_type"
                 app:layout_constraintTop_toBottomOf="@+id/card_job_details_contract_type">
@@ -231,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginVertical="@dimen/spacing_medium"
-                android:background="@color/white"
+                style="@style/card_view_expandable_style"
                 app:layout_constraintBottom_toBottomOf="@+id/card_job_details_posted_on"
                 app:layout_constraintEnd_toEndOf="@+id/card_job_details_location"
                 app:layout_constraintStart_toStartOf="@+id/card_job_details_location"
@@ -284,8 +282,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_large"
-            app:cardCornerRadius="@dimen/job_details_card_cardCornerRadius"
-            app:cardElevation="@dimen/job_details_card_cardElevation"
             app:contentPadding="@dimen/job_details_card_cardCornerRadius"
             app:layout_constraintEnd_toEndOf="@+id/layout_details_chip"
             app:layout_constraintStart_toStartOf="@+id/layout_details_chip"
@@ -320,71 +316,17 @@
                     tools:text="We are looking for a Loan Officer to evaluate, authorize approval or deny loan applications for people or for business. You will act as liaison between customers and our financial institution and you will help qualified applicants acquire loans in a timely manner." />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
-
         <Button
             android:id="@+id/button_apply_job"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+         style="@style/card_view_expandable_style"
+            android:layout_marginVertical="@dimen/spacing_medium"
             android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:layout_marginVertical="@dimen/spacing_xlarge"
-            android:background="@drawable/button_background_drawable"
-            android:paddingVertical="@dimen/spacing_medium"
-            android:text="@string/apply_btn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/card_view_expandable_description"
             app:layout_constraintStart_toStartOf="@+id/card_view_expandable_description"
             app:layout_constraintTop_toBottomOf="@+id/card_view_expandable_description" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/dialog_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_normal"
-            android:background="@drawable/dialog_apply_job"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"
-            tools:layout_editor_absoluteX="8dp">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/dialog_message"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <Button
-                    android:id="@+id/button_send"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/spacing_normal"
-                    android:background="@drawable/dialog_custom_button_send"
-                    android:text="@string/send"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/button_cancel"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-                <Button
-                    android:id="@+id/button_cancel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/dialog_custom_button_cancel"
-                    android:text="@string/cancel"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/button_send"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/button_send" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
