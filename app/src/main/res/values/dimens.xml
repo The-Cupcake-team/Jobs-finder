@@ -39,5 +39,7 @@
     <dimen name="job_details_card_cardCornerRadius">20dp</dimen>
     <dimen name="job_details_card_cardElevation">10dp</dimen>
     <dimen name="job_details_chips_padding_vertical">18dp</dimen>
+    <dimen name="card_details_chip_width">110dp</dimen>
+    <dimen name="card_details_chip_height">100dp</dimen>
 
 </resources>
