@@ -74,6 +74,13 @@
     <string name="recommended">Recommended</string>
     <string name="top_salary">Top salary</string>
 
+    <string name="login_welcome_text">Welcome Back</string>
+    <string name="user_name">Username</string>
+    <string name="password">Password</string>
+    <string name="don_t_have_account">Don’t have account?</string>
+    <string name="sign_up_here">Sign up here</string>
+
+
     <!--    signup strings-->
     <string name="full_name">Full name</string>
     <string name="last_name">Last name</string>
@@ -100,6 +107,7 @@
     <string name="your_skills">Your skills</string>
     <string name="add_skills">Add skills</string>
     <string name="next">Next</string>
+
 
 
 

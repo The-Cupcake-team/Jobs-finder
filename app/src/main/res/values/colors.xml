@@ -30,6 +30,8 @@
 
     <color name="boarder">#E5E7E9</color>
     <color name="button_tint">#4B8CED</color>
+    <color name="blue_tint">#97BFFB</color>
     <color name="button_tint_color">#DE019310</color>
+    <color name="accent_red">#FF0000</color>
 
 </resources>
