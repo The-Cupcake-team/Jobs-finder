@@ -1,4 +1,4 @@
-package com.cupcake.jobsfinder.ui.create_job.state
+package com.cupcake.jobsfinder.ui.create_job
 
 import com.cupcake.jobsfinder.R
 
@@ -12,4 +12,14 @@ data class CreateJobUiState(
     val isLoading: Boolean = false,
     val isValidForm: Boolean = false,
     val error: String = "",
-)
+) {
+    data class JobFormUiState(
+        val idJobTitle: Int = 0,
+        val company: String = "",
+        val workType: String = "",
+        val jobType: String = "",
+        val jobLocation: String = "",
+        val jobDescription: String = "",
+        val salary: Double = 0.0,
+    )
+}

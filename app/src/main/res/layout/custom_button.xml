@@ -21,7 +21,7 @@
             android:backgroundTint="@color/background"
             android:elevation="0dp"
             android:stateListAnimator="@null"
-            app:showButtonText="@{viewModel.jobUiState.titleToolBar}"
+            app:showButtonText="@{viewModel.state.titleToolBar}"
             android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

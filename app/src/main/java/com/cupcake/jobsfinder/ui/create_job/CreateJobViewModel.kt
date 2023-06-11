@@ -2,16 +2,11 @@ package com.cupcake.jobsfinder.ui.create_job
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.cupcake.jobsfinder.R
 import com.cupcake.jobsfinder.domain.usecase.CreateJobUseCase
-import com.cupcake.jobsfinder.ui.base.BaseViewModel
-import com.cupcake.jobsfinder.ui.create_job.state.CreateJobUiState
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.cupcake.jobsfinder.ui.base.BaseViewModel import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,48 +14,40 @@ class CreateJobViewModel @Inject constructor(
     private val createJob: CreateJobUseCase
 ) : BaseViewModel<CreateJobUiState>(CreateJobUiState()) {
 
-    private val _jobUiState = MutableStateFlow(CreateJobUiState())
-    val jobUiState = _jobUiState.asStateFlow()
-
     private val _event = MutableLiveData<CreateJobEvent>()
     val event: LiveData<CreateJobEvent> = _event
 
     fun createJob() {
-        viewModelScope.launch {
-            try {
-                _jobUiState.update { it.copy(isLoading = true) }
-                val jobState = createJob(
+        _state.update { it.copy(isLoading = true) }
+        tryToExecute(
+            {
+                createJob(
                     CreateJobUseCase.ParamJobInfo(
-                        jobTitleId = _jobUiState.value.jobFormUiState.idJobTitle,
-                        company = _jobUiState.value.jobFormUiState.company,
-                        workType = _jobUiState.value.jobFormUiState.workType,
-                        jobType = _jobUiState.value.jobFormUiState.jobType,
-                        jobLocation = _jobUiState.value.jobFormUiState.jobLocation,
-                        jobDescription = _jobUiState.value.jobFormUiState.jobDescription,
-                        jobSalary = _jobUiState.value.jobFormUiState.salary,
+                        jobTitleId = _state.value.jobFormUiState.idJobTitle,
+                        company = _state.value.jobFormUiState.company,
+                        workType = _state.value.jobFormUiState.workType,
+                        jobType = _state.value.jobFormUiState.jobType,
+                        jobLocation = _state.value.jobFormUiState.jobLocation,
+                        jobDescription = _state.value.jobFormUiState.jobDescription,
+                        jobSalary = _state.value.jobFormUiState.salary,
                     )
                 )
-
-                if (jobState) {
-                    onSuccessCreateJob()
-                }
-
-            } catch (e: Exception) {
-                onCreateJobError(e.message.toString())
-            }
-        }
+            },
+            ::onCreateJobSuccess,
+            ::onCreateJobError
+        )
     }
 
-    private fun onSuccessCreateJob() {
-        _jobUiState.update { it.copy(isLoading = false) }
+    private fun onCreateJobSuccess(result : Boolean) {
+        _state.update { it.copy(isLoading = false) }
         // more logic
     }
 
-    private fun onCreateJobError(errorMessage: String) {
-        _jobUiState.update {
+    private fun onCreateJobError(error: Exception) {
+        _state.update {
             it.copy(
                 isLoading = false,
-                error = errorMessage,
+                error = error.message.toString(),
             )
         }
     }
@@ -75,7 +62,7 @@ class CreateJobViewModel @Inject constructor(
     }
 
     private fun onChangeIndexViewPager(index: Int) {
-        _jobUiState.update {
+        _state.update {
             it.copy(
                 activeIconToolBar = getIconToolBar(index),
                 formNumber = getFormNumber(index),

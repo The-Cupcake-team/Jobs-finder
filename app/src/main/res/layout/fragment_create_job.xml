@@ -30,7 +30,7 @@
                 android:layout_height="?actionBarSize"
                 android:background="@color/background"
                 android:elevation="2dp"
-                app:setNavigationIcon="@{viewModel.jobUiState.activeIconToolBar}"
+                app:setNavigationIcon="@{viewModel.state.activeIconToolBar}"
                 app:navigationIcon="@drawable/ic_close"
                 app:titleTextColor="@color/color_text_primary">
 
@@ -42,7 +42,7 @@
                     android:backgroundTint="@color/background"
                     android:elevation="0dp"
                     android:stateListAnimator="@null"
-                    app:showButtonText="@{viewModel.jobUiState.titleToolBar}"
+                    app:showButtonText="@{viewModel.state.titleToolBar}"
                     android:textColor="@color/primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginBottom="8dp"
-            app:showText="@{viewModel.jobUiState.formNumber}"
+            app:showText="@{viewModel.state.formNumber}"
             android:textColor="@color/tertiary"
             app:layout_constraintBottom_toTopOf="@+id/viewPagerCreateJob"
             app:layout_constraintStart_toStartOf="parent"
