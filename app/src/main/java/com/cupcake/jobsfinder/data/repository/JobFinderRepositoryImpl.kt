@@ -6,14 +6,13 @@ import com.cupcake.jobsfinder.data.remote.response.PostDto
 import com.cupcake.jobsfinder.data.remote.response.base.BaseResponse
 import com.cupcake.jobsfinder.data.remote.response.job.JobDto
 import com.cupcake.jobsfinder.data.remote.response.job.JobWithTitleDto
-import com.cupcake.jobsfinder.domain.reposirory.Repository
 import retrofit2.Response
 import javax.inject.Inject
 
 
-class RepositoryImpl @Inject constructor(
+class JobFinderRepositoryImpl @Inject constructor(
 	private val api: JobApiService
-) : Repository {
+) : JobFinderRepository {
 
 
 	// region Job
