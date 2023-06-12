@@ -1,45 +1,44 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
+    id(Plugins.ANDROID_LIBRARY)
+    kotlin(Plugins.KOTLIN_ANDROID)
+    kotlin(Plugins.KOTLIN_KAPT)
 }
 
 android {
-    namespace 'com.cupcake.ui'
-    compileSdk 33
+    namespace ="com.cupcake.ui"
+    compileSdk=ConfigurationData.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdk 24
+        minSdk=ConfigurationData.MIN_SDK_VERSION
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+        testInstrumentationRunner = ConfigurationData.TEST_INSTRUMENTATION_RUNNER
+        consumerProguardFiles("consumer-rules.pro")
     }
 
-    kapt {
-        correctErrorTypes true
-    }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = ConfigurationData.JAVA_VERSIONS_CODE
+        targetCompatibility = ConfigurationData.JAVA_VERSIONS_CODE
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = ConfigurationData.JAVA_VERSIONS_CODE.toString()
     }
     buildFeatures {
         dataBinding = true
     }
-}
 
+}
 dependencies {
 
-    implementation project(path: ':presentation:viewmodels')
+    implementation(project(Modules.PRESENTATION_VIEWMODEL))
 
     implementation(DependencyProject.androidxCore)
     implementation(DependencyProject.compat)
