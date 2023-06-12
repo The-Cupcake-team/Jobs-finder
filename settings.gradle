@@ -14,10 +14,9 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Jobs Finder"
 include ':app'
-include ':persntation:ui'
-include ':persntation:viewmodels'
+include ':presentation:ui'
+include ':presentation:viewmodels'
 include ':domain:usecase'
 include ':domain:models'
 include ':data:repository'
 include ':data:remote'
-include ':ameer'

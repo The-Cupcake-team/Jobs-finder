@@ -1,4 +1,0 @@
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-        <corners android:radius="@dimen/card_radius" />
-        <solid android:color="@color/primary" />
-</shape>

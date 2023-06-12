@@ -1,0 +1,6 @@
+package repo
+
+interface AuthenticationRepository {
+
+
+}

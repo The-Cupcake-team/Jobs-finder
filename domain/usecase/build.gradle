@@ -5,19 +5,13 @@ plugins {
 
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_7
-    targetCompatibility = JavaVersion.VERSION_1_7
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 dependencies {
-    implementation project(path: ':data:repository')
+    api project(path: ':domain:models')
+    implementation(DependencyProject.dagger)
 }
 
-//dependencies {
-//
-//    api project(path: ':domain:models')
-//    implementation project(path: ':data:repository')
-//
-//
-//
-//}
+

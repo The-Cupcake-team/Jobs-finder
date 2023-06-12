@@ -1,11 +1,11 @@
 package com.cupcake.jobsfinder.di
 
-import com.cupcake.repository.JobFinderRepository
 import com.cupcake.repository.JobFinderRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import repo.JobFinderRepository
 
 
 @Module
