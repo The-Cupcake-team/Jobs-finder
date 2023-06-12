@@ -8,11 +8,11 @@
 
         <variable
             name="item"
-            type="com.cupcake.jobsfinder.ui.jobs.JobUiState" />
+            type="com.cupcake.viewmodels.job_details.JobUiState" />
 
         <variable
             name="listener"
-            type="com.cupcake.jobsfinder.ui.jobs.adapter.JobsListener" />
+            type="com.cupcake.ui.jobs.adapter.JobsListener" />
     </data>
 
     <androidx.cardview.widget.CardView

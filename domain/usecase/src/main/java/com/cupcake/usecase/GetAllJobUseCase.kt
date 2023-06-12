@@ -1,0 +1,12 @@
+//package com.cupcake.usecase
+//
+//import com.cupcake.models.JobWithTitle
+//import javax.inject.Inject
+//
+//class GetAllJobUseCase @Inject constructor(
+//    private val repository: JobFinderRepository
+//) {
+//    suspend operator fun invoke(limit: Int): List<JobWithTitle> {
+//        return repository.getJobs().take(limit).map { it.toJobWithJobTitle() }
+//    }
+//}

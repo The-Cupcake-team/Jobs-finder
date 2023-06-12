@@ -1,7 +1,7 @@
 package com.cupcake.jobsfinder.di
 
 import com.cupcake.jobsfinder.BuildConfig
-import com.cupcake.jobsfinder.data.remote.JobApiService
+import com.cupcake.remote.JobApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

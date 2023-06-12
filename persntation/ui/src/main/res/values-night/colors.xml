@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#1C1C1C</color>
+    <color name="primary">#4B8CED</color>
+    <color name="secondary">#99FFFFFF</color>
+    <color name="tertiary">#61FFFFFF</color>
+    <color name="accent">#14FFFFFF</color>
+    <color name="cards">#1A1A1A</color>
+    <!-- Text colors -->
+    <color name="color_text_primary">#DEFFFFFF</color>
+    <color name="color_text_secondary">#99FFFFFF</color>
+    <color name="color_text_tertiary">#61FFFFFF</color>
+</resources>

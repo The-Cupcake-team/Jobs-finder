@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="person_image_border_width">1dp</dimen>
+
+    <dimen name="spacing_small">4dp</dimen>
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_tiny">12dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_xlarge">32dp</dimen>
+    <dimen name="spacing_xxlarge">40dp</dimen>
+
+    <!--    text size-->
+    <dimen name="text_size_heading">24sp</dimen>
+    <dimen name="text_size_headline">16sp</dimen>
+    <dimen name="text_size_huge">24sp</dimen>
+    <dimen name="text_size_title">14sp</dimen>
+    <dimen name="text_size_body">14sp</dimen>
+    <dimen name="text_size_caption">12sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
+
+    <!--    cards-->
+    <dimen name="card_horizontal_height">120dp</dimen>
+    <dimen name="card_vertical_height">200dp</dimen>
+    <dimen name="card_vertical_width">320dp</dimen>
+    <dimen name="card_post_height">364dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+
+    <!--    images-->
+    <dimen name="profile_image_size">40dp</dimen>
+    <dimen name="profile_image_large_size">48dp</dimen>
+    <dimen name="company_image_size">48dp</dimen>
+    <dimen name="post_image_height">160dp</dimen>
+    <dimen name="login_welcome_image">259dp</dimen>
+
+    <!--    other dimens-->
+    <dimen name="radius">8dp</dimen>
+    <dimen name="login_card_radius">32dp</dimen>
+    <dimen name="login_card_negative_margin">-24dp</dimen>
+    <dimen name="search_bar_height">48dp</dimen>
+    <dimen name="search_home_height">40dp</dimen>
+    <dimen name="bottom_navigation_height">52dp</dimen>
+    <dimen name="button_height">42dp</dimen>
+    <dimen name="company_logo_size">60dp</dimen>
+    <dimen name="job_details_card_title">82dp</dimen>
+    <dimen name="job_details_card_cardCornerRadius">20dp</dimen>
+    <dimen name="job_details_card_cardElevation">10dp</dimen>
+    <dimen name="job_details_chips_padding_vertical">18dp</dimen>
+    <dimen name="card_details_chip_width">110dp</dimen>
+    <dimen name="card_details_chip_height">100dp</dimen>
+
+    <dimen name="login_card_height">540dp</dimen>
+    <dimen name="login_welcome_text_margin_top">80dp</dimen>
+    <dimen name="edit_text_height">48dp</dimen>
+
+
+</resources>

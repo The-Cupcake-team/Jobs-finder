@@ -1,0 +1,110 @@
+<resources>
+    <string name="app_name">Jobs Finder</string>
+
+    <!--    bottom navigation-->
+    <string name="post">Post</string>
+    <string name="home">Home</string>
+    <string name="messages">Messages</string>
+    <string name="jobs">Jobs</string>
+    <string name="my_network">My Network</string>
+
+    <!--    create post-->
+    <string name="normal_post">Normal Post</string>
+    <string name="job_post">Job Post</string>
+    <string name="anyone">Anyone</string>
+
+    <!--    home & post strings-->
+    <string name="search">Search</string>
+    <string name="follow">Follow</string>
+    <string name="followed">Followed</string>
+    <string name="comments">comments</string>
+    <string name="post_body">President cast election as choice between all our republicans who seek to impose a nationwide abortion ban and democrat</string>
+
+    <!--    job location strings-->
+    <string name="on_your_location">On your location</string>
+    <string name="on_site">On-site</string>
+    <string name="remote">Remote</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contract_type">Contract type</string>
+    <string name="Location">Location</string>
+    <string name="work_place">job type</string>
+    <string name="Salary">Salary</string>
+    <string name="posted_on">Posted on</string>
+    <string name="apply_btn">Apply</string>
+    <string name="about_company">About company \n coming soon</string>
+    <string name="dialog_message">To complete the Application you need to send your Resume</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="Experience">Experience</string>
+    <string name="intermediate">Intermediate</string>
+
+    <string name="page_number_one">1 of 2</string>
+    <string name="page_number_two">2 of 2</string>
+    <string name="title">Title</string>
+    <string name="add_job_title">add job title</string>
+    <string name="company">Company</string>
+    <string name="add_company_name">add company name</string>
+    <string name="location">Location</string>
+    <string name="country_city">Country, City</string>
+    <string name="job_type">Job Type</string>
+    <string name="hybrid">Hybird</string>
+    <string name="work_type">Work Type</string>
+    <string name="full_time">Full-time</string>
+    <string name="part_time">Part-time</string>
+    <string name="internship">Internship</string>
+    <string name="volunteer">Volunteer</string>
+    <string name="temporary">Temporary</string>
+    <string name="experience">Experience</string>
+    <string name="senior_level">Senior-level</string>
+    <string name="description">Description</string>
+    <string name="add_description">Add description</string>
+    <string name="qualification">Qualification</string>
+    <string name="skills">Skills</string>
+    <string name="salary">Salary</string>
+    <string name="usd_month">USD/Month</string>
+    <string name="public_state">public</string>
+    <string name="post_hint">What\'s on your mind ?</string>
+    <string name="camera">Camera</string>
+    <string name="video_photo">Video/Photo</string>
+    <string name="personal_name">Bilal Alkhatib</string>
+    <string name="jop_title">Android Developer</string>
+    <string name="created_at">3hours ago</string>
+    <string name="post_content">President cast election as choice between all our republicans who seek to impose President cast election as choice between all our republicans who seek to impose</string>
+    <string name="likes_count">10.5K</string>
+    <string name="comments_count">350</string>
+    <string name="recommended">Recommended</string>
+    <string name="top_salary">Top salary</string>
+
+
+    <!--    signup strings-->
+    <string name="full_name">Full name</string>
+    <string name="last_name">Last name</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="signup">Sign up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="already_have_account">Already have account?</string>
+    <string name="phone_number">Phone number</string>
+    <string name="more_feature">Fill the information for more feature</string>
+    <string name="sign_up">Sign up</string>
+    <string name="don_t_have_account">Don’t have account?</string>
+    <string name="sign_up_here">Sign up here</string>
+
+    <!--    signUp      -->
+    <string name="job_title">Job title</string>
+    <string name="education">Education</string>
+    <string name="experiences">Experiences</string>
+    <string name="experience_level">Experience Level</string>
+    <string name="entry">Entry</string>
+    <string name="mid_level">Mid-level</string>
+    <string name="senior_leve">Senior-leve</string>
+    <string name="expert">Expert</string>
+    <string name="your_skills">Your skills</string>
+    <string name="add_skills">Add skills</string>
+    <string name="next">Next</string>
+
+
+
+
+</resources>
