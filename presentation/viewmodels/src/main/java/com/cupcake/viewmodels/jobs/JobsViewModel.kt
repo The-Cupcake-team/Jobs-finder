@@ -1,14 +1,11 @@
 package com.cupcake.viewmodels.jobs
 
-import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.job.GetJobsInUserLocationUseCase
 import com.cupcake.usecase.job.GetRecommendedJobsUseCase
 import com.cupcake.usecase.job.GetTopSalaryInUserLocationUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -27,24 +24,43 @@ class JobsViewModel @Inject constructor(
     }
 
     private fun getRecommendedJobs() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val jobs = getRecommendedJobs(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
-            _state.update { it.copy(recommendedJobs = jobs, isLoading = false) }
-        }
+        tryToExecute(
+            suspend { getRecommendedJobs(10).map { it.toJobUiState() } },
+            ::onRecommendedJobsSuccess,
+            ::onError
+        )
+    }
+
+    private fun onRecommendedJobsSuccess(recommendedJobs: List<JobUiState>) {
+        _state.update { it.copy(recommendedJobs = recommendedJobs, isLoading = false) }
     }
 
     private fun getTopSalaryJobs() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val jobs = getTopSalaryInUserLocation(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
-            _state.update { it.copy(topSalaryJobs = jobs, isLoading = false) }
-        }
+        tryToExecute(
+            suspend { getTopSalaryInUserLocation(10).map { it.toJobUiState() } },
+            ::onTopSalaryJobsSuccess,
+            ::onError
+        )
+    }
+
+    private fun onTopSalaryJobsSuccess(topSalaryJobs: List<JobUiState>) {
+        _state.update { it.copy(topSalaryJobs = topSalaryJobs, isLoading = false) }
     }
 
     private fun getInLocationJobs() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val jobs = getJobsInUserLocation(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
-            _state.update { it.copy(onLocationJobs = jobs, isLoading = false) }
-        }
+        tryToExecute(
+            suspend { getJobsInUserLocation(10).map { it.toJobUiState() } },
+            ::onInLocationJobsJobsSuccess,
+            ::onError
+        )
+    }
+
+    private fun onInLocationJobsJobsSuccess(inLocationJobs: List<JobUiState>) {
+        _state.update { it.copy(onLocationJobs = inLocationJobs, isLoading = false) }
+    }
+
+    private fun onError(error: Exception) {
+        _state.update { it.copy(error = listOf(error.message!!), isLoading = false) }
     }
 
     companion object {
