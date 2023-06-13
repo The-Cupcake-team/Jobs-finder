@@ -125,14 +125,13 @@
                         style="@style/loginButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:enabled="@{viewModel.loginUIState.isValidFields}"
                         android:onClick="@{() -> viewModel.login()}"
                         android:layout_marginTop="@dimen/spacing_large"
                         android:background="@drawable/background_button_login"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/container_password" />
-
+                    <!--                        android:enabled="@{viewModel.loginUIState.isValidFields}"-->
                     <TextView
                         android:id="@+id/textViewDontHaveAccount"
                         style="@style/TextStyle.caption"
