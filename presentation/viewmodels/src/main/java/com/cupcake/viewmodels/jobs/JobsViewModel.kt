@@ -42,9 +42,8 @@ class JobsViewModel @Inject constructor(
 
     private fun getInLocationJobs() {
         viewModelScope.launch(Dispatchers.IO) {
-            val jobs = getJobsInUserLocation(RECOMMENDED_JOB_LIMIT)
-                .map { it.toJobUiState() }
-            _state.update { it.copy(inLocationJobs = jobs, isLoading = false) }
+            val jobs = getJobsInUserLocation(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
+            _state.update { it.copy(onLocationJobs = jobs, isLoading = false) }
         }
     }
 

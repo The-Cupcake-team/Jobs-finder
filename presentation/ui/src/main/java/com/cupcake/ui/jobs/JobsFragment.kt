@@ -10,6 +10,7 @@ import com.cupcake.ui.jobs.adapter.JobsAdapter
 import com.cupcake.ui.jobs.adapter.JobsListener
 import com.cupcake.viewmodels.jobs.JobsViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
@@ -20,6 +21,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
 
     override val LOG_TAG: String = this::class.java.name
     private lateinit var jobsAdapter: JobsAdapter
+    private val items = mutableListOf<JobsItem>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpAdapter()
@@ -29,6 +31,8 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
         jobsAdapter = JobsAdapter(emptyList(), this)
         binding?.jobsRecycler?.adapter = jobsAdapter
         loadRecommendedJobs()
+        loadTopSalaryJobs()
+        loadJobsOnLocation()
     }
 
 //    private fun loadJobsToAdapter() {
@@ -50,17 +54,25 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     private fun loadRecommendedJobs() {
         lifecycleScope.launch(Dispatchers.Main) {
             viewModel.state.collect {
-                jobsAdapter.setJobsItems(listOf(JobsItem.Recommended(it.recommendedJobs)))
+                items.add(JobsItem.Recommended(it.recommendedJobs))
             }
         }
     }
 
     private fun loadTopSalaryJobs() {
-
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.state.collect {
+                items.add(JobsItem.TopSalary(it.topSalaryJobs))
+            }
+        }
     }
 
     private fun loadJobsOnLocation() {
-
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.state.collect {
+                items.add(JobsItem.LocationJobs(it.onLocationJobs))
+            }
+        }
     }
 
     override fun onItemClickListener() {

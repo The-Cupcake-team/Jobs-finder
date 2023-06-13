@@ -69,7 +69,7 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
 }
 
 @BindingAdapter(value = ["app:showWhenLoading"])
-fun <T> showWhenLoading(view: View, state: Boolean?) {
+fun showWhenLoading(view: View, state: Boolean?) {
     state?.let {
         view.visibility = if (state) View.VISIBLE else View.INVISIBLE
     }
