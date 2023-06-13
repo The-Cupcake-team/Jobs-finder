@@ -22,12 +22,32 @@ class JobViewModel @Inject constructor(
 ) : BaseViewModel<JobsUiState>(JobsUiState()) {
 
     private val _jobsUIState = MutableStateFlow(
-       JobDetailUiState(
+        JobDetailUiState(
             job = JobsDetailsUiState()
         )
     )
     val jobsUIState: StateFlow<JobDetailUiState> = _jobsUIState
     private val errors: MutableList<ErrorUiState> = mutableListOf()
+
+    private fun onGetJobDetailsFailure(exception: Throwable) {
+        this._jobsUIState.update {
+            it.copy(
+                isLoading = false,
+                error = listOf(exception.message.toString())
+            )
+        }
+    }
+
+    private fun onGetJobDetailsSuccess(jobsDetails: Job) {
+        _jobsUIState.value.copy(
+            isLoading = false,
+            job = jobsDetails.toJobsDetailsUiState()
+        )
+    }
+
+    private suspend fun onInternetDisconnected() {
+        _state.update { it.copy(isLoading = true) }
+    }
 
 
     private fun Job.toJobsDetailsUiState(): JobsDetailsUiState {
