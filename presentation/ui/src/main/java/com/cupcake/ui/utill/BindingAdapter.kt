@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -69,9 +70,7 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
 }
 
 @BindingAdapter(value = ["app:showWhenLoading"])
-fun <T> showWhenLoading(view: View, state: Boolean?) {
-    state?.let {
-        view.visibility = if (state) View.VISIBLE else View.INVISIBLE
-    }
+fun <T> showWhenLoading(view: View, state: Boolean) {
+    view.isVisible=state
 }
 
