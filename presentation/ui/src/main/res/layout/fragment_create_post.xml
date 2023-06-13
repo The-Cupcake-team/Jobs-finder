@@ -35,6 +35,7 @@
                 android:fontFamily="@font/worksans_semibold"
                 android:text="@string/post"
                 android:textAllCaps="false"
+                android:onClick="@{() -> viewModel.createPost(editTextContent.getText().toString())}"
                 android:textColor="@color/primary"
                 android:textSize="@dimen/text_size_headline" />
         </androidx.appcompat.widget.Toolbar>
