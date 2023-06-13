@@ -19,7 +19,7 @@ android {
         versionCode = ConfigurationData.VERSION_CODE
         versionName = ConfigurationData.VERSION_NAME
         testInstrumentationRunner = ConfigurationData.TEST_INSTRUMENTATION_RUNNER
-        buildConfigField("String", "BASE_URL", "\"${ConfigurationData.getBaseUrl()}\"")
+        buildConfigField("String", "BASE_URL", ConfigurationData.getBaseUrl())
     }
 
     buildTypes {
