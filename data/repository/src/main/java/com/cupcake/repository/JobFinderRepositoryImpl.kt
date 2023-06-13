@@ -68,12 +68,6 @@ class JobFinderRepositoryImpl @Inject constructor(
 //	//endregion
 //
 //
-//	// region Post
-//	override suspend fun createPost(content: String): PostDto {
-//		return wrapResponseWithErrorHandler {
-//			api.createPost(content)
-//		}
-//	}
 //
 //	override suspend fun getAllPosts(): List<PostDto> {
 //		return wrapResponseWithErrorHandler { api.getPosts() }
@@ -105,19 +99,20 @@ class JobFinderRepositoryImpl @Inject constructor(
     override suspend fun getJobById(jobId: String): Job {
         TODO("Not yet implemented")
     }
-
-    override suspend fun createPost(content: String): Post {
-        TODO("Not yet implemented")
-    }
+    //region Post
 
     override suspend fun getAllPosts(): List<Post> {
         return wrapResponseWithErrorHandler { api.getPosts() }.map { it.toPost() }
     }
 
+    override suspend fun createPost(content: String): Post {
+        return wrapResponseWithErrorHandler { api.createPost(content) }.toPost()
+    }
+
     override suspend fun getPostById(id: String): Post {
         TODO("Not yet implemented")
     }
-
+    //endregion
     private suspend fun <T> wrapResponseWithErrorHandler(
         function: suspend () -> Response<BaseResponse<T>>
     ): T {
