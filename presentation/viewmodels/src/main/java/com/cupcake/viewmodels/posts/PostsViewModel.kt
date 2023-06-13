@@ -1,16 +1,10 @@
 package com.cupcake.viewmodels.posts
 
-import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Post
 import com.cupcake.viewmodels.base.BaseViewModel
 import com.cupcake.usecase.GetPostsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,31 +12,26 @@ class PostsViewModel @Inject constructor(
     private val getPostsUseCase: GetPostsUseCase
 ) : BaseViewModel<PostsUIState>(PostsUIState()) {
 
-    private val handler = CoroutineExceptionHandler { _, exception ->
-        onGetPostsFailure(exception)
-    }
-
     init {
-        onGetPosts()
+        getPosts()
     }
 
-    private fun onGetPosts() {
-        viewModelScope.launch(Dispatchers.IO + handler) {
-            val posts = getPostsUseCase()
-            onGetPostsSuccess(posts)
-        }
 
+    private fun getPosts() {
+        tryToExecute(
+            { getPostsUseCase() },
+            ::onGetPostsSuccess,
+            ::onGetPostsFailure
+        )
     }
 
-    private fun onGetPostsSuccess(posts: List<Post>){
+    private fun onGetPostsSuccess(posts: List<Post>) {
         _state.update {
-            it.copy(
-                isLoading = false,
-                postsResult = posts.map { post -> post.toPostItemUIState() })
+            it.copy(isLoading = false, postsResult = posts.map { post -> post.toPostItemUIState() })
         }
     }
 
-    private fun onGetPostsFailure(throwable: Throwable){
+    private fun onGetPostsFailure(throwable: Throwable) {
         _state.update { it.copy(isLoading = false, errors = listOf(throwable.message.toString())) }
     }
 
