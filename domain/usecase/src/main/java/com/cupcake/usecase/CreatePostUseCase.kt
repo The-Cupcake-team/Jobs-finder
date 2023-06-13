@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class CreatePostUseCase @Inject constructor(
     private val repository: JobFinderRepository,
-    private val validateField: ValidateFieldUseCade
+    private val validateField: ValidateFieldUseCase
 ) {	suspend operator fun invoke(content: String): Post {
     validateField(content)
     return repository.createPost(content)
