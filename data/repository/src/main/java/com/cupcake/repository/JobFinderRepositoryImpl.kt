@@ -6,6 +6,7 @@ import com.cupcake.models.JobWithTitle
 import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
+import com.cupcake.repository.mapper.toJobWithJobTitle
 import com.cupcake.repository.mapper.toPost
 import repo.JobFinderRepository
 import retrofit2.Response
@@ -47,9 +48,6 @@ class JobFinderRepositoryImpl @Inject constructor(
 //
 //	// region Job
 //
-//	override suspend fun getJobs(): List<JobWithTitleDto> {
-//		return wrapResponseWithErrorHandler { api.getJobs() }
-//	}
 //
 //	//endregion
 //
@@ -95,7 +93,7 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getJobs(): List<JobWithTitle> {
-        TODO("Not yet implemented")
+        return wrapResponseWithErrorHandler { api.getJobs() }.map { it.toJobWithJobTitle() }
     }
 
     override suspend fun getAllJobTitles(): List<JobTitle> {

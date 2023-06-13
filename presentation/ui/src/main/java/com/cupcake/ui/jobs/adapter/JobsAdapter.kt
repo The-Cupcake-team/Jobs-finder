@@ -2,11 +2,12 @@ package com.cupcake.ui.jobs.adapter
 
 import android.annotation.SuppressLint
 import android.view.ViewGroup
+import com.cupcake.ui.BR
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseActionListener
 import com.cupcake.ui.base.BaseAdapter
+import com.cupcake.viewmodels.jobs.JobUiState
 import com.cupcake.ui.jobs.JobsItem
-import com.cupcake.viewmodels.job_details.JobDetailsUiState
 
 
 class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
@@ -34,24 +35,24 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
     }
 
     private fun bindRecommendedJobs(
-        items: List<JobDetailsUiState>,
+        items: List<JobUiState>,
         holder: ItemViewHolder
     ) {
-//        holder.binding.setVariable(BR.adapter, RecommendedJobsAdapter(items, listener))
+        holder.binding.setVariable(BR.adapter, RecommendedJobsAdapter(items, listener))
     }
 
     private fun bindTopSalaryJobs(
-        items: List<JobDetailsUiState>,
+        items: List<JobUiState>,
         holder: ItemViewHolder
     ) {
-//        holder.binding.setVariable(BR.adapter, TopSalaryJobsAdapter(items, listener))
+        holder.binding.setVariable(BR.adapter, TopSalaryJobsAdapter(items, listener))
     }
 
     private fun bindInLocationJobs(
-        items: List<JobDetailsUiState>,
+        items: List<JobUiState>,
         holder: ItemViewHolder
     ) {
-//        holder.binding.setVariable(BR.adapter, JobsOnLocationAdapter(items, listener))
+        holder.binding.setVariable(BR.adapter, JobsOnLocationAdapter(items, listener))
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -63,13 +64,9 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
     }
 
     companion object {
-//         const val RECOMMENDED_JOBS = R.layout.recommended_jobs_recycler
-//         const val TOP_SALARY_JOBS = R.layout.top_salary_recycler
-//         const val IN_LOCATION_JOBS = R.layout.job_on_location_recycler
-
-        const val RECOMMENDED_JOBS = 1
-        const val TOP_SALARY_JOBS = 2
-        const val IN_LOCATION_JOBS = 3
+        val RECOMMENDED_JOBS = R.layout.recommended_jobs_recycler
+        val TOP_SALARY_JOBS = R.layout.top_salary_recycler
+        val IN_LOCATION_JOBS = R.layout.job_on_location_recycler
     }
 }
 

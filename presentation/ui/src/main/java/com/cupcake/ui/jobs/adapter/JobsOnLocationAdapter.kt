@@ -2,11 +2,11 @@ package com.cupcake.ui.jobs.adapter
 
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
-import com.cupcake.viewmodels.job_details.JobDetailsUiState
+import com.cupcake.viewmodels.jobs.JobUiState
 
 
-class JobsOnLocationAdapter(items: List<JobDetailsUiState>, listener: JobsListener) :
-    BaseAdapter<JobDetailsUiState>(items, listener) {
+class JobsOnLocationAdapter(items: List<JobUiState>, listener: JobsListener) :
+    BaseAdapter<JobUiState>(items, listener) {
     override var layoutId: Int = R.layout.item_job_card
 }
 

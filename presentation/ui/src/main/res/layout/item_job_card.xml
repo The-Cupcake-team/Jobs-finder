@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="com.cupcake.viewmodels.job_details.JobViewModel" />
+            type="com.cupcake.viewmodels.jobs.JobUiState" />
 
         <variable
             name="listener"
@@ -32,6 +32,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewCompanyProfile"
                 android:layout_width="@dimen/profile_image_size"
+                app:loadImage="@{item.image}"
                 android:layout_height="@dimen/profile_image_size"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
@@ -45,6 +46,7 @@
                 android:id="@+id/textViewJobTitle"
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
+                android:text="@{item.title}"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:textColor="@color/color_text_primary"
@@ -56,6 +58,7 @@
                 android:id="@+id/textViewCompanyName"
                 style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
+                android:text="@{item.companyName}"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:textColor="@color/color_text_secondary"
@@ -81,6 +84,7 @@
                 style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{item.detailsChip[0]}"
                 android:layout_marginStart="@dimen/spacing_normal"
                 android:background="@drawable/background_chips_job_card"
                 android:backgroundTint="#E7FEFF"
@@ -96,6 +100,7 @@
                 style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{item.detailsChip[1]}"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_medium"
                 android:background="@drawable/background_chips_job_card"
@@ -112,6 +117,7 @@
                 android:id="@+id/textViewSalary"
                 style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
+                android:text="@{item.salary}"
                 android:layout_height="wrap_content"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewJobType"
@@ -121,6 +127,7 @@
             <TextView
                 android:id="@+id/textViewLocation"
                 style="@style/TextStyle.body"
+                android:text="@{item.location}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"

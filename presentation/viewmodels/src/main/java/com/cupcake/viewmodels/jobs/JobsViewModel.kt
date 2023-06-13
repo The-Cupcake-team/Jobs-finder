@@ -1,15 +1,12 @@
 package com.cupcake.viewmodels.jobs
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.viewmodels.base.BaseViewModel
 import com.cupcake.usecase.job.GetJobsInUserLocationUseCase
 import com.cupcake.usecase.job.GetRecommendedJobsUseCase
 import com.cupcake.usecase.job.GetTopSalaryInUserLocationUseCase
+import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,51 +17,35 @@ class JobsViewModel @Inject constructor(
     private val getRecommendedJobs: GetRecommendedJobsUseCase,
     private val getJobsInUserLocation: GetJobsInUserLocationUseCase,
     private val getTopSalaryInUserLocation: GetTopSalaryInUserLocationUseCase
-) : BaseViewModel<JobsUiState>(JobsUiState()), JobsListener {
+) : BaseViewModel<JobsUiState>(JobsUiState()) {
 
-//    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-//        _jobsUIState.update { it.copy(isLoading = false, error = listOf(throwable.message.toString())) }
-//    }
-//    init {
-//        viewModelScope.launch {
-//            getRecommendedJobs()
-//            getTopSalaryJobs()
-//            getInLocationJobs()
-//        }
-//    }
-//
-//    private fun getRecommendedJobs() {
-//        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-//            val jobs = getRecommendedJobs(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
-//            _jobsUIState.update { it.copy(recommendedJobs = jobs, isLoading = false) }
-//        }
-//    }
-//
-//    private fun getTopSalaryJobs() {
-//        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-//            val jobs = getTopSalaryInUserLocation(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
-//            _jobsUIState.update { it.copy(topSalaryJobs = jobs, isLoading = false) }
-//        }
-//    }
-//
-//    private fun getInLocationJobs() {
-//        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-//            val jobs = getJobsInUserLocation(RECOMMENDED_JOB_LIMIT)
-//                .map { it.toJobUiState() }
-//            _jobsUIState.update { it.copy(inLocationJobs = jobs, isLoading = false) }
-//        }
-//    }
 
-    override fun onItemClickListener() {
-
+    init {
+        getRecommendedJobs()
+        getTopSalaryJobs()
+        getInLocationJobs()
     }
 
-    override fun onRecommendedJobClickListener() {
-
+    private fun getRecommendedJobs() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val jobs = getRecommendedJobs(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
+            _state.update { it.copy(recommendedJobs = jobs, isLoading = false) }
+        }
     }
 
-    override fun onTopSalaryJobClickListener() {
+    private fun getTopSalaryJobs() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val jobs = getTopSalaryInUserLocation(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() }
+            _state.update { it.copy(topSalaryJobs = jobs, isLoading = false) }
+        }
+    }
 
+    private fun getInLocationJobs() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val jobs = getJobsInUserLocation(RECOMMENDED_JOB_LIMIT)
+                .map { it.toJobUiState() }
+            _state.update { it.copy(inLocationJobs = jobs, isLoading = false) }
+        }
     }
 
     companion object {
