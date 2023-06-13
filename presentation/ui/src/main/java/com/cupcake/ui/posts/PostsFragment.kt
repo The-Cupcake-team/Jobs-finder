@@ -22,7 +22,7 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
 
     private fun setupPostsRecyclerView() {
         val adapter = PostsAdapter(listOf(), this)
-        binding?.recyclerViewPosts?.adapter = adapter
+        binding.recyclerViewPosts.adapter = adapter
     }
 
 }
