@@ -29,6 +29,9 @@ class JobViewModel @Inject constructor(
     val jobsUIState: StateFlow<JobDetailUiState> = _jobsUIState
     private val errors: MutableList<ErrorUiState> = mutableListOf()
 
+    private val handler = CoroutineExceptionHandler { _, exception ->
+        onGetJobDetailsFailure(exception)
+    }
     private fun onGetJobDetailsFailure(exception: Throwable) {
         this._jobsUIState.update {
             it.copy(
@@ -45,6 +48,12 @@ class JobViewModel @Inject constructor(
         )
     }
 
+    private fun getJobDetails() {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+            val jobDetails = getJobByIdUseCase("438cd8f7-af62-4796-84be-a98807e874d8")
+            onGetJobDetailsSuccess(jobDetails)
+        }
+    }
     private suspend fun onInternetDisconnected() {
         _state.update { it.copy(isLoading = true) }
     }
@@ -66,6 +75,7 @@ class JobViewModel @Inject constructor(
 
 
     init {
+        getJobDetails()
 //        getJobById("438cd8f7-af62-4796-84be-a98807e874d8")
     }
 
