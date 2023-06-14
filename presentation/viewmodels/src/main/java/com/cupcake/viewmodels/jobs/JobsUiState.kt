@@ -1,5 +1,6 @@
 package com.cupcake.viewmodels.jobs
 
+import com.cupcake.models.JobTitle
 import com.cupcake.models.JobWithTitle
 import com.cupcake.viewmodels.job_details.JobDetailsUiState
 import com.cupcake.viewmodels.job_details.JobsDetailsUiState
@@ -42,6 +43,11 @@ data class JobUiState(
 data class JobTitleUiState(
     val id: String = "",
     val title: String = ""
+)
+
+fun JobTitle.toJobTitleUiState() = JobTitleUiState(
+    id = this.id,
+    title = this.title
 )
 
 data class JobDetailUiState(
