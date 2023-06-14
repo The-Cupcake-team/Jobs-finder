@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<!--        <variable-->
-<!--            name="item"-->
-<!--            type="com.cupcake.ui." />-->
+        <variable
+            name="item"
+            type="com.cupcake.viewmodels.jobs.JobTitleUiState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,6 +24,7 @@
             android:backgroundTint="@color/blue_300"
             android:paddingHorizontal="12dp"
             android:paddingVertical="@dimen/spacing_normal"
+            android:text="@{item.title}"
             android:textColor="@color/color_text_secondary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -12,7 +12,7 @@
 
         <variable
             name="listener"
-            type="com.cupcake.viewmodels.jobs.JobsListener" />
+            type="com.cupcake.ui.jobs.adapter.JobsAdapter.JobsListener" />
     </data>
 
     <androidx.cardview.widget.CardView
