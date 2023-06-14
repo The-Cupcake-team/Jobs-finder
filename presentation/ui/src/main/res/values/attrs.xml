@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExpandCardCustomView">
+            <attr name="cardDescription" format="string"/>
+        </declare-styleable>
+
+    <declare-styleable name="DetailsChipCustomView">
+        <attr name="workType" format="string"/>
+        <attr name="location" format="string"/>
+        <attr name="jobType" format="string"/>
+        <attr name="createdAt" format="string"/>
+        <attr name="salary" format="string"/>
+    </declare-styleable>
+
+</resources>

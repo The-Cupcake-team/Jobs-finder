@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
 
-class JobDetails @Inject constructor(
+class JobDetailsFragment @Inject constructor(
 ): BaseFragment<FragmentJobDetailsBinding, JobViewModel>(
     R.layout.fragment_job_details,
     JobViewModel::class.java
