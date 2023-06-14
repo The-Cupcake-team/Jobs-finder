@@ -46,7 +46,7 @@
         <item name="android:fontFamily">@font/worksans_regular</item>
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>
-    <style name="apply_job_button_Style" parent="Widget.Material3.Button">
+    <style name="apply_job_button_Style" >
         <item name="background">@drawable/background_apply_job</item>
         <item name="backgroundTint">@color/button_apply_color</item>
         <item name="android:paddingVertical" tools:targetApi="o">@dimen/spacing_medium</item>
