@@ -1,7 +1,6 @@
 package com.cupcake.viewmodels.job_details
 
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Job
 import com.cupcake.usecase.GetJobByIdUseCase
@@ -30,6 +29,7 @@ class JobViewModel @Inject constructor(
     private val handler = CoroutineExceptionHandler { _, exception ->
         onGetJobDetailsFailure(exception)
     }
+
     private fun onGetJobDetailsFailure(exception: Throwable) {
         this._jobsUIState.update {
             it.copy(
@@ -39,32 +39,31 @@ class JobViewModel @Inject constructor(
         }
     }
 
-    private fun GetJobDetails(){
-        viewModelScope.launch(Dispatchers.IO + handler){
-            Log.i("TAG", "EXECUTE")
-            val jobDetails = getJobByIdUseCase("438cd8f7-af62-4796-84be-a98807e874d8")
+    private fun getJobDetails(jobId: String) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+            val jobDetails = getJobByIdUseCase(jobId)
             _jobsUIState.value = _jobsUIState.value.copy(
                 isLoading = false,
                 job = jobDetails.toJobsDetailsUiState()
             )
-            Log.i("TAG", jobDetails.jobLocation)
         }
     }
 
-    private fun Job.toJobsDetailsUiState() : JobsDetailsUiState {
+    private fun Job.toJobsDetailsUiState(): JobsDetailsUiState {
         return JobsDetailsUiState(
             image = "",
             title = "Android Kotlin Developer",
             companyName = company,
-            workType = workType ,
-            jobType = jobType ,
-            location = jobLocation ,
+            workType = workType,
+            jobType = jobType,
+            location = jobLocation,
             salary = jobSalary.toString(),
-            createdAt = createdAt ?: 1234,
-            jobDescription = jobDescription?:""
+            createdAt = createdAt,
+            jobDescription = jobDescription
         )
     }
+
     init {
-        GetJobDetails()
+        getJobDetails("438cd8f7-af62-4796-84be-a98807e874d8")
     }
 }
