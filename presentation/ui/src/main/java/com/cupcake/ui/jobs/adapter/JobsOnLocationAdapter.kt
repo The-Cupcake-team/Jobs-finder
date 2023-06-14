@@ -1,8 +1,10 @@
 package com.cupcake.ui.jobs.adapter
 
+import android.view.ViewGroup
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.jobs.JobUiState
+import com.cupcake.viewmodels.jobs.JobsListener
 
 
 class JobsOnLocationAdapter(items: List<JobUiState>, listener: JobsListener) :

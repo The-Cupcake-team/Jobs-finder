@@ -1,6 +1,7 @@
 package com.cupcake.viewmodels.jobs
 
-import com.cupcake.usecase.job.GetJobsInUserLocationUseCase
+import com.cupcake.usecase.job.GetJobsOnUserLocationUseCase
+import com.cupcake.usecase.job.GetPopularJobsUseCase
 import com.cupcake.usecase.job.GetRecommendedJobsUseCase
 import com.cupcake.usecase.job.GetTopSalaryInUserLocationUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
@@ -11,21 +12,34 @@ import javax.inject.Inject
 
 @HiltViewModel
 class JobsViewModel @Inject constructor(
+    private val getPopularJobs: GetPopularJobsUseCase,
     private val getRecommendedJobs: GetRecommendedJobsUseCase,
-    private val getJobsInUserLocation: GetJobsInUserLocationUseCase,
+    private val getJobsInUserLocation: GetJobsOnUserLocationUseCase,
     private val getTopSalaryInUserLocation: GetTopSalaryInUserLocationUseCase
-) : BaseViewModel<JobsUiState>(JobsUiState()) {
-
+) : BaseViewModel<JobsUiState>(JobsUiState()), JobsListener {
 
     init {
+        getPopularJobs()
         getRecommendedJobs()
         getTopSalaryJobs()
-        getInLocationJobs()
+        getOnLocationJobs()
+    }
+
+    private fun getPopularJobs() {
+        tryToExecute(
+            { getPopularJobs(POPULAR_JOB_LIMIT) },
+            ::onPopularJobsSuccess,
+            ::onError
+        )
+    }
+
+    private fun onPopularJobsSuccess(popularJobs: List<String>) {
+        _state.update { it.copy(popularJobs = popularJobs, isLoading = false) }
     }
 
     private fun getRecommendedJobs() {
         tryToExecute(
-            suspend { getRecommendedJobs(10).map { it.toJobUiState() } },
+            { getRecommendedJobs(RECOMMENDED_JOB_LIMIT).map { it.toJobUiState() } },
             ::onRecommendedJobsSuccess,
             ::onError
         )
@@ -37,7 +51,7 @@ class JobsViewModel @Inject constructor(
 
     private fun getTopSalaryJobs() {
         tryToExecute(
-            suspend { getTopSalaryInUserLocation(10).map { it.toJobUiState() } },
+            { getTopSalaryInUserLocation(TOP_SALARY_JOB_LIMIT).map { it.toJobUiState() } },
             ::onTopSalaryJobsSuccess,
             ::onError
         )
@@ -47,23 +61,30 @@ class JobsViewModel @Inject constructor(
         _state.update { it.copy(topSalaryJobs = topSalaryJobs, isLoading = false) }
     }
 
-    private fun getInLocationJobs() {
+    private fun getOnLocationJobs() {
         tryToExecute(
-            suspend { getJobsInUserLocation(10).map { it.toJobUiState() } },
-            ::onInLocationJobsJobsSuccess,
+            { getJobsInUserLocation(ON_LOCATION_JOB_LIMIT).map { it.toJobUiState() } },
+            ::onLocationJobsSuccess,
             ::onError
         )
     }
 
-    private fun onInLocationJobsJobsSuccess(inLocationJobs: List<JobUiState>) {
-        _state.update { it.copy(onLocationJobs = inLocationJobs, isLoading = false) }
+    private fun onLocationJobsSuccess(onLocationJobs: List<JobUiState>) {
+        _state.update { it.copy(onLocationJobs = onLocationJobs, isLoading = false) }
     }
 
     private fun onError(error: Exception) {
-        _state.update { it.copy(error = listOf(error.message!!), isLoading = false) }
+        _state.update { it.copy(error = listOf(error.message.toString()), isLoading = false) }
     }
 
     companion object {
+        private const val POPULAR_JOB_LIMIT = 5
         private const val RECOMMENDED_JOB_LIMIT = 10
+        private const val TOP_SALARY_JOB_LIMIT = 10
+        private const val ON_LOCATION_JOB_LIMIT = 10
+    }
+
+    override fun onItemClickListener(id: String) {
+
     }
 }

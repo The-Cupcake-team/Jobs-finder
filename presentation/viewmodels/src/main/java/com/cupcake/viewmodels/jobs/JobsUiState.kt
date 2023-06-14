@@ -6,6 +6,7 @@ import com.cupcake.viewmodels.job_details.JobsDetailsUiState
 
 
 data class JobsUiState(
+    val popularJobs: List<JobTitleUiState> = emptyList(),
     val recommendedJobs: List<JobUiState> = emptyList(),
     val topSalaryJobs: List<JobUiState> = emptyList(),
     val onLocationJobs: List<JobUiState> = emptyList(),
@@ -36,6 +37,11 @@ data class JobUiState(
     val location: String = "",
     val salary: String = "",
     val createdAt: Long = 0,
+)
+
+data class JobTitleUiState(
+    val id: String = "",
+    val title: String = ""
 )
 
 data class JobDetailUiState(

@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import com.cupcake.ui.BR
 import com.cupcake.ui.R
-import com.cupcake.ui.base.BaseActionListener
 import com.cupcake.ui.base.BaseAdapter
-import com.cupcake.viewmodels.jobs.JobUiState
 import com.cupcake.ui.jobs.JobsItem
+import com.cupcake.viewmodels.jobs.JobUiState
+import com.cupcake.viewmodels.jobs.JobsListener
 
 
 class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
@@ -68,11 +68,4 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
         val TOP_SALARY_JOBS = R.layout.top_salary_recycler
         val IN_LOCATION_JOBS = R.layout.job_on_location_recycler
     }
-}
-
-
-interface JobsListener : BaseActionListener {
-    fun onItemClickListener()
-    fun onRecommendedJobClickListener()
-    fun onTopSalaryJobClickListener()
 }
