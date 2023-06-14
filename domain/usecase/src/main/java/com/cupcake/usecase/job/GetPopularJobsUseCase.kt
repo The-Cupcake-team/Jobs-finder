@@ -16,6 +16,7 @@ class GetPopularJobsUseCase @Inject constructor(
             .map {it.key to (it.value.size)}
             .sortedByDescending {it.second}
             .map { JobTitle("1", it.first)}
+            .take(limit)
             .toList()
     }
 

@@ -1,12 +1,17 @@
 package com.cupcake.viewmodels.jobs
 
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.job.GetJobsOnUserLocationUseCase
 import com.cupcake.usecase.job.GetPopularJobsUseCase
 import com.cupcake.usecase.job.GetRecommendedJobsUseCase
 import com.cupcake.usecase.job.GetTopSalaryInUserLocationUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -16,7 +21,10 @@ class JobsViewModel @Inject constructor(
     private val getRecommendedJobs: GetRecommendedJobsUseCase,
     private val getJobsInUserLocation: GetJobsOnUserLocationUseCase,
     private val getTopSalaryInUserLocation: GetTopSalaryInUserLocationUseCase
-) : BaseViewModel<JobsUiState>(JobsUiState()) {
+) : BaseViewModel<JobsUiState>(JobsUiState()), JobsListener {
+
+    private val _event = MutableSharedFlow<JobsEvent>()
+    val event = _event.asSharedFlow()
 
     init {
         getPopularJobs()
@@ -78,13 +86,17 @@ class JobsViewModel @Inject constructor(
     }
 
     companion object {
-        private const val POPULAR_JOB_LIMIT = 5
+        private const val POPULAR_JOB_LIMIT = 10
         private const val RECOMMENDED_JOB_LIMIT = 10
         private const val TOP_SALARY_JOB_LIMIT = 10
         private const val ON_LOCATION_JOB_LIMIT = 10
     }
 
-//    override fun onItemClickListener(id: String) {
-//
-//    }
+    override fun onCardClickListener(id: String) {
+        viewModelScope.launch { _event.emit(JobsEvent.JobCardClick(id)) }
+    }
+
+    override fun onChipClickListener(id: String) {
+        viewModelScope.launch { _event.emit(JobsEvent.JobChipClick(id)) }
+    }
 }

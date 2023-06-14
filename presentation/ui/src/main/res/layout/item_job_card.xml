@@ -12,7 +12,7 @@
 
         <variable
             name="listener"
-            type="com.cupcake.ui.jobs.adapter.JobsAdapter.JobsListener" />
+            type="com.cupcake.viewmodels.jobs.JobsListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -22,7 +22,7 @@
         android:layout_marginVertical="@dimen/spacing_small"
         android:background="@color/cards"
         android:elevation="@dimen/zero"
-        android:onClick="@{() -> listener.onItemClickListener(item.companyName)}"
+        android:onClick="@{() -> listener.onCardClickListener(item.id)}"
         app:cardCornerRadius="@dimen/radius">
 
         <androidx.constraintlayout.widget.ConstraintLayout

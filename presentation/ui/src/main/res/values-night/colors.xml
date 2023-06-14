@@ -6,6 +6,7 @@
     <color name="tertiary">#61FFFFFF</color>
     <color name="accent">#14FFFFFF</color>
     <color name="cards">#222222</color>
+    <color name="blue_300">#303843</color>
     <!-- Text colors -->
 
     <color name="surface">#222222</color>

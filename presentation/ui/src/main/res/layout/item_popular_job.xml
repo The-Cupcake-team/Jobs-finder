@@ -4,16 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.cupcake.viewmodels.jobs.JobTitleUiState" />
+
+        <variable
+            name="listener"
+            type="com.cupcake.viewmodels.jobs.JobsListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:background="@color/background">
+        android:layout_marginHorizontal="@dimen/spacing_normal"
+        android:onClick="@{() ->listener.onChipClickListener(item.id)}">
 
         <TextView
             android:id="@+id/textViewJobType"

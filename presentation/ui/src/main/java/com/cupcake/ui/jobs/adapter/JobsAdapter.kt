@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import com.cupcake.ui.BR
 import com.cupcake.ui.R
-import com.cupcake.ui.base.BaseActionListener
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.ui.jobs.JobsItem
 import com.cupcake.viewmodels.jobs.JobTitleUiState
 import com.cupcake.viewmodels.jobs.JobUiState
+import com.cupcake.viewmodels.jobs.JobsListener
 
 
 class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
@@ -77,7 +77,7 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
         val POPULAR_JOBS = R.layout.popular_jobs_recycler
     }
 
-    interface JobsListener : BaseActionListener {
-        fun onItemClickListener(id: String)
-    }
+//    interface JobsListener : BaseInteractionListener {
+//        fun onItemClickListener(id: String)
+//    }
 }

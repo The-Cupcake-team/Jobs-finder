@@ -2,12 +2,13 @@ package com.cupcake.ui.jobs
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentJobsBinding
 import com.cupcake.ui.jobs.adapter.JobsAdapter
-import com.cupcake.ui.jobs.adapter.JobsAdapter.JobsListener
+import com.cupcake.viewmodels.jobs.JobsEvent
 import com.cupcake.viewmodels.jobs.JobsUiState
 import com.cupcake.viewmodels.jobs.JobsViewModel
 import kotlinx.coroutines.Dispatchers
@@ -17,17 +18,18 @@ import kotlinx.coroutines.launch
 class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     R.layout.fragment_jobs,
     JobsViewModel::class.java
-), JobsListener {
+) {
 
     override val LOG_TAG: String = this::class.java.name
     private lateinit var jobsAdapter: JobsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpAdapter()
+        handelJobsEvent()
     }
 
     private fun setUpAdapter() {
-        jobsAdapter = JobsAdapter(emptyList(), this)
+        jobsAdapter = JobsAdapter(emptyList(), viewModel)
         binding?.jobsRecycler?.adapter = jobsAdapter
         loadJobsAdapter()
     }
@@ -50,7 +52,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
         return JobsItem.Recommended(state.recommendedJobs)
     }
 
-       private fun loadPopularJobs(state: JobsUiState): JobsItem.PopularJobs {
+    private fun loadPopularJobs(state: JobsUiState): JobsItem.PopularJobs {
         return JobsItem.PopularJobs(state.popularJobs)
     }
 
@@ -62,7 +64,18 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
         return JobsItem.LocationJobs(state.onLocationJobs)
     }
 
-    override fun onItemClickListener(id: String) {
-        TODO("Not yet implemented")
+    private fun handelJobsEvent() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.event.collect { jobsEvent ->
+                when (jobsEvent) {
+                    is JobsEvent.JobCardClick -> showToast(jobsEvent.id)
+                    is JobsEvent.JobChipClick -> showToast(jobsEvent.id)
+                }
+            }
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

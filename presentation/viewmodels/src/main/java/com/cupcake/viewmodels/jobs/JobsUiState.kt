@@ -31,6 +31,7 @@ fun JobWithTitle.toJobUiState2() = JobDetailsUiState(
 )
 
 data class JobUiState(
+    val id : String = "",
     val image: String = "",
     val title: String = "",
     val companyName: String = "",
@@ -70,6 +71,7 @@ data class JobsDetailsUiState(
 
 
 fun JobWithTitle.toJobUiState() = JobUiState(
+    id = id,
     image = "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/e3/f27630d13511e88dd241e68ded0cea/K_logo_800x800.png?auto=format%2Ccompress&dpr=1",
     title = this.jobTitle.title,
     companyName = this.company,
