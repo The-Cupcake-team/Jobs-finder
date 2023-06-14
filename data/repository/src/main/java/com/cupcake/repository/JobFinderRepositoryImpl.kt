@@ -1,11 +1,14 @@
 package com.cupcake.repository
 
+import android.util.Log
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.JobWithTitle
 import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
+import com.cupcake.remote.response.job.JobDto
+import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toPost
 import repo.JobFinderRepository
 import retrofit2.Response
@@ -103,8 +106,24 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getJobById(jobId: String): Job {
-        TODO("Not yet implemented")
+//     DON'T WORK
+//        return wrapResponseWithErrorHandler { api.getJobById(jobId) }.toJob()
+
+        return Job(
+            id = "438cd8f7-af62-4796-84be-a98807e874d8",
+            jobTitleId = 1234,
+            company = "Google",
+            createdAt = 1234,
+            workType = "application",
+            jobLocation = "Iraq",
+            jobType = "application",
+            jobDescription = "Job description",
+            jobSalary = 12.34
+        )
     }
+
+
+
 
     override suspend fun createPost(content: String): Post {
         TODO("Not yet implemented")
@@ -121,13 +140,20 @@ class JobFinderRepositoryImpl @Inject constructor(
     private suspend fun <T> wrapResponseWithErrorHandler(
         function: suspend () -> Response<BaseResponse<T>>
     ): T {
+        Log.i("TAG", "Start")
         val response = function()
+        Log.i("TAG", "response ${response}")
 
         if (response.isSuccessful) {
+            Log.i("TAG", "Success")
             val baseResponse = response.body()
+            Log.i("TAG", "base : ${baseResponse}")
+
             if (baseResponse != null && baseResponse.isSuccess) {
+                Log.i("TAG", "base successful : ${baseResponse.value}")
                 return baseResponse.value!!
             } else {
+                Log.i("TAG", "base fail ")
                 throw Throwable("Invalid response")
             }
         } else {
