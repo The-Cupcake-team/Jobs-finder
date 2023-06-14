@@ -8,11 +8,15 @@ class GetPopularJobsUseCase @Inject constructor(
     private val repository: JobFinderRepository
 ) {
 
-    // TODO:  Should return list of popular job title
-    //  depend on top of jobs that you have from getJobs()
-    //  "Hassan Ayman"
     suspend operator fun invoke(limit: Int): List<JobTitle> {
-        return listOf()
+        return repository.getJobs()
+            .asSequence()
+            .map { it.jobTitle.title }
+            .groupBy{it}
+            .map {it.key to (it.value.size)}
+            .sortedByDescending {it.second}
+            .map { JobTitle("1", it.first)}
+            .toList()
     }
 
 }
