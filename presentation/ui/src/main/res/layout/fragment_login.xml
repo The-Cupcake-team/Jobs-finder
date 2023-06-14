@@ -84,11 +84,12 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputUsername"
                             android:layout_width="match_parent"
+                            android:text="@={viewModel.userName}"
                             android:layout_height="match_parent"
                             setIcons="@{viewModel.loginUIState.isUserNameValid}"
                             android:background="@drawable/text_input_background"
-                            android:onTextChanged="@{(text, start, before, count) -> viewModel.userNameChanged(text.toString())}"
                             android:maxLines="1" />
+
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,20 +105,20 @@
                         android:textColorHint="@color/color_text_tertiary"
                         app:boxStrokeWidth="@dimen/zero"
                         app:boxStrokeWidthFocused="@dimen/zero"
-                        app:helperText="@{viewModel.loginUIState.passwordError}"
                         app:helperTextTextColor="@color/accent_red"
                         app:hintTextColor="@color/tertiary"
-                        app:layout_constraintTop_toBottomOf="@+id/containerUsername">
-
+                        app:layout_constraintTop_toBottomOf="@+id/containerUsername"
+                        app:helperText="@{viewModel.loginUIState.passwordError}">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_input_password"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/text_input_background"
                             android:inputType="textPassword"
+                            android:text="@={viewModel.password}"
                             setIcons="@{viewModel.loginUIState.isPasswordValid}"
-                            android:onTextChanged="@{(text, start, before, count) -> viewModel.passwordChanged(text.toString())}"
                             android:lines="1" />
+
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <androidx.appcompat.widget.AppCompatButton

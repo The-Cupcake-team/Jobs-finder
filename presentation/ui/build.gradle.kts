@@ -60,6 +60,9 @@ dependencies {
     implementation(DependencyProject.fragment)
     implementation(DependencyProject.activity)
 
+    implementation(DependencyProject.navigationFragment)
+    implementation(DependencyProject.navigationUi)
+
     implementation(DependencyProject.coil)
 
 }

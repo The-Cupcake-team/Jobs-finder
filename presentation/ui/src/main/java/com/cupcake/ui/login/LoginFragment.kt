@@ -15,7 +15,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
 ) {
     override val LOG_TAG :String= this.javaClass.name
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

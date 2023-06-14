@@ -1,11 +1,10 @@
 package com.cupcake.viewmodels.login
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.LoginUseCase
-import com.cupcake.usecase.validation.ValidateLoginFormUseCase
+import com.cupcake.usecase.login.ValidateLoginFormUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
-import com.cupcake.usecase.validation.ValidatePasswordUseCase
-import com.cupcake.usecase.validation.ValidateUsernameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,63 +14,62 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val validateUsernameUseCase: ValidateUsernameUseCase,
-    private val validatePasswordUseCase: ValidatePasswordUseCase,
-    private val validateLoginFormUseCase: ValidateLoginFormUseCase,
-    private val loginUseCase: LoginUseCase,
+    private val validateLoginForm: ValidateLoginFormUseCase,
+    private val loginApi: LoginUseCase,
 ) : BaseViewModel<LoginUiState>(LoginUiState()) {
 
     private val _loginUIState = MutableStateFlow(LoginUiState())
     val loginUIState = _loginUIState.asStateFlow()
-
-    fun userNameChanged(userName: String) {
-        val validateResult = validateUsernameUseCase(userName)
-        val isValidFields = validateLoginFormUseCase(userName, _loginUIState.value.password)
-        val isUserNameValid = validateResult.successful
-
-        _loginUIState.update {
-            it.copy(
-                userName = userName,
-                userNameError = validateResult.errorMessage ?: "",
-                isValidFields = isValidFields,
-                isUserNameValid = isUserNameValid
-            )
-        }
-    }
-
-
-    fun passwordChanged(password: String) {
-        val validateResult = validatePasswordUseCase(password)
-        val isValidFields = validateLoginFormUseCase(_loginUIState.value.userName, password)
-        val isPasswordValid = validateResult.successful
-
-        _loginUIState.update {
-            it.copy(
-                password = password,
-                passwordError = validateResult.errorMessage ?: "",
-                isValidFields = isValidFields,
-                isPasswordValid = isPasswordValid
-            )
-        }
-    }
-
-
+    var userName: String = ""
+    var password: String = ""
+    private lateinit var loginResult: ValidateLoginFormUseCase.ValidationResults
     fun login() {
         viewModelScope.launch {
             try {
-                _loginUIState.update {
-                    it.copy(
-                        isLoading = true,
-                        error = ""
-                    )
+                _loginUIState.update { it.copy(isLoading = true, error = "") }
+                loginResult = validateLoginForm(userName, password)
+                if (!loginResult.isUserNameValid) {
+                    _loginUIState.update {
+                        it.copy(
+                            userName = userName,
+                            userNameError = loginResult.validateUserName,
+                            isUserNameValid = loginResult.isUserNameValid
+                        )
+                    }
+                } else {
+                    _loginUIState.update {
+                        it.copy(
+                            userName = userName,
+                            userNameError = loginResult.validateUserName,
+                            isUserNameValid = loginResult.isUserNameValid
+                        )
+                    }
                 }
-                val loginResult =
-                    loginUseCase(loginUIState.value.userName, loginUIState.value.password)
-                if (loginResult) {
+                if (!loginResult.isPasswordValid) {
+                    _loginUIState.update {
+                        it.copy(
+                            password = password,
+                            passwordError = loginResult.validatePassword,
+                            isPasswordValid = loginResult.isPasswordValid
+                        )
+                    }
+                } else {
+                    _loginUIState.update {
+                        it.copy(
+                            password = password,
+                            passwordError = loginResult.validatePassword,
+                            isPasswordValid = loginResult.isPasswordValid
+                        )
+                    }
+                }
+                if (loginResult.isUserNameValid&&loginResult.isPasswordValid) {
+                    loginApi(loginUIState.value.userName, loginUIState.value.password)
                     onSuccessLogin()
                 }
 
             } catch (e: Throwable) {
+
+
                 onErrorLogin(e.message ?: "Unknown error")
 
             }
@@ -97,3 +95,5 @@ class LoginViewModel @Inject constructor(
     }
 
 }
+
+
