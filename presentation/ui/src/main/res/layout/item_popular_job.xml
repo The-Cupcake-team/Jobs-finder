@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/background_chips_job_card"
             android:backgroundTint="@color/blue_300"
-            android:paddingHorizontal="12dp"
+            android:paddingHorizontal="@dimen/spacing_tiny"
             android:paddingVertical="@dimen/spacing_normal"
             android:text="@{item.title}"
             android:textColor="@color/color_text_secondary"

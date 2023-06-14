@@ -134,7 +134,7 @@
                 style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="@dimen/spacing_small"
                 android:text="@{item.location}"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textViewCompanyName"
