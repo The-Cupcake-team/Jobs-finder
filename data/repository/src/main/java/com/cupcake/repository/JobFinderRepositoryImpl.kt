@@ -91,7 +91,16 @@ class JobFinderRepositoryImpl @Inject constructor(
 
 
     override suspend fun createJob(jobInfo: Job): Boolean {
-        TODO("Not yet implemented")
+        val response = api.createJob(
+            jobInfo.jobTitleId,
+            jobInfo.company,
+            jobInfo.workType,
+            jobInfo.jobLocation,
+            jobInfo.jobType,
+            jobInfo.jobDescription,
+            jobInfo.jobSalary
+        )
+        return response.isSuccessful
     }
 
     override suspend fun getJobs(): List<JobWithTitle> {

@@ -1,3 +1,6 @@
+import com.cupcake.models.Job
+import com.cupcake.remote.response.job.JobDto
+
 //package com.cupcake.usecase.mapper
 //
 //
@@ -35,14 +38,14 @@
 //    )
 //}
 //
-//fun com.cupcake.models.Job.toJobDto(): com.cupcake.remote.response.job.JobDto {
-//    return com.cupcake.remote.response.job.JobDto(
-//        jobTitleId = jobTitleId,
-//        company = company,
-//        workType = workType,
-//        jobLocation = jobLocation,
-//        jobDescription = jobDescription,
-//        jobType = jobType,
-//        jobSalary = jobSalary
-//    )
-//}
+fun Job.toJobDto(): JobDto {
+    return JobDto(
+        jobTitleId = jobTitleId,
+        company = company,
+        workType = workType,
+        jobLocation = jobLocation,
+        jobDescription = jobDescription,
+        jobType = jobType,
+        jobSalary = jobSalary
+    )
+}
