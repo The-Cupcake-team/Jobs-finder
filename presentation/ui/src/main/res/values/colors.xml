@@ -8,6 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="surface">@color/white</color>
+
+
     <color name="background">#F6F6F6</color>
     <color name="transparent">#482B2B2B</color>
     <color name="primary">#4B8CED</color>
@@ -39,6 +42,9 @@
     <color name="blue_tint">#97BFFB</color>
     <color name="button_tint_color">#DE019310</color>
     <color name="accent_red">#FF0000</color>
+    <color name="accent_purple">#F5EFFF</color>
+    <color name="accent_cyan">#E7FEFF</color>
+    <color name="accent_orange">#FFEDED</color>
 
 
 </resources>

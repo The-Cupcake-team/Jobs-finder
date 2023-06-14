@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/background</item>
         <item name="android:windowLightStatusBar">false</item>
-
+        <item name="android:background">@color/background</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
