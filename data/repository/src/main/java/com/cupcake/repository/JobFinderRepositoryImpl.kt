@@ -126,7 +126,6 @@ class JobFinderRepositoryImpl @Inject constructor(
         function: suspend () -> Response<BaseResponse<T>>
     ): T {
         val response = function()
-
         if (response.isSuccessful) {
             val baseResponse = response.body()
             if (baseResponse != null && baseResponse.isSuccess) {
