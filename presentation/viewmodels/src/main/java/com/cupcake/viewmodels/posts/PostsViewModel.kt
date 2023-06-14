@@ -27,17 +27,22 @@ class PostsViewModel @Inject constructor(
 
     private fun onGetPostsSuccess(posts: List<Post>) {
         _state.update {
-            it.copy(isLoading = false, postsResult = posts.map { post -> post.toPostItemUIState() })
+            it.copy(isLoading = false, isError = false, errors = emptyList(), postsResult = posts.map { post -> post.toPostItemUIState()})
         }
     }
 
     private fun onGetPostsFailure(throwable: Throwable) {
-        _state.update { it.copy(isLoading = false, errors = listOf(throwable.message.toString())) }
+        _state.update { it.copy(isLoading = false, isError = true, errors = listOf(throwable.message.toString())) }
     }
 
 
     suspend fun onInternetDisconnected() {
         _state.update { it.copy(isLoading = true) }
+    }
+
+    fun onRetryClicked(){
+        _state.update { it.copy(errors = emptyList(), isError = false, isLoading = true) }
+        getPosts()
     }
 
     private fun Post.toPostItemUIState(): PostItemUIState {

@@ -81,7 +81,9 @@
             android:layout_height="match_parent"
             android:elevation="1dp"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="42dp"
+            tools:layout_editor_absoluteY="445dp">
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -98,6 +100,60 @@
                 app:showWhenLoading="@{viewModel.state.loading}" />
 
         </LinearLayout>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/errorDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:showWhenLoading="@{viewModel.state.error}"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:paddingVertical="@dimen/spacing_large"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/spacing_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/errorMassage"
+                    style="@style/TextStyle.body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:text="@{String.valueOf(viewModel.state.errors)}"
+                    android:textSize="@dimen/size16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="the error message try again" />
+
+
+                <Button
+                    android:id="@+id/tryAgainButton"
+                    style="@style/loginButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_medium"
+                    android:layout_marginVertical="@dimen/spacing_large"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:onClick="@{() -> viewModel.onRetryClicked()}"
+                    android:text="@string/retry"
+                    android:textColor="@color/white"
+                    app:circularflow_defaultRadius="@dimen/spacing_large"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/errorMassage"
+                    tools:layout_editor_absoluteX="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
