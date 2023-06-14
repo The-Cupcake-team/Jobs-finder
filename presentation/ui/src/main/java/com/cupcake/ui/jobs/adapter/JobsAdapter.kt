@@ -4,10 +4,11 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import com.cupcake.ui.BR
 import com.cupcake.ui.R
+import com.cupcake.ui.base.BaseActionListener
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.ui.jobs.JobsItem
+import com.cupcake.viewmodels.jobs.JobTitleUiState
 import com.cupcake.viewmodels.jobs.JobUiState
-import com.cupcake.viewmodels.jobs.JobsListener
 
 
 class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
@@ -28,10 +29,15 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         when (val current = getItems()[position]) {
+            is JobsItem.PopularJobs -> bindPopularJobs(current.items, holder as ItemViewHolder)
             is JobsItem.Recommended -> bindRecommendedJobs(current.items, holder as ItemViewHolder)
             is JobsItem.TopSalary -> bindTopSalaryJobs(current.items, holder as ItemViewHolder)
             is JobsItem.LocationJobs -> bindInLocationJobs(current.items, holder as ItemViewHolder)
         }
+    }
+
+    private fun bindPopularJobs(items: List<JobTitleUiState>, holder: ItemViewHolder) {
+        holder.binding.setVariable(BR.adapter, PopularJobsAdapter(items, listener))
     }
 
     private fun bindRecommendedJobs(
@@ -57,6 +63,7 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
 
     override fun getItemViewType(position: Int): Int {
         return when (getItems()[position]) {
+            is JobsItem.PopularJobs -> POPULAR_JOBS
             is JobsItem.Recommended -> RECOMMENDED_JOBS
             is JobsItem.TopSalary -> TOP_SALARY_JOBS
             is JobsItem.LocationJobs -> IN_LOCATION_JOBS
@@ -67,5 +74,10 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
         val RECOMMENDED_JOBS = R.layout.recommended_jobs_recycler
         val TOP_SALARY_JOBS = R.layout.top_salary_recycler
         val IN_LOCATION_JOBS = R.layout.job_on_location_recycler
+        val POPULAR_JOBS = R.layout.popular_jobs_recycler
+    }
+
+    interface JobsListener : BaseActionListener {
+        fun onItemClickListener(id: String)
     }
 }
