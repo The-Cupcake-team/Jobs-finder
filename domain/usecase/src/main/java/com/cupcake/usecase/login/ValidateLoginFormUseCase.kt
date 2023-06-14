@@ -9,14 +9,8 @@ class ValidateLoginFormUseCase @Inject constructor(
     operator fun invoke(userName: String, password: String): ValidationResults {
         val validateUserName: String = userNameChanged(userName)
         val validatePassword: String = passwordValidate(password)
-        var isUserNameValid = false
-        var isPasswordValid = false
-        if (validateUserName == "") {
-            isUserNameValid = true
-        }
-        if (validatePassword == "") {
-            isPasswordValid = true
-        }
+        val isUserNameValid = validateUserName.isBlank()
+        val isPasswordValid = validatePassword.isBlank()
         return ValidationResults(
             validateUserName,
             validatePassword,
@@ -46,9 +40,7 @@ class ValidateLoginFormUseCase @Inject constructor(
     data class ValidationResults(
         val validateUserName: String,
         val validatePassword: String,
-        val isUserNameValid: Boolean=false ,
-        val isPasswordValid: Boolean=false ,
+        val isUserNameValid: Boolean,
+        val isPasswordValid: Boolean
     )
-
-
 }

@@ -28,39 +28,15 @@ class LoginViewModel @Inject constructor(
             try {
                 _loginUIState.update { it.copy(isLoading = true, error = "") }
                 loginResult = validateLoginForm(userName, password)
-                if (!loginResult.isUserNameValid) {
-                    _loginUIState.update {
-                        it.copy(
-                            userName = userName,
-                            userNameError = loginResult.validateUserName,
-                            isUserNameValid = loginResult.isUserNameValid
-                        )
-                    }
-                } else {
-                    _loginUIState.update {
-                        it.copy(
-                            userName = userName,
-                            userNameError = loginResult.validateUserName,
-                            isUserNameValid = loginResult.isUserNameValid
-                        )
-                    }
-                }
-                if (!loginResult.isPasswordValid) {
-                    _loginUIState.update {
-                        it.copy(
-                            password = password,
-                            passwordError = loginResult.validatePassword,
-                            isPasswordValid = loginResult.isPasswordValid
-                        )
-                    }
-                } else {
-                    _loginUIState.update {
-                        it.copy(
-                            password = password,
-                            passwordError = loginResult.validatePassword,
-                            isPasswordValid = loginResult.isPasswordValid
-                        )
-                    }
+                _loginUIState.update {
+                    it.copy(
+                        userName = userName,
+                        userNameError = loginResult.validateUserName,
+                        isUserNameValid = loginResult.isUserNameValid,
+                        password = password,
+                        passwordError = loginResult.validatePassword,
+                        isPasswordValid = loginResult.isPasswordValid
+                    )
                 }
                 if (loginResult.isUserNameValid&&loginResult.isPasswordValid) {
                     loginApi(loginUIState.value.userName, loginUIState.value.password)
@@ -68,10 +44,7 @@ class LoginViewModel @Inject constructor(
                 }
 
             } catch (e: Throwable) {
-
-
                 onErrorLogin(e.message ?: "Unknown error")
-
             }
         }
     }
@@ -95,5 +68,3 @@ class LoginViewModel @Inject constructor(
     }
 
 }
-
-
