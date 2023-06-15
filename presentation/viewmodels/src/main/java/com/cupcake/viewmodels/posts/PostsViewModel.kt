@@ -1,17 +1,24 @@
 package com.cupcake.viewmodels.posts
 
+import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Post
-import com.cupcake.viewmodels.base.BaseViewModel
 import com.cupcake.usecase.GetPostsUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PostsViewModel @Inject constructor(
     private val getPostsUseCase: GetPostsUseCase
-) : BaseViewModel<PostsUIState>(PostsUIState()) {
+) : BaseViewModel<PostsUIState>(PostsUIState()), PostInteractionListener {
+
+    private val _postEvent = MutableSharedFlow<PostsEvent>()
+    val postEvent = _postEvent.asSharedFlow()
 
     init {
         getPosts()
@@ -39,7 +46,7 @@ class PostsViewModel @Inject constructor(
     }
 
     fun onRetryClicked(){
-        _state.update { it.copy(errors = "", isError = false, isLoading = true) }
+        _state.update {it.copy(isError = false, isLoading = true) }
         getPosts()
     }
 
@@ -62,6 +69,12 @@ class PostsViewModel @Inject constructor(
             createdAt = createdAt,
             description = content
         )
+    }
+
+    override fun onCommentClick(id: String) {
+        viewModelScope.launch {
+            _postEvent.emit(PostsEvent.PostCommentClick(id))
+        }
     }
 
 
