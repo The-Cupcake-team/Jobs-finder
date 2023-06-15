@@ -41,13 +41,14 @@
                     android:backgroundTint="@color/background"
                     android:elevation="0dp"
                     android:stateListAnimator="@null"
+                    android:text="@{viewModel.state.buttonText}"
+                    android:textAllCaps="false"
                     android:textColor="@color/primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:textAllCaps="false"
-                    tools:text="Next"/>
+                    tools:text="Next" />
             </androidx.appcompat.widget.Toolbar>
 
 
@@ -61,6 +62,7 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginBottom="8dp"
+            android:text="@{viewModel.state.formNumber}"
             android:textColor="@color/tertiary"
             app:layout_constraintBottom_toTopOf="@+id/viewPagerCreateJob"
             app:layout_constraintStart_toStartOf="parent"
