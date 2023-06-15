@@ -2,13 +2,13 @@ package com.cupcake.viewmodels.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cupcake.models.ErrorType
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 
 abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
@@ -19,16 +19,25 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
     fun <T> tryToExecute(
         callee: suspend () -> T,
         onSuccess: (T) -> Unit,
-        onError: (Exception) -> Unit,
+        onError: (BaseErrorUiState) -> Unit,
         dispatcher: CoroutineDispatcher = Dispatchers.IO
     ) {
         viewModelScope.launch(dispatcher) {
             try {
                 val result = callee()
                 onSuccess(result)
-            } catch (error: Exception) {
-                onError(error)
+            } catch (error: ErrorType.Network) {
+                onError(BaseErrorUiState.Disconnected)
+            } catch (error: ErrorType.Validation) {
+                onError(BaseErrorUiState.UnAuthorized)
+            } catch (error: ErrorType.Server) {
+                onError(BaseErrorUiState.ServerError)
+            } catch (error: ErrorType.Unknown) {
+                onError(BaseErrorUiState.NoFoundError)
+            } catch (error: Throwable) {
+                onError(BaseErrorUiState.NoFoundError)
             }
         }
     }
+
 }

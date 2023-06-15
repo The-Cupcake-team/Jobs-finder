@@ -10,7 +10,7 @@
             type="com.cupcake.viewmodels.posts.PostsViewModel" />
     </data>
 
-    <androidx.constraintlayout.motion.widget.MotionLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/postsMotionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -73,7 +73,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextSearchInput"
-            tools:listitem="@layout/item_post" />
+             />
+
 
         <LinearLayout
             android:id="@+id/progress_linear"
@@ -81,9 +82,7 @@
             android:layout_height="match_parent"
             android:elevation="1dp"
             android:gravity="center"
-            android:orientation="vertical"
-            tools:layout_editor_absoluteX="42dp"
-            tools:layout_editor_absoluteY="445dp">
+            android:orientation="vertical">
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -101,59 +100,53 @@
 
         </LinearLayout>
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieError"
+            android:layout_width="@dimen/lottie_image_dimens"
+            android:layout_height="@dimen/lottie_image_dimens"
+            app:layout_constraintBottom_toTopOf="@id/textViewErrorMassage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recyclerViewPosts"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/lottie_error"
+            app:showWhenLoading="@{viewModel.state.error}" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/errorDialog"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textViewErrorMassage"
+            style="@style/TextStyle.body"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:showWhenLoading="@{viewModel.state.error}"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:paddingVertical="@dimen/spacing_large"
-            android:background="@color/white"
-            app:cardCornerRadius="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:text="@{viewModel.state.errors}"
+            android:textAlignment="center"
+            android:textSize="@dimen/size16"
+            app:layout_constraintBottom_toTopOf="@id/buttonTryAgain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lottieError"
+            app:showWhenLoading="@{viewModel.state.error}"
+            tools:text="the error message try again" />
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonTryAgain"
+            style="@style/outlineButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:onClick="@{() -> viewModel.onRetryClicked()}"
+            android:text="@string/retry"
+            app:circularflow_defaultRadius="@dimen/spacing_large"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/errorMassage"
-                    style="@style/TextStyle.body"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/spacing_medium"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:text="@{String.valueOf(viewModel.state.errors)}"
-                    android:textSize="@dimen/size16"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="the error message try again" />
-
-
-                <Button
-                    android:id="@+id/tryAgainButton"
-                    style="@style/loginButtonStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/spacing_medium"
-                    android:layout_marginVertical="@dimen/spacing_large"
-                    android:focusable="true"
-                    android:gravity="center"
-                    android:onClick="@{() -> viewModel.onRetryClicked()}"
-                    android:text="@string/retry"
-                    android:textColor="@color/white"
-                    app:circularflow_defaultRadius="@dimen/spacing_large"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/errorMassage"
-                    tools:layout_editor_absoluteX="16dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-    </androidx.constraintlayout.motion.widget.MotionLayout>
+            app:layout_constraintTop_toBottomOf="@+id/textViewErrorMassage"
+            app:showWhenLoading="@{viewModel.state.error}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

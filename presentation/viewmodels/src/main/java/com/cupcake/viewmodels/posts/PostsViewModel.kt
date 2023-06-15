@@ -3,6 +3,7 @@ package com.cupcake.viewmodels.posts
 import com.cupcake.models.Post
 import com.cupcake.viewmodels.base.BaseViewModel
 import com.cupcake.usecase.GetPostsUseCase
+import com.cupcake.viewmodels.base.BaseErrorUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
@@ -27,22 +28,32 @@ class PostsViewModel @Inject constructor(
 
     private fun onGetPostsSuccess(posts: List<Post>) {
         _state.update {
-            it.copy(isLoading = false, isError = false, errors = emptyList(), postsResult = posts.map { post -> post.toPostItemUIState()})
+            it.copy(isLoading = false, isError = false, errors = "", postsResult = posts.map { post -> post.toPostItemUIState()})
         }
     }
 
-    private fun onGetPostsFailure(throwable: Throwable) {
-        _state.update { it.copy(isLoading = false, isError = true, errors = listOf(throwable.message.toString())) }
-    }
-
-
-    suspend fun onInternetDisconnected() {
-        _state.update { it.copy(isLoading = true) }
+    private fun onGetPostsFailure(error: BaseErrorUiState) {
+        _state.update {
+            it.copy(isLoading = false, isError = true, errors = handelReadableError(error) )
+        }
     }
 
     fun onRetryClicked(){
-        _state.update { it.copy(errors = emptyList(), isError = false, isLoading = true) }
+        _state.update { it.copy(errors = "", isError = false, isLoading = true) }
         getPosts()
+    }
+
+    private fun handelReadableError(error: BaseErrorUiState): String{
+        return when(error){
+            is BaseErrorUiState.Disconnected ->
+                "Disconnected from the server. Please check your internet connection."
+            is BaseErrorUiState.UnAuthorized ->
+                "Unauthorized access. Please login again."
+            is BaseErrorUiState.NoFoundError ->
+                "The requested resource was not found."
+            is BaseErrorUiState.ServerError ->
+                "An unexpected server error occurred. Please try again later."
+        }
     }
 
     private fun Post.toPostItemUIState(): PostItemUIState {
@@ -52,4 +63,6 @@ class PostsViewModel @Inject constructor(
             description = content
         )
     }
+
+
 }
