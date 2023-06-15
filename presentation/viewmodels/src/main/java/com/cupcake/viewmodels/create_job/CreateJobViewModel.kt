@@ -1,12 +1,14 @@
 package com.cupcake.viewmodels.create_job
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Job
 import com.cupcake.usecase.CreateJobUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -15,8 +17,9 @@ class CreateJobViewModel @Inject constructor(
     private val createJob: CreateJobUseCase
 ) : BaseViewModel<CreateJobUiState>(CreateJobUiState()) {
 
-    private val _event = MutableLiveData<CreateJobEvent>()
-    val event: LiveData<CreateJobEvent> = _event
+    private val _event = MutableSharedFlow<CreateJobEvent>()
+    val event = _event.asSharedFlow()
+
     fun createJob() {
         _state.update { it.copy(isLoading = true) }
         tryToExecute(
@@ -25,8 +28,8 @@ class CreateJobViewModel @Inject constructor(
                     Job(
                         jobTitleId = jobTitleMap[_state.value.jobFormUiState.jobTitleId]!!,
                         company = _state.value.jobFormUiState.company,
-                        workType = _state.value.jobFormUiState.workType,
-                        jobType = _state.value.jobFormUiState.jobType,
+                        workType = _state.value.workType,
+                        jobType = _state.value.jobType,
                         jobLocation = _state.value.jobFormUiState.jobLocation,
                         jobDescription = _state.value.jobFormUiState.jobDescription,
                         jobSalary = _state.value.jobFormUiState.salary,
@@ -40,8 +43,8 @@ class CreateJobViewModel @Inject constructor(
     }
 
     private val jobTitleMap = hashMapOf(
-        Pair("Software Engineer", 0),
-        Pair("Android Engineer", 1)
+        Pair("Android", 1),
+        Pair("backend developer", 2)
     )
 
     private fun onCreateJobSuccess(result: Boolean) {
@@ -58,22 +61,44 @@ class CreateJobViewModel @Inject constructor(
         }
     }
 
+
     fun handleEvent(event: CreateJobEvent) {
         when (event) {
             is CreateJobEvent.PageScrolled -> {
                 onChangeIndexViewPager(event.index)
             }
 
+            is CreateJobEvent.HeaderButtonClicked -> {
+                onHeaderButtonClicked(event.index)
+            }
+        }
+    }
+
+    private fun onHeaderButtonClicked(index: Int) {
+        viewModelScope.launch {
+            _event.emit(CreateJobEvent.HeaderButtonClicked(index))
         }
     }
 
     private fun onChangeIndexViewPager(index: Int) {
-        _state.update {
-            it.copy(
-//                activeIconToolBar = getIconToolBar(index),
-//                formNumber = getFormNumber(index),
-//                titleToolBar = getTitleToolBar(index)
-            )
+        when (index) {
+            0 -> {
+                _state.update {
+                    it.copy(
+                        formNumber = "1 of 2",
+                        buttonText = "Next"
+                    )
+                }
+            }
+
+            1 -> {
+                _state.update {
+                    it.copy(
+                        formNumber = "2 of 2",
+                        buttonText = "Post"
+                    )
+                }
+            }
         }
     }
 
