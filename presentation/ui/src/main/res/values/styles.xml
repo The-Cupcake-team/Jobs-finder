@@ -246,4 +246,11 @@
         <item name="drawableTint">@color/blue_500</item>
     </style>
 
+    <style name="outlineButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textAppearance">@style/TextStyle.caption</item>
+        <item name="android:textColor">@color/blue_500</item>
+        <item name="strokeColor">@color/blue_500</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+    </style>
+
 </resources>
