@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.post.CreatePostViewModel" />
@@ -33,9 +32,9 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:fontFamily="@font/worksans_semibold"
+                android:onClick="@{() -> viewModel.createPost(editTextContent.getText().toString())}"
                 android:text="@string/post"
                 android:textAllCaps="false"
-                android:onClick="@{() -> viewModel.createPost(editTextContent.getText().toString())}"
                 android:textColor="@color/primary"
                 android:textSize="@dimen/text_size_headline" />
         </androidx.appcompat.widget.Toolbar>
@@ -59,10 +58,10 @@
             android:layout_height="@dimen/profile_image_size"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
+            android:src="@drawable/test_personal_image"
             app:layout_constraintStart_toStartOf="@id/viewBackground"
             app:layout_constraintTop_toTopOf="@id/viewBackground"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full"
-            tools:src="@tools:sample/avatars" />
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
 
         <TextView
             android:id="@+id/textViewUsername"
@@ -70,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:text="Username"
+            android:text="@string/username"
             app:layout_constraintStart_toEndOf="@id/imageViewAvatar"
             app:layout_constraintTop_toTopOf="@id/imageViewAvatar" />
 
@@ -93,32 +92,44 @@
             app:layout_constraintStart_toStartOf="@+id/textViewUsername"
             app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
 
-        <EditText
-            android:id="@+id/editTextContent"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutContent"
+            style="@style/TextInputLayoutStyle"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/zero"
-            android:layout_margin="@dimen/spacing_medium"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/worksans_regular"
-            android:gravity="top"
-            android:hint="@string/post_hint"
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            android:padding="@dimen/spacing_normal"
-            android:textColor="@color/color_text_primary"
-            android:textColorHint="@color/color_text_tertiary"
-            android:textSize="@dimen/text_size_body"
+            app:helperText="@{viewModel.state.error}"
+            app:helperTextEnabled="true"
+            android:padding="@dimen/spacing_medium"
+            app:helperTextTextColor="@color/accent_red"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toBottomOf="@id/viewBackground"
             app:layout_constraintEnd_toEndOf="@id/viewBackground"
             app:layout_constraintStart_toStartOf="@id/viewBackground"
-            app:layout_constraintTop_toBottomOf="@+id/buttonState" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonState">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/worksans_regular"
+                android:gravity="top"
+                android:hint="@string/post_hint"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:padding="@dimen/spacing_medium"
+                android:textColor="@color/color_text_primary"
+                android:textColorHint="@color/color_text_tertiary"
+                android:textSize="@dimen/text_size_body" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/buttonPhoto"
             style="@style/SharedButtonStyle"
             android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="1dp"
+            android:layout_marginTop="@dimen/spacing_xxsmall"
+            android:layout_marginEnd="@dimen/person_image_border_width"
             android:layout_marginBottom="@dimen/spacing_medium"
             android:background="@drawable/create_post_photo_button"
             android:paddingHorizontal="@dimen/spacing_medium"
@@ -136,7 +147,8 @@
             style="@style/SharedButtonStyle"
             android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
+            android:layout_marginStart="@dimen/person_image_border_width"
+            android:layout_marginTop="@dimen/spacing_xxsmall"
             android:background="@drawable/create_post_camera_button"
             android:paddingHorizontal="@dimen/spacing_medium"
             android:text="@string/camera"
