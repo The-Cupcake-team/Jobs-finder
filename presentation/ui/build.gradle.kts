@@ -62,4 +62,6 @@ dependencies {
 
     implementation(DependencyProject.coil)
 
+    implementation(DependencyProject.lottie)
+
 }
