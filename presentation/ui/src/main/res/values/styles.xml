@@ -46,47 +46,28 @@
         <item name="android:fontFamily">@font/worksans_regular</item>
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>
-    <style name="apply_job_button_Style" >
-        <item name="background">@drawable/background_apply_job</item>
-        <item name="backgroundTint">@color/button_apply_color</item>
-        <item name="android:paddingVertical" tools:targetApi="o">@dimen/spacing_medium</item>
-        <item name="fontFamily">@font/worksans_semibold</item>
-        <item name="textAllCaps">false</item>
-        <item name="android:text">"Apply now"</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/text_size_body</item>
-        <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
-    </style>
+
     <style name="card_view_details_chip_style" >
         <item name="background">@drawable/card_details_chip_background</item>
         <item name="backgroundTint">@color/white</item>
         <item name="cardCornerRadius">@dimen/spacing_normal</item>
         <item name="android:layout_width">@dimen/card_details_chip_width</item>
         <item name="android:layout_height">@dimen/card_details_chip_height</item>
+        <item name="cardElevation">@dimen/zero</item>
 
    </style>
   
-    <style name="button_cancel_send_cv_style" >
-        <item name="background">@drawable/dialog_custom_button_cancel</item>
+    <style name="button_cancel_send_cv_style"  >
+        <item name="android:background">@drawable/dialog_custom_button_cancel</item>
+        <item name="android:textColor">@color/color_text_secondary</item>
+        <item name="fontFamily">@font/worksans_semibold</item>
+        <item name="android:textSize">@dimen/text_size_title</item>
         <item name="backgroundTint">@color/button_cancel</item>
-        <item name="fontFamily">@font/worksans_semibold</item>
-        <item name="textAllCaps">false</item>
         <item name="android:text">"Cancel"</item>
-        <item name="android:textSize">@dimen/text_size_title</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
-    </style>
-  
-    <style name="button_send_cv_style" >
-        <item name="background">@drawable/dialog_custom_button_send</item>
-        <item name="backgroundTint">@color/button_apply_color</item>
-        <item name="fontFamily">@font/worksans_semibold</item>
         <item name="textAllCaps">false</item>
-        <item name="android:text">"send"</item>
-        <item name="android:textSize">@dimen/text_size_title</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
     </style>
+
+
 
     <style name="WelcomeTextStyle" parent="TextStyle.Huge">
         <item name="android:textColor">@color/color_text_primary</item>
@@ -244,4 +225,15 @@
         <item name="drawableTint">@color/blue_500</item>
     </style>
 
+    <style name="TextStyle.Headline_tab_layout" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">@font/worksans_semibold</item>
+        <item name="android:textSize">@dimen/text_size_headline</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+<style name="details_chip_style_text" parent="TextStyle.caption">
+    <item name="android:layout_gravity">center</item>
+    <item name="android:textColor">@color/color_text_tertiary</item>
+    <item name="android:layout_marginTop">@dimen/spacing_normal</item>
+</style>
 </resources>
