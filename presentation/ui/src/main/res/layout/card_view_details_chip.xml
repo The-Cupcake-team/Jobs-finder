@@ -19,42 +19,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/spacing_tiny"
-                android:paddingVertical="@dimen/spacing_medium">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_contract_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_xlarge"
-                    android:src="@drawable/ic_contract_type"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:src="@drawable/ic_work_type" />
 
                 <TextView
                     android:id="@+id/text_view_details_contract_type_title"
-                    style="@style/TextStyle.caption"
-                    android:layout_width="@dimen/job_details_card_title"
+                    style="@style/details_chip_style_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/contract_type"
-                    app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_contract_type"
-                    app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_contract_type"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_contract_type" />
+                    android:text="@string/contract_type" />
 
                 <TextView
                     android:id="@+id/text_view_details_contract_type"
                     style="@style/TextStyle.body"
-                    android:layout_width="@dimen/zero"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    app:layout_constraintEnd_toEndOf="@+id/text_view_details_contract_type_title"
-                    app:layout_constraintStart_toStartOf="@+id/text_view_details_contract_type_title"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_details_contract_type_title"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_small"
                     tools:text="Full time" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -64,44 +57,35 @@
             app:layout_constraintStart_toEndOf="@+id/card_job_details_contract_type"
             app:layout_constraintTop_toTopOf="@+id/card_job_details_contract_type">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/spacing_tiny"
-                android:paddingVertical="@dimen/spacing_medium">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_Experience"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_xlarge"
-                    android:src="@drawable/ic_experience"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:src="@drawable/ic_experience" />
 
                 <TextView
                     android:id="@+id/text_view_details_Experience_title"
-                    style="@style/TextStyle.caption"
-                    android:layout_width="@dimen/job_details_card_title"
+                    style="@style/details_chip_style_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/Experience"
-                    app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_Experience"
-                    app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_Experience"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_Experience" />
+                    android:text="@string/Experience" />
 
                 <TextView
                     android:id="@+id/text_view_details_Experience"
                     style="@style/TextStyle.body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/intermediate"
-                    app:layout_constraintEnd_toEndOf="@+id/text_view_details_Experience_title"
-                    app:layout_constraintStart_toStartOf="@+id/text_view_details_Experience_title"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_details_Experience_title"
-                    tools:text="Intermediate" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@string/intermediate" />
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -112,43 +96,36 @@
             app:layout_constraintStart_toEndOf="@+id/card_job_details_Experience"
             app:layout_constraintTop_toTopOf="@+id/card_job_details_Experience">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/spacing_tiny"
-                android:paddingVertical="@dimen/spacing_medium">
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_xlarge"
-                    android:src="@drawable/ic_location"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:src="@drawable/ic_location" />
 
                 <TextView
                     android:id="@+id/text_view_details_location_title"
-                    style="@style/TextStyle.caption"
-                    android:layout_width="@dimen/job_details_card_title"
+                    style="@style/details_chip_style_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/Location"
-                    app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_location"
-                    app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_location"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_location" />
+                    android:text="@string/Location" />
 
                 <TextView
                     android:id="@+id/text_view_details_location"
                     style="@style/TextStyle.body"
-                    android:layout_width="@dimen/zero"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    app:layout_constraintEnd_toEndOf="@+id/text_view_details_location_title"
-                    app:layout_constraintStart_toStartOf="@+id/text_view_details_location_title"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_details_location_title"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_small"
                     tools:text="iraq" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -160,45 +137,35 @@
             app:layout_constraintStart_toStartOf="@+id/card_job_details_contract_type"
             app:layout_constraintTop_toBottomOf="@+id/card_job_details_contract_type">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/spacing_tiny"
-                android:paddingVertical="@dimen/spacing_medium"
-                app:layout_constraintStart_toStartOf="@+id/card_job_details_contract_type"
-                app:layout_constraintTop_toBottomOf="@+id/card_job_details_contract_type">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image_view_icon_details_work_place"
+                    android:id="@+id/image_view_icon_details_applicants"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_xlarge"
-                    android:src="@drawable/ic_work_place"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:src="@drawable/ic_applicants" />
 
                 <TextView
-                    android:id="@+id/text_view_details_work_place_title"
-                    style="@style/TextStyle.caption"
-                    android:layout_width="76dp"
-                    android:layout_height="24dp"
-                    android:gravity="center"
-                    android:text="@string/work_place"
-                    app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_work_place"
-                    app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_work_place"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_work_place" />
-
-                <TextView
-                    android:id="@+id/text_view_details_work_place"
-                    style="@style/TextStyle.body"
-                    android:layout_width="@dimen/zero"
+                    android:id="@+id/text_view_details_applicants_title"
+                    style="@style/details_chip_style_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    app:layout_constraintEnd_toEndOf="@+id/text_view_details_work_place_title"
-                    app:layout_constraintStart_toStartOf="@+id/text_view_details_work_place_title"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_details_work_place_title"
-                    tools:text="On-site" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:text="@string/applicants" />
+
+                <TextView
+                    android:id="@+id/text_view_details_applicants"
+                    style="@style/TextStyle.body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:text="@string/applicants_number" />
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -212,43 +179,34 @@
             app:layout_constraintStart_toEndOf="@id/card_job_details_work_place"
             app:layout_constraintTop_toTopOf="@+id/card_job_details_work_place">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/spacing_tiny"
-                android:paddingVertical="@dimen/job_details_chips_padding_vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_posted_on"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_xlarge"
-                    android:src="@drawable/ic_clock"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:src="@drawable/ic_posted" />
 
                 <TextView
-                    android:id="@+id/text_view_details_posted_on_title"
-                    style="@style/TextStyle.caption"
-                    android:layout_width="@dimen/job_details_card_title"
+                    style="@style/details_chip_style_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/posted_on"
-                    app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_posted_on"
-                    app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_posted_on"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_posted_on" />
+                    android:text="@string/posted_on" />
 
                 <TextView
                     android:id="@+id/text_view_details_posted_on"
                     style="@style/TextStyle.body"
-                    android:layout_width="@dimen/zero"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    app:layout_constraintEnd_toEndOf="@+id/text_view_details_posted_on_title"
-                    app:layout_constraintStart_toStartOf="@+id/text_view_details_posted_on_title"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_details_posted_on_title"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_small"
                     tools:text="2023.6.6" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
@@ -258,43 +216,35 @@
             app:layout_constraintStart_toEndOf="@+id/card_job_details_posted_on"
             app:layout_constraintTop_toTopOf="@id/card_job_details_posted_on">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/spacing_tiny"
-                android:paddingVertical="@dimen/spacing_medium">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_salary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_xlarge"
-                    android:src="@drawable/ic_salary"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:src="@drawable/ic_salary" />
 
                 <TextView
                     android:id="@+id/text_view_details_salary_title"
-                    style="@style/TextStyle.caption"
-                    android:layout_width="@dimen/job_details_card_title"
+                    style="@style/details_chip_style_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/Salary"
-                    app:layout_constraintEnd_toEndOf="@+id/image_view_icon_details_salary"
-                    app:layout_constraintStart_toStartOf="@+id/image_view_icon_details_salary"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_icon_details_salary" />
+                    android:text="@string/Salary" />
 
                 <TextView
                     android:id="@+id/text_view_details_salary"
                     style="@style/TextStyle.body"
-                    android:layout_width="@dimen/zero"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    app:layout_constraintEnd_toEndOf="@+id/text_view_details_salary_title"
-                    app:layout_constraintStart_toStartOf="@+id/text_view_details_salary_title"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_details_salary_title"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/spacing_small"
                     tools:text="$1500/mo" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
