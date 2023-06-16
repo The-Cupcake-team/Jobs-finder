@@ -45,6 +45,9 @@ dependencies {
     implementation(DependencyProject.material)
     implementation(DependencyProject.constraint)
 
+    implementation(DependencyProject.navigationFragment)
+    implementation(DependencyProject.navigationUi)
+
     testImplementation(DependencyProject.junit)
     androidTestImplementation(DependencyProject.junitExtension)
     androidTestImplementation(DependencyProject.espresso)
@@ -61,5 +64,7 @@ dependencies {
     implementation(DependencyProject.activity)
 
     implementation(DependencyProject.coil)
+
+    implementation(DependencyProject.lottie)
 
 }

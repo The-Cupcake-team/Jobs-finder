@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/postsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/messageFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_message"
+        android:title="@string/messages" />
+    <item
+        android:id="@+id/createPost"
+        android:enabled="true"
+        android:icon="@drawable/ic_circle_add"
+        android:title="@string/post" />
+
+    <item
+        android:id="@+id/myNetwork"
+        android:enabled="true"
+        android:icon="@drawable/ic_users_group"
+        android:title="@string/my_network" />
+
+    <item
+        android:id="@+id/createJobFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_jobs"
+        android:title="@string/jobs" />
+
+
+</menu>

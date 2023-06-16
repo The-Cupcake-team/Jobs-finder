@@ -9,6 +9,7 @@ import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
 import com.cupcake.repository.mapper.toJob
+import com.cupcake.repository.mapper.toJobWithJobTitle
 import com.cupcake.repository.mapper.toPost
 import repo.JobFinderRepository
 import retrofit2.Response
@@ -50,9 +51,6 @@ class JobFinderRepositoryImpl @Inject constructor(
 //
 //	// region Job
 //
-//	override suspend fun getJobs(): List<JobWithTitleDto> {
-//		return wrapResponseWithErrorHandler { api.getJobs() }
-//	}
 //
 //	//endregion
 //
@@ -71,12 +69,6 @@ class JobFinderRepositoryImpl @Inject constructor(
 //	//endregion
 //
 //
-//	// region Post
-//	override suspend fun createPost(content: String): PostDto {
-//		return wrapResponseWithErrorHandler {
-//			api.createPost(content)
-//		}
-//	}
 //
 //	override suspend fun getAllPosts(): List<PostDto> {
 //		return wrapResponseWithErrorHandler { api.getPosts() }
@@ -98,7 +90,7 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getJobs(): List<JobWithTitle> {
-        TODO("Not yet implemented")
+        return wrapResponseWithErrorHandler { api.getJobs() }.map { it.toJobWithJobTitle() }
     }
 
     override suspend fun getAllJobTitles(): List<JobTitle> {
@@ -110,18 +102,26 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
 
+
     override suspend fun createPost(content: String): Post {
         TODO("Not yet implemented")
     }
+
+    //region Post
+
 
     override suspend fun getAllPosts(): List<Post> {
         return wrapResponseWithErrorHandler { api.getPosts() }.map { it.toPost() }
     }
 
+    override suspend fun createPost(content: String): Post {
+        return wrapResponseWithErrorHandler { api.createPost(content) }.toPost()
+    }
+
     override suspend fun getPostById(id: String): Post {
         TODO("Not yet implemented")
     }
-
+    //endregion
     private suspend fun <T> wrapResponseWithErrorHandler(
         function: suspend () -> Response<BaseResponse<T>>
     ): T {
