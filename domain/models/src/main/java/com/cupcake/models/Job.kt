@@ -2,6 +2,7 @@ package com.cupcake.models
 
 
 class Job(
+    val id: String,
     val jobTitleId: Int,
     val company: String,
     val createdAt: Long,

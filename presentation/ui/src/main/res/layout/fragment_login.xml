@@ -28,15 +28,15 @@
                 android:id="@+id/imageBackground"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/login_welcome_image"
+                android:background="@drawable/login_factory"
                 android:scaleType="centerCrop"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/login_factory"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/zero"
                 android:layout_marginTop="@dimen/login_card_negative_margin"
-                android:layout_marginBottom="@dimen/login_card_negative_margin"
                 android:backgroundTint="@color/background"
                 app:cardCornerRadius="@dimen/login_card_radius"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -44,14 +44,14 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                   >
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/textViewWelcome"
                         style="@style/WelcomeTextStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/welcome_back"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,6 +60,7 @@
                         style="@style/LoginToJoin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/discover_your_career_with_our_app"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
 
@@ -76,19 +77,20 @@
                         android:textColorHint="@color/color_text_tertiary"
                         app:boxStrokeWidth="@dimen/zero"
                         app:boxStrokeWidthFocused="@dimen/zero"
-                        app:helperText="@{viewModel.loginUIState.userNameError}"
+                        app:helperText="@{viewModel.state.userNameError}"
                         app:helperTextTextColor="@color/accent_red"
                         app:hintTextColor="@color/tertiary"
                         app:layout_constraintTop_toBottomOf="@+id/textViewLoginToJoin">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputUsername"
+                            setIcons="@{viewModel.state.isUserNameValid}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            setIcons="@{viewModel.loginUIState.isUserNameValid}"
                             android:background="@drawable/text_input_background"
-                            android:onTextChanged="@{(text, start, before, count) -> viewModel.userNameChanged(text.toString())}"
-                            android:maxLines="1" />
+                            android:maxLines="1"
+                            android:text="@={viewModel.state.userName}" />
+
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,20 +106,21 @@
                         android:textColorHint="@color/color_text_tertiary"
                         app:boxStrokeWidth="@dimen/zero"
                         app:boxStrokeWidthFocused="@dimen/zero"
-                        app:helperText="@{viewModel.loginUIState.passwordError}"
+                        app:helperText="@{viewModel.state.passwordError}"
                         app:helperTextTextColor="@color/accent_red"
                         app:hintTextColor="@color/tertiary"
                         app:layout_constraintTop_toBottomOf="@+id/containerUsername">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/text_input_password"
+                            setIcons="@{viewModel.state.isPasswordValid}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/text_input_background"
                             android:inputType="textPassword"
-                            setIcons="@{viewModel.loginUIState.isPasswordValid}"
-                            android:onTextChanged="@{(text, start, before, count) -> viewModel.passwordChanged(text.toString())}"
-                            android:lines="1" />
+                            android:lines="1"
+                            android:text="@={viewModel.state.password}" />
+
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <androidx.appcompat.widget.AppCompatButton
@@ -125,10 +128,9 @@
                         style="@style/loginButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:enabled="@{viewModel.loginUIState.isValidFields}"
-                        android:onClick="@{() -> viewModel.login()}"
                         android:layout_marginTop="@dimen/spacing_large"
                         android:background="@drawable/background_button_login"
+                        android:onClick="@{() -> viewModel.login()}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/container_password" />

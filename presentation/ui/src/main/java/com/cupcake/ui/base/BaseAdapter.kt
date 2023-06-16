@@ -8,10 +8,11 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.ui.BR
+import com.cupcake.viewmodels.base.BaseInteractionListener
 
 abstract class BaseAdapter<T>(
     private var items: List<T>,
-    private val listener: BaseActionListener,
+    private val listener: BaseInteractionListener,
 ) : RecyclerView.Adapter<BaseAdapter.BaseViewHolder>() {
     @get:LayoutRes
     abstract var layoutId: Int
@@ -53,4 +54,3 @@ abstract class BaseAdapter<T>(
 
 }
 
-interface BaseActionListener

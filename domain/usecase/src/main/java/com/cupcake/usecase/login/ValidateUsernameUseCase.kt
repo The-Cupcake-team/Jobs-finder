@@ -1,15 +1,14 @@
-package com.cupcake.usecase.validation
+package com.cupcake.usecase.login
 
+import com.cupcake.usecase.ErrorType
 import javax.inject.Inject
 
 
 class ValidateUsernameUseCase @Inject constructor() {
     operator fun invoke(username: String): ValidationResult {
         if (lessThanMinimum(username)) {
-            return ValidationResult(
-                false,
-                Error_LENGTH
-            )
+            throw  ErrorType.InvalidFieldUserName(Error_LENGTH)
+
         }
         return ValidationResult(true)
     }

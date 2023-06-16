@@ -36,18 +36,19 @@
             <Button
                 android:id="@+id/cancel_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/spacing_tiny"
+                android:layout_height="@dimen/tab_layout_job_details_and_dialog_height"
                 style="@style/button_cancel_send_cv_style"
+                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_message_dialog" />
             <Button
                 android:id="@+id/apply_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/spacing_tiny"
-                style="@style/button_send_cv_style"
+                android:layout_height="@dimen/tab_layout_job_details_and_dialog_height"
+                style="@style/normalButtonStyle"
+                android:text="@string/send"
+                android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="@+id/cancel_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/cancel_button" />

@@ -2,6 +2,7 @@ package com.cupcake.ui.login
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.doOnTextChanged
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentLoginBinding
@@ -15,7 +16,4 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
 ) {
     override val LOG_TAG :String= this.javaClass.name
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }
