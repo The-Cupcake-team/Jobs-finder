@@ -11,7 +11,7 @@
 
         <variable
             name="listener"
-            type="com.cupcake.ui.posts.PostListener" />
+            type="com.cupcake.viewmodels.posts.PostInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -112,7 +112,9 @@
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLike"
                 app:layout_constraintStart_toEndOf="@+id/textViewLikesCount"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLike"
-                app:srcCompat="@drawable/ic_comment" />
+                app:srcCompat="@drawable/ic_comment"
+                android:onClick="@{() -> listener.onCommentClick(item.id)}"
+                />
 
             <TextView
                 android:id="@+id/textViewLikesCount"

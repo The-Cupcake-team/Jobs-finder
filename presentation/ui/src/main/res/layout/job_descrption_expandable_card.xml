@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_expandable_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_medium"
+            app:cardElevation="@dimen/zero"
+            app:contentPadding="@dimen/job_details_card_cardCornerRadius"
+            app:cardCornerRadius="@dimen/spacing_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
+
+                <TextView
+                    android:id="@+id/text_view_description_title"
+                    style="@style/TextStyle.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/description"
+                    app:drawableEndCompat="@drawable/ic_card_closed"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text_view_description"
+                    style="@style/TextStyle.body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="We are looking for a Loan Officer to evaluate, authorize approval or deny loan applications for people or for business. You will act as liaison between customers and our financial institution and you will help qualified applicants acquire loans in a timely manner." />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_expandable_qualification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_medium"
+            app:cardElevation="@dimen/zero"
+            app:contentPadding="@dimen/job_details_card_cardCornerRadius"
+            app:cardCornerRadius="@dimen/spacing_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_view_expandable_description">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
+
+                <TextView
+                    android:id="@+id/text_view_qualification_title"
+                    style="@style/TextStyle.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/qualification"
+                    app:drawableEndCompat="@drawable/ic_card_closed"
+                    />
+
+                <TextView
+                    android:id="@+id/text_view_qualification"
+                    style="@style/TextStyle.body"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:text="@string/qualification_text"
+                    app:drawableStartCompat="@drawable/ic_point"
+                    android:paddingTop="@dimen/spacing_medium"
+                    android:drawablePadding="@dimen/spacing_medium"
+                    />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_view_expandable_required_skills"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_medium"
+            app:cardElevation="@dimen/zero"
+            app:contentPadding="@dimen/job_details_card_cardCornerRadius"
+            app:cardCornerRadius="@dimen/spacing_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_view_expandable_qualification">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
+
+                <TextView
+                    android:id="@+id/text_view_required_skills_title"
+                    style="@style/TextStyle.Title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/required_skills"
+                    app:drawableEndCompat="@drawable/ic_card_closed"
+              />
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_Group_required_skills"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+
+                 >
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_skill_one"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/UI_UX_Designer" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_skill_two"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:text="@string/Graphic_Design" />
+                </com.google.android.material.chip.ChipGroup>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

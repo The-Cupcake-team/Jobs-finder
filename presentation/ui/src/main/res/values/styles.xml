@@ -46,6 +46,8 @@
         <item name="android:fontFamily">@font/worksans_regular</item>
         <item name="android:textSize">@dimen/text_size_small</item>
     </style>
+
+    <style name="card_view_details_chip_style" >
     <style name="apply_job_button_Style" parent="Widget.Material3.Button">
         <item name="background">@drawable/background_apply_job</item>
         <item name="backgroundTint">@color/button_apply_color</item>
@@ -57,41 +59,45 @@
         <item name="android:textSize">@dimen/text_size_body</item>
         <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
     </style>
-    <style name="card_view_details_chip_style" >
+
+    <style name="card_view_details_chip_style">
         <item name="background">@drawable/card_details_chip_background</item>
         <item name="backgroundTint">@color/white</item>
         <item name="cardCornerRadius">@dimen/spacing_normal</item>
         <item name="android:layout_width">@dimen/card_details_chip_width</item>
         <item name="android:layout_height">@dimen/card_details_chip_height</item>
-
+        <item name="cardElevation">@dimen/zero</item>
    </style>
   
-    <style name="button_cancel_send_cv_style" >
+    <style name="button_cancel_send_cv_style"  >
+        <item name="android:background">@drawable/dialog_custom_button_cancel</item>
+        <item name="android:textColor">@color/color_text_secondary</item>
+    </style>
+
+    <style name="button_cancel_send_cv_style">
         <item name="background">@drawable/dialog_custom_button_cancel</item>
         <item name="backgroundTint">@color/button_cancel</item>
         <item name="fontFamily">@font/worksans_semibold</item>
-        <item name="textAllCaps">false</item>
-        <item name="android:text">"Cancel"</item>
         <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="backgroundTint">@color/button_cancel</item>
+        <item name="android:text">"Cancel"</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
     </style>
-  
-    <style name="button_send_cv_style" >
+
+    <style name="button_send_cv_style">
         <item name="background">@drawable/dialog_custom_button_send</item>
         <item name="backgroundTint">@color/button_apply_color</item>
         <item name="fontFamily">@font/worksans_semibold</item>
         <item name="textAllCaps">false</item>
-        <item name="android:text">"send"</item>
-        <item name="android:textSize">@dimen/text_size_title</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:layout_marginVertical" tools:targetApi="o">@dimen/spacing_medium</item>
     </style>
+
+
 
     <style name="WelcomeTextStyle" parent="TextStyle.Huge">
         <item name="android:textColor">@color/color_text_primary</item>
         <item name="android:shadowColor">@color/color_text_tertiary</item>
-<!--        <item name="android:text">@string/login_welcome_text</item>-->
+        <!--        <item name="android:text">@string/login_welcome_text</item>-->
         <item name="android:shadowDx">0</item>
         <item name="android:shadowDy">4</item>
         <item name="android:shadowRadius">4</item>
@@ -103,7 +109,7 @@
         <item name="android:textColor">@color/color_text_secondary</item>
         <item name="android:layout_marginTop">@dimen/spacing_normal</item>
         <item name="android:layout_marginStart">@dimen/spacing_medium</item>
-<!--        <item name="android:text">@string/login_to_jo</item>-->
+        <!--        <item name="android:text">@string/login_to_jo</item>-->
     </style>
 
     <style name="EditTextCreateJobStyle">
@@ -138,12 +144,11 @@
     </style>
 
     <style name="SharedButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:layout_marginTop">2dp</item>
-        <item name="android:layout_marginEnd">1dp</item>
         <item name="android:layout_marginBottom">@dimen/spacing_medium</item>
         <item name="android:fontFamily">@font/worksans_regular</item>
         <item name="android:gravity">start|center_vertical</item>
         <item name="android:textAllCaps">false</item>
+        <item name="iconPadding">@dimen/spacing_normal</item>
         <item name="android:textColor">@color/color_text_primary</item>
         <item name="android:textSize">@dimen/text_size_title</item>
     </style>
@@ -161,12 +166,15 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="searchBarStyle" parent="TextStyle.caption">
+    <style name="searchBarStyle" parent="TextStyle.body">
         <item name="android:background">@drawable/background_search_bar</item>
         <item name="android:ellipsize">end</item>
+        <item name="android:drawableEnd">@drawable/ic_sort</item>
         <item name="android:hint">@string/search</item>
+        <item name="android:drawablePadding">@dimen/spacing_small</item>
         <item name="android:imeOptions">actionSearch</item>
         <item name="android:lines">1</item>
+        <item name="android:inputType">text</item>
         <item name="android:paddingStart">@dimen/spacing_xxlarge</item>
         <item name="android:paddingEnd">@dimen/spacing_xxlarge</item>
         <item name="android:textColor">@color/color_text_primary</item>
@@ -201,13 +209,19 @@
     <style name="loginButtonStyle" parent="Widget.Material3.Button">
         <item name="background">@drawable/background_button_login</item>
         <item name="backgroundTint">@color/button_tint</item>
-        <item name="android:paddingVertical" >@dimen/spacing_medium</item>
+        <item name="android:paddingVertical">@dimen/spacing_medium</item>
+        <item name="android:background">@drawable/background_button_login</item>
         <item name="fontFamily">@font/worksans_semibold</item>
         <item name="textAllCaps">false</item>
         <item name="android:text">"Login"</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/text_size_body</item>
-        <item name="android:layout_marginHorizontal" >@dimen/spacing_medium</item>
+        <item name="android:layout_marginHorizontal">@dimen/spacing_medium</item>
+
+    </style>
+    
+    <style name="cancelButtonStyle" parent="loginButtonStyle">
+        <item name="android:background">@drawable/background_cancel_button</item>
     </style>
 
     <style name="PasswordTextInputLayoutStyle" parent="TextInputLayoutStyle">
@@ -242,6 +256,27 @@
         <item name="chipStrokeWidth">2dp</item>
         <item name="chipStrokeColor">@color/blue_500</item>
         <item name="drawableTint">@color/blue_500</item>
+    </style>
+
+
+    <style name="TextStyle.Headline_tab_layout" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">@font/worksans_semibold</item>
+        <item name="android:textSize">@dimen/text_size_headline</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+  
+  <style name="details_chip_style_text" parent="TextStyle.caption">
+      <item name="android:layout_gravity">center</item>
+      <item name="android:textColor">@color/color_text_tertiary</item>
+      <item name="android:layout_marginTop">@dimen/spacing_normal</item>
+  </style>
+
+    <style name="outlineButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textAppearance">@style/TextStyle.caption</item>
+        <item name="android:textColor">@color/blue_500</item>
+        <item name="strokeColor">@color/blue_500</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
     </style>
 
 </resources>

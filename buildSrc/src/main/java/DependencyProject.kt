@@ -18,6 +18,7 @@ object DependencyProject {
     private const val LIFECYCLE_VERSION = "2.6.1"
     private const val KOTLIN_SERIALIZATION_VERSION = "1.5.0"
     private const val NAVIGATION_VERSION = "2.5.3"
+    private const val LOTTIE_VERSION = "6.0.1"
 
     const val androidxCore = "androidx.core:core-ktx:$CORE_VERSION"
     const val compat = "androidx.appcompat:appcompat:$APP_COMPAT_VERSION"
@@ -50,6 +51,8 @@ object DependencyProject {
 
     const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:$NAVIGATION_VERSION"
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:$NAVIGATION_VERSION"
+
+    const val lottie = "com.airbnb.android:lottie:$LOTTIE_VERSION"
 
     const val coil = "io.coil-kt:coil:$COIL_VERSION"
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:drawable="@drawable/on_tab_selected"
-        android:state_selected="true"
-        />
-    <item android:drawable= "@drawable/on_tab_un_selected"/>
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/radius" />
+    <solid android:color="@color/cards"/>
+    <stroke
+        android:width="1dp"
+        android:color="@color/light_border" />
+</shape>
