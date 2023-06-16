@@ -54,4 +54,3 @@ abstract class BaseAdapter<T>(
 
 }
 
-// interface BaseActionListener

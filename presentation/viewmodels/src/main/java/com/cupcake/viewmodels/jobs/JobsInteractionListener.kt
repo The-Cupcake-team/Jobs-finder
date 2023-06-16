@@ -3,7 +3,6 @@ package com.cupcake.viewmodels.jobs
 import com.cupcake.viewmodels.base.BaseInteractionListener
 
 interface JobsListener : BaseInteractionListener {
-    fun onItemClickListener()
-    fun onRecommendedJobClickListener()
-    fun onTopSalaryJobClickListener()
+    fun onCardClickListener(id: String)
+    fun onChipClickListener(id: String)
 }

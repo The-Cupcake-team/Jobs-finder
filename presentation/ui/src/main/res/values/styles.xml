@@ -162,10 +162,12 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="searchBarStyle" parent="TextStyle.caption">
+    <style name="searchBarStyle" parent="TextStyle.body">
         <item name="android:background">@drawable/background_search_bar</item>
         <item name="android:ellipsize">end</item>
+        <item name="android:drawableEnd">@drawable/ic_sort</item>
         <item name="android:hint">@string/search</item>
+        <item name="android:drawablePadding">@dimen/spacing_small</item>
         <item name="android:imeOptions">actionSearch</item>
         <item name="android:lines">1</item>
         <item name="android:inputType">text</item>

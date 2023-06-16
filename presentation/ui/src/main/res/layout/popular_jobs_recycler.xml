@@ -7,13 +7,13 @@
 
         <variable
             name="adapter"
-            type="com.cupcake.ui.jobs.adapter.JobsOnLocationAdapter" />
+            type="com.cupcake.ui.jobs.adapter.PopularJobsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/background"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/background">
 
         <TextView
             android:id="@+id/textView"
@@ -22,23 +22,21 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:text="@string/on_your_location"
+            android:text="@string/popular_jobs"
             android:textColor="@color/color_text_primary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_normal"
             android:adapter="@{adapter}"
             android:clipToPadding="false"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:listitem="@layout/item_job_card" />
-
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            tools:listitem="@layout/item_popular_job" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
