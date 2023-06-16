@@ -106,7 +106,7 @@
     </style>
 
     <style name="LoginToJoin" parent="TextStyle.body">
-        <item name="android:textColor">@color/color_text_primary</item>
+        <item name="android:textColor">@color/color_text_secondary</item>
         <item name="android:layout_marginTop">@dimen/spacing_normal</item>
         <item name="android:layout_marginStart">@dimen/spacing_medium</item>
         <!--        <item name="android:text">@string/login_to_jo</item>-->
