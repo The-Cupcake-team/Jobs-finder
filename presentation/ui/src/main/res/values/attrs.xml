@@ -7,7 +7,6 @@
     <declare-styleable name="DetailsChipCustomView">
         <attr name="workType" format="string"/>
         <attr name="location" format="string"/>
-        <attr name="jobType" format="string"/>
         <attr name="createdAt" format="string"/>
         <attr name="salary" format="string"/>
     </declare-styleable>
