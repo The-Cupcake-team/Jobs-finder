@@ -4,7 +4,18 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.create_job.CreateJobViewModel" />
+
+        <import type="com.cupcake.viewmodels.create_job.JobType" />
+
+        <import type="com.cupcake.viewmodels.create_job.WorkType" />
+
+        <import type="com.cupcake.viewmodels.create_job.ExperienceType" />
+
     </data>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,6 +45,7 @@
                 android:layout_height="@dimen/edit_text_height"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:hint="@string/add_job_title"
+                android:text="@={viewModel.state.JobFormUiState.jobTitleId}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 
@@ -55,6 +67,7 @@
                 android:layout_height="@dimen/edit_text_height"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:hint="@string/add_company_name"
+                android:text="@={viewModel.state.JobFormUiState.company}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewCompany" />
 
@@ -76,6 +89,7 @@
                 android:layout_height="@dimen/edit_text_height"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:hint="@string/country_city"
+                android:text="@={viewModel.state.JobFormUiState.jobLocation}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewLocation" />
 
@@ -94,13 +108,17 @@
                 android:id="@+id/chipGroupJopType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/textViewJobType">
+                app:layout_constraintTop_toBottomOf="@id/textViewJobType"
+                app:selectionRequired="true"
+                app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipOnSite"
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.ON_SITE)}"
                     android:text="@string/on_site" />
 
                 <com.google.android.material.chip.Chip
@@ -108,6 +126,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.HYBRID)}"
                     android:text="@string/hybrid" />
 
                 <com.google.android.material.chip.Chip
@@ -115,6 +135,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.REMOTE)}"
                     android:text="@string/remote" />
             </com.google.android.material.chip.ChipGroup>
 
@@ -133,13 +155,17 @@
                 android:id="@+id/chipGroupWorkType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/textViewWorkType">
+                app:layout_constraintTop_toBottomOf="@id/textViewWorkType"
+                app:selectionRequired="true"
+                app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipFullTime"
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.FULL_TIME)}"
                     android:text="@string/full_time" />
 
                 <com.google.android.material.chip.Chip
@@ -147,6 +173,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.PART_TIME)}"
                     android:text="@string/part_time" />
 
                 <com.google.android.material.chip.Chip
@@ -154,6 +182,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.INTERNSHIP)}"
                     android:text="@string/internship" />
 
                 <com.google.android.material.chip.Chip
@@ -161,6 +191,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.VOLUNTEER)}"
                     android:text="@string/volunteer" />
 
                 <com.google.android.material.chip.Chip
@@ -168,6 +200,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.TEMPORARY)}"
                     android:text="@string/temporary" />
             </com.google.android.material.chip.ChipGroup>
 
@@ -186,13 +220,17 @@
                 android:id="@+id/chipGroupExperience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/textViewExperience">
+                app:layout_constraintTop_toBottomOf="@id/textViewExperience"
+                app:selectionRequired="true"
+                app:singleSelection="true">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipEntry"
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.ENTRY)}"
                     android:text="@string/entry" />
 
                 <com.google.android.material.chip.Chip
@@ -200,6 +238,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.INTERMEDIATE)}"
                     android:text="@string/intermediate" />
 
                 <com.google.android.material.chip.Chip
@@ -207,6 +247,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.MID_LEVEL)}"
                     android:text="@string/mid_level" />
 
                 <com.google.android.material.chip.Chip
@@ -214,6 +256,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.SENIOR_LEVEL)}"
                     android:text="@string/senior_level" />
 
                 <com.google.android.material.chip.Chip
@@ -221,6 +265,8 @@
                     style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.EXPERT)}"
                     android:text="@string/expert" />
             </com.google.android.material.chip.ChipGroup>
 

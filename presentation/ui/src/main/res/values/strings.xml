@@ -96,6 +96,7 @@
     <string name="job_title">Job title</string>
     <string name="education">Education</string>
     <string name="experiences">Experiences</string>
+    <string name="experiences_requirement">Experiences Requirement</string>
     <string name="experience_level">Experience Level</string>
     <string name="entry">Entry</string>
     <string name="mid_level">Mid-level</string>

@@ -1,3 +1,6 @@
+
+import com.cupcake.models.Job
+import com.cupcake.remote.response.job.JobDto
 package com.cupcake.repository.mapper
 
 import com.cupcake.models.Job
@@ -23,6 +26,7 @@ fun JobWithTitleDto.toJobWithJobTitle(): JobWithTitle {
     )
 }
 
+
 //fun com.cupcake.remote.response.job.JobDto.toJob(): com.cupcake.models.Job {
 //    return Job(
 //        jobTitleId = jobTitleId ?: 0,
@@ -36,6 +40,19 @@ fun JobWithTitleDto.toJobWithJobTitle(): JobWithTitle {
 //    )
 //}
 //
+
+fun Job.toJobDto(): JobDto {
+    return JobDto(
+        jobTitleId = jobTitleId,
+        company = company,
+        workType = workType,
+        jobLocation = jobLocation,
+        jobDescription = jobDescription,
+        jobType = jobType,
+        jobSalary = jobSalary
+    )
+}
+
 //fun com.cupcake.models.Job.toJobDto(): com.cupcake.remote.response.job.JobDto {
 //    return com.cupcake.remote.response.job.JobDto(
 //        jobTitleId = jobTitleId,
@@ -62,3 +79,4 @@ fun JobDto.toJob(): Job {
         jobSalary = jobSalary ?: 12.34
     )
 }
+
