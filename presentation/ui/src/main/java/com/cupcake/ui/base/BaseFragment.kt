@@ -23,7 +23,7 @@ abstract class BaseFragment<DB: ViewDataBinding, VM: ViewModel>(
 
     lateinit var viewModel: VM
 
-    private var _binding: DB? = null
+    private lateinit var _binding: DB
     protected val binding get() = _binding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,12 +38,12 @@ abstract class BaseFragment<DB: ViewDataBinding, VM: ViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        _binding?.apply {
+        _binding.apply {
             setVariable(BR.viewModel, viewModel)
             lifecycleOwner = viewLifecycleOwner
         }
 
-        return binding?.root
+        return binding.root
     }
 
     protected fun log(value: String) {
