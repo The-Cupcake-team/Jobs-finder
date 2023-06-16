@@ -4,7 +4,8 @@ package com.cupcake.viewmodels.posts
 data class PostsUIState(
     val postsResult: List<PostItemUIState> = emptyList(),
     val isLoading: Boolean = true,
-    val errors: List<String> = emptyList(),
+    val isError: Boolean = false,
+    val errors: String = "",
 )
 
 data class PostItemUIState(
