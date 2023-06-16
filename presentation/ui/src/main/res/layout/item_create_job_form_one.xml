@@ -8,11 +8,11 @@
             name="viewModel"
             type="com.cupcake.viewmodels.create_job.CreateJobViewModel" />
 
-        <import type="com.cupcake.viewmodels.create_job.JobChipType" />
+        <import type="com.cupcake.viewmodels.create_job.JobType" />
 
-        <import type="com.cupcake.viewmodels.create_job.WorkChipType" />
+        <import type="com.cupcake.viewmodels.create_job.WorkType" />
 
-        <import type="com.cupcake.viewmodels.create_job.ExperienceChipType" />
+        <import type="com.cupcake.viewmodels.create_job.ExperienceType" />
 
     </data>
 
@@ -118,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobChipType.ON_SITE)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.ON_SITE)}"
                     android:text="@string/on_site" />
 
                 <com.google.android.material.chip.Chip
@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobChipType.HYBRID)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.HYBRID)}"
                     android:text="@string/hybrid" />
 
                 <com.google.android.material.chip.Chip
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobChipType.REMOTE)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.REMOTE)}"
                     android:text="@string/remote" />
             </com.google.android.material.chip.ChipGroup>
 
@@ -165,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkChipType.FULL_TIME)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.FULL_TIME)}"
                     android:text="@string/full_time" />
 
                 <com.google.android.material.chip.Chip
@@ -174,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkChipType.PART_TIME)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.PART_TIME)}"
                     android:text="@string/part_time" />
 
                 <com.google.android.material.chip.Chip
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkChipType.INTERNSHIP)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.INTERNSHIP)}"
                     android:text="@string/internship" />
 
                 <com.google.android.material.chip.Chip
@@ -192,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkChipType.VOLUNTEER)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.VOLUNTEER)}"
                     android:text="@string/volunteer" />
 
                 <com.google.android.material.chip.Chip
@@ -201,7 +201,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkChipType.TEMPORARY)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.TEMPORARY)}"
                     android:text="@string/temporary" />
             </com.google.android.material.chip.ChipGroup>
 
@@ -230,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceChipType.ENTRY)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.ENTRY)}"
                     android:text="@string/entry" />
 
                 <com.google.android.material.chip.Chip
@@ -239,7 +239,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceChipType.INTERMEDIATE)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.INTERMEDIATE)}"
                     android:text="@string/intermediate" />
 
                 <com.google.android.material.chip.Chip
@@ -248,7 +248,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceChipType.MID_LEVEL)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.MID_LEVEL)}"
                     android:text="@string/mid_level" />
 
                 <com.google.android.material.chip.Chip
@@ -257,7 +257,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceChipType.SENIOR_LEVEL)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.SENIOR_LEVEL)}"
                     android:text="@string/senior_level" />
 
                 <com.google.android.material.chip.Chip
@@ -266,7 +266,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
-                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceChipType.EXPERT)}"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.EXPERT)}"
                     android:text="@string/expert" />
             </com.google.android.material.chip.ChipGroup>
 

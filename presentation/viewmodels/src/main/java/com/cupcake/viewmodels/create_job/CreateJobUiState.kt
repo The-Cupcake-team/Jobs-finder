@@ -5,9 +5,6 @@ data class CreateJobUiState(
 //    val screenIcon: ScreenIcon,
     val buttonText: String = "",
     val formNumber: String = "",
-    val jobType: String = "",
-    val workType: String = "",
-    val experience: String = "",
     val isLoading: Boolean = false,
     val error: String = "",
 ) {
@@ -17,6 +14,8 @@ data class CreateJobUiState(
         var workType: String = "",
         var jobType: String = "",
         var jobLocation: String = "",
+        val experience: String = "",
+        val experienceRequirement: String = "",
         var jobDescription: String = "",
         var salary: Double = 0.0,
     )

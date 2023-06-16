@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,8 +27,8 @@ class CreateJobViewModel @Inject constructor(
                     Job(
                         jobTitleId = jobTitleMap[_state.value.jobFormUiState.jobTitleId]!!,
                         company = _state.value.jobFormUiState.company,
-                        workType = _state.value.workType,
-                        jobType = _state.value.jobType,
+                        workType = _state.value.jobFormUiState.workType,
+                        jobType = _state.value.jobFormUiState.jobType,
                         jobLocation = _state.value.jobFormUiState.jobLocation,
                         jobDescription = _state.value.jobFormUiState.jobDescription,
                         jobSalary = _state.value.jobFormUiState.salary,
@@ -103,96 +102,36 @@ class CreateJobViewModel @Inject constructor(
     }
 
 
-    fun onSelectJopType(jobChipSelected: JobChipType) {
-        when (jobChipSelected) {
-            JobChipType.ON_SITE -> _state.update {
-                it.copy(
-                    jobType = "on-site"
+    fun onSelectJopType(jobType: JobType) {
+        _state.update {
+            it.copy(
+                jobFormUiState = it.jobFormUiState.copy(
+                    jobType = jobType.value
                 )
-            }
-
-            JobChipType.HYBRID -> _state.update {
-                it.copy(
-                    jobType = "Hybrid"
-                )
-            }
-
-            JobChipType.REMOTE -> _state.update {
-                it.copy(
-                    jobType = "Remote"
-                )
-            }
+            )
         }
     }
 
-    fun onSelectWorkType(workChipSelected: WorkChipType) {
-        when (workChipSelected) {
-            WorkChipType.FULL_TIME -> _state.update {
-                it.copy(
-                    workType = "Full-Time"
+    fun onSelectWorkType(workType: WorkType) {
+        _state.update {
+            it.copy(
+                jobFormUiState = it.jobFormUiState.copy(
+                    workType = workType.value
                 )
-            }
-
-            WorkChipType.PART_TIME -> _state.update {
-                it.copy(
-                    workType = "Part-Time"
-                )
-            }
-
-            WorkChipType.INTERNSHIP -> _state.update {
-                it.copy(
-                    workType = "Internship"
-                )
-            }
-
-            WorkChipType.VOLUNTEER -> _state.update {
-                it.copy(
-                    workType = "Volunteer"
-                )
-            }
-
-            WorkChipType.TEMPORARY -> _state.update {
-                it.copy(
-                    workType = "Temporary"
-                )
-            }
-
+            )
         }
     }
 
-    fun onSelectExperienceType(experienceChipSelected: ExperienceChipType) {
-        when (experienceChipSelected) {
-            ExperienceChipType.ENTRY -> _state.update {
-                it.copy(
-                    experience = "Entry"
+    fun onSelectExperienceType(experience: ExperienceType) {
+        _state.update {
+            it.copy(
+                jobFormUiState = it.jobFormUiState.copy(
+                    experience = experience.value
                 )
-            }
-
-            ExperienceChipType.INTERMEDIATE -> _state.update {
-                it.copy(
-                    experience = "Intermediate"
-                )
-            }
-
-            ExperienceChipType.SENIOR_LEVEL -> _state.update {
-                it.copy(
-                    experience = "Senior-level"
-                )
-            }
-
-            ExperienceChipType.MID_LEVEL -> _state.update {
-                it.copy(
-                    experience = "Mid-level"
-                )
-            }
-
-            ExperienceChipType.EXPERT -> _state.update {
-                it.copy(
-                    experience = "Expert"
-                )
-            }
+            )
         }
     }
+
 
 
 }
