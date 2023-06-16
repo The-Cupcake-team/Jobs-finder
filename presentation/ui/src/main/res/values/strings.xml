@@ -12,6 +12,7 @@
     <string name="normal_post">Normal Post</string>
     <string name="job_post">Job Post</string>
     <string name="anyone">Anyone</string>
+    <string name="username">Username</string>
 
     <!--    home & post strings-->
     <string name="search">Search</string>
@@ -104,6 +105,8 @@
     <string name="add_skills">Add skills</string>
     <string name="next">Next</string>
     <string name="popular_jobs">Popular Jobs</string>
+    <string name="retry">Retry</string>
+
 
 
 </resources>

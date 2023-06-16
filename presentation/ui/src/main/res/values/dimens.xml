@@ -2,7 +2,7 @@
 <resources>
     <dimen name="zero">0dp</dimen>
     <dimen name="person_image_border_width">1dp</dimen>
-
+    <dimen name="spacing_xxsmall">2dp</dimen>
     <dimen name="spacing_small">4dp</dimen>
     <dimen name="spacing_normal">8dp</dimen>
     <dimen name="spacing_tiny">12dp</dimen>
@@ -53,6 +53,8 @@
     <dimen name="login_card_height">540dp</dimen>
     <dimen name="login_welcome_text_margin_top">80dp</dimen>
     <dimen name="edit_text_height">48dp</dimen>
+    <dimen name="size16">16sp</dimen>
+    <dimen name="lottie_image_dimens">240dp</dimen>
 
 
 </resources>
