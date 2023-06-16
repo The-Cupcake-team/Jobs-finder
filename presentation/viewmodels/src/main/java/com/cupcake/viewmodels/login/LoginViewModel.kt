@@ -1,9 +1,8 @@
 package com.cupcake.viewmodels.login
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.cupcake.usecase.ErrorType
 import com.cupcake.usecase.LoginUseCase
-import com.cupcake.usecase.login.ValidateLoginFormUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,43 +13,45 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val validateLoginForm: ValidateLoginFormUseCase,
-    private val loginApi: LoginUseCase,
+    private val login: LoginUseCase,
 ) : BaseViewModel<LoginUiState>(LoginUiState()) {
-
-    private val _loginUIState = MutableStateFlow(LoginUiState())
-    val loginUIState = _loginUIState.asStateFlow()
-    var userName: String = ""
-    var password: String = ""
-    private lateinit var loginResult: ValidateLoginFormUseCase.ValidationResults
     fun login() {
         viewModelScope.launch {
             try {
-                _loginUIState.update { it.copy(isLoading = true, error = "") }
-                loginResult = validateLoginForm(userName, password)
-                _loginUIState.update {
+                _state.update { it.copy(isLoading = true, error = "") }
+                _state.update {
                     it.copy(
-                        userName = userName,
-                        userNameError = loginResult.validateUserName,
-                        isUserNameValid = loginResult.isUserNameValid,
-                        password = password,
-                        passwordError = loginResult.validatePassword,
-                        isPasswordValid = loginResult.isPasswordValid
+                        userName = _state.value.userName,
+                        userNameError = "",
+                        isUserNameValid = true,
+                        password = _state.value.password,
+                        passwordError = "",
+                        isPasswordValid = true
                     )
                 }
-                if (loginResult.isUserNameValid&&loginResult.isPasswordValid) {
-                    loginApi(loginUIState.value.userName, loginUIState.value.password)
-                    onSuccessLogin()
-                }
+                login(_state.value.userName, _state.value.password)
 
-            } catch (e: Throwable) {
+
+                onSuccessLogin()
+            } catch (e: ErrorType) {
+
+                _state.update {
+                    it.copy(
+                        userName = _state.value.userName,
+                        password = _state.value.password,
+                        userNameError = if (e is ErrorType.InvalidFieldUserName) e.messages else "",
+                        passwordError = if (e is ErrorType.InvalidFieldPassword) e.messages else "",
+                        isUserNameValid =  e !is  ErrorType.InvalidFieldUserName  ,
+                        isPasswordValid = e !is ErrorType.InvalidFieldPassword
+                    )
+                }
                 onErrorLogin(e.message ?: "Unknown error")
+
             }
         }
     }
-
     private fun onErrorLogin(error: String) {
-        _loginUIState.update {
+        _state.update {
             it.copy(
                 isLoading = false,
                 error = error
@@ -59,12 +60,11 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun onSuccessLogin() {
-        _loginUIState.update {
+        _state.update {
             it.copy(
                 isLoading = false,
                 error = "",
             )
         }
     }
-
 }

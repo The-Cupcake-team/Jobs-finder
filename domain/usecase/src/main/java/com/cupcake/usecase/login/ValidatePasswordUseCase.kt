@@ -1,27 +1,19 @@
 package com.cupcake.usecase.login
 
+import com.cupcake.usecase.ErrorType
 import javax.inject.Inject
 
 
 class ValidatePasswordUseCase @Inject constructor() {
     operator fun invoke(passwordText: String): ValidationResult {
         if (lessThanMinimum(passwordText)) {
-            return ValidationResult(
-                false,
-                Error_LENGTH
-            )
+             throw  ErrorType.InvalidFieldPassword(Error_LENGTH)
         }
         if (notContainsLetter(passwordText)) {
-            return ValidationResult(
-                false,
-                Error_LETTER
-            )
+            throw  ErrorType.InvalidFieldPassword(Error_LETTER)
         }
         if (notContainsDigit(passwordText)) {
-            return ValidationResult(
-                false,
-                Error_DIGIT
-            )
+            throw  ErrorType.InvalidFieldPassword(Error_DIGIT)
         }
 
         return ValidationResult(true)

@@ -2,8 +2,8 @@ package com.cupcake.viewmodels.login
 
 
 data class LoginUiState(
-    val userName: String = "",
-    val password: String = "",
+    var userName: String = "",
+    var password: String = "",
     val userNameError: String = "",
     val passwordError: String = "",
     val isUserNameValid: Boolean = false,
