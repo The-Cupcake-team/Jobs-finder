@@ -1,11 +1,14 @@
 package com.cupcake.repository
 
+import android.util.Log
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.JobWithTitle
 import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
+import com.cupcake.remote.response.job.JobDto
+import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobWithJobTitle
 import com.cupcake.repository.mapper.toPost
 import repo.JobFinderRepository
@@ -95,9 +98,17 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getJobById(jobId: String): Job {
+        return wrapResponseWithErrorHandler { api.getJobById(jobId) }.toJob()
+    }
+
+
+
+    override suspend fun createPost(content: String): Post {
         TODO("Not yet implemented")
     }
+
     //region Post
+
 
     override suspend fun getAllPosts(): List<Post> {
         return wrapResponseWithErrorHandler { api.getPosts() }.map { it.toPost() }
@@ -115,10 +126,10 @@ class JobFinderRepositoryImpl @Inject constructor(
         function: suspend () -> Response<BaseResponse<T>>
     ): T {
         val response = function()
-
         if (response.isSuccessful) {
             val baseResponse = response.body()
             if (baseResponse != null && baseResponse.isSuccess) {
+                Log.i("TAG", "base successful : ${baseResponse.value}")
                 return baseResponse.value!!
             } else {
                 throw Throwable("Invalid response")

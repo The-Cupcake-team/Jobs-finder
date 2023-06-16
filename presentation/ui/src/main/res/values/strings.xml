@@ -31,7 +31,7 @@
     <string name="work_place">job type</string>
     <string name="Salary">Salary</string>
     <string name="posted_on">Posted on</string>
-    <string name="apply_btn">Apply</string>
+    <string name="apply_btn">Apply now</string>
     <string name="about_company">About company \n coming soon</string>
     <string name="dialog_message">To complete the Application you need to send your Resume</string>
     <string name="send">Send</string>
@@ -104,9 +104,16 @@
     <string name="your_skills">Your skills</string>
     <string name="add_skills">Add skills</string>
     <string name="next">Next</string>
+
+    <string name="UI_UX_Designer">UI/UX Designer</string>
+    <string name="Graphic_Design">Graphic Design</string>
+    <string name="qualification_text">\nBachelor\'s degree in Marketing, Business Administration, or a related field.</string>
+    <string name="applicants">Applicants</string>
+    <string name="applicants_number">29</string>
+    <string name="required_skills">Required Skills</string>
+
     <string name="popular_jobs">Popular Jobs</string>
     <string name="retry">Retry</string>
-
 
 
 </resources>
