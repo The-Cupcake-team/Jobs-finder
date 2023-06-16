@@ -1,9 +1,11 @@
 package com.cupcake.viewmodels.create_job
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Job
 import com.cupcake.usecase.CreateJobUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
+import com.google.android.material.slider.RangeSlider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -132,6 +134,43 @@ class CreateJobViewModel @Inject constructor(
         }
     }
 
+    fun onDescriptionChange(text: CharSequence) {
+        _state.update {
+            it.copy(
+                jobFormUiState = it.jobFormUiState.copy(
+                    jobDescription = text.toString()
+                )
+            )
+        }
+    }
 
+    fun onEducationChange(text: CharSequence) {
+        _state.update {
+            it.copy(
+                jobFormUiState = it.jobFormUiState.copy(
+                    education = text.toString()
+                )
+            )
+        }
+    }
+
+    fun onExperienceRequirementChange(text: CharSequence) {
+        _state.update {
+            it.copy(
+                jobFormUiState = it.jobFormUiState.copy(
+                    experienceRequirement = text.toString()
+                )
+            )
+        }
+    }
+    fun onSkillsChange(text: CharSequence) {
+        _state.update {
+            it.copy(
+                jobFormUiState = it.jobFormUiState.copy(
+                    skills = text.toString()
+                )
+            )
+        }
+    }
 
 }

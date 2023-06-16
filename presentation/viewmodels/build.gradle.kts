@@ -36,8 +36,10 @@ android {
 
 dependencies {
     implementation(project(Modules.DOMAIN_USECASE))
-    
+    implementation("com.google.android.material:material:1.9.0")
+
     testImplementation(DependencyProject.junit)
+    testImplementation(DependencyProject.material)
     androidTestImplementation(DependencyProject.junitExtension)
 
     implementation(DependencyProject.coroutines)

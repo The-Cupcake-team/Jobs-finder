@@ -15,7 +15,11 @@ data class CreateJobUiState(
         var jobType: String = "",
         var jobLocation: String = "",
         val experience: String = "",
-        val experienceRequirement: String = "",
+        val education: String = "",
+        var skills: String = "",
+        var startRangSalary: String = "",
+        var endRangSalary: String = "",
+        var experienceRequirement: String = "",
         var jobDescription: String = "",
         var salary: Double = 0.0,
     )
