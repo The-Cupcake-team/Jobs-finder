@@ -1,6 +1,3 @@
-
-import com.cupcake.models.Job
-import com.cupcake.remote.response.job.JobDto
 package com.cupcake.repository.mapper
 
 import com.cupcake.models.Job

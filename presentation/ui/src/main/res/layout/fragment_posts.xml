@@ -96,8 +96,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showWhenLoading="@{viewModel.state.loading}" />
-
+                 />
+<!--            app:showWhenIf="@{viewModel.state.loading}"-->
         </LinearLayout>
 
         <com.airbnb.lottie.LottieAnimationView
@@ -112,7 +112,7 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/lottie_error"
-            app:showWhenLoading="@{viewModel.state.error}" />
+            app:showWhenIf="@{viewModel.state.loading}" />
 
         <TextView
             android:id="@+id/textViewErrorMassage"
@@ -122,14 +122,14 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:text="@{viewModel.state.errors}"
+            android:text="@{viewModel.state.error.errorCode}"
             android:textAlignment="center"
             android:textSize="@dimen/size16"
             app:layout_constraintBottom_toTopOf="@id/buttonTryAgain"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/lottieError"
-            app:showWhenLoading="@{viewModel.state.error}"
+            app:showWhenIf="@{viewModel.state.error != null}"
             tools:text="the error message try again" />
 
 
@@ -147,6 +147,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewErrorMassage"
-            app:showWhenLoading="@{viewModel.state.error}" />
+            app:showWhenIf="@{viewModel.state.error != null}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

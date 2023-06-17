@@ -1,5 +1,6 @@
 package com.cupcake.viewmodels.posts
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Post
 import com.cupcake.usecase.GetPostsUseCase
@@ -35,32 +36,23 @@ class PostsViewModel @Inject constructor(
 
     private fun onGetPostsSuccess(posts: List<Post>) {
         _state.update {
-            it.copy(isLoading = false, isError = false, errors = "", postsResult = posts.map { post -> post.toPostItemUIState()})
+            it.copy(
+                isLoading = false,
+                isError = false,
+                error = null,
+                postsResult = posts.map { post -> post.toPostItemUIState() })
         }
     }
 
     private fun onGetPostsFailure(error: BaseErrorUiState) {
         _state.update {
-            it.copy(isLoading = false, isError = true, errors = handelReadableError(error) )
+            it.copy(isLoading = false, isError = true, error = error)
         }
     }
 
     fun onRetryClicked(){
         _state.update {it.copy(isError = false, isLoading = true) }
         getPosts()
-    }
-
-    private fun handelReadableError(error: BaseErrorUiState): String{
-        return when(error){
-            is BaseErrorUiState.Disconnected ->
-                "Disconnected from the server. Please check your internet connection."
-            is BaseErrorUiState.UnAuthorized ->
-                "Unauthorized access. Please login again."
-            is BaseErrorUiState.NoFoundError ->
-                "The requested resource was not found."
-            is BaseErrorUiState.ServerError ->
-                "An unexpected server error occurred. Please try again later."
-        }
     }
 
     private fun Post.toPostItemUIState(): PostItemUIState {

@@ -6,6 +6,7 @@ import com.cupcake.usecase.job.GetJobsOnUserLocationUseCase
 import com.cupcake.usecase.job.GetPopularJobsUseCase
 import com.cupcake.usecase.job.GetRecommendedJobsUseCase
 import com.cupcake.usecase.job.GetTopSalaryInUserLocationUseCase
+import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -81,8 +82,8 @@ class JobsViewModel @Inject constructor(
         _state.update { it.copy(onLocationJobs = onLocationJobs, isLoading = false) }
     }
 
-    private fun onError(error: Exception) {
-        _state.update { it.copy(error = listOf(error.message.toString()), isLoading = false) }
+    private fun onError(error: BaseErrorUiState) {
+        _state.update { it.copy(error = error, isLoading = false) }
     }
 
     companion object {

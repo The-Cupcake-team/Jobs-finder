@@ -1,12 +1,14 @@
 package com.cupcake.viewmodels.create_job
 
+import com.cupcake.viewmodels.base.BaseErrorUiState
+
 data class CreateJobUiState(
     val jobFormUiState: JobFormUiState = JobFormUiState(),
 //    val screenIcon: ScreenIcon,
     val buttonText: String = "",
     val formNumber: String = "",
     val isLoading: Boolean = false,
-    val error: String = "",
+    val error: BaseErrorUiState? = null,
 ) {
     data class JobFormUiState(
         var jobTitleId: String = "",

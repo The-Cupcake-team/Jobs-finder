@@ -1,11 +1,10 @@
 package com.cupcake.viewmodels.create_job
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Job
 import com.cupcake.usecase.CreateJobUseCase
+import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
-import com.google.android.material.slider.RangeSlider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -27,6 +26,7 @@ class CreateJobViewModel @Inject constructor(
             {
                 createJob(
                     Job(
+                        id = "",
                         jobTitleId = jobTitleMap[_state.value.jobFormUiState.jobTitleId]!!,
                         company = _state.value.jobFormUiState.company,
                         workType = _state.value.jobFormUiState.workType,
@@ -53,11 +53,11 @@ class CreateJobViewModel @Inject constructor(
         // more logic
     }
 
-    private fun onCreateJobError(error: Exception) {
+    private fun onCreateJobError(error: BaseErrorUiState) {
         _state.update {
             it.copy(
                 isLoading = false,
-                error = error.message.toString(),
+                error = error,
             )
         }
     }

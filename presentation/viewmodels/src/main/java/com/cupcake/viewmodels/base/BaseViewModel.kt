@@ -31,15 +31,15 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
                 val result = callee()
                 onSuccess(result)
             } catch (error: ErrorType.Network) {
-                onError(BaseErrorUiState.Disconnected)
+                onError(BaseErrorUiState.Disconnected(error.message.toString()))
             } catch (error: ErrorType.Validation) {
-                onError(BaseErrorUiState.UnAuthorized)
+                onError(BaseErrorUiState.UnAuthorized(error.message.toString()))
             } catch (error: ErrorType.Server) {
-                onError(BaseErrorUiState.ServerError)
+                onError(BaseErrorUiState.ServerError(error.message.toString()))
             } catch (error: ErrorType.Unknown) {
-                onError(BaseErrorUiState.NoFoundError)
+                onError(BaseErrorUiState.NoFoundError(error.message.toString()))
             } catch (error: Throwable) {
-                onError(BaseErrorUiState.NoFoundError)
+                onError(BaseErrorUiState.NoFoundError(error.message.toString()))
             }
         }
     }

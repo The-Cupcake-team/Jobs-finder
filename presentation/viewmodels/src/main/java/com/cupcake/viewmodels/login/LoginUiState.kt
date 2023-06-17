@@ -1,5 +1,7 @@
 package com.cupcake.viewmodels.login
 
+import com.cupcake.viewmodels.base.BaseErrorUiState
+
 
 data class LoginUiState(
     var userName: String = "",
@@ -9,5 +11,5 @@ data class LoginUiState(
     val isUserNameValid: Boolean = false,
     val isPasswordValid: Boolean = false,
     val isLoading: Boolean = false,
-    val error: String = ""
+    val error: BaseErrorUiState? = null,
 )

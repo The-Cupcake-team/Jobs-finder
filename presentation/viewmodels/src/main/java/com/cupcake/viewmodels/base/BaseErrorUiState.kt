@@ -1,8 +1,8 @@
 package com.cupcake.viewmodels.base
 
-sealed class BaseErrorUiState {
-    object Disconnected : BaseErrorUiState()
-    object UnAuthorized: BaseErrorUiState()
-    object ServerError: BaseErrorUiState()
-    object NoFoundError : BaseErrorUiState()
+sealed class BaseErrorUiState(val errorCode: String) {
+    class Disconnected(val error: String) : BaseErrorUiState(error)
+    class UnAuthorized(val error: String) : BaseErrorUiState(error)
+    class ServerError(val error: String) : BaseErrorUiState(error)
+    class NoFoundError(val error: String) : BaseErrorUiState(error)
 }

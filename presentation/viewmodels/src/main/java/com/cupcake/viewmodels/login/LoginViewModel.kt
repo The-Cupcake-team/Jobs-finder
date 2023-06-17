@@ -3,6 +3,7 @@ package com.cupcake.viewmodels.login
 import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.ErrorType
 import com.cupcake.usecase.LoginUseCase
+import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,7 +19,7 @@ class LoginViewModel @Inject constructor(
     fun login() {
         viewModelScope.launch {
             try {
-                _state.update { it.copy(isLoading = true, error = "") }
+                _state.update { it.copy(isLoading = true) }
                 _state.update {
                     it.copy(
                         userName = _state.value.userName,
@@ -35,22 +36,22 @@ class LoginViewModel @Inject constructor(
                 onSuccessLogin()
             } catch (e: ErrorType) {
 
-                _state.update {
-                    it.copy(
-                        userName = _state.value.userName,
-                        password = _state.value.password,
-                        userNameError = if (e is ErrorType.InvalidFieldUserName) e.messages else "",
-                        passwordError = if (e is ErrorType.InvalidFieldPassword) e.messages else "",
-                        isUserNameValid =  e !is  ErrorType.InvalidFieldUserName  ,
-                        isPasswordValid = e !is ErrorType.InvalidFieldPassword
-                    )
-                }
-                onErrorLogin(e.message ?: "Unknown error")
+//                _state.update {
+//                    it.copy(
+//                        userName = _state.value.userName,
+//                        password = _state.value.password,
+//                        userNameError = if (e is ErrorType.InvalidFieldUserName) e.messages else "",
+//                        passwordError = if (e is ErrorType.InvalidFieldPassword) e.messages else "",
+//                        isUserNameValid =  e !is  ErrorType.InvalidFieldUserName  ,
+//                        isPasswordValid = e !is ErrorType.InvalidFieldPassword
+//                    )
+//                }
+//                onErrorLogin(e.message ?: "Unknown error")
 
             }
         }
     }
-    private fun onErrorLogin(error: String) {
+    private fun onErrorLogin(error: BaseErrorUiState) {
         _state.update {
             it.copy(
                 isLoading = false,
@@ -60,11 +61,11 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun onSuccessLogin() {
-        _state.update {
-            it.copy(
-                isLoading = false,
-                error = "",
-            )
-        }
+//        _state.update {
+//            it.copy(
+//                isLoading = false,
+//                error = "",
+//            )
+//        }
     }
 }

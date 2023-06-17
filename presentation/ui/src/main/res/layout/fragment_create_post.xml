@@ -92,13 +92,13 @@
             app:layout_constraintStart_toStartOf="@+id/textViewUsername"
             app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
 
-
+<!--        app:helperText="@{viewModel.state.error.}"-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutContent"
             style="@style/TextInputLayoutStyle"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/zero"
-            app:helperText="@{viewModel.state.error}"
+
             app:helperTextEnabled="true"
             android:padding="@dimen/spacing_medium"
             app:helperTextTextColor="@color/accent_red"
@@ -171,6 +171,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenLoading="@{viewModel.state.isLoading}" />
+            app:showWhenIf="@{viewModel.state.isLoading}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

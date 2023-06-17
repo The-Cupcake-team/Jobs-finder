@@ -111,11 +111,6 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
 
-
-    override suspend fun createPost(content: String): Post {
-        TODO("Not yet implemented")
-    }
-
     //region Post
 
 

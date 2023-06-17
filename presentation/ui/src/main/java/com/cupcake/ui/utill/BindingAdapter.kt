@@ -2,11 +2,8 @@ package com.cupcake.ui.utill
 
 
 import android.view.View
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -69,9 +66,8 @@ fun <T> setRecyclerItems(view: RecyclerView, items: List<T>?) {
     } ?: (view.adapter as BaseAdapter<T>).setData(emptyList())
 }
 
-@BindingAdapter(value = ["app:showWhenLoading"])
-fun showWhenLoading(view: View, state: Boolean?) {
-fun <T> showWhenLoading(view: View, state: Boolean) {
-    view.isVisible=state
+@BindingAdapter(value = ["app:showWhenIf"])
+fun showWhenIf(view: View, state: Boolean?) {
+    view.isVisible=state ?: false
 }
 

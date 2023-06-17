@@ -2,6 +2,7 @@ package com.cupcake.viewmodels.jobs
 
 import com.cupcake.models.JobTitle
 import com.cupcake.models.JobWithTitle
+import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.job_details.JobDetailsUiState
 import com.cupcake.viewmodels.job_details.JobsDetailsUiState
 
@@ -12,7 +13,7 @@ data class JobsUiState(
     val topSalaryJobs: List<JobUiState> = emptyList(),
     val onLocationJobs: List<JobUiState> = emptyList(),
     val isLoading: Boolean = true,
-    val error: List<String> = emptyList()
+    val error: BaseErrorUiState? = null,
 )
 
 data class ErrorUiState(
