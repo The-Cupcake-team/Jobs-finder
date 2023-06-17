@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.posts.PostsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/postsMotionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/accent"
-        app:layoutDescription="@xml/fragment_posts_xml_constraintlayout2_scene">
+        android:background="@color/white">
 
         <View
             android:id="@+id/viewBackground"
@@ -79,10 +77,10 @@
             android:background="@color/background"
             android:clipToPadding="false"
             android:orientation="vertical"
-            android:paddingVertical="@dimen/spacing_small"
             app:items="@{viewModel.state.postsResult}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingBottom="@dimen/spacing_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/viewBackground"
@@ -97,55 +95,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:showWhenIf="@{viewModel.state.loading}" />
+            app:showWhenIf="@{viewModel.state.loading}"
+            bind:isLoading="@{viewModel.state.loading}"
+            />
 
+        <include
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/error"
+            layout="@layout/error"
+            app:showWhenIf="@{viewModel.state.error != null}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            bind:error="@{viewModel.state.error}"/>
 
-        <!--        <com.airbnb.lottie.LottieAnimationView-->
-        <!--            android:id="@+id/lottieError"-->
-        <!--            android:layout_width="@dimen/lottie_image_dimens"-->
-        <!--            android:layout_height="@dimen/lottie_image_dimens"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/textViewErrorMassage"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:layout_constraintVertical_chainStyle="packed"-->
-        <!--            app:lottie_autoPlay="true"-->
-        <!--            app:lottie_loop="true"-->
-        <!--            app:lottie_rawRes="@raw/lottie_error"-->
-        <!--            app:showWhenIf="@{viewModel.state.loading}" />-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/textViewErrorMassage"-->
-        <!--            style="@style/TextStyle.body"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/spacing_normal"-->
-        <!--            android:layout_marginHorizontal="@dimen/spacing_medium"-->
-        <!--            android:layout_marginBottom="@dimen/spacing_small"-->
-        <!--            android:text="@{viewModel.state.error.errorCode}"-->
-        <!--            android:textAlignment="center"-->
-        <!--            android:textSize="@dimen/size16"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/buttonTryAgain"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/lottieError"-->
-        <!--            app:showWhenIf="@{viewModel.state.error != null}"-->
-        <!--            tools:text="the error message try again" />-->
-
-
-        <!--        <com.google.android.material.button.MaterialButton-->
-        <!--            android:id="@+id/buttonTryAgain"-->
-        <!--            style="@style/outlineButton"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginHorizontal="@dimen/spacing_medium"-->
-        <!--            android:onClick="@{() -> viewModel.onRetryClicked()}"-->
-        <!--            android:text="@string/retry"-->
-        <!--            app:circularflow_defaultRadius="@dimen/spacing_large"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/textViewErrorMassage"-->
-        <!--            app:showWhenIf="@{viewModel.state.error != null}" />-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonTryAgain"
+            style="@style/outlineButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:text="@string/retry"
+            app:showWhenIf="@{viewModel.state.error != null}"
+            android:onClick="@{() -> viewModel.onRetryClicked()}"
+            app:circularflow_defaultRadius="@dimen/spacing_large"
+            app:layout_constraintTop_toBottomOf="@id/error"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
