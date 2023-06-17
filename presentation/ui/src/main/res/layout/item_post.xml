@@ -17,14 +17,14 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/spacing_small"
-        app:cardElevation="@dimen/zero"
-        app:cardCornerRadius="@dimen/zero">
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:elevation="@dimen/zero"
+       >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cards"
+            android:background="@color/white"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -63,7 +63,7 @@
                 style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{String.valueOf(item.createdAt)}'
+                app:convertTime="@{item.createdAt}"
                 android:textColor="@color/color_text_tertiary"
                 app:layout_constraintStart_toStartOf="@+id/textViewJopTitle"
                 app:layout_constraintTop_toBottomOf="@+id/textViewJopTitle"
@@ -77,8 +77,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/textViewPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewPersonName"
-                app:srcCompat="@drawable/ic_more"
-                app:tint="@color/secondary"/>
+                app:srcCompat="@drawable/ic_more" />
 
             <TextView
                 android:id="@+id/textViewContent"
@@ -97,25 +96,27 @@
             <ImageView
                 android:id="@+id/imageViewPostImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/zero"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_normal"
+                app:layout_constraintDimensionRatio="5:4"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/imageViewLike"
                 app:layout_constraintTop_toBottomOf="@+id/textViewContent"
-                tools:srcCompat="@drawable/test_post_image" />
+                tools:srcCompat="@drawable/test_post_image"
+                app:loadImage="@{item.image}"/>
 
             <ImageView
                 android:id="@+id/imageViewComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
-                android:onClick="@{() -> listener.onCommentClick(item.id)}"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLike"
                 app:layout_constraintStart_toEndOf="@+id/textViewLikesCount"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLike"
                 app:srcCompat="@drawable/ic_comment"
-                app:tint="@color/secondary"/>
+                android:onClick="@{() -> listener.onCommentClick(item.id)}"
+                />
 
             <TextView
                 android:id="@+id/textViewLikesCount"
@@ -137,8 +138,7 @@
                 android:layout_marginBottom="@dimen/spacing_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_heart"
-                app:tint="@color/secondary"/>
+                app:srcCompat="@drawable/ic_heart" />
 
             <TextView
                 android:id="@+id/textViewCommentsCount"
@@ -160,8 +160,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewComment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageViewComment"
-                app:srcCompat="@drawable/ic_saved"
-                app:tint="@color/secondary"/>
+                app:srcCompat="@drawable/ic_saved" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

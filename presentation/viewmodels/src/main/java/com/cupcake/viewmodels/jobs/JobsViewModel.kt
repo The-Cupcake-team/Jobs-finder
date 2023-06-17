@@ -1,6 +1,5 @@
 package com.cupcake.viewmodels.jobs
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.job.GetJobsOnUserLocationUseCase
 import com.cupcake.usecase.job.GetPopularJobsUseCase
@@ -100,4 +99,13 @@ class JobsViewModel @Inject constructor(
     override fun onChipClickListener(id: String) {
         viewModelScope.launch { _event.emit(JobsEvent.JobChipClick(id)) }
     }
+
+    fun onRetryClicked(){
+        _state.update {it.copy(error = null, isLoading = true) }
+        getPopularJobs()
+        getRecommendedJobs()
+        getTopSalaryJobs()
+        getOnLocationJobs()
+    }
+
 }

@@ -1,10 +1,13 @@
 package com.cupcake.jobsfinder.ui.jobs
 
 import android.content.Context
+import android.os.Build
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
 import com.cupcake.ui.databinding.CardViewDetailsChipBinding
+import com.cupcake.ui.utill.convert
 
 class DetailsChipCustomView @JvmOverloads constructor(
     context: Context,
@@ -28,6 +31,10 @@ class DetailsChipCustomView @JvmOverloads constructor(
     }
     fun salary(salaryValue:String){
         binding.textViewDetailsSalary.text=salaryValue
+    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun convertTime( time: Long){
+        binding.textViewDetailsPostedOn.text = convert(time)
     }
 
 }

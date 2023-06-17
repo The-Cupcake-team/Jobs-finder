@@ -1,9 +1,12 @@
 package com.cupcake.ui.utill
 
 
+import android.os.Build
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -11,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
+import com.cupcake.viewmodels.base.BaseErrorUiState
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -71,3 +75,19 @@ fun showWhenIf(view: View, state: Boolean?) {
     view.isVisible=state ?: false
 }
 
+@BindingAdapter(value = ["app:showDrawableErrorImage"])
+fun showDrawableErrorImage(view: ImageView, errorType: BaseErrorUiState?){
+    when(errorType){
+        is BaseErrorUiState.Disconnected -> view.setImageResource(R.drawable.network_connection_failure_backup)
+        is BaseErrorUiState.NoFoundError -> view.setImageResource(R.drawable.no_results_3x)
+        is BaseErrorUiState.ServerError -> view.setImageResource(R.drawable.no_content_backup)
+        is BaseErrorUiState.UnAuthorized -> view.setImageResource(R.drawable.no_content_backup)
+        else -> {view.setImageResource(R.drawable.no_content_backup)}
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@BindingAdapter(value = ["app:convertTime"])
+fun convertTime(view: TextView , time: Long){
+   view.text = convert(time)
+}
