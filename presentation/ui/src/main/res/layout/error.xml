@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+            <TextView
+                android:id="@+id/textViewErrorMassage"
+                style="@style/TextStyle.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:text="@{viewModel.state.error.errorCode}"
+                android:textAlignment="center"
+                android:textSize="@dimen/size16"
+                app:layout_constraintBottom_toTopOf="@id/buttonTryAgain"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="the error message try again" />
+
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonTryAgain"
+                style="@style/outlineButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:onClick="@{() -> viewModel.onRetryClicked()}"
+                android:text="@string/retry"
+                app:circularflow_defaultRadius="@dimen/spacing_large"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewErrorMassage"
+                app:showWhenIf="@{viewModel.state.error != null}" />
+</androidx.constraintlayout.widget.ConstraintLayout>
