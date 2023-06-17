@@ -11,7 +11,7 @@
         android:icon="@drawable/ic_message"
         android:title="@string/messages" />
     <item
-        android:id="@+id/createPost"
+        android:id="@+id/createPostFragment"
         android:enabled="true"
         android:icon="@drawable/ic_circle_add"
         android:title="@string/post" />
@@ -23,7 +23,7 @@
         android:title="@string/my_network" />
 
     <item
-        android:id="@+id/createJobFragment"
+        android:id="@+id/jobsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_jobs"
         android:title="@string/jobs" />

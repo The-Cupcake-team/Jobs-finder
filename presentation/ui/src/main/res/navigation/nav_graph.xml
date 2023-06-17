@@ -5,12 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/postsFragment">
 
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.cupcake.jobsfinder.MainActivity"
-        tools:layout="@layout/activity_main"
-        android:label="MainActivity" />
-
     <fragment
         android:id="@+id/createJobFragment"
         android:name="com.cupcake.ui.create_job.CreateJobFragment"
@@ -21,5 +15,29 @@
         android:id="@+id/postsFragment"
         android:name="com.cupcake.ui.posts.PostsFragment"
         android:label="PostsFragment" />
+
+    <fragment
+        android:id="@+id/jobsFragment"
+        android:name="com.cupcake.ui.jobs.JobsFragment"
+        tools:layout="@layout/fragment_jobs"
+        android:label="JobsFragment" >
+        <action
+            android:id="@+id/action_jobsFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment" />
+        <argument
+            android:name="idJob"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createPostFragment"
+        android:name="com.cupcake.ui.post.CreatePostFragment"
+        tools:layout="@layout/fragment_create_post"
+        android:label="CreatePostFragment" />
+    <fragment
+        android:id="@+id/jobDetailsFragment"
+        android:name="com.cupcake.ui.jobs.JobDetailsFragment"
+        tools:layout="@layout/fragment_job_details"
+        android:label="JobDetailsFragment" />
 
 </navigation>

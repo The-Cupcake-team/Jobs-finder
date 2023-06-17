@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentJobsBinding
@@ -68,7 +69,10 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
         lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
-                    is JobsEvent.JobCardClick -> showToast(jobsEvent.id)
+                    is JobsEvent.JobCardClick -> {
+                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment())
+                    }
+
                     is JobsEvent.JobChipClick -> showToast(jobsEvent.id)
                 }
             }
