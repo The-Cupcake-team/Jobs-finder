@@ -17,9 +17,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
         android:layout_marginTop="@dimen/spacing_medium"
-        app:cardCornerRadius="@dimen/spacing_normal">
+        android:elevation="@dimen/zero"
+       >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
                 style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text='@{String.valueOf(item.createdAt)}'
+                app:convertTime="@{item.createdAt}"
                 android:textColor="@color/color_text_tertiary"
                 app:layout_constraintStart_toStartOf="@+id/textViewJopTitle"
                 app:layout_constraintTop_toBottomOf="@+id/textViewJopTitle"
@@ -96,13 +96,15 @@
             <ImageView
                 android:id="@+id/imageViewPostImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/zero"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_normal"
+                app:layout_constraintDimensionRatio="5:4"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toTopOf="@+id/imageViewLike"
                 app:layout_constraintTop_toBottomOf="@+id/textViewContent"
-                tools:srcCompat="@drawable/test_post_image" />
+                tools:srcCompat="@drawable/test_post_image"
+                app:loadImage="@{item.image}"/>
 
             <ImageView
                 android:id="@+id/imageViewComment"

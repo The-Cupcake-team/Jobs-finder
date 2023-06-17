@@ -15,41 +15,31 @@
 
         <ImageView
             android:id="@+id/errorImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:layout_constraintBottom_toTopOf="@id/textViewErrorMassage"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/textViewErrorMassage"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:showDrawableErrorImage="@{error}" />
 
         <TextView
             android:id="@+id/textViewErrorMassage"
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:textAlignment="center"
             android:text="@{error.errorCode}"
+            android:textAlignment="center"
             android:textSize="@dimen/size16"
-            app:layout_constraintBottom_toTopOf="@id/buttonTryAgain"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/errorImage"
             tools:text="the error message try again" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonTryAgain"
-            style="@style/outlineButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:text="@string/retry"
-            app:circularflow_defaultRadius="@dimen/spacing_large"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewErrorMassage" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
