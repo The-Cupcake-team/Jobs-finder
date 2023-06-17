@@ -20,9 +20,7 @@
             android:id="@+id/layout_job_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background"
-           >
-
+            android:background="@color/background">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tool_bar"
@@ -31,21 +29,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/ic_back"
-                app:navigationIconTint="@color/color_text_secondary">
+                app:navigationIcon="@drawable/ic_back">
 
                 <ImageButton
                     android:id="@+id/image_view_saved_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="@dimen/spacing_normal"
-                    android:background="@color/background"
                     android:layout_gravity="end"
                     android:layout_marginEnd="@dimen/spacing_normal"
-                    android:src="@drawable/ic_saved" />
+                    android:background="@color/background"
+                    android:padding="@dimen/spacing_normal"
+                    android:src="@drawable/ic_saved"
+                    android:tint="@color/secondary" />
             </androidx.appcompat.widget.Toolbar>
-
-
 
 
             <com.google.android.material.card.MaterialCardView
@@ -62,16 +58,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/text_view_job_title"
                         style="@style/TextStyle.Headline"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/text_view_job_details_title_top"
                         android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/text_view_job_details_title_top"
                         android:gravity="center"
                         android:text="@{viewModel.jobsUIState.job.title}"
                         tools:text="Junior UI/UX Designer" />
@@ -81,8 +76,8 @@
                         style="@style/TextStyle.caption"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_small"
                         android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/spacing_small"
                         android:gravity="center"
                         android:text="@{viewModel.jobsUIState.job.companyName}"
                         tools:text="Meta inc." />
@@ -91,40 +86,38 @@
                         android:id="@+id/tab_layout_category"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/tab_layout_job_details_and_dialog_height"
-                       android:layout_margin="@dimen/spacing_medium"
+                        android:layout_margin="@dimen/spacing_medium"
                         android:background="@drawable/tab_layout_background"
-                        android:padding="@dimen/spacing_small"
                         app:tabIndicator="@drawable/tab_indicator"
                         app:tabIndicatorColor="@color/chip_color_and_tab_layout_color"
-                        app:tabIndicatorFullWidth="true"
                         app:tabIndicatorGravity="stretch"
-                        app:tabTextAppearance="@style/TextStyle.Headline_tab_layout"
-                        app:tabMode="fixed"
                         app:tabRippleColor="@color/cards"
                         app:tabSelectedTextColor="@color/color_text_primary"
-                        />
+                        app:tabTextAppearance="@style/TextStyle.Headline_tab_layout" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/image_view_logo_company"
                 android:layout_width="@dimen/company_logo_size"
                 android:layout_height="@dimen/company_logo_size"
                 android:layout_marginTop="@dimen/spacing_medium"
-                app:cardBackgroundColor="@color/background"
-                app:strokeWidth="@dimen/elevation_job_details"
-                app:strokeColor="@color/light_border"
                 android:elevation="@dimen/elevation_job_details"
+                app:cardBackgroundColor="@color/cards"
                 app:cardCornerRadius="@dimen/spacing_normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tool_bar">
+                app:layout_constraintTop_toBottomOf="@+id/tool_bar"
+                app:strokeColor="@color/boarder"
+                app:strokeWidth="@dimen/elevation_job_details">
 
                 <ImageView
-                    android:layout_width="@dimen/company_logo_size"
-                    android:layout_height="@dimen/company_logo_size"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/metalogo" />
+                    android:layout_width="@dimen/profile_image_size"
+                    android:layout_height="@dimen/profile_image_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_meta" />
             </com.google.android.material.card.MaterialCardView>
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager_category"
                 android:layout_width="match_parent"
@@ -142,11 +135,10 @@
                 android:layout_margin="@dimen/spacing_medium"
                 android:text="@string/apply_btn"
                 android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_pager_category"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintTop_toBottomOf="@id/view_pager_category" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

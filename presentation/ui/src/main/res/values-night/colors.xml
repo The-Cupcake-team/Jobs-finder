@@ -15,7 +15,11 @@
     <color name="color_text_secondary">#99FFFFFF</color>
     <color name="color_text_tertiary">#61FFFFFF</color>
 
-    <color name="accent_purple">#312A3D</color>
-    <color name="accent_cyan">#093F43</color>
+    <color name="accent_purple">#333038</color>
+    <color name="accent_cyan">#303738</color>
     <color name="accent_orange">#3D4433</color>
+
+    <color name="chip_color_and_tab_layout_color">#303843</color>
+    <color name="boarder">#14FFFFFF</color>
+
 </resources>

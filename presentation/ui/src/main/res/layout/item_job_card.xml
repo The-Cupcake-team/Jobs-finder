@@ -18,16 +18,17 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="@dimen/card_horizontal_height"
-        android:layout_marginHorizontal="@dimen/spacing_normal"
+        android:layout_marginHorizontal="@dimen/spacing_small"
         android:layout_marginVertical="@dimen/spacing_small"
-        android:background="@color/cards"
         android:elevation="@dimen/zero"
+        app:cardElevation="@dimen/zero"
         android:onClick="@{() -> listener.onCardClickListener(item.id)}"
         app:cardCornerRadius="@dimen/radius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/cards">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewCompanyProfile"
