@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.register.RegisterViewModel" />
     </data>
 
     <ScrollView
@@ -16,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacing_medium"
-            tools:context="com.cupcake.ui.signup.SignUpFragment">
+            tools:context="com.cupcake.ui.register.RegisterFragment">
 
             <TextView
                 android:id="@+id/textViewSignUp"
@@ -35,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:text="@string/more_feature"
-                android:textColor="@color/color_text_secondary"
+                android:textColor="@color/color_text_tertiary"
                 app:layout_constraintStart_toStartOf="@id/textViewSignUp"
                 app:layout_constraintTop_toBottomOf="@id/textViewSignUp" />
 
@@ -55,7 +58,6 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewFirstName">
@@ -85,7 +87,6 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewUserName">
@@ -104,17 +105,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="@string/phone_number"
-                app:layout_constraintStart_toStartOf="@id/textInputLayoutPhoneNumber"
+                android:text="@string/email"
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
                 app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayoutPhoneNumber"
+                android:id="@+id/textInputLayoutEmail"
                 style="@style/TextInputLayoutStyle"
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewPhoneNumber">
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/worksans_regular"
-                    android:inputType="phone"
+                    android:inputType="textEmailAddress"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,7 +135,7 @@
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/password"
                 app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
-                app:layout_constraintTop_toBottomOf="@id/textInputLayoutPhoneNumber" />
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutPassword"
@@ -143,7 +143,6 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewPassword">
@@ -172,7 +171,6 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_small"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword">
@@ -199,11 +197,13 @@
 
             <TextView
                 android:id="@+id/textViewAlreadyHaveAccount"
+                style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_marginEnd="@dimen/spacing_normal"
                 android:text="@string/already_have_account"
+                android:textColor="@color/color_text_tertiary"
                 app:layout_constraintEnd_toStartOf="@+id/textViewLogin"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
@@ -222,7 +222,6 @@
                 app:layout_constraintStart_toEndOf="@+id/textViewAlreadyHaveAccount"
                 app:layout_constraintTop_toTopOf="@id/textViewAlreadyHaveAccount"
                 app:rippleColor="@android:color/transparent" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

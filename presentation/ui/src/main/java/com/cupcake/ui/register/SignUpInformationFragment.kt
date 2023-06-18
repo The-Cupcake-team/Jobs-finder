@@ -1,4 +1,4 @@
-package com.cupcake.ui.signup
+package com.cupcake.ui.register
 
 import android.os.Bundle
 import android.view.LayoutInflater
