@@ -19,13 +19,14 @@
             android:id="@+id/layout_details_chip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:createdAt="@{String.valueOf(viewModel.jobsUIState.job.createdAt)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:location="@{viewModel.jobsUIState.job.location}"
             app:salary="@{viewModel.jobsUIState.job.salary}"
-            app:workType="@{viewModel.jobsUIState.job.workType}" />
+            app:workType="@{viewModel.jobsUIState.job.workType}"
+            app:convertTime="@{viewModel.jobsUIState.job.createdAt}"
+            />
 
         <com.cupcake.jobsfinder.ui.jobs.ExpandCardCustomView
             android:id="@+id/card_view_expandable_description"

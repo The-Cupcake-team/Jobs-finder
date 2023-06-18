@@ -1,6 +1,5 @@
 package com.cupcake.viewmodels.posts
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Post
 import com.cupcake.usecase.GetPostsUseCase
@@ -51,7 +50,7 @@ class PostsViewModel @Inject constructor(
     }
 
     fun onRetryClicked(){
-        _state.update {it.copy(isError = false, isLoading = true) }
+        _state.update {it.copy(error = null, isLoading = true) }
         getPosts()
     }
 
