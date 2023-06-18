@@ -20,7 +20,7 @@
     <string name="followed">Followed</string>
     <string name="comments">comments</string>
     <string name="post_body">President cast election as choice between all our republicans who seek to impose a nationwide abortion ban and democrat</string>
-
+    <string name="comment">comment......</string>
     <!--    job location strings-->
     <string name="on_your_location">On your location</string>
     <string name="on_site">On-site</string>
@@ -116,6 +116,7 @@
     <string name="required_skills">Required Skills</string>
     <string name="popular_jobs">Popular Jobs</string>
     <string name="retry">Retry</string>
+    <string name="comments_title">Comments (23)</string>
 
 
 </resources>

@@ -275,6 +275,18 @@
         <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
     </style>
 
+    <style name="edit_text_post_comments_style" parent="TextStyle.body">
+        <item name="android:background">@drawable/background_search_bar</item>
+        <item name="android:hint">@string/comment</item>
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="android:inputType">text</item>
+        <item name="android:paddingStart">@dimen/spacing_medium</item>
+        <item name="android:textColor">@color/color_text_primary</item>
+        <item name="android:textColorHint">@color/tertiary</item>
+        <item name="android:layout_marginStart">@dimen/spacing_medium</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_medium</item>
+    </style>
+
 
 
 </resources>

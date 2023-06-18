@@ -61,5 +61,6 @@
 
     <dimen name="size16">16sp</dimen>
     <dimen name="lottie_image_dimens">240dp</dimen>
+    <dimen name="height_view_bar_comment_background">64dp</dimen>
 
 </resources>
