@@ -13,6 +13,7 @@ import com.cupcake.viewmodels.jobs.JobsEvent
 import com.cupcake.viewmodels.jobs.JobsUiState
 import com.cupcake.viewmodels.jobs.JobsViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
@@ -22,16 +23,20 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
 
     override val LOG_TAG: String = this::class.java.name
     private lateinit var jobsAdapter: JobsAdapter
+    private lateinit var job: Job
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpAdapter()
         handelJobsEvent()
-
     }
 
+    override fun onStop() {
+        super.onStop()
+        job.cancel()
+    }
     private fun setUpAdapter() {
         jobsAdapter = JobsAdapter(emptyList(), viewModel)
-        binding?.jobsRecycler?.adapter = jobsAdapter
+        binding.jobsRecycler.adapter = jobsAdapter
         loadJobsAdapter()
     }
 
@@ -66,7 +71,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     }
 
     private fun handelJobsEvent() {
-        lifecycleScope.launch(Dispatchers.Main) {
+         job = lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
                     is JobsEvent.JobCardClick -> {
