@@ -52,4 +52,7 @@ dependencies {
     implementation(DependencyProject.logging)
 
     implementation(DependencyProject.kotlinxSerialization)
+
+    implementation(DependencyProject.hilt)
+    kapt(DependencyProject.hiltCompiler)
 }
