@@ -44,7 +44,7 @@
     <string name="title">Title</string>
     <string name="add_job_title">Add job title</string>
     <string name="company">Company</string>
-    <string name="add_company_name">add company name</string>
+    <string name="add_company_name">Add company name</string>
     <string name="location">Location</string>
     <string name="country_city">Country, City</string>
     <string name="job_type">Job Type</string>

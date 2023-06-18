@@ -26,7 +26,7 @@ class CreateJobViewModel @Inject constructor(
     private val _event = MutableSharedFlow<CreateJobEvent>()
     val event = _event.asSharedFlow()
 
-    private var searchJobTitle : Job? = null
+    private var searchJobTitle: Job? = null
 
 
 //    fun createJob() {
@@ -69,7 +69,7 @@ class CreateJobViewModel @Inject constructor(
     fun handleEvent(event: CreateJobEvent) {
         when (event) {
             is CreateJobEvent.PageScrolled -> {
-
+                onChangeIndexViewPager(event.index)
             }
 
             is CreateJobEvent.HeaderButtonClicked -> {
@@ -81,6 +81,13 @@ class CreateJobViewModel @Inject constructor(
     private fun onHeaderButtonClicked(index: Int) {
         viewModelScope.launch {
             _event.emit(CreateJobEvent.HeaderButtonClicked(index))
+        }
+    }
+
+    private fun onChangeIndexViewPager(index: Int) {
+        when (index) {
+            PAGE_ONE -> _state.update { it.copy(buttonText = "Next") }
+            PAGE_TWO -> _state.update { it.copy(buttonText = "Post") }
         }
     }
 
@@ -147,5 +154,8 @@ class CreateJobViewModel @Inject constructor(
         }
     }
 
-
+    private companion object {
+        const val PAGE_ONE = 0
+        const val PAGE_TWO = 1
+    }
 }

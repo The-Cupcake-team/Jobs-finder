@@ -32,7 +32,7 @@
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:text="@string/title"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,9 +130,9 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipOnSite"
                     style="@style/ChipStyle"
+                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checkable="true"
                     android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.ON_SITE)}"
                     android:text="@string/on_site" />
 
@@ -177,6 +177,7 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipFullTime"
                     style="@style/ChipStyle"
+                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
@@ -242,6 +243,7 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipEntry"
                     style="@style/ChipStyle"
+                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
