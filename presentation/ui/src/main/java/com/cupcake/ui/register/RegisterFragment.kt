@@ -6,16 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.cupcake.ui.R
+import com.cupcake.ui.base.BaseFragment
+import com.cupcake.ui.databinding.FragmentLoginBinding
+import com.cupcake.ui.databinding.FragmentRegisterBinding
+import com.cupcake.viewmodels.login.LoginViewModel
+import com.cupcake.viewmodels.register.RegisterViewModel
 
-class RegisterFragment : Fragment() {
+class RegisterFragment: BaseFragment<FragmentRegisterBinding ,  RegisterViewModel>(
 
+    R.layout.fragment_register,
+    RegisterViewModel::class.java
+    ) {
+        override val LOG_TAG :String= this.javaClass.name
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
-}
