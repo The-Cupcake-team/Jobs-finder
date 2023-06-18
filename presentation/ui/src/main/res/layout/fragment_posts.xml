@@ -40,7 +40,7 @@
 
         <EditText
             android:id="@+id/editTextSearchInput"
-            style="@style/searchBarStyle"
+            style="@style/homeSearchBarStyle"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/search_home_height"
             android:backgroundTint="@color/background"

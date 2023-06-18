@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.posts.FollowingPostsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,12 +16,20 @@
         tools:context=".posts.FollowingFragment">
 
 
-        <TextView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFollowingPosts"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            android:background="@color/background"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_medium"
+            app:items="@{viewModel.state.postsResult}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="FOLLOWINGGGGGGGGGGG" />
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/item_post" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

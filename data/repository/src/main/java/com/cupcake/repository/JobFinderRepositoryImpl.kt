@@ -1,10 +1,13 @@
 package com.cupcake.repository
 
 import android.util.Log
-import com.cupcake.models.*
+import com.cupcake.models.ErrorType
+import com.cupcake.models.Job
+import com.cupcake.models.JobTitle
+import com.cupcake.models.JobWithTitle
+import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
-import com.cupcake.remote.response.job.JobDto
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobWithJobTitle
 import com.cupcake.repository.mapper.toPost
@@ -113,6 +116,19 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun getAllPosts(): List<Post> {
         return wrapResponseWithErrorHandler { api.getPosts() }.map { it.toPost() }
+    }
+
+
+    override suspend fun getFollowingPosts(): List<Post> {
+        val fakePosts = listOf(
+            Post("1", System.currentTimeMillis(), "One Piece 🏴‍☠️❤️‍🔥"),
+            Post("2", System.currentTimeMillis(), "Sabahooooooo 👋"),
+            Post("3", System.currentTimeMillis(), "here we are go 🤍❤️"),
+            Post("3", System.currentTimeMillis(), "MY TEAM IS THE BEST 🧁🔝💖💖💖"),
+            Post("3", System.currentTimeMillis(), "MY TEAM MATES ARE AWESOME 😍🤩💖"),
+            Post("3", System.currentTimeMillis(), "FK you haters 🫵😎✊")
+        )
+        return fakePosts
     }
 
     override suspend fun createPost(content: String): Post {
