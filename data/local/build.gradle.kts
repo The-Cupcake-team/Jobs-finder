@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.cupcake.remote"
+    namespace = "com.cupcake.local"
     compileSdk = ConfigurationData.COMPILE_SDK_VERSION
 
     defaultConfig {
@@ -40,8 +40,8 @@ dependencies {
     androidTestImplementation(DependencyProject.junitExtension)
     androidTestImplementation(DependencyProject.espresso)
 
-    implementation(DependencyProject.roomCompiler)
-    implementation(DependencyProject.roomRx)
-    kapt(DependencyProject.roomRuntime)
+    implementation(DependencyProject.roomRuntime)
+    annotationProcessor(DependencyProject.roomCompiler)
+    kapt(DependencyProject.room)
 
 }

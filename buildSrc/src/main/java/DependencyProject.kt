@@ -59,6 +59,6 @@ object DependencyProject {
 
     const val roomRuntime = "androidx.room:room-runtime:$ROOM_VERSION"
     const val roomCompiler = "androidx.room:room-compiler:$ROOM_VERSION"
-    const val roomRx = "androidx.room:room-rxjava3:$ROOM_VERSION"
+    const val room = "androidx.room:room-compiler:$ROOM_VERSION"
 
 }
