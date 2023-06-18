@@ -87,6 +87,7 @@
     <string name="sign_in">Sign In</string>
     <string name="already_have_account">Already have account?</string>
     <string name="phone_number">Phone number</string>
+    <string name="email">Email</string>
     <string name="more_feature">Fill the information for more feature</string>
     <string name="sign_up">Sign up</string>
     <string name="don_t_have_account">Don’t have account?</string>
