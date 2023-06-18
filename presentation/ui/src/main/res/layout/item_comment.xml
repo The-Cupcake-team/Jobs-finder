@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cards"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_view_person_image"
+            android:layout_width="@dimen/profile_image_size"
+            android:layout_height="@dimen/profile_image_size"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:src="@drawable/test_personal_image"
+            app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/circleImageView" />
+
+        <TextView
+            android:id="@+id/text_view_person_name"
+            style="@style/TextStyle.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:text="@string/personal_name"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_number_like"
+            app:layout_constraintStart_toEndOf="@+id/image_view_person_image"
+            app:layout_constraintTop_toTopOf="@+id/image_view_person_image" />
+<TextView
+    android:id="@+id/text_view_number_like"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/text_view_person_name"
+    android:text="329"
+    android:layout_marginEnd="@dimen/spacing_medium"
+    app:layout_constraintBottom_toBottomOf="@id/text_view_person_name"
+  android:drawablePadding="@dimen/spacing_small"
+    app:drawableEndCompat="@drawable/ic_heart" />
+        <TextView
+            android:id="@+id/text_view_person_job_title"
+            style="@style/TextStyle.body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xxsmall"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:text="@string/jop_title"
+            android:textColor="@color/color_text_secondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_person_name"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_person_name" />
+
+        <TextView
+            android:id="@+id/text_view_content_post"
+            style="@style/TextStyle.body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:text="@string/post_content"
+            android:textColor="@color/color_text_primary"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_person_job_title"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_person_job_title" />
+
+        <TextView
+            android:id="@+id/textViewCreatedAt"
+            style="@style/TextStyle.caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:text="@string/created_at"
+            android:textColor="@color/color_text_tertiary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
