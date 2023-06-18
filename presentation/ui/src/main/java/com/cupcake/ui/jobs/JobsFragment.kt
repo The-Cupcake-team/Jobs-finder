@@ -2,8 +2,8 @@ package com.cupcake.ui.jobs
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
@@ -17,8 +17,7 @@ import kotlinx.coroutines.launch
 
 
 class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
-    R.layout.fragment_jobs,
-    JobsViewModel::class.java
+    R.layout.fragment_jobs, JobsViewModel::class.java
 ) {
 
     override val LOG_TAG: String = this::class.java.name
@@ -27,6 +26,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpAdapter()
         handelJobsEvent()
+
     }
 
     private fun setUpAdapter() {
@@ -70,16 +70,29 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
                     is JobsEvent.JobCardClick -> {
-                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment())
+                        navigateToDirection(
+                            JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment()
+                        )
                     }
 
-                    is JobsEvent.JobChipClick -> showToast(jobsEvent.id)
+                    is JobsEvent.JobChipClick -> {
+                        val action = JobsFragmentDirections
+                            .actionJobsFragmentToJobSearchFragment(jobsEvent.title)
+                        navigateToDirection(action)
+                    }
+
+                    is JobsEvent.SearchBoxClick -> {
+                        navigateToDirection(
+                            JobsFragmentDirections.actionJobsFragmentToJobSearchFragment()
+                        )
+                    }
+
                 }
             }
         }
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    private fun navigateToDirection(directions: NavDirections) {
+        findNavController().navigate(directions)
     }
 }

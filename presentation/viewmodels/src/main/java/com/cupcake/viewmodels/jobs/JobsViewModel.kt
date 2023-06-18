@@ -96,8 +96,12 @@ class JobsViewModel @Inject constructor(
         viewModelScope.launch { _event.emit(JobsEvent.JobCardClick(id)) }
     }
 
-    override fun onChipClickListener(id: String) {
-        viewModelScope.launch { _event.emit(JobsEvent.JobChipClick(id)) }
+    override fun onChipClickListener(jobTitle: String) {
+        viewModelScope.launch { _event.emit(JobsEvent.JobChipClick(jobTitle)) }
+    }
+
+    override fun onSearchBoxClickListener() {
+        viewModelScope.launch { _event.emit(JobsEvent.SearchBoxClick) }
     }
 
     fun onRetryClicked(){
