@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/bottomSheetsPosts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bottom_sheet_background">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background">
+            
+            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
+                android:id="@+id/bottomSheetDrag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <Button
+                style="@style/Widget.Material3.Button.TextButton.Icon"
+                android:id="@+id/followTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:gravity="center_vertical"
+                app:iconSize="@dimen/spacing_large"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:textSize="@dimen/text_size_body"
+                android:text="@string/follow"
+                app:icon="@drawable/ic_add"
+                app:iconTint="@color/primary"
+                android:textColor="@color/primary"
+                android:textAllCaps="false"
+                android:fontFamily="@font/worksans_regular"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bottomSheetDrag" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="@dimen/zero"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintTop_toBottomOf="@id/followTextView"
+                app:layout_constraintStart_toStartOf="@id/followTextView"
+                app:layout_constraintEnd_toEndOf="@id/followTextView"
+                />
+
+            <Button
+                android:id="@+id/saveTextView"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:fontFamily="@font/worksans_regular"
+                android:gravity="center_vertical"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textColor="@color/color_text_primary"
+                android:textSize="@dimen/text_size_body"
+                app:icon="@drawable/ic_saved"
+                app:iconSize="@dimen/spacing_large"
+                app:iconTint="@color/color_text_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
