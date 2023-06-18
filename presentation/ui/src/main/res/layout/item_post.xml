@@ -138,7 +138,7 @@
                 android:layout_marginBottom="@dimen/spacing_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_heart"
+                app:srcCompat="@drawable/tabler_thumb"
                 app:tint="@color/secondary"/>
 
             <TextView

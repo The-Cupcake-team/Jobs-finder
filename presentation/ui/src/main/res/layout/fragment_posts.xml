@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/cards">
 
         <View
             android:id="@+id/viewBackground"
@@ -78,6 +78,7 @@
             app:layout_constraintTop_toBottomOf="@id/viewBackground"
             android:layout_marginTop="@dimen/spacing_normal"
             app:tabIndicatorHeight="2dp"
+            android:background="@color/cards"
             app:tabRippleColor="@color/cards"
             app:tabTextColor="@color/color_text_tertiary"
             app:tabSelectedTextColor="@color/primary"
