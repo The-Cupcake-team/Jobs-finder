@@ -6,6 +6,7 @@ import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
 import com.cupcake.repository.mapper.toJob
+import com.cupcake.repository.mapper.toJobTitle
 import com.cupcake.repository.mapper.toJobWithJobTitle
 import com.cupcake.repository.mapper.toPost
 import repo.JobFinderRepository
@@ -55,9 +56,6 @@ class JobFinderRepositoryImpl @Inject constructor(
 //	// region Post
 //
 //
-//	override suspend fun getAllJobTitles(): List<JobTitleDto> {
-//		return wrapResponseWithErrorHandler { api.getAllJobTitle() }
-//	}
 //
 //
 //	// region Job
@@ -100,7 +98,7 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAllJobTitles(): List<JobTitle> {
-        TODO("Not yet implemented")
+        return wrapResponseWithErrorHandler { api.getAllJobTitle() }.map { it.toJobTitle() }
     }
 
     override suspend fun getJobById(jobId: String): Job {

@@ -3,6 +3,8 @@ package com.cupcake.ui.utill
 
 import android.os.Build
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -15,6 +17,8 @@ import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.viewmodels.jobs.JobTitleUiState
+import com.google.android.material.textfield.TextInputLayout
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -90,4 +94,17 @@ fun showDrawableErrorImage(view: ImageView, errorType: BaseErrorUiState?){
 @BindingAdapter(value = ["app:convertTime"])
 fun convertTime(view: TextView , time: Long){
    view.text = convert(time)
+}
+
+
+@BindingAdapter(value = ["app:bindArrayAdapter"])
+fun bindArrayAdapter(view: AutoCompleteTextView, queryList: List<JobTitleUiState>?) {
+    queryList?.let {
+        val historySearchAdapter = ArrayAdapter(view.context, R.layout.item_job_title, it.map { jobTitle -> jobTitle.title })
+        if (it.isNotEmpty()){
+            view.requestFocus()
+            view.showDropDown()
+            view.setAdapter(historySearchAdapter)
+        }
+    }
 }

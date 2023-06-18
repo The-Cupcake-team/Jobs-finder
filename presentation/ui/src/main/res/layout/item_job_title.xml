@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cards"
+    android:drawablePadding="8dp"
+    android:ellipsize="end"
+    android:maxLines="1"
+    android:padding="@dimen/spacing_medium"
+    android:textAppearance="?attr/textAppearanceSubtitle1"
+    android:textColor="@color/color_text_secondary" />

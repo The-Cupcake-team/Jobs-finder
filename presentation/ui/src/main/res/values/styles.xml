@@ -260,5 +260,11 @@
     </style>
 
 
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu">
+        <item name="indicatorSize">0dp</item>
+        <item name="android:isIndicator">false</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="tabIndicatorColor">@color/accent_orange</item>
+    </style>
 
 </resources>
