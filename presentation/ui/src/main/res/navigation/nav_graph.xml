@@ -23,10 +23,21 @@
         android:label="JobsFragment" >
         <action
             android:id="@+id/action_jobsFragment_to_jobDetailsFragment"
-            app:destination="@id/jobDetailsFragment" />
+            app:destination="@id/jobDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <argument
             android:name="idJob"
             app:argType="string" />
+        <action
+            android:id="@+id/action_jobsFragment_to_jobSearchFragment"
+            app:destination="@id/jobSearchFragment"
+            app:enterAnim="@android:animator/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/jobsFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -39,5 +50,16 @@
         android:name="com.cupcake.ui.jobs.JobDetailsFragment"
         tools:layout="@layout/fragment_job_details"
         android:label="JobDetailsFragment" />
+    <fragment
+        android:id="@+id/jobSearchFragment"
+        android:name="com.cupcake.ui.job_search.JobSearchFragment"
+        android:label="JobSearchFragment"
+        tools:layout="@layout/fragment_job_search"
+        >
+        <argument
+            android:name="jobTitle"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
 
 </navigation>
