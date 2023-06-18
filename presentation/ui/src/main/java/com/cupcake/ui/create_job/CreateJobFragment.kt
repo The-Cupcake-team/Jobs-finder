@@ -27,14 +27,14 @@ class CreateJobFragment : BaseFragment<FragmentCreateJobBinding, CreateJobViewMo
             fragmentItems = fragmentTasks,
             lifecycle = lifecycle,
         )
-        binding?.apply {
+        binding.apply {
             viewPagerCreateJob.adapter = adapter
             onChangePageSelected()
         }
     }
 
     private fun onChangePageSelected() {
-        binding?.apply {
+        binding.apply {
             viewPagerCreateJob.registerOnPageChangeCallback(object :
                 ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {

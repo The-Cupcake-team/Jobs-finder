@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 import javax.inject.Inject
 
 @HiltViewModel
@@ -163,6 +164,7 @@ class CreateJobViewModel @Inject constructor(
             )
         }
     }
+
     fun onSkillsChange(text: CharSequence) {
         _state.update {
             it.copy(
@@ -172,5 +174,19 @@ class CreateJobViewModel @Inject constructor(
             )
         }
     }
+
+
+    fun onChangeRangSalary(values: List<Float>) {
+
+        _state.update {
+            it.copy(
+                jobFormUiState = it.jobFormUiState.copy(
+                    startRangSalary = values.first().toInt().toString(),
+                    endRangSalary = values.last().toInt().toString(),
+                )
+            )
+        }
+    }
+
 
 }
