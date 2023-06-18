@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    namespace ="com.cupcake.repository"
-    compileSdk=ConfigurationData.COMPILE_SDK_VERSION
+    namespace = "com.cupcake.remote"
+    compileSdk = ConfigurationData.COMPILE_SDK_VERSION
 
     defaultConfig {
         minSdk=ConfigurationData.MIN_SDK_VERSION
@@ -15,36 +15,33 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
-
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
         }
     }
-
     compileOptions {
-        sourceCompatibility = ConfigurationData.JAVA_VERSIONS_CODE
-        targetCompatibility = ConfigurationData.JAVA_VERSIONS_CODE
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-
     kotlinOptions {
         jvmTarget = ConfigurationData.JAVA_VERSIONS_CODE.toString()
     }
-
 }
 
 dependencies {
-
-    implementation(project(Modules.DOMAIN_USECASE))
-    implementation(project(Modules.DATA_REMOTE))
-    implementation(project(Modules.DATA_LOCAL))
-
+    implementation(DependencyProject.androidxCore)
+    implementation(DependencyProject.compat)
 
     testImplementation(DependencyProject.junit)
     androidTestImplementation(DependencyProject.junitExtension)
+    androidTestImplementation(DependencyProject.espresso)
 
-    implementation(DependencyProject.retrofit)
+    implementation(DependencyProject.roomCompiler)
+    implementation(DependencyProject.roomRx)
+    kapt(DependencyProject.roomRuntime)
 
-    implementation(DependencyProject.hilt)
 }
