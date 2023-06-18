@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentPostsBinding
 import com.cupcake.viewmodels.posts.PostsEvent
 import com.cupcake.viewmodels.posts.PostsViewModel
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,15 +24,42 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupPostsRecyclerView()
+  //      setupPostsRecyclerView()
+        setPostsViewPagerAdapter()
         handleEvent()
     }
 
 
-    private fun setupPostsRecyclerView() {
-        val adapter = PostsAdapter(listOf(), viewModel)
-        binding.recyclerViewPosts.adapter = adapter
+//    private fun setupPostsRecyclerView() {
+//        val adapter = PostsAdapter(listOf(), viewModel)
+//        binding.recyclerViewPosts.adapter = adapter
+//    }
+
+
+    private fun setPostsViewPagerAdapter(){
+        val fragments = mapOf(
+            FOLLOWING_FRAGMENT to FollowingFragment(),
+            PUBLIC_FRAGMENT to PublicFragment()
+        )
+        val adapter = ViewPagerPostsAdapter(
+            fragmentManager = requireActivity().supportFragmentManager,
+            fragmentItems = fragments,
+            lifecycle = lifecycle
+        )
+        binding.apply {
+            viewPagerPosts.adapter = adapter
+            setTabLayout(tabLayoutCategory, viewPagerPosts)
+        }
     }
+
+    private fun setTabLayout(tabLayoutCategory : TabLayout, viewPagerCategory : ViewPager2){
+        val tabsName = listOf("Public", "Following")
+        TabLayoutMediator(tabLayoutCategory, viewPagerCategory){ tab , position ->
+            tab.text = tabsName[position]
+        }.attach()
+    }
+
+
 
     private fun handleEvent(){
         lifecycleScope.launch(Dispatchers.Main){
@@ -40,6 +70,12 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
                 }
             }
         }
+    }
+
+
+    companion object{
+        const val FOLLOWING_FRAGMENT = 1
+        const val PUBLIC_FRAGMENT = 0
     }
 
 }
