@@ -1,0 +1,18 @@
+package com.cupcake.jobsfinder.local.entities
+
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "jobs_table")
+data class JobsEntity (
+    @PrimaryKey
+    val id: String,
+    val jobTitle: String,
+    val company: String,
+    val createdTime: String,
+    val workType: String,
+    val jobLocation: String,
+    val jobType: String,
+    val jobDescription: String,
+    val salary: String
+)
