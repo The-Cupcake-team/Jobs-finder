@@ -102,7 +102,6 @@ fun bindArrayAdapter(view: AutoCompleteTextView, queryList: List<JobTitleUiState
     queryList?.let {
         val historySearchAdapter = ArrayAdapter(view.context, R.layout.item_job_title, it.map { jobTitle -> jobTitle.title })
         if (it.isNotEmpty()){
-            view.requestFocus()
             view.showDropDown()
             view.setAdapter(historySearchAdapter)
         }
