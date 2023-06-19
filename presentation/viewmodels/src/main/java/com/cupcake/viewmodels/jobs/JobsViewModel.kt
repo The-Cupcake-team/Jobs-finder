@@ -22,7 +22,6 @@ class JobsViewModel @Inject constructor(
     private val getRecommendedJobs: GetRecommendedJobsUseCase,
     private val getJobsInUserLocation: GetJobsOnUserLocationUseCase,
     private val getTopSalaryInUserLocation: GetTopSalaryInUserLocationUseCase,
-    private val saveJobUseCase: SaveJobUseCase
 ) : BaseViewModel<JobsUiState>(JobsUiState()), JobsListener {
 
     private val _event = MutableSharedFlow<JobsEvent>()
@@ -87,17 +86,7 @@ class JobsViewModel @Inject constructor(
         _state.update { it.copy(error = error, isLoading = false) }
     }
 
-     suspend fun saveJob(jobUiState: JobUiState) {
-        tryToExecute(
-            {saveJobUseCase(jobUiState.toJobWithTitle())},
-            ::onJobSaveSuccess,
-            ::onError
-        )
-    }
 
-    private fun onJobSaveSuccess(isSaved: Boolean){
-        //todo: change ui state
-    }
 
     companion object {
         private const val POPULAR_JOB_LIMIT = 10

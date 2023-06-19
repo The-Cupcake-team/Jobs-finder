@@ -97,9 +97,6 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
                         )
                     }
 
-                    is JobsEvent.SaveButtonClick -> {
-                        //todo: some action like show toast
-                    }
 
                     is JobsEvent.OnFloatingActionClickListener -> {
                         findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToCreateJobFormOneFragment())

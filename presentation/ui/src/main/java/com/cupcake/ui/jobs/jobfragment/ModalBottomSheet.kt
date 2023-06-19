@@ -9,20 +9,25 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.cupcake.ui.R
 import com.cupcake.ui.databinding.EditJobPostBottomSheetsBinding
 import com.cupcake.viewmodels.jobs.BottomSheetEvent
 import com.cupcake.viewmodels.jobs.BottomSheetViewModel
 import com.cupcake.viewmodels.jobs.JobUiState
+import com.cupcake.viewmodels.jobs.toJobWithTitle
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 private const val BOTTOM_SHEET = "ModalBottomSheet"
 
-class ModalBottomSheet : BottomSheetDialogFragment() {
-    private val bottomSheetViewModel: BottomSheetViewModel by viewModels()
+class ModalBottomSheet  : BottomSheetDialogFragment() {
     private lateinit var jobUiState: JobUiState
+    private lateinit var bottomSheetViewModel: BottomSheetViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +40,8 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
             container,
             false
         )
+        bottomSheetViewModel = ViewModelProvider(requireActivity())[BottomSheetViewModel::class.java]
+
         arguments?.let {
             jobUiState = it.getParcelable(BOTTOM_SHEET)!!
         }
@@ -47,7 +54,10 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
         lifecycleScope.launch {
             bottomSheetViewModel.event.collect { bottomSheetsEvent ->
                 when (bottomSheetsEvent) {
-                    is BottomSheetEvent.OnSaveListener -> { savePost(jobUiState)}
+                    is BottomSheetEvent.OnSaveListener -> {
+//                        savePost(jobUiState)
+                    }
+
                     is BottomSheetEvent.OnShareClickListener -> {
                         sharePost(bottomSheetsEvent.id)
                     }
@@ -74,8 +84,6 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
         startActivity(intent)
     }
 
-    private fun savePost(jobUiState: JobUiState) {
-    }
 
 
     companion object {
