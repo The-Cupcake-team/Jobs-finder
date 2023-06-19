@@ -29,8 +29,7 @@
                 android:layout_height="?actionBarSize"
                 android:gravity="center"
                 app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/back"
-                app:navigationIconTint="@color/color_text_secondary">
+                app:navigationIcon="@drawable/back">
 
                 <ImageButton
                     android:id="@+id/image_view_saved_btn"
@@ -39,6 +38,7 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="@dimen/spacing_medium"
                     android:background="@color/background"
+                    android:contentDescription="@string/save_icon"
                     android:src="@drawable/ic_saved" />
             </androidx.appcompat.widget.Toolbar>
 
@@ -68,6 +68,7 @@
                         android:layout_marginTop="@dimen/text_view_job_details_title_top"
                         android:gravity="center"
                         android:text="@{viewModel.jobsUIState.job.title}"
+                        android:textColor="@color/color_text_primary"
                         tools:text="Junior UI/UX Designer" />
 
                     <TextView
@@ -79,6 +80,7 @@
                         android:layout_marginTop="@dimen/spacing_small"
                         android:gravity="center"
                         android:text="@{viewModel.jobsUIState.job.companyName}"
+                        android:textColor="@color/color_text_tertiary"
                         tools:text="Meta inc." />
 
                     <com.google.android.material.tabs.TabLayout
@@ -89,7 +91,7 @@
                         android:background="@drawable/tab_layout_background"
                         android:padding="@dimen/spacing_small"
                         app:tabIndicator="@drawable/tab_indicator"
-                        app:tabIndicatorColor="@color/chip_color_and_tab_layout_color"
+                        app:tabIndicatorColor="@color/tab_layout_color"
                         app:tabIndicatorFullWidth="true"
                         app:tabIndicatorGravity="stretch"
                         app:tabMode="fixed"
@@ -105,19 +107,23 @@
                 android:layout_height="@dimen/company_logo_size"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:elevation="@dimen/elevation_job_details"
+                android:paddingHorizontal="@dimen/spacing_normal"
+                android:paddingVertical="@dimen/spacing_medium"
                 app:cardBackgroundColor="@color/background"
                 app:cardCornerRadius="@dimen/spacing_normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tool_bar"
-                app:strokeColor="@color/light_border"
+                app:strokeColor="@color/border_color"
                 app:strokeWidth="@dimen/elevation_job_details">
 
                 <ImageView
-                    android:layout_width="@dimen/company_logo_size"
-                    android:layout_height="@dimen/company_logo_size"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/metalogo" />
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/spacing_normal"
+                    android:contentDescription="@string/company_logo"
+                    android:src="@drawable/meta_logo" />
             </com.google.android.material.card.MaterialCardView>
 
             <androidx.viewpager2.widget.ViewPager2
@@ -134,7 +140,7 @@
                 android:id="@+id/button_apply_job"
                 style="@style/normalButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/job_details_button_height"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_medium"
                 android:text="@string/apply_btn"

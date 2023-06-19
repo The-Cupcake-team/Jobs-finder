@@ -116,6 +116,8 @@
     <string name="required_skills">Required Skills</string>
     <string name="popular_jobs">Popular Jobs</string>
     <string name="retry">Retry</string>
+    <string name="save_icon">save icon</string>
+    <string name="company_logo">company logo</string>
 
 
 </resources>

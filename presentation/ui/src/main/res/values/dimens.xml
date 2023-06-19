@@ -61,5 +61,6 @@
 
     <dimen name="size16">16sp</dimen>
     <dimen name="lottie_image_dimens">240dp</dimen>
+    <dimen name="job_details_button_height">48dp</dimen>
 
 </resources>

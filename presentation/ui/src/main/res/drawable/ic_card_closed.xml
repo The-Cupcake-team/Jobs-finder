@@ -3,14 +3,14 @@
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-  <path
-      android:pathData="M4,0L20,0A4,4 0,0 1,24 4L24,20A4,4 0,0 1,20 24L4,24A4,4 0,0 1,0 20L0,4A4,4 0,0 1,4 0z"
-      android:fillColor="#E7EDF5"/>
-  <path
-      android:pathData="M8,10L12,14L16,10"
-      android:strokeLineJoin="round"
-      android:strokeWidth="2"
-      android:fillColor="#00000000"
-      android:strokeColor="#4B8CED"
-      android:strokeLineCap="round"/>
+    <path
+        android:fillColor="@color/expanded_chip_color"
+        android:pathData="M4,0L20,0A4,4 0,0 1,24 4L24,20A4,4 0,0 1,20 24L4,24A4,4 0,0 1,0 20L0,4A4,4 0,0 1,4 0z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M8,10L12,14L16,10"
+        android:strokeWidth="2"
+        android:strokeColor="@color/expanded_chip_arrow_color"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
 </vector>
