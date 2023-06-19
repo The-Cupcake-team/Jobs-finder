@@ -1,10 +1,7 @@
 package com.cupcake.repository
 
 import android.util.Log
-import com.cupcake.models.Job
-import com.cupcake.models.JobTitle
-import com.cupcake.models.JobWithTitle
-import com.cupcake.models.Post
+import com.cupcake.models.*
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
@@ -136,11 +133,14 @@ class JobFinderRepositoryImpl @Inject constructor(
                 Log.i("TAG", "base successful : ${baseResponse.value}")
                 return baseResponse.value!!
             } else {
-                throw Throwable("Invalid response")
+//                throw Throwable("Invalid response")
+                throw ErrorType.Server(baseResponse?.message!!)
+
             }
         } else {
             val errorResponse = response.errorBody()?.toString()
-            throw Throwable(errorResponse ?: "Error Network")
+//            throw Throwable(errorResponse ?: "Error Network")
+            throw ErrorType.Server(errorResponse ?: "Error Network")
         }
 
     }

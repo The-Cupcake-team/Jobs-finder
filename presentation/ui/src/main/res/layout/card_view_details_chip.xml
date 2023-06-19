@@ -23,7 +23,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/cards">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_contract_type"
@@ -62,7 +63,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/cards">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_Experience"
@@ -101,7 +103,8 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/cards">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_location"
@@ -140,7 +143,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/cards">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_applicants"
@@ -179,7 +183,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/cards">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_posted_on"
@@ -216,7 +221,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/cards">
 
                 <ImageView
                     android:id="@+id/image_view_icon_details_salary"
