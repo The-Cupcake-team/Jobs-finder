@@ -5,13 +5,16 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.comment.CommentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        tools:context=".posts.CommentsFragment">
+        tools:context=".comment.CommentsFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
@@ -104,16 +107,36 @@
             app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
             app:layout_constraintTop_toBottomOf="@+id/text_view_content_post" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
+            android:layout_marginTop="@dimen/spacing_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_normal"
-            android:paddingBottom="@dimen/spacing_normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_created_at"
-            tools:itemCount="2"
+            app:layout_constraintTop_toBottomOf="@id/text_view_created_at" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerViewComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            app:items="@{viewModel.state.postsResult}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
             tools:listitem="@layout/item_comment" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/dividerTwo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/view_background_comment_bar" />
 
         <View
             android:id="@+id/view_background_comment_bar"
@@ -143,7 +166,7 @@
             style="@style/edit_text_post_comments_style"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/search_home_height"
-            android:backgroundTint="@color/background"
+            android:background="@android:color/transparent"
             app:layout_constraintBottom_toBottomOf="@+id/image_view_person_image_comment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_view_person_image_comment"
