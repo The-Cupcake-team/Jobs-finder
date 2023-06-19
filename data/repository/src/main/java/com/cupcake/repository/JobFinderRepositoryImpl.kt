@@ -136,7 +136,7 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getPostById(id: String): Post {
-        TODO("Not yet implemented")
+        return wrapResponseWithErrorHandler { api.getPostById(id) }.toPost()
     }
     //endregion
     private suspend fun <T> wrapResponseWithErrorHandler(
