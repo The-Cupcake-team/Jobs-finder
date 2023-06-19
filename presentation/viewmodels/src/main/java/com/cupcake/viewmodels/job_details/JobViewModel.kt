@@ -1,52 +1,40 @@
 package com.cupcake.viewmodels.job_details
 
-
-import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Job
 import com.cupcake.usecase.GetJobByIdUseCase
+import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
-import com.cupcake.viewmodels.jobs.ErrorUiState
-import com.cupcake.viewmodels.jobs.JobsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class JobViewModel @Inject constructor(
     private val getJobByIdUseCase: GetJobByIdUseCase
-) : BaseViewModel<JobsUiState>(JobsUiState()) {
+) : BaseViewModel<JobDetailUiState>(JobDetailUiState()) {
 
-    private val _jobsUIState = MutableStateFlow(
-        JobDetailUiState(job = JobsDetailsUiState())
-    )
-    val jobsUIState: StateFlow<JobDetailUiState> = _jobsUIState
-    private val errors: MutableList<ErrorUiState> = mutableListOf()
-    private val handler = CoroutineExceptionHandler { _, exception ->
-        onGetJobDetailsFailure(exception)
-    }
-
-    private fun onGetJobDetailsFailure(exception: Throwable) {
-        this._jobsUIState.update {
-            it.copy(
-                isLoading = false,
-                error = listOf(exception.message.toString())
-            )
-        }
+    init {
+        getJobDetails("438cd8f7-af62-4796-84be-a98807e874d8")
     }
 
     private fun getJobDetails(jobId: String) {
-        viewModelScope.launch(Dispatchers.IO + handler) {
-            val jobDetails = getJobByIdUseCase(jobId)
-            _jobsUIState.value = _jobsUIState.value.copy(
+        tryToExecute(
+            { getJobByIdUseCase(jobId) },
+            ::onGetJobDetailsSuccess,
+            ::onGetJobDetailsFailure
+        )
+    }
+
+    private fun onGetJobDetailsSuccess(jobDetails: Job) {
+        updateState {
+            it.copy(
                 isLoading = false,
+                error = null,
                 job = jobDetails.toJobsDetailsUiState()
-            )
-        }
+            ) }
+    }
+
+    private fun onGetJobDetailsFailure(error: BaseErrorUiState) {
+        updateState { it.copy(isLoading = false, error = error) }
     }
 
     private fun Job.toJobsDetailsUiState(): JobsDetailsUiState {
@@ -57,13 +45,9 @@ class JobViewModel @Inject constructor(
             workType = workType,
             jobType = jobType,
             location = jobLocation,
-            salary = jobSalary.toString(),
+            salary = jobSalary.toInt(),
             createdAt = createdAt,
             jobDescription = jobDescription
         )
-    }
-
-    init {
-        getJobDetails("438cd8f7-af62-4796-84be-a98807e874d8")
     }
 }

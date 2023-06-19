@@ -19,20 +19,20 @@
             android:id="@+id/layout_details_chip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:createdAt="@{viewModel.jobsUIState.job.createdAt}"
+            app:createdAt="@{viewModel.state.job.createdAt}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:location="@{viewModel.jobsUIState.job.location}"
-            app:salary="@{(`$` + String.valueOf(viewModel.jobsUIState.job.salary) + `/mo`)}"
-            app:workType="@{viewModel.jobsUIState.job.workType}" />
+            app:location="@{viewModel.state.job.location}"
+            app:salary="@{(`$` + String.valueOf(viewModel.state.job.salary) + `/mo`)}"
+            app:workType="@{viewModel.state.job.workType}" />
 
         <com.cupcake.ui.job_details.custom_view.ExpandCardCustomView
             android:id="@+id/card_view_expandable_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing_normal"
-            app:cardDescription="@{viewModel.jobsUIState.job.jobDescription}"
+            app:cardDescription="@{viewModel.state.job.jobDescription}"
             app:layout_constraintEnd_toEndOf="@+id/layout_details_chip"
             app:layout_constraintStart_toStartOf="@+id/layout_details_chip"
             app:layout_constraintTop_toBottomOf="@id/layout_details_chip" />

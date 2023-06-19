@@ -68,7 +68,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/text_view_job_details_title_top"
                         android:gravity="center"
-                        android:text="@{viewModel.jobsUIState.job.title}"
+                        android:text="@{viewModel.state.job.title}"
                         android:textColor="@color/color_text_primary"
                         tools:text="Junior UI/UX Designer" />
 
@@ -80,7 +80,7 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:gravity="center"
-                        android:text="@{viewModel.jobsUIState.job.companyName}"
+                        android:text="@{viewModel.state.job.companyName}"
                         android:textColor="@color/color_text_tertiary"
                         tools:text="Meta inc." />
 
