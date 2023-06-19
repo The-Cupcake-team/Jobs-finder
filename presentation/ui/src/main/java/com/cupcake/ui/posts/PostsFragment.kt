@@ -2,20 +2,17 @@ package com.cupcake.ui.posts
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentPostsBinding
-import com.cupcake.viewmodels.posts.PostsEvent
 import com.cupcake.viewmodels.posts.PostsViewModel
+
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
@@ -23,37 +20,42 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
     PostsViewModel::class.java
 ) {
     override val LOG_TAG: String = this.javaClass.name
-
+    private val fragmentList = mutableListOf<Fragment>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-  //      setupPostsRecyclerView()
         setPostsViewPagerAdapter()
-        handleEvent()
     }
 
-
-//    private fun setupPostsRecyclerView() {
-//        val adapter = PostsAdapter(listOf(), viewModel)
-//        binding.recyclerViewPosts.adapter = adapter
-//    }
-
-
-    private fun setPostsViewPagerAdapter(){
+    private fun setPostsViewPagerAdapter() {
         val fragments = mapOf(
-            FOLLOWING_FRAGMENT to FollowingFragment(),
-            PUBLIC_FRAGMENT to PublicFragment()
+            PUBLIC_FRAGMENT to PublicFragment(),
+            FOLLOWING_FRAGMENT to FollowingFragment()
         )
+        fragmentList.clear()
+
+        for (fragment in fragments.values) {
+            fragmentList.add(fragment)
+        }
         val adapter = ViewPagerPostsAdapter(
-            fragmentManager = requireActivity().supportFragmentManager,
-            fragmentItems = fragments,
+            fragmentManager = childFragmentManager,
+            fragmentList = fragmentList,
             lifecycle = lifecycle
         )
-        binding.apply {
-            viewPagerPosts.adapter = adapter
-            setTabLayout(tabLayoutCategory, viewPagerPosts)
+        binding.viewPagerPosts.adapter = adapter
+        setTabLayout(binding.tabLayoutCategory, binding.viewPagerPosts)
+    }
+
+    private fun setTabLayout(tabLayoutCategory: TabLayout, viewPagerCategory: ViewPager2) {
+        val tabsName = listOf("Public", "Following")
+        TabLayoutMediator(tabLayoutCategory, viewPagerCategory) { tab, position ->
+            tab.text = tabsName[position]
+        }.attach()
+
+        viewPagerCategory.post {
+            setUpTransformerViewPager(viewPagerCategory)
         }
     }
+
 
     private fun setUpTransformerViewPager(viewPager: ViewPager2) {
         val transformer = CompositePageTransformer()
@@ -72,30 +74,6 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
         }
         viewPager.setPageTransformer(transformer)
     }
-
-
-
-    private fun setTabLayout(tabLayoutCategory : TabLayout, viewPagerCategory : ViewPager2){
-        val tabsName = listOf("Public", "Following")
-        TabLayoutMediator(tabLayoutCategory, viewPagerCategory){ tab , position ->
-            tab.text = tabsName[position]
-        }.attach()
-        setUpTransformerViewPager(viewPagerCategory)
-    }
-
-
-
-    private fun handleEvent(){
-        lifecycleScope.launch(Dispatchers.Main){
-            viewModel.postEvent.collect{postEvent ->
-                when(postEvent){
-                    is PostsEvent.PostCommentClick ->
-                        Toast.makeText(requireContext(), postEvent.id, Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
 
     companion object{
         const val FOLLOWING_FRAGMENT = 1
