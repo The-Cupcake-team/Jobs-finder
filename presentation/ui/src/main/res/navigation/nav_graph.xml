@@ -39,5 +39,17 @@
         android:name="com.cupcake.ui.jobs.JobDetailsFragment"
         tools:layout="@layout/fragment_job_details"
         android:label="JobDetailsFragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.cupcake.ui.register.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cupcake.ui.login.LoginFragment"
+        android:label="LoginFragment" />
 
 </navigation>
