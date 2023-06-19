@@ -62,7 +62,7 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
         transformer.addTransformer(MarginPageTransformer(20))
         transformer.addTransformer { view, position ->
             if (position <= -1.0F || position >= 1.0F) {
-                view.alpha = 0.2F
+                view.alpha = 0.0F
                 view.visibility = View.GONE
             } else if (position == 0.0F) {
                 view.alpha = 1.0F
