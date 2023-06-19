@@ -53,6 +53,19 @@ fun JobTitle.toJobTitleUiState() = JobTitleUiState(
     title = this.title
 )
 
+fun JobUiState.toJobWithTitle(): JobWithTitle{
+    return JobWithTitle(
+        id = id,
+        jobTitle = JobTitle(title = title, id = id),
+        company = companyName,
+        createdTime = createdAt.toString(),
+        workType = detailsChip[0],
+        jobLocation = location,
+        jobType = detailsChip[1],
+        jobDescription = companyName,
+        salary = salary
+    )
+}
 data class JobDetailUiState(
     val job: JobsDetailsUiState,
     val isLoading: Boolean = false,

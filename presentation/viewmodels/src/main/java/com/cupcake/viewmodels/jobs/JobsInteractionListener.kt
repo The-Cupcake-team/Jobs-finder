@@ -1,6 +1,5 @@
 package com.cupcake.viewmodels.jobs
 
-import com.cupcake.viewmodels.BuildConfig
 import com.cupcake.viewmodels.base.BaseInteractionListener
 
 interface JobsListener : BaseInteractionListener {
@@ -14,5 +13,4 @@ interface JobsListener : BaseInteractionListener {
 
     fun onSearchBoxClickListener()
 
-    fun onSaveButtonClicked()
 }

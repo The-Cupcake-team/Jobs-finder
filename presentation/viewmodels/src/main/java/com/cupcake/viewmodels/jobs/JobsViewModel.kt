@@ -1,6 +1,7 @@
 package com.cupcake.viewmodels.jobs
 
 import androidx.lifecycle.viewModelScope
+import com.cupcake.usecase.SaveJobUseCase
 import com.cupcake.usecase.job.GetJobsOnUserLocationUseCase
 import com.cupcake.usecase.job.GetPopularJobsUseCase
 import com.cupcake.usecase.job.GetRecommendedJobsUseCase
@@ -20,7 +21,8 @@ class JobsViewModel @Inject constructor(
     private val getPopularJobs: GetPopularJobsUseCase,
     private val getRecommendedJobs: GetRecommendedJobsUseCase,
     private val getJobsInUserLocation: GetJobsOnUserLocationUseCase,
-    private val getTopSalaryInUserLocation: GetTopSalaryInUserLocationUseCase
+    private val getTopSalaryInUserLocation: GetTopSalaryInUserLocationUseCase,
+    private val saveJobUseCase: SaveJobUseCase
 ) : BaseViewModel<JobsUiState>(JobsUiState()), JobsListener {
 
     private val _event = MutableSharedFlow<JobsEvent>()
@@ -85,8 +87,16 @@ class JobsViewModel @Inject constructor(
         _state.update { it.copy(error = error, isLoading = false) }
     }
 
-    private fun onSaveButtonClicked(newValue: Boolean) {
-        _state.update { it.copy(isSavedJob = newValue) }
+     suspend fun saveJob(jobUiState: JobUiState) {
+        tryToExecute(
+            {saveJobUseCase(jobUiState.toJobWithTitle())},
+            ::onJobSaveSuccess,
+            ::onError
+        )
+    }
+
+    private fun onJobSaveSuccess(isSaved: Boolean){
+        //todo: change ui state
     }
 
     companion object {
@@ -111,15 +121,10 @@ class JobsViewModel @Inject constructor(
         viewModelScope.launch { _event.emit(JobsEvent.OnFloatingActionClickListener) }
     }
 
-
-
     override fun onImageViewMoreClickListener(model:JobUiState) {
         viewModelScope.launch { _event.emit(JobsEvent.OnImageViewMoreClickListener(model)) }
     }
 
-    override fun onSaveButtonClicked(){
-        viewModelScope.launch { _event.emit(JobsEvent.SaveButtonClick) }
-    }
 
     fun onRetryClicked(){
         _state.update {it.copy(error = null, isLoading = true) }

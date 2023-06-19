@@ -93,3 +93,20 @@ fun JobDto.toJob(): Job {
     )
 }
 
+fun JobsEntity.toJobWithTitle(): JobWithTitle{
+    return return JobWithTitle(
+        id = id,
+        jobTitle = JobTitle(
+            id = jobId,
+            title = jobTitle
+        ),
+        company = company,
+        createdTime = createdTime,
+        workType = workType,
+        jobLocation = jobLocation,
+        jobDescription = jobDescription,
+        jobType = jobType,
+        salary = salary
+    )
+}
+
