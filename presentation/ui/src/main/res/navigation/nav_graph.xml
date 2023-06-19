@@ -14,7 +14,12 @@
     <fragment
         android:id="@+id/postsFragment"
         android:name="com.cupcake.ui.posts.PostsFragment"
-        android:label="PostsFragment" />
+        android:label="PostsFragment" >
+        <action
+            android:id="@+id/action_postsFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/jobsFragment"
@@ -39,5 +44,12 @@
         android:name="com.cupcake.ui.jobs.JobDetailsFragment"
         tools:layout="@layout/fragment_job_details"
         android:label="JobDetailsFragment" />
-
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="com.cupcake.ui.comment.CommentsFragment"
+        android:label="CommentsFragment">
+        <argument
+            android:name="postID"
+            app:argType="string" />
+    </fragment>
 </navigation>
