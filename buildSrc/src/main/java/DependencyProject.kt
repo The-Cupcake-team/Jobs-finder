@@ -19,6 +19,7 @@ object DependencyProject {
     private const val KOTLIN_SERIALIZATION_VERSION = "1.5.0"
     private const val NAVIGATION_VERSION = "2.5.3"
     private const val LOTTIE_VERSION = "6.0.1"
+    private const val DATASTORE_VERSION = "1.0.0"
 
     const val androidxCore = "androidx.core:core-ktx:$CORE_VERSION"
     const val compat = "androidx.appcompat:appcompat:$APP_COMPAT_VERSION"
@@ -56,4 +57,5 @@ object DependencyProject {
 
     const val coil = "io.coil-kt:coil:$COIL_VERSION"
 
+    const val dataStore = "androidx.datastore:datastore-preferences:$DATASTORE_VERSION"
 }
