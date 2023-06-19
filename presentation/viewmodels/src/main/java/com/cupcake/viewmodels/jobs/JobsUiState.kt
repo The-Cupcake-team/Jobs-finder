@@ -1,10 +1,12 @@
 package com.cupcake.viewmodels.jobs
 
+import android.os.Parcelable
 import com.cupcake.models.JobTitle
 import com.cupcake.models.JobWithTitle
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.job_details.JobDetailsUiState
 import com.cupcake.viewmodels.job_details.JobsDetailsUiState
+import kotlinx.parcelize.Parcelize
 
 
 data class JobsUiState(
@@ -32,6 +34,8 @@ fun JobWithTitle.toJobUiState2() = JobDetailsUiState(
     salary = this.salary
 )
 
+
+@Parcelize
 data class JobUiState(
     val id : String = "",
     val image: String = "",
@@ -41,7 +45,8 @@ data class JobUiState(
     val location: String = "",
     val salary: String = "",
     val createdAt: Long = 0,
-)
+): Parcelable
+
 
 data class JobTitleUiState(
     val id: String = "",

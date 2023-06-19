@@ -4,18 +4,22 @@
 
 
     <data>
+
         <variable
-            name="bottomSheets"
-            type="com.cupcake.ui.jobs.jobfragment.JobsFragment" />
+            name="viewModel"
+            type="com.cupcake.viewmodels.jobs.BottomSheetViewModel" />
+
+        <variable
+            name="item"
+            type="com.cupcake.viewmodels.jobs.JobUiState" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/standard_bottom_sheet"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
         style="@style/BottomSheet"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,9 +28,9 @@
 
             <com.google.android.material.bottomsheet.BottomSheetDragHandleView
                 android:id="@+id/drag_handle"
-                android:layout_width="72dp"
-                android:layout_height="4dp"
-                android:layout_marginVertical="16dp"
+                android:layout_width="@dimen/bottom_sheet_drag_handle_view_width"
+                android:layout_height="@dimen/bottom_sheet_drag_handle_view_height"
+                android:layout_marginVertical="@dimen/size16"
                 android:layout_marginTop="@dimen/size16"
                 android:background="@color/color_text_tertiary"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -34,35 +38,37 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/save"
+                android:id="@+id/textViewSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
+                android:layout_marginVertical="@dimen/size20"
                 android:backgroundTint="@color/black"
-                android:drawablePadding="8dp"
+                android:drawablePadding="@dimen/drawable_padding"
                 android:text="@string/save"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_size_body"
+                android:onClick="@{()->viewModel.onSaveListener(item)}"
                 app:drawableStartCompat="@drawable/ic_saved"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/drag_handle" />
 
             <TextView
-                android:id="@+id/share"
+                android:id="@+id/textViewShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp"
+                android:layout_marginVertical="@dimen/size20"
                 android:backgroundTint="@color/black"
-                android:drawablePadding="8dp"
-                android:text="@string/share"
                 android:clickable="true"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:drawablePadding="@dimen/drawable_padding"
+                android:focusable="true"
+                android:onClick="@{()->viewModel.onShareClickListener(item.id)}"
+                android:text="@string/share"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_size_body"
                 app:drawableStartCompat="@drawable/share"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/save"
-            android:focusable="true" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewSave" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
