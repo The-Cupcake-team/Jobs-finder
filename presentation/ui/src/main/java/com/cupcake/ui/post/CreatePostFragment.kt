@@ -62,16 +62,24 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         if (resultCode == RESULT_OK) {
             when (requestCode) {
                 REQUEST_CAMERA_CODE -> {
+                    binding.relativeLayout.visibility = View.VISIBLE
                     val bitmapImageFromCamera = data?.extras?.get("data") as Bitmap
+
                     binding.imageOfPost.load(bitmapImageFromCamera) {
                         crossfade(true)
                         crossfade(1000)
                     }
                     binding.imageOfPost.visibility = View.VISIBLE
+                    binding.iconButtonRemoveImage.setOnClickListener {
+                        binding.relativeLayout.visibility = View.GONE
+                    }
                 }
                 REQUEST_GALLERY_CODE -> {
                     binding.imageOfPost.load(data?.data)
-                    binding.imageOfPost.visibility = View.VISIBLE
+                    binding.relativeLayout.visibility = View.VISIBLE
+                    binding.iconButtonRemoveImage.setOnClickListener {
+                        binding.relativeLayout.visibility = View.GONE
+                    }
                 }
             }
         }
@@ -88,7 +96,6 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
                         openCamera()
                 }
             }
-
             override fun onPermissionRationaleShouldBeShown(
                 p0: MutableList<PermissionRequest>?,
                 p1: PermissionToken?
