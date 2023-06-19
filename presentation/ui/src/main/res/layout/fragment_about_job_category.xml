@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         tools:context="com.cupcake.ui.jobs.AboutJobCategory">
 
-        <com.cupcake.jobsfinder.ui.jobs.DetailsChipCustomView
+        <com.cupcake.ui.job_details.custom_view.DetailsChipCustomView
             android:id="@+id/layout_details_chip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,11 +27,11 @@
             app:salary="@{viewModel.jobsUIState.job.salary}"
             app:workType="@{viewModel.jobsUIState.job.workType}" />
 
-        <com.cupcake.jobsfinder.ui.jobs.ExpandCardCustomView
+        <com.cupcake.ui.job_details.custom_view.ExpandCardCustomView
             android:id="@+id/card_view_expandable_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_medium"
+            android:layout_marginVertical="@dimen/spacing_normal"
             app:cardDescription="@{viewModel.jobsUIState.job.jobDescription}"
             app:layout_constraintEnd_toEndOf="@+id/layout_details_chip"
             app:layout_constraintStart_toStartOf="@+id/layout_details_chip"
