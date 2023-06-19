@@ -46,6 +46,7 @@
     <color name="accent_purple">#F5EFFF</color>
     <color name="accent_cyan">#E7FEFF</color>
     <color name="accent_orange">#FFEDED</color>
+    <color name="defaultColor">#97BFFB</color>
 
 
 </resources>

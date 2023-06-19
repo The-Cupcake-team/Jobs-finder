@@ -79,16 +79,16 @@
                 app:srcCompat="@drawable/ic_more"
                 app:tint="@color/secondary"/>
 
-            <TextView
+            <com.cupcake.ui.posts.custom_view.ReadMoreCustomView
                 android:id="@+id/textViewContent"
                 style="@style/TextStyle.body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:ellipsize="end"
-                android:maxLines="2"
                 android:text="@{item.description}"
+                app:textMode="length"
+                app:anchorPoint="150"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt"
                 tools:text="@string/post_content" />
@@ -139,7 +139,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/tabler_thumb"
-                app:tint="@color/secondary"/>
+               />
 
             <TextView
                 android:id="@+id/textViewCommentsCount"
