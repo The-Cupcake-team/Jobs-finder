@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="item"
+            type="com.cupcake.viewmodels.comment.CommentUiState.PostUiState" />
+
+        <variable
+            name="listener"
+            type="com.cupcake.viewmodels.comment.CommentInteractionListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,8 +84,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
+            android:text="@{item.content}"
             android:ellipsize="end"
-            android:text="@string/post_content"
+            tools:text="@string/post_content"
             android:textColor="@color/color_text_primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_person_job_title"
@@ -90,7 +98,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
+            app:convertTime="@{item.createAt}"
             android:layout_marginEnd="@dimen/spacing_medium"
+            tools:text="@string/created_at"
             android:text="@string/created_at"
             android:layout_marginBottom="@dimen/spacing_medium"
             android:textColor="@color/color_text_tertiary"
