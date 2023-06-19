@@ -2,6 +2,7 @@ package com.cupcake.remote
 
 import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
+import com.cupcake.remote.response.authentication.register.UserDto
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
 import com.cupcake.remote.response.job.JobWithTitleDto
@@ -71,4 +72,14 @@ interface JobApiService {
     suspend fun getAllJobTitle(): Response<BaseResponse<List<JobTitleDto>>>
     // endregion
 
+    // region Authentication
+    @FormUrlEncoded
+    @POST("/register")
+    suspend fun register(
+        @Field("fullName") fullName: String,
+        @Field("username") userName: String,
+        @Field("phoneNumber") phoneNumber: String,
+        @Field("password") password: String,
+    ): Response<BaseResponse<UserDto>>
+    // endregion
 }
