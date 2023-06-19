@@ -73,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
+                android:onClick="@{() -> listener.onOptionsClick()}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewPersonName"
@@ -124,7 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_small"
-                android:text="@string/likes_count"
+                android:text="@{String.valueOf(item.likes)}"
                 android:textColor="@color/color_text_tertiary"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLike"
                 app:layout_constraintStart_toEndOf="@+id/imageViewLike"
@@ -136,10 +137,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_normal"
+                app:isLiked="@{item.isLiked}"
+                android:onClick="@{() -> listener.onLikeClick(item.id)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/tabler_thumb"
-                app:tint="@color/secondary"/>
+                app:srcCompat="@drawable/tabler_thumb" />
 
             <TextView
                 android:id="@+id/textViewCommentsCount"
@@ -158,10 +160,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
+                android:onClick="@{() -> listener.onClickShare(item.id)}"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewComment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageViewComment"
-                app:srcCompat="@drawable/ic_saved"
+                app:srcCompat="@drawable/ic_share"
                 app:tint="@color/secondary"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
