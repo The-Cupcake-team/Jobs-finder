@@ -11,6 +11,8 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import coil.load
@@ -44,6 +46,7 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         binding.buttonPhoto.setOnClickListener {
             checkPermissionOfGallery()
         }
+        setSpinnerAdapter()
         lifecycleScope.launch {
             viewModel.state.collect { state ->
                 if (state.isPostCreated) {
@@ -156,10 +159,33 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         startActivityForResult(galleryIntent, REQUEST_GALLERY_CODE)
     }
 
+    private fun setSpinnerAdapter(){
+        val listStateVisibility = listOf(VISIBILITY_PUBLIC, VISIBILITY_PRIVATE)
+        val adapterSpinner = ArrayAdapter(this.requireContext(), R.layout.custom_spinner,listStateVisibility)
+        binding.spinnerStatus.apply{
+            adapter = adapterSpinner
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    Toast.makeText(requireContext(), listStateVisibility[position], Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    Toast.makeText(requireContext(), "Please Select the status visibility of post", Toast.LENGTH_SHORT).show()
+                }
+
+            }
+        }
+    }
+
     companion object {
         const val REQUEST_CAMERA_CODE = 1
         const val REQUEST_GALLERY_CODE = 2
+        const val VISIBILITY_PUBLIC = "Public"
+        const val VISIBILITY_PRIVATE = "Private"
     }
 }
-
-

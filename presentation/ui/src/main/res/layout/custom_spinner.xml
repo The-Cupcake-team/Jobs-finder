@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="@dimen/spacing_normal"
+    android:paddingVertical="@dimen/spacing_tiny"
+    android:drawableStart="@drawable/ic_icon_global"
+    android:layout_marginStart="@dimen/spacing_tiny"
+    android:textColor="@color/primary"
+    style="@style/Base.CardView"
+    >
+
+</TextView>
