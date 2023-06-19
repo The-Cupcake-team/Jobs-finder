@@ -138,8 +138,10 @@ class CreateJobViewModel @Inject constructor(
         _state.update { it.copy(jobFormUiState = it.jobFormUiState.copy(experienceRequirement = text.toString())) }
     }
 
-    fun onSkillsChange(text: CharSequence) {
-        _state.update { it.copy(jobFormUiState = it.jobFormUiState.copy()) }
+    fun onSkillsChange(skills: List<String>) {
+        _state.update { it.copy(jobFormUiState = it.jobFormUiState.copy(
+            skills = skills
+        )) }
     }
 
 
