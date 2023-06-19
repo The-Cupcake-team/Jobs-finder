@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:location="@{viewModel.jobsUIState.job.location}"
-            app:salary="@{viewModel.jobsUIState.job.salary}"
+            app:salary="@{(`$` + String.valueOf(viewModel.jobsUIState.job.salary) + `/mo`)}"
             app:workType="@{viewModel.jobsUIState.job.workType}" />
 
         <com.cupcake.ui.job_details.custom_view.ExpandCardCustomView
