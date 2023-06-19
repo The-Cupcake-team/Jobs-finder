@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.posts.FollowingPostsViewModel" />
@@ -11,8 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/blue_300"
         android:layout_height="match_parent"
+        android:background="@color/blue_300"
         tools:context=".posts.FollowingFragment">
 
 
@@ -30,6 +32,43 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:listitem="@layout/item_post" />
+
+        <include
+            android:id="@+id/loading"
+            bind:isLoading="@{viewModel.state.loading}"
+            layout="@layout/loading"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenIf="@{viewModel.state.loading}" />
+
+        <include
+            android:id="@+id/error"
+            bind:error="@{viewModel.state.error}"
+            layout="@layout/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenIf="@{viewModel.state.error != null}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonTryAgain"
+            style="@style/outlineButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:onClick="@{() -> viewModel.onRetryClicked()}"
+            android:text="@string/retry"
+            app:circularflow_defaultRadius="@dimen/spacing_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error"
+            app:showWhenIf="@{viewModel.state.error != null}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
