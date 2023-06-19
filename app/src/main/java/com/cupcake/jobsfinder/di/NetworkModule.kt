@@ -34,6 +34,13 @@ object NetworkModule {
 	): OkHttpClient {
 		return OkHttpClient().newBuilder()
 			.addInterceptor(loggingInterceptor)
+			.addInterceptor { chain ->
+				val originalRequest = chain.request()
+				val newRequest = originalRequest.newBuilder()
+					.header("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlZTVhZTBkNS0xNzgzLTRhNWItYWVkMi0zYzcxOWQyY2FmMzQiLCJleHAiOjE2ODc0NTg3MjN9.KuUkrlsOBP75uQq5HDkd-7ZEQZ0_zleiPYOUdV3rPRk")
+					.build()
+				chain.proceed(newRequest)
+			}
 			.build()
 	}
 
