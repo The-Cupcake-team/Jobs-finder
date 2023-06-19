@@ -1,17 +1,22 @@
-package com.cupcake.ui.jobs
+package com.cupcake.ui.jobs.jobfragment
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.cupcake.ui.BuildConfig
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentJobsBinding
+import com.cupcake.ui.jobs.JobsItem
 import com.cupcake.ui.jobs.adapter.JobsAdapter
 import com.cupcake.viewmodels.jobs.JobsEvent
 import com.cupcake.viewmodels.jobs.JobsUiState
 import com.cupcake.viewmodels.jobs.JobsViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -20,7 +25,7 @@ import kotlinx.coroutines.launch
 class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     R.layout.fragment_jobs, JobsViewModel::class.java
 ) {
-
+    private lateinit var modalBottomSheet : ModalBottomSheet
     override val LOG_TAG: String = this::class.java.name
     private lateinit var jobsAdapter: JobsAdapter
     private lateinit var job: Job
@@ -95,6 +100,16 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
                     is JobsEvent.SaveButtonClick -> {
                         //todo: some action like show toast
                     }
+
+                    is JobsEvent.OnFloatingActionClickListener -> {
+                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToCreateJobFormOneFragment())
+                    }
+
+                    is JobsEvent.OnImageViewMoreClickListener -> {
+                        modalBottomSheet=ModalBottomSheet(jobsEvent.model)
+                        modalBottomSheet.show(
+                            requireActivity().supportFragmentManager
+                            , "ModalBottomSheet") }
 
                 }
             }

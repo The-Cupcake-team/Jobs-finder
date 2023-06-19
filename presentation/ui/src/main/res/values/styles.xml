@@ -261,4 +261,8 @@
 
 
 
+    <style name="BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="android:background">@drawable/bottom_sheets_radius</item>
+
+    </style>
 </resources>

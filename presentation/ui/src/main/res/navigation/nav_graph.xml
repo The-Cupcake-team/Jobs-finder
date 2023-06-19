@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/jobsFragment"
-        android:name="com.cupcake.ui.jobs.JobsFragment"
+        android:name="com.cupcake.ui.jobs.jobfragment.JobsFragment"
         tools:layout="@layout/fragment_jobs"
         android:label="JobsFragment" >
         <action
@@ -29,6 +29,9 @@
         <argument
             android:name="idJob"
             app:argType="string" />
+        <action
+            android:id="@+id/action_jobsFragment_to_createJobFormOneFragment"
+            app:destination="@id/createJobFormOneFragment" />
         <action
             android:id="@+id/action_jobsFragment_to_jobSearchFragment"
             app:destination="@id/jobSearchFragment"
@@ -50,6 +53,10 @@
         android:name="com.cupcake.ui.jobs.JobDetailsFragment"
         tools:layout="@layout/fragment_job_details"
         android:label="JobDetailsFragment" />
+    <fragment
+        android:id="@+id/createJobFormOneFragment"
+        android:name="com.cupcake.ui.create_job.CreateJobFormOneFragment"
+        android:label="CreateJobFormOneFragment" />
     <fragment
         android:id="@+id/jobSearchFragment"
         android:name="com.cupcake.ui.job_search.JobSearchFragment"
