@@ -11,10 +11,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.viewmodels.posts.PostItemUIState
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -91,3 +93,21 @@ fun showDrawableErrorImage(view: ImageView, errorType: BaseErrorUiState?){
 fun convertTime(view: TextView , time: Long){
    view.text = convert(time)
 }
+
+@BindingAdapter(value = ["app:isLiked"])
+fun isLiked(view: ImageView , isLiked: Boolean){
+    if (isLiked){
+        view.setImageResource(R.drawable.selected_thumb)
+    }
+    else{
+        view.setImageResource(R.drawable.tabler_thumb)
+    }
+}
+
+@BindingAdapter(value = ["app:isRefresh"])
+fun isRefresh(view: SwipeRefreshLayout , isRefresh: Boolean){
+    view.isRefreshing = isRefresh
+}
+
+
+
