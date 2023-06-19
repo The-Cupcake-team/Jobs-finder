@@ -95,13 +95,12 @@
             android:id="@+id/textInputLayoutContent"
             style="@style/TextInputLayoutStyle"
             android:layout_width="@dimen/zero"
-            android:layout_height="@dimen/zero"
+            android:layout_height="wrap_content"
 
-            app:helperTextEnabled="true"
             android:padding="@dimen/spacing_medium"
+            app:helperTextEnabled="true"
             app:helperTextTextColor="@color/accent_red"
             app:hintEnabled="false"
-            app:layout_constraintBottom_toBottomOf="@id/viewBackground"
             app:layout_constraintEnd_toEndOf="@id/viewBackground"
             app:layout_constraintStart_toStartOf="@id/viewBackground"
             app:layout_constraintTop_toBottomOf="@+id/buttonState">
@@ -119,6 +118,8 @@
                 android:textColor="@color/color_text_primary"
                 android:textColorHint="@color/color_text_tertiary"
                 android:textSize="@dimen/text_size_body" />
+
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -140,6 +141,14 @@
             app:layout_constraintStart_toStartOf="@id/viewBackground"
             app:layout_constraintTop_toBottomOf="@+id/viewBackground" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_of_post"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginHorizontal="@dimen/spacing_large"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutContent"
+            android:visibility="gone"
+            />
         <Button
             android:id="@+id/buttonCamera"
             style="@style/SharedButtonStyle"
