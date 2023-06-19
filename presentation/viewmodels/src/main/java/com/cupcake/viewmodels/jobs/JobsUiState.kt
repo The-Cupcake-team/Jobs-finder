@@ -13,6 +13,7 @@ data class JobsUiState(
     val topSalaryJobs: List<JobUiState> = emptyList(),
     val onLocationJobs: List<JobUiState> = emptyList(),
     val isLoading: Boolean = true,
+    val isSavedJob: Boolean = false,
     val error: BaseErrorUiState? = null,
 )
 

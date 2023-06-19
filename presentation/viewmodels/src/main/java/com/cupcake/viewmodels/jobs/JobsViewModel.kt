@@ -85,6 +85,10 @@ class JobsViewModel @Inject constructor(
         _state.update { it.copy(error = error, isLoading = false) }
     }
 
+    private fun onSaveButtonClicked(newValue: Boolean) {
+        _state.update { it.copy(isSavedJob = newValue) }
+    }
+
     companion object {
         private const val POPULAR_JOB_LIMIT = 10
         private const val RECOMMENDED_JOB_LIMIT = 10
@@ -102,6 +106,10 @@ class JobsViewModel @Inject constructor(
 
     override fun onSearchBoxClickListener() {
         viewModelScope.launch { _event.emit(JobsEvent.SearchBoxClick) }
+    }
+
+    override fun onSaveButtonClicked(){
+        viewModelScope.launch { _event.emit(JobsEvent.SaveButtonClick) }
     }
 
     fun onRetryClicked(){
