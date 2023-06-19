@@ -7,6 +7,7 @@ fun PostDto.toPost(): Post {
     return Post(
         id = id ?: "",
         createdAt = createdAt ?: 0,
-        content = content ?: ""
+        content = content ?: "",
+        creatorName = creatorName ?: ""
     )
 }

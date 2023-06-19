@@ -7,4 +7,5 @@ data class PostDto(
     val id: String?,
     val createdAt: Long?,
     val content: String?,
+    val creatorName: String?
 )

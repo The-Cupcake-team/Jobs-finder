@@ -67,7 +67,8 @@ class PublicPostsViewModel @Inject constructor(
         return PostItemUIState(
             id = id,
             createdAt = createdAt,
-            description = content
+            description = content,
+            creatorName = creatorName
         )
     }
 

@@ -121,12 +121,12 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun getFollowingPosts(): List<Post> {
         val fakePosts = listOf(
-            Post("1", System.currentTimeMillis(), "One Piece 🏴‍☠️❤️‍🔥"),
-            Post("2", System.currentTimeMillis(), "Sabahooooooo 👋"),
-            Post("3", System.currentTimeMillis(), "here we are go 🤍❤️"),
-            Post("3", System.currentTimeMillis(), "MY TEAM IS THE BEST 🧁🔝💖💖💖"),
-            Post("3", System.currentTimeMillis(), "MY TEAM MATES ARE AWESOME 😍🤩💖"),
-            Post("3", System.currentTimeMillis(), "FK you haters 🫵😎✊")
+            Post("1", System.currentTimeMillis(), "One Piece 🏴‍☠️❤️‍🔥", "Sajjadio"),
+            Post("2", System.currentTimeMillis(), "Sabahooooooo 👋", "amory" ),
+            Post("3", System.currentTimeMillis(), "here we are go 🤍❤️", "dada"),
+            Post("3", System.currentTimeMillis(), "MY TEAM IS THE BEST 🧁🔝💖💖💖", "ahmed mousa"),
+            Post("3", System.currentTimeMillis(), "MY TEAM MATES ARE AWESOME 😍🤩💖", "kaido"),
+            Post("3", System.currentTimeMillis(), "FK you haters 🫵😎✊", "BK")
         )
         return fakePosts
     }
