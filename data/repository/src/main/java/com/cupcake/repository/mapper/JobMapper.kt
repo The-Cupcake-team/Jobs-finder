@@ -1,5 +1,6 @@
 package com.cupcake.repository.mapper
 
+import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.Job
 import com.cupcake.remote.response.job.JobDto
 import com.cupcake.models.JobTitle
@@ -23,6 +24,21 @@ fun JobWithTitleDto.toJobWithJobTitle(): JobWithTitle {
     )
 }
 
+fun JobWithTitle.toJobsEntity(): JobsEntity{
+    return JobsEntity(
+        id = id,
+        jobId = jobTitle.id,
+        jobTitle = jobTitle.title,
+        company = company,
+        createdTime = createdTime,
+        workType = workType,
+        jobLocation = jobLocation,
+        jobType = jobType,
+        jobDescription = jobDescription,
+        salary = salary
+
+    )
+}
 
 //fun com.cupcake.remote.response.job.JobDto.toJob(): com.cupcake.models.Job {
 //    return Job(

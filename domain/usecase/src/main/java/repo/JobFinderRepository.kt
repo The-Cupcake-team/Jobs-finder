@@ -18,7 +18,7 @@ interface JobFinderRepository {
 
     suspend fun getJobById(jobId: String): Job
 
-    suspend fun insertJob(job: Job)
+    suspend fun insertJob(job: JobWithTitle)
 
     //endregion
 

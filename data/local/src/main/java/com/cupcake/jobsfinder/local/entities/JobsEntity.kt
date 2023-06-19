@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 data class JobsEntity (
     @PrimaryKey
     val id: String,
+    val jobId: String,
     val jobTitle: String,
     val company: String,
     val createdTime: String,

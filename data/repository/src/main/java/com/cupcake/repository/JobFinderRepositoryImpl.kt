@@ -7,6 +7,7 @@ import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobWithJobTitle
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
 import repo.JobFinderRepository
 import retrofit2.Response
@@ -108,8 +109,9 @@ class JobFinderRepositoryImpl @Inject constructor(
         return wrapResponseWithErrorHandler { api.getJobById(jobId) }.toJob()
     }
 
-    override suspend fun insertJob(job: Job) {
-
+    override suspend fun insertJob(job: JobWithTitle) {
+        val jobEntity = job.toJobsEntity()
+        jobFinderDao.insertJop(jobEntity)
     }
 
 
