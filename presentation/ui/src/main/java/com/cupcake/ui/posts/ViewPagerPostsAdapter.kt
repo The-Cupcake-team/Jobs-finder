@@ -6,13 +6,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ViewPagerPostsAdapter(
-    private val fragmentItems: Map<Int, Fragment>,
     fragmentManager: FragmentManager,
-    lifecycle: Lifecycle,
+    fragmentList: List<Fragment>,
+    lifecycle: Lifecycle
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
-    override fun getItemCount(): Int = fragmentItems.size
 
-    override fun createFragment(position: Int): Fragment {
-        return fragmentItems[position]!!
-    }
+    private val fragments = fragmentList
+
+    override fun getItemCount(): Int = fragments.size
+
+    override fun createFragment(position: Int): Fragment = fragments[position]
 }
