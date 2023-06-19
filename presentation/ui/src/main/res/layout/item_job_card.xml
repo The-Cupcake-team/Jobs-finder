@@ -76,8 +76,9 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:rotation="90"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:onClick="@{() -> listener.onImageViewMoreClickListener(item)}"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/ic_more" />
 
             <TextView

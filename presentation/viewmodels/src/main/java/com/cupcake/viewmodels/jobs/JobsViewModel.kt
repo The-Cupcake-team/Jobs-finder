@@ -103,6 +103,15 @@ class JobsViewModel @Inject constructor(
     override fun onSearchBoxClickListener() {
         viewModelScope.launch { _event.emit(JobsEvent.SearchBoxClick) }
     }
+    override fun onFloatingActionClickListener() {
+        viewModelScope.launch { _event.emit(JobsEvent.OnFloatingActionClickListener) }
+    }
+
+
+
+    override fun onImageViewMoreClickListener(model:JobUiState) {
+        viewModelScope.launch { _event.emit(JobsEvent.OnImageViewMoreClickListener(model)) }
+    }
 
     fun onRetryClicked(){
         _state.update {it.copy(error = null, isLoading = true) }

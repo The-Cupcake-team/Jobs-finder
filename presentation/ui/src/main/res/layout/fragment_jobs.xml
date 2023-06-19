@@ -8,6 +8,9 @@
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.jobs.JobsViewModel" />
+        <variable
+            name="listener"
+            type="com.cupcake.viewmodels.jobs.JobsListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +65,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             bind:error="@{viewModel.state.error}"/>
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonTryAgain"
             style="@style/outlineButton"
@@ -76,6 +78,18 @@
             app:layout_constraintTop_toBottomOf="@id/error"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            android:backgroundTint="#4B8CED"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="25dp"
+            app:tint="#FFFFFF"
+            android:onClick="@{() ->viewModel.onFloatingActionClickListener()}"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
