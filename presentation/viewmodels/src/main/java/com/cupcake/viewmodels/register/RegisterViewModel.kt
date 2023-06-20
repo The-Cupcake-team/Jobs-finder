@@ -38,6 +38,7 @@ class RegisterViewModel @Inject constructor(
 
     private fun onRegisterSuccess(user: User) {
         updateState { it.copy(isLoading = false, isUserRegistered = true) }
+        viewModelScope.launch { _event.emit(RegisterEvent.NavigateToHome) }
     }
 
     private fun onRegisterError(error: BaseErrorUiState) {

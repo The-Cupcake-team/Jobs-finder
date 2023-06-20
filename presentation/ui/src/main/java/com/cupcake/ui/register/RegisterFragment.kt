@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentRegisterBinding
@@ -30,6 +31,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
                 when (it) {
                     is RegisterEvent.LoginClick -> navigateToLogin()
                     is RegisterEvent.ShowErrorMessage -> showToast(it.errorMessage)
+                    is RegisterEvent.NavigateToHome -> navigateToHome()
 
                 }
             }
@@ -42,5 +44,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     private fun showToast(errorMessage: String) {
         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun navigateToHome() {
+        findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToPostsFragment())
     }
 }
