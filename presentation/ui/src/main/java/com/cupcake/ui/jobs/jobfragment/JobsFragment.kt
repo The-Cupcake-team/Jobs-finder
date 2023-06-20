@@ -25,7 +25,6 @@ import kotlinx.coroutines.launch
 class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     R.layout.fragment_jobs, JobsViewModel::class.java
 ) {
-    private lateinit var modalBottomSheet : ModalBottomSheet
     override val LOG_TAG: String = this::class.java.name
     private lateinit var jobsAdapter: JobsAdapter
     private lateinit var job: Job
@@ -104,10 +103,8 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
 
                     is JobsEvent.OnImageViewMoreClickListener -> {
                         ModalBottomSheet.newInstance(jobsEvent.model)
-                       .show(
-                            requireActivity().supportFragmentManager
-                            , "ModalBottomSheet") }
-
+                       .show(requireActivity().supportFragmentManager
+                            ,"ModalBottomSheet") }
                 }
             }
         }

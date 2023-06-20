@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <data>
-
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.jobs.BottomSheetViewModel" />
 
-        <variable
-            name="item"
-            type="com.cupcake.viewmodels.jobs.JobUiState" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -46,10 +42,11 @@
                 android:backgroundTint="@color/black"
                 android:drawablePadding="@dimen/drawable_padding"
                 android:gravity="center|left"
-                android:onClick="@{()->viewModel.saveJob(item)}"
-                android:text="@string/save"
+                android:onClick="@{()->viewModel.saveJob()}"
+                android:text="@{viewModel.state.textSaved}"
                 android:textColor="@color/black"
-                app:drawableStartCompat="@drawable/ic_saved"
+                tools:text="Saved"
+                app:setIsSavedIcon="@{viewModel.state.isSaved}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/drag_handle" />
 
@@ -64,7 +61,7 @@
                 android:drawablePadding="@dimen/drawable_padding"
                 android:gravity="center|left"
                 android:focusable="true"
-                android:onClick="@{()->viewModel.onShareClickListener(item.id)}"
+                android:onClick="@{()->viewModel.onShareClickListener()}"
                 android:text="@string/share"
                 android:textColor="@color/black"
                 app:drawableStartCompat="@drawable/share"

@@ -1,7 +1,7 @@
 package com.cupcake.viewmodels.jobs
 
 interface BottomSheetListener {
-    fun onShareClickListener( id : String)
+    fun onShareClickListener()
 
-    fun onSaveListener(model:JobUiState)
+
 }

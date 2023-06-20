@@ -22,11 +22,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val BOTTOM_SHEET = "ModalBottomSheet"
 
 class ModalBottomSheet  : BottomSheetDialogFragment() {
+    private val bottomSheetViewModel by    lazy  {
+        ViewModelProvider(requireActivity())[BottomSheetViewModel::class.java] }
     private lateinit var jobUiState: JobUiState
-    private lateinit var bottomSheetViewModel: BottomSheetViewModel
 
 
     override fun onCreateView(
@@ -38,37 +38,28 @@ class ModalBottomSheet  : BottomSheetDialogFragment() {
             inflater,
             R.layout.edit_job_post_bottom_sheets,
             container,
-            false
-        )
-        bottomSheetViewModel = ViewModelProvider(requireActivity())[BottomSheetViewModel::class.java]
-
-        arguments?.let {
-            jobUiState = it.getParcelable(BOTTOM_SHEET)!!
-        }
-
-        binding.apply {
-            item = jobUiState
-            viewModel = bottomSheetViewModel
-        }
+            false)
+        bottomSheetViewModel.jobUiState=jobUiState
+        bottomSheetViewModel.changeSavedState()
+        binding.viewModel = bottomSheetViewModel
 
         lifecycleScope.launch {
             bottomSheetViewModel.event.collect { bottomSheetsEvent ->
                 when (bottomSheetsEvent) {
                     is BottomSheetEvent.OnSaveListener -> {
-//                        savePost(jobUiState)
+                      dismiss()
                     }
 
                     is BottomSheetEvent.OnShareClickListener -> {
                         sharePost(bottomSheetsEvent.id)
+                        dismiss()
                     }
                 }
             }
         }
-
         return binding.root
 
     }
-
     private fun sharePost(id: String) {
         val intent = Intent(Intent.ACTION_SEND)
         val base = "https://cup-cake-media-dw2pb.ondigitalocean.app/"
@@ -85,12 +76,9 @@ class ModalBottomSheet  : BottomSheetDialogFragment() {
     }
 
 
-
     companion object {
         fun newInstance(model: JobUiState) = ModalBottomSheet().apply {
-            arguments = Bundle().apply {
-                putParcelable(BOTTOM_SHEET, model)
-            }
+            jobUiState = model
         }
     }
 

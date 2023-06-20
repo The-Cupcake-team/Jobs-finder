@@ -16,7 +16,7 @@ class SaveJobUseCase @Inject constructor(
         return true //that mean the job is saved
     }
 
-    private suspend fun isAlreadyExist(id: String): Boolean{
+     suspend fun isAlreadyExist(id: String): Boolean{
         repository.getSavedJobById(id) ?: return false
         return true
     }

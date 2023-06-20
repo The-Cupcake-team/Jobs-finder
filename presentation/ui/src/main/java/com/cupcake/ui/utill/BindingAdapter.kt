@@ -1,6 +1,7 @@
 package com.cupcake.ui.utill
 
 
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.widget.EditText
@@ -15,6 +16,9 @@ import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -90,4 +94,15 @@ fun showDrawableErrorImage(view: ImageView, errorType: BaseErrorUiState?){
 @BindingAdapter(value = ["app:convertTime"])
 fun convertTime(view: TextView , time: Long){
    view.text = convert(time)
+}
+
+@OptIn(InternalCoroutinesApi::class)
+@BindingAdapter("setIsSavedIcon")
+fun setIsSavedIcon(textView: TextView, isSaved: Boolean) {
+    val drawable: Drawable = if (isSaved) {
+        ContextCompat.getDrawable(textView.context, R.drawable.saved)!!
+    } else {
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_saved)!!
+    }
+    textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
 }
