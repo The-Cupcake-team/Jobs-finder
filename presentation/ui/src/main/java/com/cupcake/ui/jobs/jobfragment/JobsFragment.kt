@@ -97,16 +97,15 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
                         )
                     }
 
-
                     is JobsEvent.OnFloatingActionClickListener -> {
-                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToCreateJobFormOneFragment())
+                        navigateToDirection(
+                            JobsFragmentDirections.actionJobsFragmentToCreateJobFormOneFragment()
+                        )
                     }
 
                     is JobsEvent.OnImageViewMoreClickListener -> {
                         ModalBottomSheet.newInstance(jobsEvent.model)
-                       .show(
-                            requireActivity().supportFragmentManager
-                            , "ModalBottomSheet") }
+                       .show(requireActivity().supportFragmentManager, "ModalBottomSheet") }
 
                 }
             }
