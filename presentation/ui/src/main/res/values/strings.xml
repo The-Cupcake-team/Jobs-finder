@@ -119,4 +119,6 @@
     <string name="save">Save</string>
     <string name="share">Share</string>
     <string name="sharePost">Hello bro,Your Post is very awesome , select your App to share \n%1$s . </string>
+    <string name="saved_successfully">Saved Successfully</string>
+    <string name="saved_canceld">Saved Canceled</string>
 </resources>

@@ -1,33 +1,21 @@
 package com.cupcake.ui.jobs.jobfragment
 
-import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.cupcake.ui.R
 import com.cupcake.ui.databinding.EditJobPostBottomSheetsBinding
-import com.cupcake.ui.job_search.JobSearchFragmentArgs
 import com.cupcake.viewmodels.jobs.BottomSheetEvent
 import com.cupcake.viewmodels.jobs.BottomSheetViewModel
-import com.cupcake.viewmodels.jobs.JobUiState
-import com.cupcake.viewmodels.jobs.toJobWithTitle
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 class ModalBottomSheet : BottomSheetDialogFragment() {
@@ -76,6 +64,12 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
             bottomSheetViewModel.event.collect { bottomSheetsEvent ->
                 when (bottomSheetsEvent) {
                     is BottomSheetEvent.OnSaveListener -> {
+                        val isSaved = bottomSheetViewModel.state.value.isSaved
+                        if(isSaved){
+                            showToast(getString(R.string.saved_successfully))
+                        }else{
+                            showToast(getString(R.string.saved_canceld))
+                        }
                         dismiss()
                     }
 
@@ -86,6 +80,10 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
                 }
             }
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
 
