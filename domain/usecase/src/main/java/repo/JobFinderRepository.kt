@@ -12,7 +12,7 @@ interface JobFinderRepository {
 
     suspend fun createJob(jobInfo: Job): Boolean
 
-    suspend fun getJobs(): List<JobWithTitle>
+    suspend fun getJobs(): List<Job>
 
     suspend fun getAllJobTitles(): List<JobTitle>
 

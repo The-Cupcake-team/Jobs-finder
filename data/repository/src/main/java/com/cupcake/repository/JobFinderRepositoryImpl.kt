@@ -84,7 +84,7 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun createJob(jobInfo: Job): Boolean {
         val response = api.createJob(
-            jobInfo.jobTitleId,
+            jobInfo.jobTitle.id.toInt(),
             jobInfo.company,
             jobInfo.workType,
             jobInfo.jobLocation,
@@ -95,8 +95,8 @@ class JobFinderRepositoryImpl @Inject constructor(
         return response.isSuccessful
     }
 
-    override suspend fun getJobs(): List<JobWithTitle> {
-        return wrapResponseWithErrorHandler { api.getJobs() }.map { it.toJobWithJobTitle() }
+    override suspend fun getJobs(): List<Job> {
+        return wrapResponseWithErrorHandler { api.getJobs() }.map { it.toJob() }
     }
 
     override suspend fun getAllJobTitles(): List<JobTitle> {

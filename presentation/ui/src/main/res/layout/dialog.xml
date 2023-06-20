@@ -10,6 +10,7 @@
         android:id="@+id/dialog_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:cardCornerRadius="@dimen/radius"
         android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout

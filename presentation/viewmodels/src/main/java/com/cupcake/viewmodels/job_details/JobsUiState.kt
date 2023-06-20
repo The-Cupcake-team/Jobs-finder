@@ -22,8 +22,8 @@ data class JobDetailUiState(
 data class JobsDetailsUiState(
     val id: String = "",
     val image: String = "",
-    val title: String = "",
-    val companyName: String = "",
+    val title: String = "Android developer",
+    val companyName: String = "hassan",
     val workType: String = "",
     val jobType: String = "",
     val location: String = "",

@@ -1,17 +1,27 @@
 package com.cupcake.ui.jobs
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
+import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
+import com.cupcake.ui.databinding.DialogBinding
 import com.cupcake.ui.databinding.FragmentJobDetailsBinding
 import com.cupcake.ui.jobs.adapter.ViewPagerJobDetailsAdapter
 import com.cupcake.viewmodels.job_details.JobViewModel
+import com.cupcake.viewmodels.job_details.JobsDetailsUiState
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -62,8 +72,31 @@ class JobDetailsFragment @Inject constructor(
         }
     }
     private fun setDialog() {
-        val dialog = DialogJob(requireContext())
-        dialog.show()
+        val alertBuilder = AlertDialog.Builder(requireContext())
+        val binding = DialogBinding.inflate(LayoutInflater.from(requireContext()))
+        alertBuilder.setView(binding.root)
+        val alertDialog = alertBuilder.create()
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+
+        binding.applyButton.setOnClickListener {
+            val jobDetails = viewModel.state.value.job
+            sendEmail(jobDetails)
+            alertDialog.dismiss()
+        }
+
+        binding.cancelButton.setOnClickListener {
+            alertDialog.dismiss()
+        }
+    }
+
+    private fun sendEmail(jobDetails: JobsDetailsUiState) {
+            val intent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:${jobDetails.companyName}@gmail.com")
+                putExtra(Intent.EXTRA_SUBJECT, jobDetails.title)
+        }
+        requireActivity().startActivity(intent)
     }
 
     companion object{
