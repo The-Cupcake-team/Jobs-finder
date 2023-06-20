@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/jobDetailsFragment">
+    app:startDestination="@id/jobsFragment">
 
     <fragment
         android:id="@+id/createJobFragment"
@@ -24,9 +24,6 @@
         <action
             android:id="@+id/action_jobsFragment_to_jobDetailsFragment"
             app:destination="@id/jobDetailsFragment" />
-        <argument
-            android:name="idJob"
-            app:argType="string" />
     </fragment>
 
     <fragment
@@ -38,6 +35,11 @@
         android:id="@+id/jobDetailsFragment"
         android:name="com.cupcake.ui.jobs.JobDetailsFragment"
         tools:layout="@layout/fragment_job_details"
-        android:label="JobDetailsFragment" />
+        android:label="JobDetailsFragment" >
+        <argument
+            android:name="jobId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>
