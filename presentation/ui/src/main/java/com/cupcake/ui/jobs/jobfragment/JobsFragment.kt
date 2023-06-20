@@ -33,7 +33,6 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     override fun onResume() {
         super.onResume()
         handelJobsEvent()
-
     }
 
     override fun onPause() {
