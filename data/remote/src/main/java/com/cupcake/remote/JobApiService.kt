@@ -41,7 +41,7 @@ interface JobApiService {
     @GET("/job")
     suspend fun getJobs(): Response<BaseResponse<List<JobWithTitleDto>>>
 
-    @GET("/job/{id}")
+    @GET("public/job/{id}")
     suspend fun getJobById(
         @Path("id") jobId: String
     ): Response<BaseResponse<JobDto>>

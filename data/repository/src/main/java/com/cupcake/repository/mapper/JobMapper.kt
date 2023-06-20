@@ -4,13 +4,14 @@ import com.cupcake.models.Job
 import com.cupcake.remote.response.job.JobDto
 import com.cupcake.models.JobTitle
 import com.cupcake.models.JobWithTitle
+import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.job.JobWithTitleDto
 
 fun JobWithTitleDto.toJobWithJobTitle(): JobWithTitle {
     return JobWithTitle(
         id = id,
         jobTitle = JobTitle(
-            id = jobTitle.id,
+            id = jobTitle.id.toString(),
             title = jobTitle.title
         ),
         company = company,
@@ -38,17 +39,17 @@ fun JobWithTitleDto.toJobWithJobTitle(): JobWithTitle {
 //}
 //
 
-fun Job.toJobDto(): JobDto {
-    return JobDto(
-        jobTitleId = jobTitleId,
-        company = company,
-        workType = workType,
-        jobLocation = jobLocation,
-        jobDescription = jobDescription,
-        jobType = jobType,
-        jobSalary = jobSalary
-    )
-}
+//fun Job.toJobDto(): JobDto {
+//    return JobDto(
+//        jobTitleId = jobTitleId,
+//        company = company,
+//        workType = workType,
+//        jobLocation = jobLocation,
+//        jobDescription = jobDescription,
+//        jobType = jobType,
+//        jobSalary = jobSalary
+//    )
+//}
 
 //fun com.cupcake.models.Job.toJobDto(): com.cupcake.remote.response.job.JobDto {
 //    return com.cupcake.remote.response.job.JobDto(
@@ -62,18 +63,25 @@ fun Job.toJobDto(): JobDto {
 //    )
 //}
 
+fun JobTitleDto.toJobTitle(): JobTitle {
+    return JobTitle(
+        id = this.id.toString(),
+        title = this.title
+    )
+}
 
 fun JobDto.toJob(): Job {
     return Job(
-        jobTitleId = 123,
-        id =  id ?: "438cd8f7-af62-4796-84be-a98807e874d8",
-        company = company ?: "The Chance",
-        createdAt = createdAt ?: 1234,
-        workType = workType ?: "full time",
-        jobLocation = jobLocation ?: "Iraq",
-        jobType = jobType ?: "Front-End",
-        jobDescription = jobDescription ?: "Job description",
-        jobSalary = jobSalary ?: 12.34
+        id = this.id ?: "",
+        jobTitle = this.jobTitle?.toJobTitle() ?: JobTitle("", ""),
+        company = this.company ?: "",
+        createdAt = this.createdAt ?: 0L,
+        workType = this.workType ?: "",
+        jobLocation = this.jobLocation ?: "",
+        jobType = this.jobType ?: "",
+        jobDescription = this.jobDescription ?: "",
+        jobSalary = this.jobSalary?.maxSalary ?: 0.0,
+        jobExperience = this.experience ?: ""
     )
 }
 

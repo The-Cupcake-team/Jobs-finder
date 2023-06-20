@@ -13,7 +13,7 @@ class JobViewModel @Inject constructor(
 ) : BaseViewModel<JobDetailUiState>(JobDetailUiState()) {
 
     init {
-        getJobDetails("438cd8f7-af62-4796-84be-a98807e874d8")
+        getJobDetails("f2ac1ca6-c036-4b2c-9712-a5d6766c61e4")
     }
 
     private fun getJobDetails(jobId: String) {
@@ -35,19 +35,5 @@ class JobViewModel @Inject constructor(
 
     private fun onGetJobDetailsFailure(error: BaseErrorUiState) {
         updateState { it.copy(isLoading = false, error = error) }
-    }
-
-    private fun Job.toJobsDetailsUiState(): JobsDetailsUiState {
-        return JobsDetailsUiState(
-            image = "",
-            title = "Android Kotlin Developer",
-            companyName = company,
-            workType = workType,
-            jobType = jobType,
-            location = jobLocation,
-            salary = jobSalary.toInt(),
-            createdAt = createdAt,
-            jobDescription = jobDescription
-        )
     }
 }

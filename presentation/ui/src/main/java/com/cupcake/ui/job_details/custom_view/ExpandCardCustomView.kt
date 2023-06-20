@@ -1,4 +1,4 @@
-package com.cupcake.jobsfinder.ui.jobs
+package com.cupcake.ui.job_details.custom_view
 
 import android.content.Context
 import android.transition.AutoTransition
@@ -8,27 +8,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.cupcake.ui.R
-import com.cupcake.ui.databinding.JobDescrptionExpandableCardBinding
+import com.cupcake.ui.databinding.JobDetailsExpandableCardBinding
 
 class ExpandCardCustomView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
-    private val binding: JobDescrptionExpandableCardBinding = JobDescrptionExpandableCardBinding.inflate(
-        LayoutInflater.from(context),
-        this,
-        true
-    )
+    private val binding: JobDetailsExpandableCardBinding =
+        JobDetailsExpandableCardBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            true
+        )
+
     init {
-       cardDescriptionExpand()
+        cardDescriptionExpand()
         cardQualificationExpand()
         cardRequiredSkillsExpand()
     }
-    fun cardDescription(value:String){
-        binding.textViewDescription.text=value
+
+    fun cardDescription(value: String) {
+        binding.textViewDescription.text = value
     }
-    private fun cardDescriptionExpand(){
+
+    private fun cardDescriptionExpand() {
         binding.textViewDescriptionTitle.setOnClickListener {
             binding.apply {
                 if (textViewDescription.visibility == View.GONE) {
@@ -37,17 +41,27 @@ class ExpandCardCustomView @JvmOverloads constructor(
                         AutoTransition()
                     )
                     textViewDescription.visibility = View.VISIBLE
-                    textViewDescriptionTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_card_open, 0)
-                } else{
+                    textViewDescriptionTitle.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        R.drawable.ic_card_open,
+                        0
+                    )
+                } else {
                     textViewDescription.visibility = View.GONE
-                    textViewDescriptionTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_card_closed, 0)
-                }
+                    textViewDescriptionTitle.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        R.drawable.ic_card_closed,
+                        0
+                    )
                 }
             }
         }
+    }
 
 
-    private fun cardQualificationExpand(){
+    private fun cardQualificationExpand() {
         binding.textViewQualificationTitle.setOnClickListener {
             binding.apply {
                 if (textViewQualification.visibility == View.GONE) {
@@ -56,15 +70,26 @@ class ExpandCardCustomView @JvmOverloads constructor(
                         AutoTransition()
                     )
                     textViewQualification.visibility = View.VISIBLE
-                    textViewQualificationTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_card_open, 0)
-                } else {textViewQualification.visibility = View.GONE
-                    textViewQualificationTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_card_closed, 0)
+                    textViewQualificationTitle.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        R.drawable.ic_card_open,
+                        0
+                    )
+                } else {
+                    textViewQualification.visibility = View.GONE
+                    textViewQualificationTitle.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        R.drawable.ic_card_closed,
+                        0
+                    )
                 }
             }
         }
     }
 
-    private fun cardRequiredSkillsExpand(){
+    private fun cardRequiredSkillsExpand() {
         binding.textViewRequiredSkillsTitle.setOnClickListener {
             binding.apply {
                 if (chipGroupRequiredSkills.visibility == View.GONE) {
@@ -73,10 +98,20 @@ class ExpandCardCustomView @JvmOverloads constructor(
                         AutoTransition()
                     )
                     chipGroupRequiredSkills.visibility = View.VISIBLE
-                    textViewRequiredSkillsTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_card_open, 0)
+                    textViewRequiredSkillsTitle.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        R.drawable.ic_card_open,
+                        0
+                    )
                 } else {
                     chipGroupRequiredSkills.visibility = View.GONE
-                    textViewRequiredSkillsTitle.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_card_closed, 0)
+                    textViewRequiredSkillsTitle.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        R.drawable.ic_card_closed,
+                        0
+                    )
                 }
             }
         }
