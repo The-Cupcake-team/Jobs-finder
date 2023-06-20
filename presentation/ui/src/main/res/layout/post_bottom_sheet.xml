@@ -80,7 +80,7 @@
                 android:gravity="center_vertical"
                 android:paddingVertical="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_medium"
-                android:text="@string/save"
+                android:text="save"
                 android:textAllCaps="false"
                 android:textColor="@color/color_text_primary"
                 android:textSize="@dimen/text_size_body"
@@ -91,8 +91,6 @@
                 app:layout_constraintTop_toBottomOf="@id/divider2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

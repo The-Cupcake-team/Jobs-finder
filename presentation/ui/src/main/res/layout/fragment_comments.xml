@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -50,6 +51,7 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
+            app:showWhenIf="@{viewModel.state.isSuccess}"
             android:src="@drawable/test_personal_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tool_bar"
@@ -63,6 +65,7 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_medium"
             android:text="@string/personal_name"
+            app:showWhenIf="@{viewModel.state.isSuccess}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image_view_person_image"
             app:layout_constraintTop_toTopOf="@+id/image_view_person_image" />
@@ -75,6 +78,7 @@
             android:layout_marginTop="@dimen/spacing_xxsmall"
             android:layout_marginEnd="@dimen/spacing_medium"
             android:text="@string/jop_title"
+            app:showWhenIf="@{viewModel.state.isSuccess}"
             android:textColor="@color/color_text_secondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_person_name"
@@ -88,7 +92,8 @@
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
             android:ellipsize="end"
-            android:text="@string/post_content"
+            app:showWhenIf="@{viewModel.state.isSuccess}"
+            android:text="@{viewModel.state.post.content}"
             android:textColor="@color/color_text_primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_person_job_title"
@@ -101,7 +106,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
-            android:text="@string/created_at"
+            app:showWhenIf="@{viewModel.state.isSuccess}"
+            app:convertTime="@{viewModel.state.post.createAt}"
             android:textColor="@color/color_text_tertiary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
@@ -112,6 +118,7 @@
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:showWhenIf="@{viewModel.state.isSuccess}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_created_at" />
@@ -119,15 +126,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecyclerViewComments"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/zero"
             android:paddingVertical="@dimen/spacing_normal"
             android:clipToPadding="false"
             android:orientation="vertical"
-            app:items="@{viewModel.state.postsResult}"
+            app:showWhenIf="@{viewModel.state.isSuccess}"
+            app:items="@{viewModel.state.posts}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintBottom_toTopOf="@id/dividerTwo"
             tools:listitem="@layout/item_comment" />
 
         <com.google.android.material.divider.MaterialDivider
@@ -185,6 +194,32 @@
             app:layout_constraintBottom_toBottomOf="@+id/edit_text_post_comments"
             app:layout_constraintEnd_toEndOf="@+id/edit_text_post_comments"
             app:layout_constraintTop_toTopOf="@+id/edit_text_post_comments" />
+
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/loading"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenIf="@{viewModel.state.isLoading}"
+            bind:isLoading="@{viewModel.state.isLoading}" />
+
+        <include
+            android:id="@+id/error"
+            bind:error="@{viewModel.state.error}"
+            layout="@layout/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:showWhenIf="@{viewModel.state.error != null}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
