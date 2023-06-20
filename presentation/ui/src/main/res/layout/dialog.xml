@@ -7,45 +7,44 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        app:cardCornerRadius="@dimen/spacing_normal"
         android:id="@+id/dialog_card"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
-        android:visibility="visible"
-        android:layout_marginHorizontal="@dimen/spacing_medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:visibility="visible">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/spacing_medium">
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:paddingVertical="@dimen/spacing_large">
 
             <TextView
                 android:id="@+id/text_view_message_dialog"
-                style="@style/Base.CardView"
+                style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dialog_message"
                 android:textAlignment="center"
+                android:gravity="center_horizontal"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
                 android:id="@+id/cancel_button"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/tab_layout_job_details_and_dialog_height"
-                style="@style/button_cancel_send_cv_style"
+                android:layout_height="wrap_content"
+                style="@style/normalButtonStyle"
+                android:text="@string/cancel"
                 android:gravity="center"
+                android:layout_marginTop="@dimen/spacing_large"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_view_message_dialog" />
             <Button
                 android:id="@+id/apply_button"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/tab_layout_job_details_and_dialog_height"
+                android:layout_height="wrap_content"
                 style="@style/normalButtonStyle"
                 android:text="@string/send"
                 android:textAllCaps="false"
@@ -55,4 +54,3 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>
-

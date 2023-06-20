@@ -2,11 +2,12 @@ package com.cupcake.ui.jobs
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.cupcake.ui.databinding.DialogBinding
 
-class Dialog(
+class DialogJob(
     context: Context,
 ) {
     private val alertDialog: AlertDialog
@@ -17,10 +18,10 @@ class Dialog(
         binding = DialogBinding.inflate(LayoutInflater.from(context))
         alertBuilder.setView(binding.root)
         alertDialog = alertBuilder.create()
+        alertDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         alertDialog.setCancelable(false)
-        binding.textViewMessageDialog.text = "To complete the Application you need to send your Resume"
         binding.applyButton.setOnClickListener {
-            Toast.makeText(context, "coming soon", Toast.LENGTH_SHORT).show()
+
             alertDialog.dismiss()
         }
         binding.cancelButton.setOnClickListener {
