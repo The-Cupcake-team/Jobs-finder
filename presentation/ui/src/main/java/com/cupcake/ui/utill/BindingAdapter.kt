@@ -100,7 +100,7 @@ fun convertTime(view: TextView , time: Long){
 @BindingAdapter("setIsSavedIcon")
 fun setIsSavedIcon(textView: TextView, isSaved: Boolean) {
     val drawable: Drawable = if (isSaved) {
-        ContextCompat.getDrawable(textView.context, R.drawable.saved)!!
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_save)!!
     } else {
         ContextCompat.getDrawable(textView.context, R.drawable.ic_saved)!!
     }
