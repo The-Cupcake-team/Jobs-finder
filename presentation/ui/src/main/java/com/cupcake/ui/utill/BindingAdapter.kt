@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -18,7 +19,6 @@ import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.jobs.JobTitleUiState
-import com.google.android.material.textfield.TextInputLayout
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -100,10 +100,23 @@ fun convertTime(view: TextView , time: Long){
 @BindingAdapter(value = ["app:bindArrayAdapter"])
 fun bindArrayAdapter(view: AutoCompleteTextView, queryList: List<JobTitleUiState>?) {
     queryList?.let {
-        val historySearchAdapter = ArrayAdapter(view.context, R.layout.item_job_title, it.map { jobTitle -> jobTitle.title })
-        if (it.isNotEmpty()){
+        val historySearchAdapter = ArrayAdapter(
+            view.context,
+            R.layout.item_job_title,
+            it.map { jobTitle -> jobTitle.title })
+        if (it.isNotEmpty()) {
             view.showDropDown()
             view.setAdapter(historySearchAdapter)
         }
     }
+}
+
+@BindingAdapter("app:setIconActionLeftToolBar")
+fun setIconAction(view: ImageButton, state: Int?) {
+    state?.let {
+        it.takeIf { it == 1 }?.let {
+            view.setImageResource(R.drawable.ic_close)
+        } ?: view.setImageResource(R.drawable.ic_back)
+    } ?: view.setImageResource(R.drawable.ic_close)
+
 }

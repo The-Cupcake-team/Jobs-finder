@@ -8,6 +8,8 @@ data class CreateJobUiState(
     val buttonText: String = "",
     val isLoading: Boolean = true,
     val error: BaseErrorUiState? = null,
+    val progressStep: Int = 0
+
 ) {
     data class JobFormUiState(
         var jobTitles: List<JobTitleUiState> = emptyList(),

@@ -41,7 +41,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_close" />
+                    android:onClick="@{()->viewModel.onBack(viewModel.state.progressStep)}"
+                    app:setIconActionLeftToolBar="@{viewModel.state.progressStep}" />
 
                 <TextView
                     android:id="@+id/next_button"
@@ -54,6 +55,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="@dimen/spacing_normal"
+                    android:onClick="@{()->viewModel.onChangeIndexViewPager(viewModel.state.progressStep)}"
                     android:stateListAnimator="@null"
                     android:text="@{viewModel.state.buttonText}"
                     android:textAllCaps="false"

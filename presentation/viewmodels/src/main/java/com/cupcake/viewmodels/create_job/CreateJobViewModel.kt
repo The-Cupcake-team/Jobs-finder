@@ -1,6 +1,7 @@
 package com.cupcake.viewmodels.create_job
 
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.CreateJobUseCase
 import com.cupcake.usecase.GetAllJobTitleUseCase
@@ -21,7 +22,7 @@ import javax.inject.Inject
 class CreateJobViewModel @Inject constructor(
     private val createJob: CreateJobUseCase,
     private val jobTitles: GetAllJobTitleUseCase
-) : BaseViewModel<CreateJobUiState>(CreateJobUiState()) {
+) : BaseViewModel<CreateJobUiState>(CreateJobUiState()), CreateJobInteractionListener {
 
     private val _event = MutableSharedFlow<CreateJobEvent>()
     val event = _event.asSharedFlow()
@@ -75,19 +76,46 @@ class CreateJobViewModel @Inject constructor(
             is CreateJobEvent.HeaderButtonClicked -> {
                 onHeaderButtonClicked(event.index)
             }
+
         }
     }
 
-    private fun onHeaderButtonClicked(index: Int) {
+    override fun onHeaderButtonClicked(index: Int) {
         viewModelScope.launch {
             _event.emit(CreateJobEvent.HeaderButtonClicked(index))
         }
     }
 
-    private fun onChangeIndexViewPager(index: Int) {
+    override fun onNextClicked(state: Int) {
+        viewModelScope.launch {
+            _event.emit(CreateJobEvent.PageScrolled(state))
+        }
+    }
+
+    fun onChangeIndexViewPager(index: Int) {
+        viewModelScope.launch {
+            _event.emit(CreateJobEvent.PageScrolled(index))
+        }
         when (index) {
-            PAGE_ONE -> _state.update { it.copy(buttonText = "Next") }
-            PAGE_TWO -> _state.update { it.copy(buttonText = "Post") }
+            PAGE_ONE -> _state.update { it.copy(buttonText = "Next", progressStep = 1) }
+            PAGE_TWO -> _state.update { it.copy(buttonText = "Post", progressStep = 0) }
+        }
+    }
+
+    fun onBack(index: Int) {
+        viewModelScope.launch {
+
+            if (index == 1) {
+            } else {
+                _event.emit(CreateJobEvent.PageScrolled(index))
+            }
+
+        }
+        when (index) {
+            PAGE_ONE -> _state.update { it.copy(buttonText = "Next", progressStep = 1) }
+            PAGE_TWO -> _state.update { it.copy(buttonText = "Post", progressStep = 0) }
+
+
         }
     }
 
