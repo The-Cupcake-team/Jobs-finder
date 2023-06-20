@@ -24,7 +24,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
 ) {
     override val LOG_TAG: String = this::class.java.name
     private lateinit var jobsAdapter: JobsAdapter
-    private lateinit var job: Job
+    private lateinit var jobsEventJob: Job
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpAdapter()
@@ -37,7 +37,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
 
     override fun onPause() {
         super.onPause()
-        job.cancel()
+        jobsEventJob.cancel()
 
     }
 
@@ -78,7 +78,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     }
 
     private fun handelJobsEvent() {
-        job = lifecycleScope.launch(Dispatchers.Main) {
+        jobsEventJob = lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
                     is JobsEvent.JobCardClick -> handleJobCardClick()
