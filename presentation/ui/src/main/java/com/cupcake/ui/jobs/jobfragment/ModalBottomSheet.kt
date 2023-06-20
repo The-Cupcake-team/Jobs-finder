@@ -64,8 +64,8 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
             bottomSheetViewModel.event.collect { bottomSheetsEvent ->
                 when (bottomSheetsEvent) {
                     is BottomSheetEvent.OnSaveListener -> {
-                        val isSaved = bottomSheetViewModel.state.value.isSaved
-                        if(isSaved){
+                        val isUnSaved = bottomSheetViewModel.state.value.isSaved
+                        if(!isUnSaved){
                             showToast(getString(R.string.saved_successfully))
                         }else{
                             showToast(getString(R.string.saved_canceld))

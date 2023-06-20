@@ -7,5 +7,5 @@ object Plugins {
     const val KOTLIN_KAPT = "kapt"
     const val SERIALIZATION = "org.jetbrains.kotlin.plugin.serialization"
     const val NAVIGATION_SAFE_ARGS = "androidx.navigation.safeargs.kotlin"
-    const val parcelize = "kotlin-parcelize"
+    const val PARCELIZE = "kotlin-parcelize"
 }
