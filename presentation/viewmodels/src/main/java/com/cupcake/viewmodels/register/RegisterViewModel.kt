@@ -1,9 +1,8 @@
 package com.cupcake.viewmodels.register
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.User
-import com.cupcake.usecase.RegisterUseCase
+import com.cupcake.usecase.register.RegisterUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,19 +31,17 @@ class RegisterViewModel @Inject constructor(
                     confirmPassword = state.value.confirmPassword
                 )
             },
-            onSuccess = ::onSignUpSuccess,
-            onError = ::onSignUpError
+            onSuccess = ::onRegisterSuccess,
+            onError = ::onRegisterError
         )
     }
 
-    private fun onSignUpSuccess(user: User) {
+    private fun onRegisterSuccess(user: User) {
         updateState { it.copy(isLoading = false, isUserRegistered = true) }
-        Log.i("Register", "onSignUpSuccess: ${user.fullName}")
     }
 
-    private fun onSignUpError(error: BaseErrorUiState) {
+    private fun onRegisterError(error: BaseErrorUiState) {
         updateState { it.copy(isLoading = false, error = error) }
-        Log.i("Register", "onSignUpError: ${error.errorCode}")
         viewModelScope.launch { _event.emit(RegisterEvent.ShowErrorMessage(error.errorCode)) }
     }
 
