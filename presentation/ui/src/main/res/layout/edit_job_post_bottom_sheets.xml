@@ -14,9 +14,11 @@
             type="com.cupcake.viewmodels.jobs.JobUiState" />
     </data>
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:id="@+id/standard_bottom_sheet"
-        style="@style/BottomSheet"
+        app:contentPaddingRight="@dimen/spacing_medium"
+
+        android:background="@drawable/bottom_sheets_radius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -48,7 +50,7 @@
                 android:gravity="center|left"
                 android:onClick="@{()->viewModel.saveJob(item)}"
                 android:text="@string/save"
-                android:textColor="@color/black"
+                android:textColor="@color/icon_primary"
                 app:drawableStartCompat="@drawable/ic_saved"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/drag_handle" />
@@ -66,7 +68,7 @@
                 android:focusable="true"
                 android:onClick="@{()->viewModel.onShareClickListener(item.id)}"
                 android:text="@string/share"
-                android:textColor="@color/black"
+                android:textColor="@color/icon_primary"
                 app:drawableStartCompat="@drawable/share"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,5 +77,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </layout>

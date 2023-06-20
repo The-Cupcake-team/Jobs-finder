@@ -7,6 +7,8 @@
     <color name="accent">#14FFFFFF</color>
     <color name="cards">#222222</color>
     <color name="blue_300">#303843</color>
+    <color name="white">#212121</color>
+
     <!-- Text colors -->
 
     <color name="surface">#222222</color>
@@ -21,5 +23,9 @@
 
     <color name="chip_color_and_tab_layout_color">#303843</color>
     <color name="boarder">#14FFFFFF</color>
+
+    <color name="icon_color">#656565</color>
+    <color name="icon_primary">#E1E1E1</color>
+
 
 </resources>
