@@ -102,9 +102,8 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
                     }
 
                     is JobsEvent.OnImageViewMoreClickListener -> {
-                        ModalBottomSheet.newInstance(jobsEvent.model)
-                       .show(requireActivity().supportFragmentManager
-                            ,"ModalBottomSheet") }
+                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToModalBottomSheet(jobsEvent.model))
+                    }
                 }
             }
         }

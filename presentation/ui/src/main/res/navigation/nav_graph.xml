@@ -41,6 +41,9 @@
             app:popExitAnim="@android:anim/slide_out_right"
             app:popUpTo="@id/jobsFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_jobsFragment_to_modalBottomSheet"
+            app:destination="@id/modalBottomSheet" />
     </fragment>
 
     <fragment
@@ -68,5 +71,13 @@
             app:argType="string"
             android:defaultValue="" />
     </fragment>
+    <dialog
+        android:id="@+id/modalBottomSheet"
+        android:name="com.cupcake.ui.jobs.jobfragment.ModalBottomSheet"
+        android:label="ModalBottomSheet" >
+        <argument
+            android:name="jobUiState"
+            app:argType="com.cupcake.viewmodels.jobs.JobUiState" />
+    </dialog>
 
 </navigation>

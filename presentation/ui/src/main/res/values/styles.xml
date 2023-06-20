@@ -261,8 +261,17 @@
 
 
 
-    <style name="BottomSheet" parent="Widget.MaterialComponents.BottomSheet">
-        <item name="android:background">@drawable/bottom_sheets_radius</item>
+    <!-- set the rounded drawable as background to your bottom sheet -->
+    <style name="BaseBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+    <style name="BottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
+    </style>
 
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
     </style>
 </resources>

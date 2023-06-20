@@ -12,7 +12,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/standard_bottom_sheet"
-        style="@style/BottomSheet"
+        style="@style/BottomSheetDialogTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -42,7 +42,7 @@
                 android:backgroundTint="@color/black"
                 android:drawablePadding="@dimen/drawable_padding"
                 android:gravity="center|left"
-                android:onClick="@{()->viewModel.saveJob()}"
+                android:onClick="@{()->viewModel.onSaveListener()}"
                 android:text="@{viewModel.state.textSaved}"
                 android:textColor="@color/black"
                 tools:text="Saved"

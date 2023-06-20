@@ -1,6 +1,7 @@
 package com.cupcake.viewmodels.jobs
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.SaveJobUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
@@ -15,23 +16,32 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BottomSheetViewModel @Inject constructor(
-    private val saveJobUseCase: SaveJobUseCase
-)
-    : BaseViewModel<BottomSheetUiState>(BottomSheetUiState()), BottomSheetListener {
+    private val saveJobUseCase: SaveJobUseCase,
+    savedStateHandle: SavedStateHandle // Add SavedStateHandle as a dependency
+
+
+) : BaseViewModel<BottomSheetUiState>(BottomSheetUiState()), BottomSheetListener {
     private val _event = MutableSharedFlow<BottomSheetEvent>()
     val event = _event.asSharedFlow()
-    lateinit var jobUiState: JobUiState
+    var jobUiState: JobUiState = savedStateHandle["jobUiState"] ?: JobUiState()
     override fun onShareClickListener() {
-        viewModelScope.launch { _event.emit(BottomSheetEvent.OnShareClickListener(jobUiState.id)) } }
+        Log.d("TAG", "onShareClickListener:${jobUiState} ")
+        viewModelScope.launch { _event.emit(BottomSheetEvent.OnShareClickListener(jobUiState.id)) }
+    }
 
-      fun saveJob() {
-          viewModelScope.launch(Dispatchers.IO) {
+    override fun onSaveListener() {
+        Log.d("TAG", "onSaveListener:${jobUiState} ")
+        viewModelScope.launch(Dispatchers.IO) {
             saveJobUseCase(jobUiState.toJobWithTitle())
-          }
-          viewModelScope.launch { _event.emit(BottomSheetEvent.OnSaveListener) }
-}
-    fun changeSavedState(){
-        viewModelScope.launch(Dispatchers.IO){
+        }
+        viewModelScope.launch { _event.emit(BottomSheetEvent.OnSaveListener) }
+    }
+
+     fun changeSavedState() {
+        Log.d("TAG", "changeSavedState:${jobUiState} ")
+
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.d("TAG", "changeSavedState:${jobUiState} ")
             saveJobUseCase.isAlreadyExist(jobUiState.id).apply {
                 _state.update {
                     it.copy(
@@ -41,13 +51,15 @@ class BottomSheetViewModel @Inject constructor(
                 }
             }
 
-    }
+        }
     }
 
 
-    private fun onJobSaveSuccess(isSaved: Boolean){
+
+    private fun onJobSaveSuccess(isSaved: Boolean) {
         //todo: change ui state
     }
+
     private fun onError(error: BaseErrorUiState) {
 //        _state.update { it.copy(error = error, isLoading = false) }
     }
