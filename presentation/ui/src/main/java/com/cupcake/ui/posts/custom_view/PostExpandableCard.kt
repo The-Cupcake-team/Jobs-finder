@@ -2,56 +2,55 @@ package com.cupcake.ui.posts.custom_view
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.transition.AutoTransition
-import androidx.transition.TransitionManager
-import com.cupcake.ui.databinding.PostExpandableCardBinding
+import android.widget.LinearLayout
+import com.cupcake.ui.databinding.ReadMoreLayoutBinding
 
-class PostExpandableCard@JvmOverloads constructor(
+class PostExpandableCard @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-): ConstraintLayout(context, attrs, defStyleAttr){
-    private val binding: PostExpandableCardBinding = PostExpandableCardBinding.inflate(
+) : LinearLayout(context, attrs, defStyleAttr) {
+    private val binding: ReadMoreLayoutBinding = ReadMoreLayoutBinding.inflate(
         LayoutInflater.from(context),
         this,
         true
     )
 
-
     init {
-        cardPostExpand()
+        cardPostExpandReadMore()
+        cardPostExpandReadLess()
     }
 
 
-    fun postStartText(startValue: String){
-        binding.postFullText.text = startValue
-        Log.d("lolo", "postStartText: $startValue ")
+    fun postStartText(startValue: String) {
+
+        binding.textViewContentPostBeforeReadMore.text = startValue
     }
 
-    fun postFullText(fullValue: String){
-        binding.postFullText.text = fullValue
+    fun postFullText(fullValue: String) {
+        binding.textViewContentPostAfterReadMore.text = fullValue
     }
 
-
-
-    private fun cardPostExpand(){
-        binding.Readmore.setOnClickListener {
+    private fun cardPostExpandReadMore() {
+        binding.textViewClickReadMore.setOnClickListener {
             binding.apply {
-                if (postFullText.visibility == View.GONE){
-                    TransitionManager.beginDelayedTransition(
-                        cardViewPostExpandable,
-                        AutoTransition()
-                    )
-                    postFullText.visibility = View.VISIBLE
-                    postStartText.visibility =View.GONE
-                }else{
-                    postFullText.visibility = View.GONE
-                    postStartText.visibility =View.VISIBLE
-                }
+                textViewContentPostBeforeReadMore.visibility = View.GONE
+                textViewClickReadMore.visibility = View.GONE
+                textViewContentPostAfterReadMore.visibility = View.VISIBLE
+                textViewClickReadLess.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun cardPostExpandReadLess() {
+        binding.textViewClickReadLess.setOnClickListener {
+            binding.apply {
+                textViewContentPostAfterReadMore.visibility = View.GONE
+                textViewClickReadLess.visibility = View.GONE
+                textViewContentPostBeforeReadMore.visibility = View.VISIBLE
+                textViewClickReadMore.visibility = View.VISIBLE
             }
         }
     }
