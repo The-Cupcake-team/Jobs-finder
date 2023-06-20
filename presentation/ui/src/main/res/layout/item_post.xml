@@ -80,19 +80,17 @@
                 app:srcCompat="@drawable/ic_more"
                 app:tint="@color/secondary"/>
 
-            <com.cupcake.ui.posts.custom_view.ReadMoreCustomView
+            <com.cupcake.ui.posts.custom_view.PostExpandableCard
                 android:id="@+id/textViewContent"
                 style="@style/TextStyle.body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:text="@{item.description}"
-                app:textMode="length"
-                app:anchorPoint="150"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt"
-                tools:text="@string/post_content" />
+                app:postFullText="@{item.description}"
+                />
 
             <ImageView
                 android:id="@+id/imageViewPostImage"

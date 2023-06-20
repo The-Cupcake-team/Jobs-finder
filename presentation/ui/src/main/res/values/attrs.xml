@@ -4,6 +4,11 @@
             <attr name="cardDescription" format="string"/>
         </declare-styleable>
 
+    <declare-styleable name="PostExpandableCard">
+        <attr name="postStartText" format="string"/>
+        <attr name="postFullText" format="string"/>
+    </declare-styleable>
+
     <declare-styleable name="DetailsChipCustomView">
         <attr name="workType" format="string"/>
         <attr name="location" format="string"/>
