@@ -10,8 +10,11 @@
 
     </data>
 
-    <androidx.cardview.widget.CardView
+    <FrameLayout
         android:id="@+id/standard_bottom_sheet"
+        app:contentPaddingRight="@dimen/spacing_medium"
+
+        android:background="@drawable/bottom_sheets_radius"
         style="@style/BottomSheetDialogTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +47,7 @@
                 android:gravity="center|left"
                 android:onClick="@{()->viewModel.onSaveListener()}"
                 android:text="@{viewModel.state.textSaved}"
-                android:textColor="@color/black"
+                android:textColor="@color/icon_primary"
                 tools:text="Saved"
                 app:setIsSavedIcon="@{viewModel.state.isSaved}"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,9 +64,9 @@
                 android:drawablePadding="@dimen/drawable_padding"
                 android:gravity="center|left"
                 android:focusable="true"
-                android:onClick="@{()->viewModel.onShareClickListener()}"
+                android:onClick="@{()->viewModel.onShareClickListener(item.id)}"
                 android:text="@string/share"
-                android:textColor="@color/black"
+                android:textColor="@color/icon_primary"
                 app:drawableStartCompat="@drawable/share"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,5 +75,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </layout>

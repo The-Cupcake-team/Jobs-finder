@@ -47,5 +47,8 @@
     <color name="accent_cyan">#E7FEFF</color>
     <color name="accent_orange">#FFEDED</color>
 
+    <color name="icon_color">#A7A7A7</color>
+    <color name="icon_primary">#202020</color>
+
 
 </resources>

@@ -20,9 +20,21 @@ fun JobWithTitleDto.toJobWithJobTitle(): JobWithTitle {
         jobLocation = jobLocation,
         jobDescription = jobDescription,
         jobType = jobType,
-        salary = jobSalary.toString()
+        salary = formatLargeNumber(jobSalary.minSalary)+"-"
+                +formatLargeNumber(jobSalary.maxSalary)
     )
 }
+
+private fun formatLargeNumber(number: Double): String {
+    val suffixes = listOf("", "k", "M", "B", "T") // Add more suffixes as needed
+    val suffixIndex = (Math.floor(Math.log10(number)) / 3).toInt()
+
+    val scaledNumber = number / Math.pow(10.0, suffixIndex * 3.toDouble())
+    val formattedNumber = String.format("%.1f", scaledNumber)
+
+    return formattedNumber + suffixes[suffixIndex]
+}
+
 
 fun JobWithTitle.toJobsEntity(): JobsEntity{
     return JobsEntity(
