@@ -64,7 +64,7 @@
                 android:drawablePadding="@dimen/drawable_padding"
                 android:gravity="center|left"
                 android:focusable="true"
-                android:onClick="@{()->viewModel.onShareClickListener(item.id)}"
+                android:onClick="@{()->viewModel.onShareClickListener()}"
                 android:text="@string/share"
                 android:textColor="@color/icon_primary"
                 app:drawableStartCompat="@drawable/share"
