@@ -1,22 +1,19 @@
 package com.cupcake.ui.jobs.jobfragment
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
-import com.cupcake.ui.BuildConfig
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentJobsBinding
 import com.cupcake.ui.jobs.JobsItem
 import com.cupcake.ui.jobs.adapter.JobsAdapter
+import com.cupcake.viewmodels.jobs.JobUiState
 import com.cupcake.viewmodels.jobs.JobsEvent
 import com.cupcake.viewmodels.jobs.JobsUiState
 import com.cupcake.viewmodels.jobs.JobsViewModel
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -31,13 +28,20 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpAdapter()
-        handelJobsEvent()
     }
 
-    override fun onStop() {
-        super.onStop()
-        job.cancel()
+    override fun onResume() {
+        super.onResume()
+        handelJobsEvent()
+
     }
+
+    override fun onPause() {
+        super.onPause()
+        job.cancel()
+
+    }
+
     private fun setUpAdapter() {
         jobsAdapter = JobsAdapter(emptyList(), viewModel)
         binding.jobsRecycler.adapter = jobsAdapter
@@ -75,38 +79,38 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     }
 
     private fun handelJobsEvent() {
-         job = lifecycleScope.launch(Dispatchers.Main) {
+        job = lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
-                    is JobsEvent.JobCardClick -> {
-                        navigateToDirection(
-                            JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment()
-                        )
-                    }
-
-                    is JobsEvent.JobChipClick -> {
-                        val action = JobsFragmentDirections
-                            .actionJobsFragmentToJobSearchFragment(jobsEvent.title)
-                        navigateToDirection(action)
-                    }
-
-                    is JobsEvent.SearchBoxClick -> {
-                        navigateToDirection(
-                            JobsFragmentDirections.actionJobsFragmentToJobSearchFragment()
-                        )
-                    }
-
-
-                    is JobsEvent.OnFloatingActionClickListener -> {
-                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToCreateJobFormOneFragment())
-                    }
-
-                    is JobsEvent.OnImageViewMoreClickListener -> {
-                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToModalBottomSheet(jobsEvent.model))
-                    }
+                    is JobsEvent.JobCardClick -> handleJobCardClick()
+                    is JobsEvent.JobChipClick -> handleJobChipClick(jobsEvent.title)
+                    is JobsEvent.SearchBoxClick -> handleSearchBoxClick()
+                    is JobsEvent.OnFloatingActionClickListener -> handleFloatingActionClick()
+                    is JobsEvent.OnImageViewMoreClickListener -> handleImageViewMoreClick(jobsEvent.model)
                 }
             }
         }
+    }
+
+    private fun handleJobCardClick() {
+        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment())
+    }
+
+    private fun handleJobChipClick(title: String) {
+        val action = JobsFragmentDirections.actionJobsFragmentToJobSearchFragment(title)
+        navigateToDirection(action)
+    }
+
+    private fun handleSearchBoxClick() {
+        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToJobSearchFragment())
+    }
+
+    private fun handleFloatingActionClick() {
+        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToCreateJobFormOneFragment())
+    }
+
+    private fun handleImageViewMoreClick(model: JobUiState) {
+        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToModalBottomSheet(model))
     }
 
     private fun navigateToDirection(directions: NavDirections) {
