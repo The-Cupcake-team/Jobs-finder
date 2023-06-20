@@ -11,18 +11,27 @@
         android:id="@+id/bottomSheetsPosts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bottom_sheet_background">
+        app:shapeAppearance="@drawable/bottom_sheet_background"
+        android:background="@drawable/bottom_sheet_background"
+        app:strokeWidth="@dimen/zero">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background">
-            
-            <com.google.android.material.bottomsheet.BottomSheetDragHandleView
-                android:id="@+id/bottomSheetDrag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_height="match_parent"
+            >
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="72dp"
+                android:layout_height="4dp"
+                app:circularflow_defaultRadius="@dimen/spacing_normal"
+                android:background="@drawable/divider_background"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginVertical="@dimen/spacing_medium"
+                app:layout_constraintBottom_toTopOf="@id/followTextView"
+                />
 
             <Button
                 style="@style/Widget.Material3.Button.TextButton.Icon"
@@ -41,13 +50,14 @@
                 android:textAllCaps="false"
                 android:fontFamily="@font/worksans_regular"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bottomSheetDrag" />
+                app:layout_constraintBottom_toTopOf="@id/divider2"
+                app:layout_constraintTop_toBottomOf="@id/divider3"/>
 
             <View
                 android:id="@+id/divider2"
                 android:layout_width="@dimen/zero"
                 android:layout_height="1dp"
-                android:background="?android:attr/listDivider"
+                android:background="@color/boarder"
                 app:layout_constraintTop_toBottomOf="@id/followTextView"
                 app:layout_constraintStart_toStartOf="@id/followTextView"
                 app:layout_constraintEnd_toEndOf="@id/followTextView"
