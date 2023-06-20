@@ -9,16 +9,21 @@
             type="com.cupcake.viewmodels.jobs.BottomSheetViewModel" />
 
     </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bottom_sheet_background"
+    >
 
     <FrameLayout
         android:id="@+id/standard_bottom_sheet"
-        app:contentPaddingRight="@dimen/spacing_medium"
-
-        android:background="@drawable/bottom_sheets_radius"
         style="@style/BottomSheetDialogTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+        android:background="@drawable/bottom_sheets_radius"
+        app:contentPaddingRight="@dimen/spacing_medium"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -42,16 +47,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginVertical="@dimen/size20"
-                android:backgroundTint="@color/black"
+
                 android:drawablePadding="@dimen/drawable_padding"
                 android:gravity="center|left"
                 android:onClick="@{()->viewModel.onSaveListener()}"
                 android:text="@{viewModel.state.textSaved}"
                 android:textColor="@color/icon_primary"
-                tools:text="Saved"
-                app:setIsSavedIcon="@{viewModel.state.isSaved}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/drag_handle" />
+                app:layout_constraintTop_toBottomOf="@+id/drag_handle"
+                app:setIsSavedIcon="@{viewModel.state.isSaved}"
+                tools:text="Saved" />
 
             <TextView
                 android:id="@+id/textViewShare"
@@ -59,11 +64,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
                 android:layout_marginVertical="@dimen/size20"
-                android:backgroundTint="@color/black"
                 android:clickable="true"
                 android:drawablePadding="@dimen/drawable_padding"
-                android:gravity="center|left"
                 android:focusable="true"
+                android:gravity="center|left"
                 android:onClick="@{()->viewModel.onShareClickListener()}"
                 android:text="@string/share"
                 android:textColor="@color/icon_primary"
@@ -74,6 +78,8 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
