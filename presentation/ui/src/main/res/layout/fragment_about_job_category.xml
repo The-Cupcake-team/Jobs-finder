@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.job_details.JobViewModel" />
@@ -37,6 +36,7 @@
             app:layout_constraintEnd_toEndOf="@+id/layout_details_chip"
             app:layout_constraintStart_toStartOf="@+id/layout_details_chip"
             app:layout_constraintTop_toBottomOf="@id/layout_details_chip" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

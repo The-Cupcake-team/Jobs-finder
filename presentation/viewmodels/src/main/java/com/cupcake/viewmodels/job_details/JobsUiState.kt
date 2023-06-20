@@ -20,6 +20,7 @@ data class JobDetailUiState(
 )
 
 data class JobsDetailsUiState(
+    val id: String = "",
     val image: String = "",
     val title: String = "",
     val companyName: String = "",
@@ -34,6 +35,7 @@ data class JobsDetailsUiState(
 
 fun Job.toJobsDetailsUiState(): JobsDetailsUiState {
     return JobsDetailsUiState(
+        id = this.id,
         image = "",
         title = this.jobTitle.title,
         companyName = this.company,

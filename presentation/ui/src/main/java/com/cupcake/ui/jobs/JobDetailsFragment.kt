@@ -2,6 +2,8 @@ package com.cupcake.ui.jobs
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
@@ -19,9 +21,17 @@ class JobDetailsFragment @Inject constructor(
     JobViewModel::class.java
 ) {
     override val LOG_TAG: String = this.javaClass.simpleName
+    private val args: JobDetailsFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setJobAdapter()
+        setViewModel()
         applyClickHandler()
+        onClickBackNavigationIcon()
+    }
+
+    private fun setViewModel(){
+        viewModel.getJobDetails(args.jobId.toString())
+        viewModel.jobId = args.jobId.toString()
     }
     private fun setJobAdapter(){
         val fragmentTasks = mapOf(
@@ -33,7 +43,7 @@ class JobDetailsFragment @Inject constructor(
             fragmentItems = fragmentTasks,
             lifecycle = lifecycle,
         )
-        binding?.apply {
+        binding.apply {
             viewPagerCategory.adapter = adapter
             setTabLayout(tabLayoutCategory, viewPagerCategory)
         }
@@ -47,18 +57,24 @@ class JobDetailsFragment @Inject constructor(
     }
 
     private fun applyClickHandler(){
-        binding?.buttonApplyJob?.setOnClickListener {
+        binding.buttonApplyJob.setOnClickListener {
             setDialog()
         }
     }
     private fun setDialog() {
-        val dialog = Dialog(requireContext())
+        val dialog = DialogJob(requireContext())
         dialog.show()
     }
 
     companion object{
         const val ABOUT_JOB_FRAGMENT = 0
         const val ABOUT_CATEGORY_FRAGMENT = 1
+    }
+
+    private fun onClickBackNavigationIcon() {
+        binding.toolBar.setNavigationOnClickListener { view ->
+            view.findNavController().popBackStack()
+        }
     }
 
 }

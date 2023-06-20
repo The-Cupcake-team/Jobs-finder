@@ -5,6 +5,7 @@ import com.cupcake.usecase.GetJobByIdUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -12,11 +13,8 @@ class JobViewModel @Inject constructor(
     private val getJobByIdUseCase: GetJobByIdUseCase
 ) : BaseViewModel<JobDetailUiState>(JobDetailUiState()) {
 
-    init {
-        getJobDetails("f2ac1ca6-c036-4b2c-9712-a5d6766c61e4")
-    }
-
-    private fun getJobDetails(jobId: String) {
+    var jobId : String = ""
+        fun getJobDetails(jobId: String) {
         tryToExecute(
             { getJobByIdUseCase(jobId) },
             ::onGetJobDetailsSuccess,
@@ -35,5 +33,9 @@ class JobViewModel @Inject constructor(
 
     private fun onGetJobDetailsFailure(error: BaseErrorUiState) {
         updateState { it.copy(isLoading = false, error = error) }
+    }
+    fun onRetryClicked(){
+        _state.update {it.copy(error = null, isLoading = true) }
+        getJobDetails(jobId)
     }
 }

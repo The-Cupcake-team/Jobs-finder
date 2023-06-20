@@ -70,7 +70,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
                     is JobsEvent.JobCardClick -> {
-                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment())
+                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment(jobsEvent.id))
                     }
 
                     is JobsEvent.JobChipClick -> showToast(jobsEvent.id)
