@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
@@ -20,8 +19,6 @@ import com.cupcake.viewmodels.job_details.JobViewModel
 import com.cupcake.viewmodels.job_details.JobsDetailsUiState
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -93,7 +90,8 @@ class JobDetailsFragment @Inject constructor(
 
     private fun sendEmail(jobDetails: JobsDetailsUiState) {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:${jobDetails.companyName}@gmail.com")
+                data = Uri.parse("mailto:")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf("${jobDetails.companyName.replace(" ", "_")}@gmail.com"))
                 putExtra(Intent.EXTRA_SUBJECT, jobDetails.title)
         }
         requireActivity().startActivity(intent)
