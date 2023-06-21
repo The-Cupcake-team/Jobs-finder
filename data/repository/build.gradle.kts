@@ -40,7 +40,6 @@ dependencies {
     implementation(project(Modules.DATA_REMOTE))
     implementation(project(Modules.DATA_LOCAL))
 
-
     testImplementation(DependencyProject.junit)
     androidTestImplementation(DependencyProject.junitExtension)
 

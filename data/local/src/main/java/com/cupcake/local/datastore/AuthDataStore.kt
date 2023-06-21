@@ -1,4 +1,4 @@
-package com.example.local
+package com.cupcake.local.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -38,3 +38,4 @@ class AuthDataStore @Inject constructor(@ApplicationContext context: Context) {
         val TOKEN = stringPreferencesKey("token")
     }
 }
+

@@ -2,11 +2,10 @@ plugins {
     id(Plugins.ANDROID_LIBRARY)
     kotlin(Plugins.KOTLIN_ANDROID)
     kotlin(Plugins.KOTLIN_KAPT)
-    id(Plugins.SERIALIZATION)
 }
 
 android {
-    namespace = "com.example.local"
+    namespace = "com.cupcake.local"
     compileSdk = ConfigurationData.COMPILE_SDK_VERSION
 
     defaultConfig {
@@ -43,6 +42,5 @@ dependencies {
 
     implementation(DependencyProject.hilt)
     kapt(DependencyProject.hiltCompiler)
-
     implementation(DependencyProject.dataStore)
 }
