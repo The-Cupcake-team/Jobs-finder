@@ -38,6 +38,7 @@ dependencies {
 
     implementation(project(Modules.DOMAIN_USECASE))
     implementation(project(Modules.DATA_REMOTE))
+    implementation(project(Modules.DATA_LOCAL))
 
 
     testImplementation(DependencyProject.junit)
@@ -46,5 +47,4 @@ dependencies {
     implementation(DependencyProject.retrofit)
 
     implementation(DependencyProject.hilt)
-
 }

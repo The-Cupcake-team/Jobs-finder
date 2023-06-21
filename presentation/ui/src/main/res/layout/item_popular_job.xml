@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_normal"
-        android:onClick="@{() ->listener.onChipClickListener(item.id)}">
+        android:onClick="@{() ->listener.onChipClickListener(item.title)}">
 
         <TextView
             android:id="@+id/textViewJobType"
