@@ -4,26 +4,16 @@ import com.cupcake.models.Job
 import com.cupcake.viewmodels.base.BaseErrorUiState
 
 data class JobDetailsUiState(
-    val image: String = "",
-    val title: String = "",
-    val companyName: String = "",
-    val detailsChip: List<String> = emptyList(),
-    val location: String = "",
-    val salary: String = "",
-    val createdAt: Long = 0,
-)
-
-data class JobDetailUiState(
-    val job: JobsDetailsUiState = JobsDetailsUiState(),
+    val job: JobDetailsFieldState = JobDetailsFieldState(),
     val isLoading: Boolean = true,
     val error: BaseErrorUiState? = null
 )
 
-data class JobsDetailsUiState(
+data class JobDetailsFieldState(
     val id: String = "",
     val image: String = "",
-    val title: String = "Android developer",
-    val companyName: String = "hassan",
+    val title: String = "",
+    val companyName: String = "",
     val workType: String = "",
     val jobType: String = "",
     val location: String = "",
@@ -33,8 +23,8 @@ data class JobsDetailsUiState(
     val experience: String = ""
 )
 
-fun Job.toJobsDetailsUiState(): JobsDetailsUiState {
-    return JobsDetailsUiState(
+fun Job.toJobsDetailsUiState(): JobDetailsFieldState {
+    return JobDetailsFieldState(
         id = this.id,
         image = "",
         title = this.jobTitle.title,
