@@ -1,6 +1,7 @@
 package com.cupcake.ui.utill
 
 
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.widget.EditText
@@ -93,6 +94,22 @@ fun showDrawableErrorImage(view: ImageView, errorType: BaseErrorUiState?){
 fun convertTime(view: TextView , time: Long){
    view.text = convert(time)
 }
+
+@BindingAdapter("setIsSavedIcon")
+fun setIsSavedIcon(textView: TextView, isSaved: Boolean?) {
+    val drawable: Drawable? = if (isSaved == true) {
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_saved)
+    } else {
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_save)
+    }
+    textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+}
+
+@BindingAdapter("dismissSwipeRefreshIf")
+fun dismissSwipeRefreshIf(swipeRefreshLayout: SwipeRefreshLayout, dismiss: Boolean) {
+    swipeRefreshLayout.isRefreshing = dismiss
+}
+
 
 @BindingAdapter(value = ["app:isLiked"])
 fun isLiked(view: ImageView , isLiked: Boolean){

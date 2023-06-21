@@ -20,6 +20,7 @@ object DependencyProject {
     private const val NAVIGATION_VERSION = "2.5.3"
     private const val LOTTIE_VERSION = "6.0.1"
     private const val swipeRefreshLayoutVersion = "1.1.0"
+    private const val ROOM_VERSION = "2.5.1"
 
     const val androidxCore = "androidx.core:core-ktx:$CORE_VERSION"
     const val compat = "androidx.appcompat:appcompat:$APP_COMPAT_VERSION"
@@ -57,5 +58,11 @@ object DependencyProject {
     const val lottie = "com.airbnb.android:lottie:$LOTTIE_VERSION"
 
     const val coil = "io.coil-kt:coil:$COIL_VERSION"
+
+    const val roomRuntime = "androidx.room:room-runtime:$ROOM_VERSION"
+    const val roomCompiler = "androidx.room:room-compiler:$ROOM_VERSION"
+    const val room = "androidx.room:room-compiler:$ROOM_VERSION"
+
+
 
 }

@@ -24,15 +24,32 @@
 
     <fragment
         android:id="@+id/jobsFragment"
-        android:name="com.cupcake.ui.jobs.JobsFragment"
+        android:name="com.cupcake.ui.jobs.jobfragment.JobsFragment"
         tools:layout="@layout/fragment_jobs"
         android:label="JobsFragment" >
         <action
             android:id="@+id/action_jobsFragment_to_jobDetailsFragment"
-            app:destination="@id/jobDetailsFragment" />
+            app:destination="@id/jobDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <argument
             android:name="idJob"
             app:argType="string" />
+        <action
+            android:id="@+id/action_jobsFragment_to_createJobFormOneFragment"
+            app:destination="@id/createJobFormOneFragment" />
+        <action
+            android:id="@+id/action_jobsFragment_to_jobSearchFragment"
+            app:destination="@id/jobSearchFragment"
+            app:enterAnim="@android:animator/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/jobsFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_jobsFragment_to_modalBottomSheet"
+            app:destination="@id/modalBottomSheet" />
     </fragment>
 
     <fragment
@@ -53,4 +70,28 @@
             android:name="postID"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/createJobFormOneFragment"
+        android:name="com.cupcake.ui.create_job.CreateJobFormOneFragment"
+        android:label="CreateJobFormOneFragment" />
+    <fragment
+        android:id="@+id/jobSearchFragment"
+        android:name="com.cupcake.ui.job_search.JobSearchFragment"
+        android:label="JobSearchFragment"
+        tools:layout="@layout/fragment_job_search"
+        >
+        <argument
+            android:name="jobTitle"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+    <dialog
+        android:id="@+id/modalBottomSheet"
+        android:name="com.cupcake.ui.jobs.jobfragment.ModalBottomSheet"
+        android:label="ModalBottomSheet" >
+        <argument
+            android:name="jobUiState"
+            app:argType="com.cupcake.viewmodels.jobs.JobUiState" />
+    </dialog>
+
 </navigation>

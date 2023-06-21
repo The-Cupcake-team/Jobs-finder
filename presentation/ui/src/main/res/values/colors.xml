@@ -48,6 +48,11 @@
     <color name="accent_orange">#FFEDED</color>
     <color name="defaultColor">#97BFFB</color>
 
+    <color name="icon_color">#A7A7A7</color>
+    <color name="icon_primary">#202020</color>
+
     <color name="bottom_sheet_background">#616161</color>
+
+
 
 </resources>
