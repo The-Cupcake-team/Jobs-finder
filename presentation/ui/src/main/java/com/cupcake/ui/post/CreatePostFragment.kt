@@ -50,7 +50,7 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         lifecycleScope.launch {
             viewModel.state.collect { state ->
                 if (state.isPostCreated) {
-                    Snackbar.make(requireView(), "Post Created Successfully", Snackbar.LENGTH_LONG)
+                    Snackbar.make(requireView(), POST_CREATED, Snackbar.LENGTH_LONG)
                         .show()
                 }
             }
@@ -85,10 +85,11 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         }
     }
 
+
     private fun checkPermissionOfCamera() {
         Dexter.withContext(this.requireContext()).withPermissions(
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            android.Manifest.permission.CAMERA
+            Manifest.permission.CAMERA
         ).withListener(object : MultiplePermissionsListener {
             override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
                 report?.let {
@@ -189,10 +190,11 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         }
     }
 
-    companion object {
+    private companion object {
         const val REQUEST_CAMERA_CODE = 1
         const val REQUEST_GALLERY_CODE = 2
         const val VISIBILITY_PUBLIC = "Public"
         const val VISIBILITY_PRIVATE = "Private"
+        const val POST_CREATED = "Post Created Successfully"
     }
 }
