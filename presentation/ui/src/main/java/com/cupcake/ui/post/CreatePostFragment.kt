@@ -5,6 +5,7 @@ import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -14,6 +15,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.cupcake.ui.R
@@ -21,14 +23,6 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentCreatePostBinding
 import com.cupcake.viewmodels.post.CreatePostViewModel
 import com.google.android.material.snackbar.Snackbar
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.coroutines.launch
 
 class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostViewModel>(
@@ -84,27 +78,79 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
             }
         }
     }
-
-
-    private fun checkPermissionOfCamera() {
-        Dexter.withContext(this.requireContext()).withPermissions(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-        ).withListener(object : MultiplePermissionsListener {
-            override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                report?.let {
-                    if (report.areAllPermissionsGranted())
-                        openCamera()
-                }
-            }
-            override fun onPermissionRationaleShouldBeShown(
-                p0: MutableList<PermissionRequest>?,
-                p1: PermissionToken?
-            ) {
+override fun onRequestPermissionsResult(
+    requestCode: Int,
+    permissions: Array<String>,
+    grantResults: IntArray
+) {
+    when (requestCode) {
+        REQUEST_CAMERA_CODE -> {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera()
+            } else {
                 showRotationDialogPermission()
             }
-        }).check()
+        }
 
+        REQUEST_GALLERY_CODE -> {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openGallery()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "You have denied the storage permission to select an image",
+                    Toast.LENGTH_SHORT
+                ).show()
+                showRotationDialogPermission()
+            }
+        }
+    }
+}
+private fun checkPermissionOfCamera() {
+    val cameraPermission = Manifest.permission.CAMERA
+    val storagePermission = Manifest.permission.READ_EXTERNAL_STORAGE
+
+    val permissionsToRequest = mutableListOf<String>()
+    if (ContextCompat.checkSelfPermission(
+            requireContext(),
+            cameraPermission
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+        permissionsToRequest.add(cameraPermission)
+    }
+    if (ContextCompat.checkSelfPermission(
+            requireContext(),
+            storagePermission
+        ) != PackageManager.PERMISSION_GRANTED
+    ) {
+        permissionsToRequest.add(storagePermission)
+    }
+
+    if (permissionsToRequest.isNotEmpty()) {
+        requestPermissions(
+            permissionsToRequest.toTypedArray(),
+            REQUEST_CAMERA_CODE
+        )
+    } else {
+        openCamera()
+    }
+}
+
+    private fun checkPermissionOfGallery() {
+        val storagePermission = Manifest.permission.READ_EXTERNAL_STORAGE
+
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                storagePermission
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(storagePermission),
+                REQUEST_GALLERY_CODE
+            )
+        } else {
+            openGallery()
+        }
     }
 
     private fun openCamera() {
@@ -132,33 +178,6 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
             }.setNegativeButton("Cancel") { dialog, _ ->
                 dialog.dismiss()
             }.show()
-    }
-
-    private fun checkPermissionOfGallery() {
-        Dexter.withContext(this.requireActivity()).withPermission(
-            Manifest.permission.READ_EXTERNAL_STORAGE
-        ).withListener(object : PermissionListener {
-            override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                openGallery()
-            }
-
-            override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
-                Toast.makeText(
-                    requireContext(),
-                    "You have denied the storage permission to select image",
-                    Toast.LENGTH_SHORT
-                ).show()
-                showRotationDialogPermission()
-            }
-
-            override fun onPermissionRationaleShouldBeShown(
-                p0: PermissionRequest?,
-                p1: PermissionToken?
-            ) {
-                showRotationDialogPermission()
-            }
-
-        }).check()
     }
 
     private fun openGallery() {
