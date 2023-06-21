@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.cupcake.ui.jobs.AboutJobCategory">
+        tools:context="com.cupcake.ui.job_details.AboutJobCategory">
 
         <com.cupcake.ui.job_details.custom_view.DetailsChipCustomView
             android:id="@+id/layout_details_chip"

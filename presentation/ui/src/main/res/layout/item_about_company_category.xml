@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.cupcake.ui.jobs.FragmentAboutCompanyCategory">
+        tools:context="com.cupcake.ui.job_details.AboutCompanyCategory">
 
         <TextView
             android:layout_width="match_parent"

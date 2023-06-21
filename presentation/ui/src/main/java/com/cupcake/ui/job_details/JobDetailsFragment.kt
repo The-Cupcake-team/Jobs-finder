@@ -1,4 +1,4 @@
-package com.cupcake.ui.jobs
+package com.cupcake.ui.job_details
 
 import android.content.Intent
 import android.net.Uri
@@ -15,24 +15,24 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.DialogBinding
 import com.cupcake.ui.databinding.FragmentJobDetailsBinding
 import com.cupcake.ui.jobs.adapter.ViewPagerJobDetailsAdapter
-import com.cupcake.viewmodels.job_details.JobViewModel
-import com.cupcake.viewmodels.job_details.JobsDetailsUiState
+import com.cupcake.viewmodels.job_details.JobDetailsViewModel
+import com.cupcake.viewmodels.job_details.JobDetailsFieldState
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import javax.inject.Inject
 
 
 class JobDetailsFragment @Inject constructor(
-): BaseFragment<FragmentJobDetailsBinding, JobViewModel>(
+): BaseFragment<FragmentJobDetailsBinding, JobDetailsViewModel>(
     R.layout.fragment_job_details,
-    JobViewModel::class.java
+    JobDetailsViewModel::class.java
 ) {
     override val LOG_TAG: String = this.javaClass.simpleName
     private val args: JobDetailsFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setJobAdapter()
         setViewModel()
-        applyClickHandler()
+        onClickApplyButton()
         onClickBackNavigationIcon()
     }
 
@@ -43,7 +43,7 @@ class JobDetailsFragment @Inject constructor(
     private fun setJobAdapter(){
         val fragmentTasks = mapOf(
             ABOUT_JOB_FRAGMENT to AboutJobCategory(),
-            ABOUT_CATEGORY_FRAGMENT to FragmentAboutCompanyCategory(),
+            ABOUT_CATEGORY_FRAGMENT to AboutCompanyCategory(),
         )
         val adapter = ViewPagerJobDetailsAdapter(
             fragmentManager = requireActivity().supportFragmentManager,
@@ -63,7 +63,7 @@ class JobDetailsFragment @Inject constructor(
         }.attach()
     }
 
-    private fun applyClickHandler(){
+    private fun onClickApplyButton(){
         binding.buttonApplyJob.setOnClickListener {
             setDialog()
         }
@@ -77,7 +77,7 @@ class JobDetailsFragment @Inject constructor(
         alertDialog.setCancelable(false)
         alertDialog.show()
 
-        binding.applyButton.setOnClickListener {
+        binding.sendButton.setOnClickListener {
             val jobDetails = viewModel.state.value.job
             sendEmail(jobDetails)
             alertDialog.dismiss()
@@ -88,7 +88,7 @@ class JobDetailsFragment @Inject constructor(
         }
     }
 
-    private fun sendEmail(jobDetails: JobsDetailsUiState) {
+    private fun sendEmail(jobDetails: JobDetailsFieldState) {
             val intent = Intent(Intent.ACTION_SENDTO).apply {
                 data = Uri.parse("mailto:")
                 putExtra(Intent.EXTRA_EMAIL, arrayOf("${jobDetails.companyName.replace(" ", "_")}@gmail.com"))
