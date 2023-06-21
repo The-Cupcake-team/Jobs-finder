@@ -16,18 +16,5 @@
         <attr name="salary" format="string"/>
     </declare-styleable>
 
-    <declare-styleable name="ReadMoreTextView">
-        <attr name="readMoreText" format="string"/>
-        <attr name="readLessText" format="string"/>
-        <attr name="anchorTextColor" format="color"/>
-        <attr name="isExpanded" format="boolean"/>
-        <attr name="anchorPoint" format="integer"/>
-        <attr name="textMode" format="enum">
-            <enum name="length" value="0"/>
-            <enum name="line" value="1"/>
-        </attr>
-    </declare-styleable>
-
-    <attr name="readMoreTextView" format="reference"/>
 
 </resources>
