@@ -50,5 +50,11 @@
     <color name="expanded_chip_color">#E7EDF5</color>
     <color name="expanded_chip_arrow_color">#4B8CED</color>
 
+    <color name="icon_color">#A7A7A7</color>
+    <color name="icon_primary">#202020</color>
+
+    <color name="bottom_sheet_background">#616161</color>
+
+
 
 </resources>

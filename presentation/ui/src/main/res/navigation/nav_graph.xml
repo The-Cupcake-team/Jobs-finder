@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/jobsFragment">
+    app:startDestination="@id/postsFragment">
 
     <fragment
         android:id="@+id/createJobFragment"
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/jobsFragment"
-        android:name="com.cupcake.ui.jobs.JobsFragment"
+        android:name="com.cupcake.ui.jobs.jobfragment.JobsFragment"
         tools:layout="@layout/fragment_jobs"
         android:label="JobsFragment" >
         <action
@@ -35,11 +35,29 @@
         android:id="@+id/jobDetailsFragment"
         android:name="com.cupcake.ui.jobs.JobDetailsFragment"
         tools:layout="@layout/fragment_job_details"
-        android:label="JobDetailsFragment" >
+        android:label="JobDetailsFragment" />
+    <fragment
+        android:id="@+id/createJobFormOneFragment"
+        android:name="com.cupcake.ui.create_job.CreateJobFormOneFragment"
+        android:label="CreateJobFormOneFragment" />
+    <fragment
+        android:id="@+id/jobSearchFragment"
+        android:name="com.cupcake.ui.job_search.JobSearchFragment"
+        android:label="JobSearchFragment"
+        tools:layout="@layout/fragment_job_search"
+        >
         <argument
-            android:name="jobId"
+            android:name="jobTitle"
             app:argType="string"
-            app:nullable="true" />
+            android:defaultValue="" />
     </fragment>
+    <dialog
+        android:id="@+id/modalBottomSheet"
+        android:name="com.cupcake.ui.jobs.jobfragment.ModalBottomSheet"
+        android:label="ModalBottomSheet" >
+        <argument
+            android:name="jobUiState"
+            app:argType="com.cupcake.viewmodels.jobs.JobUiState" />
+    </dialog>
 
 </navigation>

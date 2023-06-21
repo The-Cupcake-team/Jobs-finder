@@ -139,7 +139,6 @@
         <item name="android:background">@drawable/button_background</item>
         <item name="android:textColor">@color/white</item>
         <item name="fontFamily">@font/worksans_semibold</item>
-        <item name="elevation">@dimen/zero</item>
         <item name="android:textSize">@dimen/text_size_title</item>
     </style>
 
@@ -154,12 +153,12 @@
         <item name="android:ellipsize">end</item>
         <item name="android:drawableEnd">@drawable/ic_sort</item>
         <item name="android:hint">@string/search</item>
-        <item name="android:drawablePadding">@dimen/spacing_small</item>
+        <item name="android:drawablePadding">@dimen/spacing_normal</item>
         <item name="android:imeOptions">actionSearch</item>
         <item name="android:lines">1</item>
         <item name="android:inputType">text</item>
-        <item name="android:paddingStart">@dimen/spacing_xxlarge</item>
-        <item name="android:paddingEnd">@dimen/spacing_xxlarge</item>
+        <item name="android:paddingStart">@dimen/spacing_medium</item>
+        <item name="android:paddingEnd">@dimen/spacing_medium</item>
         <item name="android:textColor">@color/color_text_primary</item>
         <item name="android:textColorHint">@color/tertiary</item>
         <item name="android:layout_marginStart">@dimen/spacing_medium</item>
@@ -262,4 +261,19 @@
         <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
     </style>
 
+
+
+    <!-- set the rounded drawable as background to your bottom sheet -->
+    <style name="BaseBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+    <style name="BottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_dialog</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/white</item>
+    </style>
 </resources>

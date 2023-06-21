@@ -1,12 +1,15 @@
 package com.cupcake.repository
 
 import android.util.Log
+import com.cupcake.jobsfinder.local.daos.JobFinderDao
+import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.*
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
-import com.cupcake.remote.response.job.JobDto
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobWithJobTitle
+import com.cupcake.repository.mapper.toJobWithTitle
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
 import repo.JobFinderRepository
 import retrofit2.Response
@@ -14,7 +17,8 @@ import javax.inject.Inject
 
 
 class JobFinderRepositoryImpl @Inject constructor(
-    private val api: JobApiService
+    private val api: JobApiService,
+    private val jobFinderDao: JobFinderDao
 ) : JobFinderRepository {
 
 
@@ -105,6 +109,21 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun getJobById(jobId: String): Job {
         return wrapResponseWithErrorHandler { api.getJobById(jobId) }.toJob()
+    }
+
+    override suspend fun insertJob(job: JobWithTitle) {
+        val jobEntity = job.toJobsEntity()
+        jobFinderDao.insertJob(jobEntity)
+    }
+
+    override suspend fun deleteJob(job: JobWithTitle) {
+        val jobEntity = job.toJobsEntity()
+        jobFinderDao.deleteSavedJob(jobEntity)
+    }
+
+    override suspend fun getSavedJobById(id: String): JobWithTitle? {
+        val jobEntity: JobsEntity? = jobFinderDao.getJopById(id)
+        return jobEntity?.toJobWithTitle()
     }
 
 

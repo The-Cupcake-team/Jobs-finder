@@ -1,6 +1,7 @@
 package com.cupcake.ui.utill
 
 
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.widget.EditText
@@ -11,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
@@ -90,4 +92,19 @@ fun showDrawableErrorImage(view: ImageView, errorType: BaseErrorUiState?){
 @BindingAdapter(value = ["app:convertTime"])
 fun convertTime(view: TextView , time: Long){
    view.text = convert(time)
+}
+
+@BindingAdapter("setIsSavedIcon")
+fun setIsSavedIcon(textView: TextView, isSaved: Boolean?) {
+    val drawable: Drawable? = if (isSaved == true) {
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_saved)
+    } else {
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_save)
+    }
+    textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+}
+
+@BindingAdapter("dismissSwipeRefreshIf")
+fun dismissSwipeRefreshIf(swipeRefreshLayout: SwipeRefreshLayout, dismiss: Boolean) {
+    swipeRefreshLayout.isRefreshing = dismiss
 }
