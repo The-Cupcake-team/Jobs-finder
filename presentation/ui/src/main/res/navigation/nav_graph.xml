@@ -33,7 +33,7 @@
         android:label="CreatePostFragment" />
     <fragment
         android:id="@+id/jobDetailsFragment"
-        android:name="com.cupcake.ui.jobs.JobDetailsFragment"
+        android:name="com.cupcake.ui.job_details.JobDetailsFragment"
         tools:layout="@layout/fragment_job_details"
         android:label="JobDetailsFragment" >
         <argument

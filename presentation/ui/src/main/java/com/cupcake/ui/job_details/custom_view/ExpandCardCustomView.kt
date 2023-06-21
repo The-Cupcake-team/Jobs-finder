@@ -8,15 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.cupcake.ui.R
-import com.cupcake.ui.databinding.JobDetailsExpandableCardBinding
+import com.cupcake.ui.databinding.ItemJobDetailsExpandableCardsBinding
 
 class ExpandCardCustomView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
-    private val binding: JobDetailsExpandableCardBinding =
-        JobDetailsExpandableCardBinding.inflate(
+    private val binding: ItemJobDetailsExpandableCardsBinding =
+        ItemJobDetailsExpandableCardsBinding.inflate(
             LayoutInflater.from(context),
             this,
             true
