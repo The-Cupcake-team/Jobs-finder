@@ -60,7 +60,7 @@ class CommentViewModel @Inject constructor(
     }
 
     private fun Post.toUiPost(): CommentUiState.PostUiState {
-        return CommentUiState.PostUiState(id, content, createdAt)
+        return CommentUiState.PostUiState(id, content, createdAt, creatorName)
     }
 
     override fun onLikeClick(id: String) {
