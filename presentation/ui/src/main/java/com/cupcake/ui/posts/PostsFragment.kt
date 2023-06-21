@@ -20,13 +20,13 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
     PostsViewModel::class.java
 ) {
     override val LOG_TAG: String = this.javaClass.name
-    private val fragmentList = mutableListOf<Fragment>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setPostsViewPagerAdapter()
     }
 
     private fun setPostsViewPagerAdapter() {
+        val fragmentList = mutableListOf<Fragment>()
         val fragments = mapOf(
             PUBLIC_FRAGMENT to PublicFragment(),
             FOLLOWING_FRAGMENT to FollowingFragment()

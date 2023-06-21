@@ -20,9 +20,10 @@ class PublicFragment : BaseFragment<FragmentPublicBinding, PublicPostsViewModel>
 ) {
     override val LOG_TAG: String = this.javaClass.simpleName
     private val bottomSheetFragment = BottomSheetFragment()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupPostsRecyclerView()
-        handleEvent()
+        observePostEvents()
     }
 
     private fun setupPostsRecyclerView() {
@@ -30,37 +31,42 @@ class PublicFragment : BaseFragment<FragmentPublicBinding, PublicPostsViewModel>
         binding.recyclerViewPosts.adapter = adapter
         binding.recyclerViewPosts.itemAnimator = null
     }
-    private fun handleEvent(){
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.postEvent.collect{postEvent ->
+
+    private fun observePostEvents() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.postEvent.collect { postEvent ->
                     postEvent.getContentIfNotHandled()?.let { event ->
-                        when(event){
-                            is PostsEvent.PostCommentClick -> {
-                                val action = PostsFragmentDirections.actionPostsFragmentToCommentsFragment(event.id)
-                                findNavController().navigate(action)
-                            }
-
-                            is PostsEvent.PostShareClick -> {
-                                val shareIntent= Intent().apply {
-                                    action = Intent.ACTION_SEND
-                                    putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                                    type = "text/plain"
-                                }
-                                startActivity(Intent.createChooser(shareIntent, "Share via"))
-
-                            }
-
-                            is PostsEvent.PostOptionsClick -> {
-                                bottomSheetFragment.show(requireActivity().supportFragmentManager, "BottomSheetDialog")
-                            }
-                        }
+                        handlePostEvent(event)
                     }
-
                 }
             }
         }
     }
 
+    private fun handlePostEvent(event: PostsEvent) {
+        when (event) {
+            is PostsEvent.PostCommentClick -> navigateToCommentsFragment(event.id)
+            is PostsEvent.PostShareClick -> sharePost()
+            is PostsEvent.PostOptionsClick -> showBottomSheetDialog()
+        }
+    }
 
+    private fun navigateToCommentsFragment(postId: String) {
+        val action = PostsFragmentDirections.actionPostsFragmentToCommentsFragment(postId)
+        findNavController().navigate(action)
+    }
+
+    private fun sharePost() {
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "This is my post to send.")
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(shareIntent, "Share via"))
+    }
+
+    private fun showBottomSheetDialog() {
+        bottomSheetFragment.show(requireActivity().supportFragmentManager, "BottomSheetDialog")
+    }
 }

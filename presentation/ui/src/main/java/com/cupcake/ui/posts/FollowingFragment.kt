@@ -23,45 +23,49 @@ class FollowingFragment : BaseFragment<FragmentFollowingBinding, FollowingPostsV
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupPostsRecyclerView()
-        handleEvent()
+        observePostEvents()
     }
 
-    private fun setupPostsRecyclerView(){
+    private fun setupPostsRecyclerView() {
         val adapter = PostsAdapter(listOf(), viewModel)
         binding.recyclerViewFollowingPosts.adapter = adapter
         binding.recyclerViewFollowingPosts.itemAnimator = null
-
     }
 
-    private fun handleEvent(){
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.postEvent.collect{postEvent ->
+    private fun observePostEvents() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.postEvent.collect { postEvent ->
                     postEvent.getContentIfNotHandled()?.let { event ->
-                        when(event){
-                            is PostsEvent.PostCommentClick -> {
-                                val action = PostsFragmentDirections.actionPostsFragmentToCommentsFragment("27271a1d-3023-44e1-bfb4-130afa641438")
-                                findNavController().navigate(action)
-                            }
-
-                            is PostsEvent.PostShareClick -> {
-                                val shareIntent= Intent().apply {
-                                    action = Intent.ACTION_SEND
-                                    putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
-                                    type = "text/plain"
-                                }
-                                startActivity(Intent.createChooser(shareIntent, "Share via"))
-
-                            }
-                            is PostsEvent.PostOptionsClick -> {
-                                bottomSheetFragment.show(requireActivity().supportFragmentManager, "BottomSheetDialog")
-                            }
-                        }
+                        handlePostEvent(event)
                     }
-
                 }
             }
         }
     }
 
+    private fun handlePostEvent(event: PostsEvent) {
+        when (event) {
+            is PostsEvent.PostCommentClick -> navigateToCommentsFragment("190d6e52-3ea5-4f1a-ad25-4487585b2ae5")
+            is PostsEvent.PostShareClick -> sharePost()
+            is PostsEvent.PostOptionsClick -> showBottomSheetDialog()
+        }
+    }
+
+    private fun navigateToCommentsFragment(postId: String) {
+        val action = PostsFragmentDirections.actionPostsFragmentToCommentsFragment(postId)
+        findNavController().navigate(action)
+    }
+
+    private fun sharePost() {
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "This is my text to send.")
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(shareIntent, "Share via"))
+    }
+    private fun showBottomSheetDialog() {
+        bottomSheetFragment.show(requireActivity().supportFragmentManager, "BottomSheetDialog")
+    }
 }
