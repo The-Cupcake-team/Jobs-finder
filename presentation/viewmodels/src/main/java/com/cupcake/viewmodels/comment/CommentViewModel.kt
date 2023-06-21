@@ -1,7 +1,5 @@
 package com.cupcake.viewmodels.comment
 
-import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import com.cupcake.models.Post
 import com.cupcake.usecase.GetFollowingPostsUseCase
 import com.cupcake.usecase.GetPostByIdUseCase
@@ -13,58 +11,69 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CommentViewModel @Inject constructor(
-    private val getPostById :GetPostByIdUseCase,
-    private val getFollowingPostsUseCase: GetFollowingPostsUseCase,
-    savedStateHandle: SavedStateHandle
-): BaseViewModel<CommentUiState>(CommentUiState()) , CommentInteractionListener{
-//    private val postId = savedStateHandle.get<String>("postId")
-    //private val args= CommentFragmentArgs.fromSavedStateHandle(savedStateHandle)
+    private val getPostById: GetPostByIdUseCase,
+    private val postsUseCase: GetFollowingPostsUseCase
+) : BaseViewModel<CommentUiState>(CommentUiState()), CommentInteractionListener {
+
     init {
-        getFollowingPosts()
-        getPost("27271a1d-3023-44e1-bfb4-130afa641438")
+        getCommentsPost()
     }
 
-    fun getPost(id:String){
-        updateState { it.copy(isLoading = true) }
+    fun getPost(id: String) {
+        updateState { it.copy(isLoading = true, isSuccess = false, error = null) }
         tryToExecute(
-            callee = {getPostById(id)},
+            callee = { getPostById(id) },
             onSuccess = ::onSuccessGetPost,
             onError = ::onErrorGetPost
         )
     }
-    private fun onSuccessGetPost(post: Post){
-        updateState { it.copy(isLoading = false,post = post.toUiPost()) }
+
+    private fun onSuccessGetPost(post: Post) {
+        updateState { it.copy(isLoading = false, post = post.toUiPost(), isSuccess = true, error = null) }
     }
-    private fun onErrorGetPost(errorMessage: BaseErrorUiState){
-        updateState { it.copy(isLoading = false,error = errorMessage) }
+
+    private fun onErrorGetPost(error: BaseErrorUiState) {
+        updateState { it.copy(isLoading = false, error = error, isSuccess = false) }
     }
-    private fun getFollowingPosts(){
+
+    private fun getCommentsPost() {
         tryToExecute(
-            { getFollowingPostsUseCase() },
-            ::onGetFollowingPostsSuccess,
-            ::onGetFollowingPostsFailure
+            { postsUseCase() },
+            ::onGetCommentsPostSuccess,
+            ::onGetCommentPostFailure
         )
     }
 
-    private fun onGetFollowingPostsSuccess(posts: List<Post>) {
+    private fun onGetCommentsPostSuccess(posts: List<Post>) {
         _state.update {
             it.copy(
                 isLoading = false,
                 error = null,
-                postsResult = posts.map { post -> post.toUiPost()})
+                posts = posts.map { post -> post.toUiPost() })
         }
     }
 
-    private fun onGetFollowingPostsFailure(error: BaseErrorUiState) {
+    private fun onGetCommentPostFailure(error: BaseErrorUiState) {
         _state.update {
             it.copy(isLoading = false, error = error)
         }
     }
+
     private fun Post.toUiPost(): CommentUiState.PostUiState {
-        return CommentUiState.PostUiState(id, content, createdAt)
+        return CommentUiState.PostUiState(id, content, createdAt, creatorName)
     }
 
     override fun onLikeClick(id: String) {
-        TODO("Not yet implemented")
+        _state.update { currentState ->
+            val updateComments=currentState.posts.map { post ->
+                if (post.id==id){
+                    post.copy(isLiked = !post.isLiked, likes = if (post.isLiked) post.likes-1 else post.likes+1)
+                }else{
+                    post
+                }
+            }
+            currentState.copy(posts = updateComments)
+        }
     }
+
 }

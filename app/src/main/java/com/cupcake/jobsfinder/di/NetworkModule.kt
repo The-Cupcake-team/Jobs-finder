@@ -2,6 +2,7 @@ package com.cupcake.jobsfinder.di
 
 import com.cupcake.jobsfinder.BuildConfig
 import com.cupcake.remote.JobApiService
+import com.cupcake.remote.interceptor.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,17 +31,12 @@ object NetworkModule {
 
 	@Provides
 	fun provideOkHttpClient(
+		authInterceptor: AuthInterceptor,
 		loggingInterceptor: HttpLoggingInterceptor
 	): OkHttpClient {
 		return OkHttpClient().newBuilder()
+			.addInterceptor(authInterceptor)
 			.addInterceptor(loggingInterceptor)
-			.addInterceptor { chain ->
-				val originalRequest = chain.request()
-				val newRequest = originalRequest.newBuilder()
-					.header("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYmZmZDA3NC03ZmRmLTQyYTYtYTMzMi1kZDI0OGFmZWFhNzMiLCJleHAiOjE2ODc0NTc5NDB9.Px2tyzCuueNjteyRM2TvKpl5iroqRIP5IG-C6Iwpf4A ")
-					.build()
-				chain.proceed(newRequest)
-			}
 			.build()
 	}
 

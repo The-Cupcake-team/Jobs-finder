@@ -38,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:text="@string/personal_name"
+            android:text="@{item.creatorName}"
             app:layout_constraintEnd_toStartOf="@+id/text_view_number_like"
             app:layout_constraintStart_toEndOf="@+id/image_view_person_image"
             app:layout_constraintTop_toTopOf="@+id/image_view_person_image" />
@@ -49,20 +49,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginEnd="@dimen/spacing_medium"
+            android:onClick="@{() -> listener.onLikeClick(item.id)}"
+            app:isLiked="@{item.liked}"
             app:layout_constraintBottom_toBottomOf="@+id/text_view_number_like"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/heart_comment" />
+            app:srcCompat="@drawable/tabler_thumb" />
 
         <TextView
             android:id="@+id/text_view_number_like"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacing_small"
-            tools:text="329"
             app:layout_constraintBottom_toBottomOf="@id/text_view_person_name"
             app:layout_constraintEnd_toStartOf="@id/commentLoveIcon"
-            app:layout_constraintTop_toTopOf="@+id/text_view_person_name" />
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/text_view_person_name"
+            app:layout_constraintTop_toTopOf="@+id/text_view_person_name"
+            app:layout_constraintVertical_bias="0.0"
+            android:text="@{String.valueOf(item.likes)}"
+            tools:text="329" />
 
         <TextView
             android:id="@+id/text_view_person_job_title"

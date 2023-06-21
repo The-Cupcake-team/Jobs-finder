@@ -123,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_small"
-                android:text="@string/likes_count"
+                android:text="@{String.valueOf(item.likes)}"
                 android:textColor="@color/color_text_tertiary"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLike"
                 app:layout_constraintStart_toEndOf="@+id/imageViewLike"
