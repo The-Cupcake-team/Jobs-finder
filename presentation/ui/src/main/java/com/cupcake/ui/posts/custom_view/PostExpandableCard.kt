@@ -5,52 +5,48 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
-import com.cupcake.ui.databinding.ReadMoreLayoutBinding
+import com.cupcake.ui.databinding.PostContentExpandBinding
+
 
 class PostExpandableCard @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
-    private val binding: ReadMoreLayoutBinding = ReadMoreLayoutBinding.inflate(
+    private val binding: PostContentExpandBinding = PostContentExpandBinding.inflate(
         LayoutInflater.from(context),
         this,
         true
     )
 
     init {
-        cardPostExpandReadMore()
-        cardPostExpandReadLess()
+        textViewContentPostFirstTextClick()
+        textViewContentPostFullTextClick()
     }
 
 
     fun postStartText(startValue: String) {
 
-        binding.textViewContentPostBeforeReadMore.text = startValue
+        binding.textViewContentPostFirstText.text = startValue
     }
 
     fun postFullText(fullValue: String) {
-        binding.textViewContentPostAfterReadMore.text = fullValue
+        binding.textViewContentPostFullText.text = fullValue
     }
 
-    private fun cardPostExpandReadMore() {
-        binding.textViewClickReadMore.setOnClickListener {
-            binding.apply {
-                textViewContentPostBeforeReadMore.visibility = View.GONE
-                textViewClickReadMore.visibility = View.GONE
-                textViewContentPostAfterReadMore.visibility = View.VISIBLE
-                textViewClickReadLess.visibility = View.VISIBLE
+    private fun textViewContentPostFullTextClick() {
+        binding.apply {
+            textViewContentPostFullText.setOnClickListener {
+                textViewContentPostFullText.visibility = View.GONE
+                textViewContentPostFirstText.visibility = View.VISIBLE
             }
         }
     }
-
-    private fun cardPostExpandReadLess() {
-        binding.textViewClickReadLess.setOnClickListener {
-            binding.apply {
-                textViewContentPostAfterReadMore.visibility = View.GONE
-                textViewClickReadLess.visibility = View.GONE
-                textViewContentPostBeforeReadMore.visibility = View.VISIBLE
-                textViewClickReadMore.visibility = View.VISIBLE
+    private fun textViewContentPostFirstTextClick() {
+        binding.apply {
+            textViewContentPostFirstText.setOnClickListener {
+                textViewContentPostFirstText.visibility = View.GONE
+                textViewContentPostFullText.visibility = View.VISIBLE
             }
         }
     }
