@@ -51,7 +51,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_view_message_dialog" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/apply_button"
+                android:id="@+id/send_button"
                 style="@style/normalButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
