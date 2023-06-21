@@ -50,5 +50,8 @@
     <color name="expanded_chip_color">#E7EDF5</color>
     <color name="expanded_chip_arrow_color">#4B8CED</color>
 
+    <color name="hover">#616161</color>
+    <color name="cancel_color">#99000000</color>
+
 
 </resources>
