@@ -124,7 +124,7 @@
 
             <TextView
                 android:id="@+id/textViewSalary"
-                style="@style/TextStyle.body"
+                style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_chips_job_card"
@@ -137,7 +137,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/imageViewMore"
                 app:layout_constraintStart_toEndOf="@+id/textViewJobType"
                 app:layout_constraintTop_toTopOf="@+id/textViewJobType"
-                tools:text="$30000000000000000000" />
+                tools:text="200000k-5000000000000000k" />
 
             <TextView
                 android:id="@+id/textViewLocation"

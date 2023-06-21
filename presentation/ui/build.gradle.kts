@@ -48,7 +48,6 @@ dependencies {
 
     implementation(DependencyProject.navigationFragment)
     implementation(DependencyProject.navigationUi)
-    implementation("com.google.android.material:material:1.9.0")
 
     testImplementation(DependencyProject.junit)
     androidTestImplementation(DependencyProject.junitExtension)
@@ -71,5 +70,7 @@ dependencies {
     implementation(DependencyProject.coil)
 
     implementation(DependencyProject.lottie)
+
+    implementation(DependencyProject.swiperefreshlayout)
 
 }

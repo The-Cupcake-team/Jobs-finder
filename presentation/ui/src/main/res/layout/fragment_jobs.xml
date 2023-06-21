@@ -13,84 +13,97 @@
             type="com.cupcake.viewmodels.jobs.JobsListener" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        app:onRefreshListener="@{() -> viewModel.onRetryClicked()}"
+        app:dismissSwipeRefreshIf="@{viewModel.state.error != null}"
 
-        <EditText
-            android:id="@+id/editTextSearchInput"
-            style="@style/searchBarStyle"
-            android:drawableStart="@drawable/ic_search"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:focusable="false"
-            android:onClick="@{() -> viewModel.onSearchBoxClickListener()}"
-            android:layout_height="@dimen/search_bar_height"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:paddingHorizontal="@dimen/spacing_medium"
-            android:paddingVertical="@dimen/spacing_tiny"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:background="@color/background">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/jobsRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            app:showWhenIf="@{viewModel.state.error == null}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSearchInput" />
+            <EditText
+                android:id="@+id/editTextSearchInput"
+                style="@style/searchBarStyle"
+                android:drawableStart="@drawable/ic_search"
+                android:layout_width="match_parent"
+                android:focusable="false"
+                android:onClick="@{() -> viewModel.onSearchBoxClickListener()}"
+                android:layout_height="@dimen/search_bar_height"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:paddingVertical="@dimen/spacing_tiny"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/loading"
-            layout="@layout/loading"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showWhenIf="@{viewModel.state.loading}"
-            bind:isLoading="@{viewModel.state.loading}"
-            />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/jobsRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                app:showWhenIf="@{viewModel.state.error == null}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextSearchInput" />
 
-        <include
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/error"
-            layout="@layout/error"
-            app:showWhenIf="@{viewModel.state.error != null}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            bind:error="@{viewModel.state.error}"/>
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonTryAgain"
-            style="@style/outlineButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:text="@string/retry"
-            app:showWhenIf="@{viewModel.state.error != null}"
-            android:onClick="@{() -> viewModel.onRetryClicked()}"
-            app:circularflow_defaultRadius="@dimen/spacing_large"
-            app:layout_constraintTop_toBottomOf="@id/error"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            android:backgroundTint="#4B8CED"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="25dp"
-            app:tint="#FFFFFF"
-            android:onClick="@{() ->viewModel.onFloatingActionClickListener()}"
-            />
+            <include
+                android:id="@+id/loading"
+                layout="@layout/loading"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:showWhenIf="@{viewModel.state.loading}"
+                bind:isLoading="@{viewModel.state.loading}"
+                />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <include
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/error"
+                layout="@layout/error"
+                app:showWhenIf="@{viewModel.state.error != null}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                bind:error="@{viewModel.state.error}"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonTryAgain"
+                style="@style/outlineButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:text="@string/retry"
+                app:showWhenIf="@{viewModel.state.error != null}"
+                android:onClick="@{() -> viewModel.onRetryClicked()}"
+                app:circularflow_defaultRadius="@dimen/spacing_large"
+                app:layout_constraintTop_toBottomOf="@id/error"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add"
+                android:backgroundTint="#4B8CED"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="25dp"
+                app:tint="#FFFFFF"
+                android:onClick="@{() ->viewModel.onFloatingActionClickListener()}"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
 </layout>

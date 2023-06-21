@@ -12,13 +12,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.base.BaseErrorUiState
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -105,4 +104,10 @@ fun setIsSavedIcon(textView: TextView, isSaved: Boolean) {
         ContextCompat.getDrawable(textView.context, R.drawable.ic_save)!!
     }
     textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+}
+
+@BindingAdapter("dismissSwipeRefreshIf")
+fun dismissSwipeRefreshIf(swipeRefreshLayout: SwipeRefreshLayout, dismiss: Boolean) {
+    swipeRefreshLayout.isRefreshing = dismiss
+    //swipeRefreshLayout.setColorSchemeResources(R.color.primary)
 }
