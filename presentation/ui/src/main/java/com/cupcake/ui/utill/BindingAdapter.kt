@@ -109,5 +109,4 @@ fun setIsSavedIcon(textView: TextView, isSaved: Boolean) {
 @BindingAdapter("dismissSwipeRefreshIf")
 fun dismissSwipeRefreshIf(swipeRefreshLayout: SwipeRefreshLayout, dismiss: Boolean) {
     swipeRefreshLayout.isRefreshing = dismiss
-    //swipeRefreshLayout.setColorSchemeResources(R.color.primary)
 }
