@@ -20,7 +20,7 @@ class ValidateRegisterFormUseCase @Inject constructor(
         email: String,
         password: String,
         confirmedPassword: String
-    ) {
+    ){
         validateFullName(fullName)
         validateUsername(userName)
         validateEmail(email)

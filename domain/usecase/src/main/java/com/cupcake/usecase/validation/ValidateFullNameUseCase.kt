@@ -6,16 +6,16 @@ import javax.inject.Inject
 class ValidateFullNameUseCase @Inject constructor() {
     operator fun invoke(fullName: String) {
         if (fullName.isBlank()) {
-            throw ErrorType.Validation(ERROR)
+            throw ErrorType.InvalidFieldFullName(ERROR)
         }
 
         val regex = Regex("^[a-zA-Z]+$")
         if (!regex.matches(fullName)) {
-            throw ErrorType.Validation(LETTERS_ERROR)
+            throw ErrorType.InvalidFieldFullName(LETTERS_ERROR)
         }
 
         if (fullName.length < MINIMUM_LENGTH) {
-            throw ErrorType.Validation(LENGTH_ERROR)
+            throw ErrorType.InvalidFieldFullName(LENGTH_ERROR)
         }
     }
 

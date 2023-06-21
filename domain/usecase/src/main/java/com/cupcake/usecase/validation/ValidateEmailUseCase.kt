@@ -6,7 +6,7 @@ import javax.inject.Inject
 class ValidateEmailUseCase @Inject constructor() {
     operator fun invoke(email: String) {
         if (email.isBlank()) {
-            throw ErrorType.Validation(ERROR)
+            throw ErrorType.InvalidFieldEmail(ERROR)
         }
 
         /*if ("@" !in email) {

@@ -6,7 +6,7 @@ import javax.inject.Inject
 class ValidateConfirmedPasswordUseCase @Inject constructor() {
     operator fun invoke(confirmedPassword: String, password: String) {
         if (confirmedPassword != password) {
-            throw ErrorType.Validation(ERROR)
+            throw ErrorType.InvalidFieldConfirmedPassword(ERROR)
         }
     }
 
