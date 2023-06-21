@@ -71,4 +71,6 @@ dependencies {
 
     implementation(DependencyProject.lottie)
 
+    implementation(DependencyProject.swiperefreshlayout)
+
 }

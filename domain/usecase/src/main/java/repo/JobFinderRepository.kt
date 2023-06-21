@@ -18,6 +18,12 @@ interface JobFinderRepository {
 
     suspend fun getJobById(jobId: String): Job
 
+    suspend fun insertJob(job: JobWithTitle)
+
+    suspend fun deleteJob(job: JobWithTitle)
+
+    suspend fun getSavedJobById(id: String): JobWithTitle?
+
     //endregion
 
     // clean up

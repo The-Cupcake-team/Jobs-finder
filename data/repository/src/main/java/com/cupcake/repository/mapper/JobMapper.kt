@@ -1,5 +1,6 @@
 package com.cupcake.repository.mapper
 
+import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.Job
 import com.cupcake.remote.response.job.JobDto
 import com.cupcake.models.JobTitle
@@ -19,10 +20,37 @@ fun JobWithTitleDto.toJobWithJobTitle(): JobWithTitle {
         jobLocation = jobLocation,
         jobDescription = jobDescription,
         jobType = jobType,
-        salary = jobSalary.toString()
+        salary = formatLargeNumber(jobSalary.minSalary)+"-"
+                +formatLargeNumber(jobSalary.maxSalary)
     )
 }
 
+private fun formatLargeNumber(number: Double): String {
+    val suffixes = listOf("", "k", "M", "B", "T") // Add more suffixes as needed
+    val suffixIndex = (Math.floor(Math.log10(number)) / 3).toInt()
+
+    val scaledNumber = number / Math.pow(10.0, suffixIndex * 3.toDouble())
+    val formattedNumber = String.format("%.1f", scaledNumber)
+
+    return formattedNumber + suffixes[suffixIndex]
+}
+
+
+fun JobWithTitle.toJobsEntity(): JobsEntity{
+    return JobsEntity(
+        id = id,
+        jobId = jobTitle.id,
+        jobTitle = jobTitle.title,
+        company = company,
+        createdTime = createdTime,
+        workType = workType,
+        jobLocation = jobLocation,
+        jobType = jobType,
+        jobDescription = jobDescription,
+        salary = salary
+
+    )
+}
 
 //fun com.cupcake.remote.response.job.JobDto.toJob(): com.cupcake.models.Job {
 //    return Job(
@@ -74,6 +102,23 @@ fun JobDto.toJob(): Job {
         jobType = jobType ?: "Front-End",
         jobDescription = jobDescription ?: "Job description",
         jobSalary = jobSalary ?: 12.34
+    )
+}
+
+fun JobsEntity.toJobWithTitle(): JobWithTitle{
+    return return JobWithTitle(
+        id = id,
+        jobTitle = JobTitle(
+            id = jobId,
+            title = jobTitle
+        ),
+        company = company,
+        createdTime = createdTime,
+        workType = workType,
+        jobLocation = jobLocation,
+        jobDescription = jobDescription,
+        jobType = jobType,
+        salary = salary
     )
 }
 

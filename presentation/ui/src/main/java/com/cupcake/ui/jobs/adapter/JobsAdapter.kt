@@ -1,6 +1,7 @@
 package com.cupcake.ui.jobs.adapter
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.view.ViewGroup
 import com.cupcake.ui.BR
 import com.cupcake.ui.R
@@ -37,7 +38,9 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
     }
 
     private fun bindPopularJobs(items: List<JobTitleUiState>, holder: ItemViewHolder) {
-        holder.binding.setVariable(BR.adapter, PopularJobsAdapter(items, listener))
+        val adapter = PopularJobsAdapter(items, listener)
+        holder.binding.setVariable(BR.adapter, adapter)
+        hiddenRootIfEmpty(holder.binding.root, items)
     }
 
     private fun bindRecommendedJobs(
@@ -45,6 +48,7 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
         holder: ItemViewHolder
     ) {
         holder.binding.setVariable(BR.adapter, RecommendedJobsAdapter(items, listener))
+        hiddenRootIfEmpty(holder.binding.root, items)
     }
 
     private fun bindTopSalaryJobs(
@@ -52,6 +56,7 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
         holder: ItemViewHolder
     ) {
         holder.binding.setVariable(BR.adapter, TopSalaryJobsAdapter(items, listener))
+        hiddenRootIfEmpty(holder.binding.root, items)
     }
 
     private fun bindInLocationJobs(
@@ -59,6 +64,7 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
         holder: ItemViewHolder
     ) {
         holder.binding.setVariable(BR.adapter, JobsOnLocationAdapter(items, listener))
+        hiddenRootIfEmpty(holder.binding.root, items)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -69,6 +75,10 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
             is JobsItem.LocationJobs -> IN_LOCATION_JOBS
         }
     }
+    
+    private fun hiddenRootIfEmpty(root: View, list: List<Any>){
+        root.visibility = if (list.isNotEmpty()) View.VISIBLE else View.GONE
+    }
 
     companion object {
         val RECOMMENDED_JOBS = R.layout.recommended_jobs_recycler
@@ -77,7 +87,4 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
         val POPULAR_JOBS = R.layout.popular_jobs_recycler
     }
 
-//    interface JobsListener : BaseInteractionListener {
-//        fun onItemClickListener(id: String)
-//    }
 }

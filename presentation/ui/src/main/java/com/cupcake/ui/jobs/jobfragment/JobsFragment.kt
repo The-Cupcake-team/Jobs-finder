@@ -1,37 +1,49 @@
-package com.cupcake.ui.jobs
+package com.cupcake.ui.jobs.jobfragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentJobsBinding
+import com.cupcake.ui.jobs.JobsItem
 import com.cupcake.ui.jobs.adapter.JobsAdapter
+import com.cupcake.viewmodels.jobs.JobUiState
 import com.cupcake.viewmodels.jobs.JobsEvent
 import com.cupcake.viewmodels.jobs.JobsUiState
 import com.cupcake.viewmodels.jobs.JobsViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
 class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
-    R.layout.fragment_jobs,
-    JobsViewModel::class.java
+    R.layout.fragment_jobs, JobsViewModel::class.java
 ) {
-
     override val LOG_TAG: String = this::class.java.name
     private lateinit var jobsAdapter: JobsAdapter
+    private lateinit var jobsEventJob: Job
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpAdapter()
+    }
+
+    override fun onResume() {
+        super.onResume()
         handelJobsEvent()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        jobsEventJob.cancel()
+
     }
 
     private fun setUpAdapter() {
         jobsAdapter = JobsAdapter(emptyList(), viewModel)
-        binding?.jobsRecycler?.adapter = jobsAdapter
+        binding.jobsRecycler.adapter = jobsAdapter
         loadJobsAdapter()
     }
 
@@ -66,20 +78,41 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     }
 
     private fun handelJobsEvent() {
-        lifecycleScope.launch(Dispatchers.Main) {
+        jobsEventJob = lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
-                    is JobsEvent.JobCardClick -> {
-                        findNavController().navigate(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment())
-                    }
-
-                    is JobsEvent.JobChipClick -> showToast(jobsEvent.id)
+                    is JobsEvent.JobCardClick -> handleJobCardClick()
+                    is JobsEvent.JobChipClick -> handleJobChipClick(jobsEvent.title)
+                    is JobsEvent.SearchBoxClick -> handleSearchBoxClick()
+                    is JobsEvent.OnFloatingActionClickListener -> handleFloatingActionClick()
+                    is JobsEvent.OnMoreOptionClickListener -> handleImageViewMoreClick(jobsEvent.model)
                 }
             }
         }
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    private fun handleJobCardClick() {
+        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment())
+    }
+
+    private fun handleJobChipClick(title: String) {
+        val action = JobsFragmentDirections.actionJobsFragmentToJobSearchFragment(title)
+        navigateToDirection(action)
+    }
+
+    private fun handleSearchBoxClick() {
+        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToJobSearchFragment())
+    }
+
+    private fun handleFloatingActionClick() {
+        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToCreateJobFormOneFragment())
+    }
+
+    private fun handleImageViewMoreClick(model: JobUiState) {
+        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToModalBottomSheet(model))
+    }
+
+    private fun navigateToDirection(directions: NavDirections) {
+        findNavController().navigate(directions)
     }
 }

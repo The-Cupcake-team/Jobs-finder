@@ -47,6 +47,7 @@ dependencies {
 
     implementation(project(Modules.DATA_REPO))
     implementation(project(Modules.DATA_REMOTE))
+    implementation(project(Modules.DATA_LOCAL))
     implementation(project(Modules.DOMAIN_USECASE))
     implementation(project(Modules.PRESENTATION_UI))
 
@@ -67,5 +68,9 @@ dependencies {
 
     implementation(DependencyProject.navigationFragment)
     implementation(DependencyProject.navigationUi)
+
+    implementation(DependencyProject.roomRuntime)
+    annotationProcessor(DependencyProject.roomCompiler)
+    kapt(DependencyProject.room)
 
 }

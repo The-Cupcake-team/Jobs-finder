@@ -1,10 +1,12 @@
 package com.cupcake.viewmodels.jobs
 
+import android.os.Parcelable
 import com.cupcake.models.JobTitle
 import com.cupcake.models.JobWithTitle
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.job_details.JobDetailsUiState
 import com.cupcake.viewmodels.job_details.JobsDetailsUiState
+import kotlinx.parcelize.Parcelize
 
 
 data class JobsUiState(
@@ -13,6 +15,7 @@ data class JobsUiState(
     val topSalaryJobs: List<JobUiState> = emptyList(),
     val onLocationJobs: List<JobUiState> = emptyList(),
     val isLoading: Boolean = true,
+    val isSavedJob: Boolean = false,
     val error: BaseErrorUiState? = null,
 )
 
@@ -31,6 +34,8 @@ fun JobWithTitle.toJobUiState2() = JobDetailsUiState(
     salary = this.salary
 )
 
+
+@Parcelize
 data class JobUiState(
     val id : String = "",
     val image: String = "",
@@ -40,7 +45,8 @@ data class JobUiState(
     val location: String = "",
     val salary: String = "",
     val createdAt: Long = 0,
-)
+): Parcelable
+
 
 data class JobTitleUiState(
     val id: String = "",
@@ -52,6 +58,19 @@ fun JobTitle.toJobTitleUiState() = JobTitleUiState(
     title = this.title
 )
 
+fun JobUiState.toJobWithTitle(): JobWithTitle{
+    return JobWithTitle(
+        id = id,
+        jobTitle = JobTitle(title = title, id = id),
+        company = companyName,
+        createdTime = createdAt.toString(),
+        workType = detailsChip[0],
+        jobLocation = location,
+        jobType = detailsChip[1],
+        jobDescription = companyName,
+        salary = salary
+    )
+}
 data class JobDetailUiState(
     val job: JobsDetailsUiState,
     val isLoading: Boolean = false,

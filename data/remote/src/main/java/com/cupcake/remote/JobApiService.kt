@@ -38,7 +38,7 @@ interface JobApiService {
 
     // region Job
 
-    @GET("/job")
+    @GET("/user/jobs")
     suspend fun getJobs(): Response<BaseResponse<List<JobWithTitleDto>>>
 
     @GET("/job/{id}")
