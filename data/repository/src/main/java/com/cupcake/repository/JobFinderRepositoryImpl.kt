@@ -123,10 +123,10 @@ class JobFinderRepositoryImpl @Inject constructor(
         val fakePosts = listOf(
             Post("1", System.currentTimeMillis(), "One Piece 🏴‍☠️❤️‍🔥", "Sajjadio"),
             Post("2", System.currentTimeMillis(), "Sabahooooooo 👋", "amory" ),
-            Post("3", System.currentTimeMillis(), "here we are go 🤍❤️", "dada"),
-            Post("3", System.currentTimeMillis(), "MY TEAM IS THE BEST 🧁🔝💖💖💖", "ahmed mousa"),
-            Post("3", System.currentTimeMillis(), "MY TEAM MATES ARE AWESOME 😍🤩💖", "kaido"),
-            Post("3", System.currentTimeMillis(), "FK you haters 🫵😎✊", "BK")
+            Post("4", System.currentTimeMillis(), "here we are go 🤍❤️", "dada"),
+            Post("5", System.currentTimeMillis(), "MY TEAM IS THE BEST 🧁🔝💖💖💖", "ahmed mousa"),
+            Post("6", System.currentTimeMillis(), "MY TEAM MATES ARE AWESOME 😍🤩💖", "kaido"),
+            Post("7", System.currentTimeMillis(), "FK you haters 🫵😎✊", "BK")
         )
         return fakePosts
     }
