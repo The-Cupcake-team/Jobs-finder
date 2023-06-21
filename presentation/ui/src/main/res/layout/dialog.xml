@@ -6,52 +6,50 @@
 
     </data>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/dialog_card"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="@dimen/radius"
-        android:visibility="visible">
+        android:layout_height="wrap_content"
+        android:background="@drawable/card_background"
+        android:paddingHorizontal="@dimen/spacing_medium"
+        android:paddingVertical="@dimen/spacing_large">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/text_view_message_dialog"
+            style="@style/TextStyle.body"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/spacing_medium"
-            android:paddingVertical="@dimen/spacing_large">
+            android:gravity="center_horizontal"
+            android:text="@string/dialog_message"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/text_view_message_dialog"
-                style="@style/TextStyle.body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dialog_message"
-                android:textAlignment="center"
-                android:gravity="center_horizontal"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/cancel_button"
+            style="@style/normalButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:gravity="center"
+            android:background="@color/blue_300"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_message_dialog" />
 
-            <Button
-                android:id="@+id/cancel_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/normalButtonStyle"
-                android:text="@string/cancel"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/spacing_large"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_message_dialog" />
-            <Button
-                android:id="@+id/apply_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/normalButtonStyle"
-                android:text="@string/send"
-                android:textAllCaps="false"
-                app:layout_constraintBottom_toBottomOf="@+id/cancel_button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/cancel_button" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/apply_button"
+            style="@style/normalButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send"
+            android:background="@color/blue_500"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@+id/cancel_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cancel_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
