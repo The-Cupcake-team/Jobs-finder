@@ -1,7 +1,7 @@
 package com.cupcake.usecase
 
 
-import com.cupcake.usecase.login.ValidateLoginFormUseCase
+import com.cupcake.usecase.validation.ValidateLoginFormUseCase
 import repo.JobFinderRepository
 import javax.inject.Inject
 

@@ -1,11 +1,11 @@
 package com.cupcake.repository
 
+import com.cupcake.local.datastore.AuthDataStore
 import com.cupcake.models.ErrorType
 import com.cupcake.models.User
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toUser
-import com.example.local.AuthDataStore
 import repo.AuthenticationRepository
 import retrofit2.Response
 import javax.inject.Inject

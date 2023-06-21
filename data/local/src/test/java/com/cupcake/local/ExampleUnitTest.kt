@@ -1,4 +1,4 @@
-package com.example.local
+package com.cupcake.local
 
 import org.junit.Test
 
