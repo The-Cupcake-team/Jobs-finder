@@ -68,7 +68,7 @@ class ModalBottomSheet : BottomSheetDialogFragment() {
                         if(!isUnSaved){
                             showToast(getString(R.string.saved_successfully))
                         }else{
-                            showToast(getString(R.string.saved_canceld))
+                            showToast(getString(R.string.saved_canceled))
                         }
                         dismiss()
                     }

@@ -6,7 +6,7 @@ sealed class JobsEvent {
 
     object OnFloatingActionClickListener : JobsEvent()
 
-    data class OnImageViewMoreClickListener(val model:JobUiState): JobsEvent()
+    data class OnMoreOptionClickListener(val model:JobUiState): JobsEvent()
 
     data class JobChipClick(val title: String) : JobsEvent()
 

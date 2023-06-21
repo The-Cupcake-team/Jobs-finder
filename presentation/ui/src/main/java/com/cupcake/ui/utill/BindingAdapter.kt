@@ -17,7 +17,6 @@ import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.base.BaseErrorUiState
-import kotlinx.coroutines.InternalCoroutinesApi
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -95,13 +94,12 @@ fun convertTime(view: TextView , time: Long){
    view.text = convert(time)
 }
 
-@OptIn(InternalCoroutinesApi::class)
 @BindingAdapter("setIsSavedIcon")
-fun setIsSavedIcon(textView: TextView, isSaved: Boolean) {
-    val drawable: Drawable = if (isSaved) {
-        ContextCompat.getDrawable(textView.context, R.drawable.ic_saved)!!
+fun setIsSavedIcon(textView: TextView, isSaved: Boolean?) {
+    val drawable: Drawable? = if (isSaved == true) {
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_saved)
     } else {
-        ContextCompat.getDrawable(textView.context, R.drawable.ic_save)!!
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_save)
     }
     textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
 }

@@ -113,7 +113,7 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun insertJob(job: JobWithTitle) {
         val jobEntity = job.toJobsEntity()
-        jobFinderDao.insertJop(jobEntity)
+        jobFinderDao.insertJob(jobEntity)
     }
 
     override suspend fun deleteJob(job: JobWithTitle) {

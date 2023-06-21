@@ -61,7 +61,6 @@
                 style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
                 android:text="@{item.companyName + `,`}"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintStart_toStartOf="@+id/textViewJobTitle"

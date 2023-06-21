@@ -10,7 +10,7 @@ import com.cupcake.jobsfinder.local.entities.JobsEntity
 @Dao
 interface JobFinderDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertJop(job: JobsEntity)
+    fun insertJob(job: JobsEntity)
 
     @Query("SELECT * FROM jobs_table WHERE id = :id")
     fun getJopById(id: String): JobsEntity?

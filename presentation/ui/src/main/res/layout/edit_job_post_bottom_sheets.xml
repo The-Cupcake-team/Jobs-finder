@@ -28,14 +28,14 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/size16">
+            android:layout_marginHorizontal="@dimen/spacing_medium">
 
             <com.google.android.material.bottomsheet.BottomSheetDragHandleView
                 android:id="@+id/drag_handle"
                 android:layout_width="@dimen/bottom_sheet_drag_handle_view_width"
                 android:layout_height="@dimen/bottom_sheet_drag_handle_view_height"
-                android:layout_marginVertical="@dimen/size16"
-                android:layout_marginTop="@dimen/size16"
+                android:layout_marginVertical="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:background="@color/color_text_tertiary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -46,8 +46,7 @@
                 style="@style/TextStyle.body"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_marginVertical="@dimen/size20"
-
+                android:layout_marginVertical="@dimen/spacing_medium"
                 android:drawablePadding="@dimen/drawable_padding"
                 android:gravity="center|left"
                 android:onClick="@{()->viewModel.onSaveListener()}"
@@ -63,7 +62,7 @@
                 style="@style/TextStyle.body"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/button_height"
-                android:layout_marginVertical="@dimen/size20"
+                android:layout_marginVertical="@dimen/spacing_medium"
                 android:clickable="true"
                 android:drawablePadding="@dimen/drawable_padding"
                 android:focusable="true"

@@ -1,7 +1,6 @@
 package com.cupcake.viewmodels.jobs
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.usecase.SaveJobUseCase
 import com.cupcake.usecase.job.GetJobsOnUserLocationUseCase
 import com.cupcake.usecase.job.GetPopularJobsUseCase
 import com.cupcake.usecase.job.GetRecommendedJobsUseCase
@@ -111,7 +110,7 @@ class JobsViewModel @Inject constructor(
     }
 
     override fun onImageViewMoreClickListener(model:JobUiState) {
-        viewModelScope.launch { _event.emit(JobsEvent.OnImageViewMoreClickListener(model)) }
+        viewModelScope.launch { _event.emit(JobsEvent.OnMoreOptionClickListener(model)) }
     }
 
 

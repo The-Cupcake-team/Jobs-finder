@@ -85,7 +85,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
                     is JobsEvent.JobChipClick -> handleJobChipClick(jobsEvent.title)
                     is JobsEvent.SearchBoxClick -> handleSearchBoxClick()
                     is JobsEvent.OnFloatingActionClickListener -> handleFloatingActionClick()
-                    is JobsEvent.OnImageViewMoreClickListener -> handleImageViewMoreClick(jobsEvent.model)
+                    is JobsEvent.OnMoreOptionClickListener -> handleImageViewMoreClick(jobsEvent.model)
                 }
             }
         }

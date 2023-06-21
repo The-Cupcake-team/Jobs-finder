@@ -87,7 +87,4 @@ class JobsAdapter(items: List<JobsItem>, private val listener: JobsListener) :
         val POPULAR_JOBS = R.layout.popular_jobs_recycler
     }
 
-//    interface JobsListener : BaseInteractionListener {
-//        fun onItemClickListener(id: String)
-//    }
 }
