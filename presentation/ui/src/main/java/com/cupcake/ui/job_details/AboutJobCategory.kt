@@ -6,11 +6,11 @@ import android.view.View
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.ItemAboutJobCategoryBinding
-import com.cupcake.viewmodels.job_details.JobViewModel
+import com.cupcake.viewmodels.job_details.JobDetailsViewModel
 
-class AboutJobCategory : BaseFragment<ItemAboutJobCategoryBinding, JobViewModel>(
+class AboutJobCategory : BaseFragment<ItemAboutJobCategoryBinding, JobDetailsViewModel>(
     R.layout.item_about_job_category,
-    JobViewModel::class.java
+    JobDetailsViewModel::class.java
 ) {
     override val LOG_TAG: String = this.javaClass.simpleName
 

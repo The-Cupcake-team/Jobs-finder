@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class JobViewModel @Inject constructor(
+class JobDetailsViewModel @Inject constructor(
     private val getJobByIdUseCase: GetJobByIdUseCase
 ) : BaseViewModel<JobDetailsUiState>(JobDetailsUiState()) {
 
