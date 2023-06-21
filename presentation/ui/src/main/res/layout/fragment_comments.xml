@@ -92,6 +92,7 @@
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
             android:ellipsize="end"
+            android:maxLines="3"
             app:showWhenIf="@{viewModel.state.isSuccess}"
             android:text="@{viewModel.state.post.content}"
             android:textColor="@color/color_text_primary"
