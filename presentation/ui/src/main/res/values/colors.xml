@@ -24,7 +24,7 @@
 
 
     <color name="chip_color">#E7EDF5</color>
-    <color name="light_border">#E5E7E9</color>
+    <color name="border_color">#14FFFFFF</color>
 
 
     <!-- Text colors -->
@@ -35,7 +35,7 @@
 
     <!--Transparent color -->
     <color name="transparent_color">#00000000</color>
-    <color name="chip_color_and_tab_layout_color">#E7EDF5</color>
+    <color name="tab_layout_color">#E7EDF5</color>
     <color name="button_apply_color">#4B8CED</color>
     <color name="button_cancel">#E5E7E9</color>
     <color name="boarder">#E5E7E9</color>
@@ -46,12 +46,18 @@
     <color name="accent_purple">#F5EFFF</color>
     <color name="accent_cyan">#E7FEFF</color>
     <color name="accent_orange">#FFEDED</color>
+    <color name="icon_toolbar_color">#DE000000</color>
+    <color name="expanded_chip_color">#E7EDF5</color>
+    <color name="expanded_chip_arrow_color">#4B8CED</color>
 
     <color name="icon_color">#A7A7A7</color>
     <color name="icon_primary">#202020</color>
 
     <color name="bottom_sheet_background">#616161</color>
 
+
+    <color name="hover">#616161</color>
+    <color name="cancel_color">#99000000</color>
 
 
 </resources>

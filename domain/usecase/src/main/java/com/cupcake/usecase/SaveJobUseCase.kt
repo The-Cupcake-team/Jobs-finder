@@ -1,13 +1,13 @@
 package com.cupcake.usecase
 
-import com.cupcake.models.JobWithTitle
+import com.cupcake.models.Job
 import repo.JobFinderRepository
 import javax.inject.Inject
 
 class SaveJobUseCase @Inject constructor(
     private val repository: JobFinderRepository,
 ) {
-    suspend operator fun invoke(job: JobWithTitle): Boolean {
+    suspend operator fun invoke(job: Job): Boolean {
         if(isAlreadyExist(job.id)){
             deleteInsertedJob(job)
             return false //that mean the saved job are deleted
@@ -21,7 +21,7 @@ class SaveJobUseCase @Inject constructor(
         return true
     }
 
-    private suspend fun deleteInsertedJob(job: JobWithTitle){
+    private suspend fun deleteInsertedJob(job: Job){
         repository.deleteJob(job)
     }
 }

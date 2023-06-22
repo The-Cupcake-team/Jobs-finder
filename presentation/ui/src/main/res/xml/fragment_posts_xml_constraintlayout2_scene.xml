@@ -29,6 +29,9 @@
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
+        <Constraint
+            motion:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/include" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
