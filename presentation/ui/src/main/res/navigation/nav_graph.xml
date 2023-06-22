@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registerFragment">
+    app:startDestination="@id/postsFragment">
 
     <fragment
         android:id="@+id/createJobFragment"
@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_postsFragment_to_postBottomSheetFragment"
             app:destination="@id/postBottomSheetFragment" />
+        <action
+            android:id="@+id/action_postsFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
 
     </fragment>
 
@@ -131,6 +134,10 @@
             android:name="postUiState"
             app:argType="com.cupcake.viewmodels.posts.PostItemUIState"/>
     </dialog>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.cupcake.ui.notification.NotificationFragment"
+        android:label="" />
 
 
 </navigation>
