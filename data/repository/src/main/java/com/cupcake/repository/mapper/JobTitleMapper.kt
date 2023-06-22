@@ -1,11 +1,12 @@
-//package com.cupcake.usecase.mapper
-//
-//import com.cupcake.remote.response.JobTitleDto
-//import com.cupcake.models.JobTitle
-//
-//fun com.cupcake.remote.response.JobTitleDto.toJobTitle(): com.cupcake.models.JobTitle {
-//    return JobTitle(
-//        id = id,
-//        title = title,
-//    )
-//}
+package com.cupcake.repository.mapper
+
+
+import com.cupcake.models.JobTitle
+import com.cupcake.remote.response.JobTitleDto
+
+fun JobTitleDto.toJobTitle(): JobTitle {
+    return JobTitle(
+        id = id,
+        title = title,
+    )
+}

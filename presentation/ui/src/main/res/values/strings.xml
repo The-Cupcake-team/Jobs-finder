@@ -21,6 +21,7 @@
     <string name="comments">comments</string>
     <string name="post_body">President cast election as choice between all our republicans who seek to impose a nationwide abortion ban and democrat</string>
     <string name="comment">comment......</string>
+
     <!--    job location strings-->
     <string name="on_your_location">On your location</string>
     <string name="on_site">On-site</string>
@@ -42,9 +43,9 @@
     <string name="page_number_one">1 of 2</string>
     <string name="page_number_two">2 of 2</string>
     <string name="title">Title</string>
-    <string name="add_job_title">add job title</string>
+    <string name="add_job_title">Add job title</string>
     <string name="company">Company</string>
-    <string name="add_company_name">add company name</string>
+    <string name="add_company_name">Add company name</string>
     <string name="location">Location</string>
     <string name="country_city">Country, City</string>
     <string name="job_type">Job Type</string>
@@ -130,5 +131,5 @@
     <string name="resizable_text_read_more">Read more…</string>
     <string name="resizable_text_read_less">Read less</string>
 
-
+    <string name="rang_salary">%s K</string>
 </resources>

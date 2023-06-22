@@ -32,22 +32,37 @@
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
                 android:text="@string/title"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editTextJobTitle"
-                style="@style/EditTextCreateJobStyle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutJobTitle"
+                style="@style/CustomTextInputLayout"
                 android:layout_width="match_parent"
+                app:endIconMode="clear_text"
                 android:layout_height="@dimen/edit_text_height"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:hint="@string/add_job_title"
-                android:text="@={viewModel.state.JobFormUiState.jobTitleUIState.title}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+                app:layout_constraintTop_toBottomOf="@id/textViewTitle">
+
+                <AutoCompleteTextView
+                    android:id="@+id/editTextJobTitleSearch"
+                    style="@style/TextStyle.body"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_background"
+                    android:completionThreshold="1"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:onTextChanged="@{(text,start,before,count) -> viewModel.onJobTitleChange(text)}"
+                    android:padding="@dimen/spacing_medium"
+                    android:textColor="@color/color_text_primary"
+                    app:bindArrayAdapter="@{viewModel.state.jobFormUiState.jobTitles}" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textViewCompany"
@@ -58,7 +73,7 @@
                 android:text="@string/company"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editTextJobTitle" />
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutJobTitle" />
 
             <EditText
                 android:id="@+id/editTextCompanyName"
@@ -115,9 +130,9 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipOnSite"
                     style="@style/ChipStyle"
+                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checkable="true"
                     android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.ON_SITE)}"
                     android:text="@string/on_site" />
 
@@ -162,6 +177,7 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipFullTime"
                     style="@style/ChipStyle"
+                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
@@ -227,6 +243,7 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipEntry"
                     style="@style/ChipStyle"
+                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"

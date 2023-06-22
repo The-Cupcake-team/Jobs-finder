@@ -17,7 +17,7 @@ object DependencyProject {
     private const val KOTLIN_COROUTINES_VERSION = "1.6.4"
     private const val LIFECYCLE_VERSION = "2.6.1"
     private const val KOTLIN_SERIALIZATION_VERSION = "1.5.0"
-    private const val NAVIGATION_VERSION = "2.5.3"
+    private const val NAVIGATION_VERSION = "2.6.0"
     private const val LOTTIE_VERSION = "6.0.1"
     private const val swipeRefreshLayoutVersion = "1.1.0"
     private const val DATASTORE_VERSION = "1.0.0"
