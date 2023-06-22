@@ -115,23 +115,23 @@ class RegisterViewModel @Inject constructor(
     }
 
     fun onFullNameChange(fullName: String) {
-        updateState { it.copy(fullName = fullName) }
+        updateState { it.copy(fullName = fullName, fullNameError = "") }
     }
 
     fun onUserNameChange(userName: String) {
-        updateState { it.copy(userName = userName) }
+        updateState { it.copy(userName = userName, userNameError = "") }
     }
 
     fun onEmailChange(email: String) {
-        updateState { it.copy(email = email) }
+        updateState { it.copy(email = email , emailError = "") }
     }
 
     fun onPasswordChange(password: String) {
-        updateState { it.copy(password = password) }
+        updateState { it.copy(password = password, passwordError = "") }
     }
 
     fun onConfirmPasswordChange(confirmPassword: String) {
-        updateState { it.copy(confirmedPassword = confirmPassword) }
+        updateState { it.copy(confirmedPassword = confirmPassword, confirmedPasswordError = "") }
     }
 
     fun onLoginClick() {
