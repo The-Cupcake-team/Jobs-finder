@@ -37,6 +37,12 @@ interface JobFinderRepository {
 
     suspend fun getFollowingPosts(): List<Post>
 
+    suspend fun insertPost(post: Post)
+
+    suspend fun deletePost(post: Post)
+
+    suspend fun getSavedPostById(id: String): Post?
+
 
     //endregion
 

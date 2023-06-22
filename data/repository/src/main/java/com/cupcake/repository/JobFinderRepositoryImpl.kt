@@ -3,7 +3,6 @@ package com.cupcake.repository
 import android.util.Log
 import com.cupcake.jobsfinder.local.daos.JobFinderDao
 import com.cupcake.jobsfinder.local.entities.JobsEntity
-import com.cupcake.models.*
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
@@ -11,10 +10,10 @@ import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toJob
-import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toJobTitle
-import com.cupcake.repository.mapper.toJobWithJobTitle
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
+import com.cupcake.repository.mapper.toPostsEntity
 import repo.JobFinderRepository
 import retrofit2.Response
 import javax.inject.Inject
@@ -152,6 +151,18 @@ class JobFinderRepositoryImpl @Inject constructor(
             Post("7", System.currentTimeMillis(), "FK you haters 🫵😎✊", "BK")
         )
         return fakePosts
+    }
+
+    override suspend fun insertPost(post: Post) {
+        jobFinderDao.insertPost(post.toPostsEntity())
+    }
+
+    override suspend fun deletePost(post: Post) {
+        jobFinderDao.deleteSavedPost(post.toPostsEntity())
+    }
+
+    override suspend fun getSavedPostById(id: String): Post? {
+       return jobFinderDao.getPostById(id)?.toPost()
     }
 
     override suspend fun createPost(content: String): Post {
