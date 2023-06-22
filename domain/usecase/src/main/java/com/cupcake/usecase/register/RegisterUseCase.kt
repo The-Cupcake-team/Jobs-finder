@@ -20,7 +20,7 @@ class RegisterUseCase @Inject constructor(
         validateRegisterForm(fullName, userName, email, password, confirmPassword)
 
         val user = authenticationRepository.register(fullName, userName, email, password)
-        authenticationRepository.saveAuthToken(user.token)
+        authenticationRepository.saveAuthData(user.token)
 
         return user
     }

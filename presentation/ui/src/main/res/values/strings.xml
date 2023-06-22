@@ -132,4 +132,6 @@
     <string name="resizable_text_read_less">Read less</string>
 
     <string name="rang_salary">%s K</string>
+
+    <string name="offline">You Are Currently Offline</string>
 </resources>

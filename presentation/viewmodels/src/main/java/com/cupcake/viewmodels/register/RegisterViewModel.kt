@@ -20,7 +20,21 @@ class RegisterViewModel @Inject constructor(
     val event = _event.asSharedFlow()
 
     fun register() {
-        updateState { it.copy(isLoading = true) }
+        updateState {
+            it.copy(
+                isLoading = true,
+                fullNameError = "",
+                userNameError = "",
+                emailError = "",
+                passwordError = "",
+                confirmedPasswordError = "",
+                isFullNameValid = true,
+                isUserNameValid = true,
+                isEmailValid = true,
+                isPasswordValid = true,
+                isConfirmedPasswordValid = true
+            )
+        }
         tryToExecute(
             callee = {
                 registerUseCase(
@@ -95,10 +109,9 @@ class RegisterViewModel @Inject constructor(
 
             else -> {
                 updateState { it.copy(isLoading = false, error = error) }
-                viewModelScope.launch { _event.emit(RegisterEvent.ShowErrorMessage(error.toString())) }
+                viewModelScope.launch { _event.emit(RegisterEvent.ShowError) }
             }
         }
-
     }
 
     fun onFullNameChange(fullName: String) {
