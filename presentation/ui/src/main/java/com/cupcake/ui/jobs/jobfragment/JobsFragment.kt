@@ -81,7 +81,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
         jobsEventJob = lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
-                    is JobsEvent.JobCardClick -> handleJobCardClick()
+                    is JobsEvent.JobCardClick -> handleJobCardClick(jobsEvent.id)
                     is JobsEvent.JobChipClick -> handleJobChipClick(jobsEvent.title)
                     is JobsEvent.SearchBoxClick -> handleSearchBoxClick()
                     is JobsEvent.OnFloatingActionClickListener -> handleFloatingActionClick()
@@ -91,8 +91,8 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
         }
     }
 
-    private fun handleJobCardClick() {
-        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment())
+    private fun handleJobCardClick(id: String) {
+        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment(id))
     }
 
     private fun handleJobChipClick(title: String) {

@@ -10,10 +10,13 @@ data class JobsEntity (
     val jobId: String,
     val jobTitle: String,
     val company: String,
-    val createdTime: String,
+    val createdTime: Long,
     val workType: String,
     val jobLocation: String,
     val jobType: String,
     val jobDescription: String,
-    val salary: String
-)
+    val minSalary: Double,
+    val maxSalary: Double,
+    val jobExperience: String,
+    val education: String,
+    )

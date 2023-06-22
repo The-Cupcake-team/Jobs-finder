@@ -66,6 +66,9 @@
     <dimen name="size16">16sp</dimen>
     <dimen name="size20">20sp</dimen>
     <dimen name="lottie_image_dimens">240dp</dimen>
+
     <dimen name="height_view_bar_comment_background">64dp</dimen>
+    <dimen name="job_details_button_height">48dp</dimen>
+    <dimen name="dialgo_height">138dp</dimen>
 
 </resources>

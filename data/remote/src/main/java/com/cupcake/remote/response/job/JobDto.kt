@@ -1,17 +1,21 @@
 package com.cupcake.remote.response.job
 
 
+import com.cupcake.remote.response.JobTitleDto
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class JobDto(
-    val id: String? = null,
-    val jobTitleId: Int?,
+    val id: String?,
+    val creatorId: String?,
+    val jobTitle: JobTitleDto?,
     val company: String?,
-    val createdAt: Long? = null,
+    val createdAt: Long?,
     val workType: String?,
     val jobLocation: String?,
     val jobType: String?,
     val jobDescription: String?,
-    val jobSalary: Double?
+    val jobSalary: JobSalaryDto?,
+    val experience: String?,
+    val eduction: String?
 )
