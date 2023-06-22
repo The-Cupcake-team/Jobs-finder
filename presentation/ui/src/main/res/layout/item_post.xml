@@ -11,7 +11,7 @@
 
         <variable
             name="listener"
-            type="com.cupcake.viewmodels.posts.PostInteractionListener" />
+            type="com.cupcake.viewmodels.posts.SpecialPostInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
