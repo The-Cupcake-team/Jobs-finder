@@ -7,6 +7,7 @@ import androidx.navigation.fragment.navArgs
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentJobSearchBinding
+import com.cupcake.ui.jobs.adapter.JobsAdapter
 import com.cupcake.viewmodels.job_search.JobSearchViewModel
 
 
@@ -31,4 +32,5 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
             Navigation.findNavController(view).popBackStack()
         }
     }
+
 }
