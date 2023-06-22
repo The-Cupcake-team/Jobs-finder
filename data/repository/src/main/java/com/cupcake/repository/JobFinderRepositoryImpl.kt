@@ -1,6 +1,8 @@
 package com.cupcake.repository
 
 import android.util.Log
+import com.cupcake.jobsfinder.local.daos.JobFinderDao
+import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.*
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job

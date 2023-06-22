@@ -228,6 +228,13 @@
         <item name="endIconDrawable">@drawable/ic_password_toggle</item>
     </style>
 
+    <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox.Dense.ExposedDropdownMenu">
+        <item name="indicatorSize">0dp</item>
+        <item name="android:isIndicator">false</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="tabIndicatorColor">@color/accent_orange</item>
+    </style>
+
     <style name="chipStyle" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>

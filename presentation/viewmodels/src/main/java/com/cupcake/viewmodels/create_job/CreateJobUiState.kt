@@ -12,6 +12,7 @@ data class CreateJobUiState(
 
 ) {
     data class JobFormUiState(
+        var jobTitles: List<JobTitleUiState> = emptyList(),
         var jobTitleUIState: JobTitleUIState = JobTitleUIState(),
         var company: String = "",
         var workType: String = "",

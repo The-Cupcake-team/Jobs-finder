@@ -1,11 +1,7 @@
 package com.cupcake.viewmodels.create_job
 
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.cupcake.models.Job
-import com.cupcake.models.JobSalary
-import com.cupcake.models.JobTitle
 import com.cupcake.usecase.CreateJobUseCase
 import com.cupcake.usecase.GetAllJobTitleUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
@@ -30,7 +26,7 @@ class CreateJobViewModel @Inject constructor(
     private val _event = MutableSharedFlow<CreateJobEvent>()
     val event = _event.asSharedFlow()
 
-    private var searchJobTitle: com.cupcake.models.Job? = null
+    private var searchJobTitle: Job? = null
     fun createJob() {
         _state.update { it.copy(isLoading = true) }
 //        tryToExecute(
@@ -212,8 +208,15 @@ class CreateJobViewModel @Inject constructor(
     }
 
 
-    private fun onGetJobTitleSuccess(jobTitles: List<JobTitleUiState>){
-        _state.update { it.copy(isLoading = false, jobFormUiState = it.jobFormUiState.copy(jobTitles = jobTitles)) }
+    private fun onGetJobTitleSuccess(jobTitles: List<JobTitleUiState>) {
+        _state.update {
+            it.copy(
+                isLoading = false,
+                jobFormUiState = it.jobFormUiState.copy(
+                    jobTitles = jobTitles
+                )
+            )
+        }
     }
 
     private fun onError(error: BaseErrorUiState) {
@@ -231,41 +234,18 @@ class CreateJobViewModel @Inject constructor(
     }
 
 
-    fun onChangeRangSalary(values: List<Float>) {
-        _state.update {
-            it.copy(
-                jobFormUiState = it.jobFormUiState.copy(
-                    experienceRequirement = text.toString()
-                )
-            )
-        }
-    }
 
     fun onChangeRangSalary(values: List<Float>) {
         _state.update {
             it.copy(
                 jobFormUiState = it.jobFormUiState.copy(
-                    startRangSalary = values.first().toInt().toString(),
-                    endRangSalary = values.last().toInt().toString(),
+                    salary = it.jobFormUiState.salary.copy(
+                        minSalary = values.first().toInt().toString(),
+                        maxSalary = values.last().toInt().toString()
+                    )
                 )
             )
         }
-    }
-
-//    fun onSkillsChange(text: CharSequence) {
-//        _state.update {
-//            it.copy(
-//                jobFormUiState = it.jobFormUiState.copy(
-//                    skills = text.toString()
-//                )
-//            )
-//        }
-//    }
-
-    fun onSkillsChange(skills: List<String>) {
-        _state.update { it.copy(jobFormUiState = it.jobFormUiState.copy(
-            skills = skills
-        )) }
     }
 
     private companion object {
