@@ -7,7 +7,6 @@ import com.cupcake.models.*
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
-import com.cupcake.models.JobWithTitle
 import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse

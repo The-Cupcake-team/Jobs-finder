@@ -1,7 +1,7 @@
 package com.cupcake.viewmodels.login
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.usecase.ErrorType
+import com.cupcake.models.ErrorType
 import com.cupcake.usecase.LoginUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel

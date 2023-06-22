@@ -72,6 +72,6 @@ dependencies {
 
     implementation(DependencyProject.lottie)
 
-    implementation(DependencyProject.swiperefreshlayout)
+    implementation(DependencyProject.swipRefersh)
 
 }
