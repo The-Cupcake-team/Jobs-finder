@@ -45,6 +45,7 @@ dependencies {
     implementation(DependencyProject.compat)
     implementation(DependencyProject.material)
     implementation(DependencyProject.constraint)
+    implementation(DependencyProject.swipRefersh)
 
     implementation(DependencyProject.navigationFragment)
     implementation(DependencyProject.navigationUi)

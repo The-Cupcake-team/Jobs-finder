@@ -17,7 +17,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_normal"
         android:elevation="@dimen/zero">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_normal"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="@string/personal_name"
+                android:text="@{item.creatorName}"
                 app:layout_constraintStart_toEndOf="@+id/imageViewPerson"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,26 +73,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
+                android:onClick="@{() -> listener.onOptionsClick()}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewPersonName"
                 app:srcCompat="@drawable/ic_more"
                 app:tint="@color/secondary"/>
 
-            <TextView
+            <com.cupcake.ui.posts.custom_view.PostExpandableCard
                 android:id="@+id/textViewContent"
                 style="@style/TextStyle.body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="@{item.description}"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt"
-                tools:text="@string/post_content" />
-
+                app:postFullText="@{item.description}"
+                app:postStartText="@{item.description}"
+                />
             <ImageView
                 android:id="@+id/imageViewPostImage"
                 android:layout_width="match_parent"
@@ -124,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_small"
-                android:text="@string/likes_count"
+                android:text="@{String.valueOf(item.likes)}"
                 android:textColor="@color/color_text_tertiary"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLike"
                 app:layout_constraintStart_toEndOf="@+id/imageViewLike"
@@ -136,10 +135,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_normal"
+                app:isLiked="@{item.isLiked}"
+                android:onClick="@{() -> listener.onLikeClick(item.id)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_heart"
-                app:tint="@color/secondary"/>
+                app:srcCompat="@drawable/tabler_thumb" />
 
             <TextView
                 android:id="@+id/textViewCommentsCount"
@@ -158,10 +158,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
+                android:onClick="@{() -> listener.onClickShare(item.id)}"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewComment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageViewComment"
-                app:srcCompat="@drawable/ic_saved"
+                app:srcCompat="@drawable/ic_share"
                 app:tint="@color/secondary"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

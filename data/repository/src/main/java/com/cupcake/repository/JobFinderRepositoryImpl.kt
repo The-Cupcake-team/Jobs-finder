@@ -4,6 +4,11 @@ import android.util.Log
 import com.cupcake.jobsfinder.local.daos.JobFinderDao
 import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.*
+import com.cupcake.models.ErrorType
+import com.cupcake.models.Job
+import com.cupcake.models.JobTitle
+import com.cupcake.models.JobWithTitle
+import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toJob
@@ -135,12 +140,25 @@ class JobFinderRepositoryImpl @Inject constructor(
         return wrapResponseWithErrorHandler { api.getPosts() }.map { it.toPost() }
     }
 
+
+    override suspend fun getFollowingPosts(): List<Post> {
+        val fakePosts = listOf(
+            Post("1", System.currentTimeMillis(), "One Piece 🏴‍☠️❤️‍🔥", "Sajjadio"),
+            Post("2", System.currentTimeMillis(), "Sabahooooooo 👋", "amory" ),
+            Post("4", System.currentTimeMillis(), "here we are go 🤍❤️", "dada"),
+            Post("5", System.currentTimeMillis(), "MY TEAM IS THE BEST 🧁🔝💖💖💖", "ahmed mousa"),
+            Post("6", System.currentTimeMillis(), "MY TEAM MATES ARE AWESOME 😍🤩💖", "kaido"),
+            Post("7", System.currentTimeMillis(), "FK you haters 🫵😎✊", "BK")
+        )
+        return fakePosts
+    }
+
     override suspend fun createPost(content: String): Post {
         return wrapResponseWithErrorHandler { api.createPost(content) }.toPost()
     }
 
     override suspend fun getPostById(id: String): Post {
-        TODO("Not yet implemented")
+        return wrapResponseWithErrorHandler { api.getPostById(id) }.toPost()
     }
     //endregion
     private suspend fun <T> wrapResponseWithErrorHandler(

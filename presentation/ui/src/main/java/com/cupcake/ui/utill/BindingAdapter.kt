@@ -18,7 +18,9 @@ import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.viewmodels.posts.PostItemUIState
 import com.google.android.material.textfield.TextInputLayout
+
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -119,5 +121,20 @@ fun setIsSavedIcon(textView: TextView, isSaved: Boolean?) {
 @BindingAdapter("dismissSwipeRefreshIf")
 fun dismissSwipeRefreshIf(swipeRefreshLayout: SwipeRefreshLayout, dismiss: Boolean) {
     swipeRefreshLayout.isRefreshing = dismiss
+}
+
+@BindingAdapter(value = ["app:isLiked"])
+fun isLiked(view: ImageView , isLiked: Boolean){
+    if (isLiked){
+        view.setImageResource(R.drawable.selected_thumb)
+    }
+    else{
+        view.setImageResource(R.drawable.tabler_thumb)
+    }
+}
+
+@BindingAdapter(value = ["app:isRefresh"])
+fun isRefresh(view: SwipeRefreshLayout , isRefresh: Boolean){
+    view.isRefreshing = isRefresh
 }
 

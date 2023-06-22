@@ -46,6 +46,8 @@
     <color name="accent_purple">#F5EFFF</color>
     <color name="accent_cyan">#E7FEFF</color>
     <color name="accent_orange">#FFEDED</color>
+    <color name="defaultColor">#97BFFB</color>
+
     <color name="icon_toolbar_color">#DE000000</color>
     <color name="expanded_chip_color">#E7EDF5</color>
     <color name="expanded_chip_arrow_color">#4B8CED</color>
