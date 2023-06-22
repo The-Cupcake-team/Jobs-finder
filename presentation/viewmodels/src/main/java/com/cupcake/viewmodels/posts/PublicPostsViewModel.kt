@@ -98,9 +98,9 @@ class PublicPostsViewModel @Inject constructor(
         }
     }
 
-    override fun onOptionsClick() {
+    override fun onOptionsClick(model: PostItemUIState) {
         viewModelScope.launch {
-            _postEvent.emit(Event(PostsEvent.PostOptionsClick))
+            _postEvent.emit(Event(PostsEvent.PostOptionsClick(model)))
         }
     }
 

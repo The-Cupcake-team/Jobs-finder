@@ -7,6 +7,6 @@ interface PostInteractionListener: BaseInteractionListener {
     fun onCommentClick(id: String)
     fun onLikeClick(id: String)
     fun onClickShare(id: String)
-    fun onOptionsClick()
+    fun onOptionsClick(model: PostItemUIState)
 
 }

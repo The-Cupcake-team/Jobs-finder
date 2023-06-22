@@ -11,6 +11,7 @@ import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentFollowingBinding
 import com.cupcake.viewmodels.posts.FollowingPostsViewModel
+import com.cupcake.viewmodels.posts.PostItemUIState
 import com.cupcake.viewmodels.posts.PostsEvent
 import kotlinx.coroutines.launch
 
@@ -19,7 +20,6 @@ class FollowingFragment : BaseFragment<FragmentFollowingBinding, FollowingPostsV
     FollowingPostsViewModel::class.java
 ) {
     override val LOG_TAG: String = this.javaClass.simpleName
-    private val bottomSheetFragment = BottomSheetFragment()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupPostsRecyclerView()
@@ -48,7 +48,7 @@ class FollowingFragment : BaseFragment<FragmentFollowingBinding, FollowingPostsV
         when (event) {
             is PostsEvent.PostCommentClick -> navigateToCommentsFragment("190d6e52-3ea5-4f1a-ad25-4487585b2ae5")
             is PostsEvent.PostShareClick -> sharePost()
-            is PostsEvent.PostOptionsClick -> showBottomSheetDialog()
+            is PostsEvent.PostOptionsClick -> showBottomSheetDialog(event.model)
         }
     }
 
@@ -65,7 +65,8 @@ class FollowingFragment : BaseFragment<FragmentFollowingBinding, FollowingPostsV
         }
         startActivity(Intent.createChooser(shareIntent, "Share via"))
     }
-    private fun showBottomSheetDialog() {
-        bottomSheetFragment.show(requireActivity().supportFragmentManager, "BottomSheetDialog")
+    private fun showBottomSheetDialog(model: PostItemUIState) {
+        val action = PostsFragmentDirections.actionPostsFragmentToPostBottomSheetFragment(model)
+        findNavController().navigate(action)
     }
 }
