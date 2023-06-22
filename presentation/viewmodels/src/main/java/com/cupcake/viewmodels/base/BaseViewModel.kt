@@ -32,13 +32,10 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
                 val result = callee()
                 onSuccess(result)
             } catch (error: ErrorType.Network) {
-                Log.i("BaseViewModel", "Network: ${error.message}")
                 onError(BaseErrorUiState.Disconnected(error.message.toString())) //500
             } catch (error: ErrorType.UnAuthorized) {
-                Log.i("BaseViewModel", "UnAuthorized: ${error.message}")
                 onError(BaseErrorUiState.UnAuthorized(error.message.toString()))
             } catch (error: ErrorType.Server) {
-                Log.i("BaseViewModel", "Server: ${error.message}")
                 onError(BaseErrorUiState.ServerError(error.message.toString()))
             } catch (error: ErrorType.InvalidFieldFullName) {
                 onError(BaseErrorUiState.InvalidFieldFullName(error.message.toString()))
@@ -51,10 +48,8 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
             } catch (error: ErrorType.InvalidFieldConfirmedPassword) {
                 onError(BaseErrorUiState.InvalidFieldConfirmedPassword(error.message.toString()))
             } catch (error: ErrorType.Unknown) {
-                Log.i("BaseViewModel", "Unknown: ${error.message}")
                 onError(BaseErrorUiState.NoFoundError(error.message.toString()))
             } catch (error: Throwable) {
-                Log.i("BaseViewModel", "Throwable: ${error.message}")
                 onError(BaseErrorUiState.NoFoundError(error.message.toString()))
             }
         }
