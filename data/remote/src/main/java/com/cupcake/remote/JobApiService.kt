@@ -4,7 +4,6 @@ import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
-import com.cupcake.remote.response.job.JobWithTitleDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -26,8 +25,11 @@ interface JobApiService {
         @Field("jobLocation") jobLocation: String?,
         @Field("jobType") jobType: String?,
         @Field("jobDescription") jobDescription: String?,
-        @Field("jobSalary") jobSalary: Double?
-    ): Response<BaseResponse<JobDto>>
+        @Field("minSalary") minSalary: Double?,
+        @Field("maxSalary") maxSalary: Double?,
+        @Field("experience") experience: String?,
+        @Field("education") education: String?,
+    ): Response<BaseResponse<Nothing>>
 
 
     @GET("/posts")
@@ -38,10 +40,10 @@ interface JobApiService {
 
     // region Job
 
-    @GET("/job")
-    suspend fun getJobs(): Response<BaseResponse<List<JobWithTitleDto>>>
+    @GET("/user/jobs")
+    suspend fun getJobs(): Response<BaseResponse<List<JobDto>>>
 
-    @GET("/job/{id}")
+    @GET("public/job/{id}")
     suspend fun getJobById(
         @Path("id") jobId: String
     ): Response<BaseResponse<JobDto>>

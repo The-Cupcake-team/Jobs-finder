@@ -1,7 +1,9 @@
 plugins {
     id(Plugins.ANDROID_LIBRARY)
+    id(Plugins.PARCELIZE)
     kotlin(Plugins.KOTLIN_ANDROID)
     kotlin(Plugins.KOTLIN_KAPT)
+
 }
 
 android {

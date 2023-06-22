@@ -26,7 +26,7 @@ override fun intercept(chain: Interceptor.Chain): Response {
     private companion object {
         const val AUTHORIZATION = "Authorization"
         const val BEARER = "bearer"
-         val TOKEN = ""
+         val TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYmZmZDA3NC03ZmRmLTQyYTYtYTMzMi1kZDI0OGFmZWFhNzMiLCJleHAiOjE2ODc2ODYyMjZ9.rOGfe0KsYJ-eGZaHMVss7u1Pw_LBUIcHdKkBlmXewiE"
     }
 
 

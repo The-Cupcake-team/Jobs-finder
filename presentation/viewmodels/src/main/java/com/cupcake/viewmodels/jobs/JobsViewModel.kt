@@ -20,7 +20,7 @@ class JobsViewModel @Inject constructor(
     private val getPopularJobs: GetPopularJobsUseCase,
     private val getRecommendedJobs: GetRecommendedJobsUseCase,
     private val getJobsInUserLocation: GetJobsOnUserLocationUseCase,
-    private val getTopSalaryInUserLocation: GetTopSalaryInUserLocationUseCase
+    private val getTopSalaryInUserLocation: GetTopSalaryInUserLocationUseCase,
 ) : BaseViewModel<JobsUiState>(JobsUiState()), JobsListener {
 
     private val _event = MutableSharedFlow<JobsEvent>()
@@ -85,6 +85,8 @@ class JobsViewModel @Inject constructor(
         _state.update { it.copy(error = error, isLoading = false) }
     }
 
+
+
     companion object {
         private const val POPULAR_JOB_LIMIT = 10
         private const val RECOMMENDED_JOB_LIMIT = 10
@@ -96,9 +98,21 @@ class JobsViewModel @Inject constructor(
         viewModelScope.launch { _event.emit(JobsEvent.JobCardClick(id)) }
     }
 
-    override fun onChipClickListener(id: String) {
-        viewModelScope.launch { _event.emit(JobsEvent.JobChipClick(id)) }
+    override fun onChipClickListener(jobTitle: String) {
+        viewModelScope.launch { _event.emit(JobsEvent.JobChipClick(jobTitle)) }
     }
+
+    override fun onSearchBoxClickListener() {
+        viewModelScope.launch { _event.emit(JobsEvent.SearchBoxClick) }
+    }
+    override fun onFloatingActionClickListener() {
+        viewModelScope.launch { _event.emit(JobsEvent.OnFloatingActionClickListener) }
+    }
+
+    override fun onImageViewMoreClickListener(model:JobUiState) {
+        viewModelScope.launch { _event.emit(JobsEvent.OnMoreOptionClickListener(model)) }
+    }
+
 
     fun onRetryClicked(){
         _state.update {it.copy(error = null, isLoading = true) }
