@@ -4,4 +4,10 @@
         <item>20.0</item>
         <item>70.0</item>
     </array>
+
+        <array name="custom_salary_range">
+            <item>0.0</item>
+            <item>100.0</item>
+        </array>
+
 </resources>

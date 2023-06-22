@@ -6,9 +6,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
+import com.cupcake.ui.databinding.BottomSheetJobsSearchFilterBinding
 import com.cupcake.ui.databinding.FragmentJobSearchBinding
-import com.cupcake.ui.jobs.adapter.JobsAdapter
 import com.cupcake.viewmodels.job_search.JobSearchViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
 class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewModel>(
@@ -25,6 +26,14 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
 
         onBackButtonClicked()
         binding.editTextSearchInput.setText(args.jobTitle)
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.imageViewFilter.setOnClickListener {
+            showFilterSheet()
+        }
     }
 
     private fun onBackButtonClicked(){
@@ -32,5 +41,19 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
             Navigation.findNavController(view).popBackStack()
         }
     }
+
+
+
+
+    private fun showFilterSheet() {
+        val bottomSheetBinding = BottomSheetJobsSearchFilterBinding.inflate(layoutInflater)
+        val dialog = BottomSheetDialog(requireContext())
+
+        dialog.apply {
+            setContentView(bottomSheetBinding.root)
+            show()
+        }
+    }
+
 
 }

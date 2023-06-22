@@ -47,7 +47,7 @@
                 android:layout_height="@dimen/search_bar_height"
                 android:drawableStart="@drawable/ic_search"
                 android:background="@drawable/background_search_bar"
-                android:hint="Search"
+                android:hint="@string/search"
                 android:paddingStart="@dimen/spacing_medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -55,6 +55,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/imageViewFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
@@ -73,14 +74,13 @@
             android:layout_marginStart="@dimen/spacing_tiny"
             android:layout_marginTop="@dimen/spacing_normal"
             android:orientation="vertical"
-            app:items=""
             android:paddingTop="@dimen/spacing_small"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            tools:listitem="@layout/item_job_card" />
+            tools:listitem="@layout/item_job_card"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
