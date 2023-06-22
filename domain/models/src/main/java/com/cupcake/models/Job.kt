@@ -10,6 +10,7 @@ class Job(
     val jobLocation: String,
     val jobType: String,
     val jobDescription: String,
-    val jobSalary: Double,
+    val jobSalary: JobSalary,
     val jobExperience: String,
+    val education: String,
 )

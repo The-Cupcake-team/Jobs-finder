@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
-import com.cupcake.ui.databinding.CardViewDetailsChipBinding
+import com.cupcake.ui.databinding.ItemJobDetailsCardsBinding
 import com.cupcake.ui.utill.convert
 
 class DetailsChipCustomView @JvmOverloads constructor(
@@ -14,7 +14,7 @@ class DetailsChipCustomView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
 ) : LinearLayout(context, attrs, defStyleAttr) {
-    private val binding: CardViewDetailsChipBinding = CardViewDetailsChipBinding.inflate(
+    private val binding: ItemJobDetailsCardsBinding = ItemJobDetailsCardsBinding.inflate(
         LayoutInflater.from(context),
         this,
         true
@@ -39,9 +39,5 @@ class DetailsChipCustomView @JvmOverloads constructor(
     fun experience(experience: String) {
         binding.textViewDetailsExperience.text = experience
     }
-
-//    fun convertTime(time: Long) {
-//        binding.textViewDetailsPostedOn.text = convert(time)
-//    }
 
 }

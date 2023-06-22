@@ -2,27 +2,27 @@ package com.cupcake.repository.mapper
 
 import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.Job
+import com.cupcake.models.JobSalary
 import com.cupcake.remote.response.job.JobDto
 import com.cupcake.models.JobTitle
-import com.cupcake.models.JobWithTitle
 import com.cupcake.remote.response.JobTitleDto
-import com.cupcake.remote.response.job.JobWithTitleDto
 
-fun JobWithTitleDto.toJobWithJobTitle(): JobWithTitle {
-    return JobWithTitle(
-        id = id,
+fun JobDto.toJobWithJobTitle(): Job {
+    return Job(
+        id = id ?: "",
         jobTitle = JobTitle(
-            id = jobTitle.id.toString(),
-            title = jobTitle.title
+            id = jobTitle?.id.toString(),
+            title = jobTitle?.title ?: ""
         ),
-        company = company,
-        createdTime = createdAt.toString(),
-        workType = workType,
-        jobLocation = jobLocation,
-        jobDescription = jobDescription,
-        jobType = jobType,
-        salary = formatLargeNumber(jobSalary.minSalary)+"-"
-                +formatLargeNumber(jobSalary.maxSalary)
+        company = company ?: "",
+        createdAt = createdAt ?: 0L,
+        workType = workType ?: "",
+        jobLocation = jobLocation ?: "",
+        jobDescription = jobDescription ?: "",
+        jobType = jobType ?: "",
+        jobSalary = JobSalary(minSalary = jobSalary?.minSalary ?: 0.0, maxSalary = jobSalary?.maxSalary ?: 0.0),
+        jobExperience = experience ?: "",
+        education = eduction ?: ""
     )
 }
 
@@ -37,19 +37,21 @@ private fun formatLargeNumber(number: Double): String {
 }
 
 
-fun JobWithTitle.toJobsEntity(): JobsEntity{
+fun Job.toJobsEntity(): JobsEntity{
     return JobsEntity(
         id = id,
-        jobId = jobTitle.id,
-        jobTitle = jobTitle.title,
+        jobId = jobTitle.id ?: "",
+        jobTitle = jobTitle.title ?: "",
         company = company,
-        createdTime = createdTime,
+        createdTime = createdAt,
         workType = workType,
         jobLocation = jobLocation,
         jobType = jobType,
         jobDescription = jobDescription,
-        salary = salary
-
+        minSalary = jobSalary.minSalary,
+        maxSalary = jobSalary.maxSalary,
+        jobExperience = jobExperience,
+        education = education
     )
 }
 
@@ -108,25 +110,28 @@ fun JobDto.toJob(): Job {
         jobLocation = this.jobLocation ?: "",
         jobType = this.jobType ?: "",
         jobDescription = this.jobDescription ?: "",
-        jobSalary = this.jobSalary?.maxSalary ?: 0.0,
-        jobExperience = this.experience ?: ""
+        jobSalary = JobSalary(maxSalary = jobSalary?.maxSalary?:0.0, minSalary = jobSalary?.minSalary ?: 0.0),
+        jobExperience = this.experience ?: "",
+        education = this.eduction ?: ""
     )
 }
 
-fun JobsEntity.toJobWithTitle(): JobWithTitle{
-    return return JobWithTitle(
+fun JobsEntity.toJob(): Job{
+    return Job(
         id = id,
         jobTitle = JobTitle(
             id = jobId,
             title = jobTitle
         ),
         company = company,
-        createdTime = createdTime,
+        createdAt = createdTime,
         workType = workType,
         jobLocation = jobLocation,
         jobDescription = jobDescription,
         jobType = jobType,
-        salary = salary
+        jobSalary = JobSalary(minSalary = minSalary, maxSalary = maxSalary),
+        jobExperience = jobExperience,
+        education = education
     )
 }
 

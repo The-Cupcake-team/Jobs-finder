@@ -45,7 +45,7 @@
                 android:layout_height="@dimen/edit_text_height"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:hint="@string/add_job_title"
-                android:text="@={viewModel.state.JobFormUiState.jobTitleId}"
+                android:text="@={viewModel.state.JobFormUiState.jobTitleUIState.title}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
 

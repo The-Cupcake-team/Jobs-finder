@@ -2,7 +2,6 @@ package repo
 
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
-import com.cupcake.models.JobWithTitle
 import com.cupcake.models.Post
 
 interface JobFinderRepository {
@@ -18,11 +17,11 @@ interface JobFinderRepository {
 
     suspend fun getJobById(jobId: String): Job
 
-    suspend fun insertJob(job: JobWithTitle)
+    suspend fun insertJob(job: Job)
 
-    suspend fun deleteJob(job: JobWithTitle)
+    suspend fun deleteJob(job: Job)
 
-    suspend fun getSavedJobById(id: String): JobWithTitle?
+    suspend fun getSavedJobById(id: String): Job?
 
     //endregion
 

@@ -1,6 +1,5 @@
 package com.cupcake.usecase
 
-import com.cupcake.models.JobWithTitle
 import repo.JobFinderRepository
 import javax.inject.Inject
 

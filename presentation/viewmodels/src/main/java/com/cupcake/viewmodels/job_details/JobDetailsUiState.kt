@@ -27,12 +27,12 @@ fun Job.toJobsDetailsUiState(): JobDetailsFieldState {
     return JobDetailsFieldState(
         id = this.id,
         image = "",
-        title = this.jobTitle.title,
+        title = this.jobTitle.title ?: "",
         companyName = this.company,
         workType = this.workType,
         jobType = this.jobType,
         location = this.jobLocation,
-        salary = this.jobSalary.toInt(),
+        salary = this.jobSalary.maxSalary.toInt(),
         createdAt = this.createdAt,
         description = this.jobDescription,
         experience = this.jobExperience

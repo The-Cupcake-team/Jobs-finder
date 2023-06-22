@@ -28,7 +28,7 @@ class BottomSheetViewModel @Inject constructor(
 
     override fun onSaveListener() {
         viewModelScope.launch(Dispatchers.IO) {
-            saveJobUseCase(jobUiState.toJobWithTitle())
+            saveJobUseCase(jobUiState.toJob())
         }
         viewModelScope.launch { _event.emit(BottomSheetEvent.OnSaveListener) }
     }

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.cupcake.viewmodels.job_details.JobViewModel" />
+            type="com.cupcake.viewmodels.job_details.JobDetailsViewModel" />
     </data>
 
 
