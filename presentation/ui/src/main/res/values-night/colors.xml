@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#1B1B1B</color>
+    <color name="background">#212121</color>
     <color name="primary">#4B8CED</color>
     <color name="secondary">#99FFFFFF</color>
     <color name="tertiary">#61FFFFFF</color>
     <color name="accent">#14FFFFFF</color>
-    <color name="cards">#222222</color>
+    <color name="cards">#262626</color>
     <color name="blue_300">#303843</color>
     <color name="white">#212121</color>
 
