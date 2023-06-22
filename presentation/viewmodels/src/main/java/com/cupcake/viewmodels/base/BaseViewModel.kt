@@ -32,7 +32,7 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
                 onSuccess(result)
             } catch (error: ErrorType.Network) {
                 onError(BaseErrorUiState.Disconnected(error.message.toString()))
-            } catch (error: ErrorType.Validation) {
+            } catch (error: ErrorType) {
                 onError(BaseErrorUiState.UnAuthorized(error.message.toString()))
             } catch (error: ErrorType.Server) {
                 onError(BaseErrorUiState.ServerError(error.message.toString()))

@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:background="@color/background"
     android:padding="@dimen/spacing_medium"
-    tools:context="com.cupcake.ui.signup.SignUpInformationFragment">
+    tools:context="com.cupcake.ui.register.SignUpInformationFragment">
 
     <TextView
         style="@style/TextStyle.Title"
