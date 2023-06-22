@@ -7,5 +7,10 @@ data class User(
     val email: String,
     val isActive: Boolean,
     val createdAt: Long,
-    val token: String
+    val token: Token
+)
+
+data class Token(
+    val token: String,
+    val expireTime: Long
 )

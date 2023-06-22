@@ -1,7 +1,9 @@
 package com.cupcake.repository
 
+import android.util.Log
 import com.cupcake.local.datastore.AuthDataStore
 import com.cupcake.models.ErrorType
+import com.cupcake.models.Token
 import com.cupcake.models.User
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
@@ -31,16 +33,20 @@ class AuthenticationRepositoryImpl @Inject constructor(
         }.toUser()
     }
 
-    override suspend fun saveAuthToken(token: String) {
-        authDataStore.saveAuthToken(token)
+    override suspend fun saveAuthData(token: Token) {
+        authDataStore.saveAuthData(token.token, token.expireTime)
     }
 
     override suspend fun getAuthToken(): String? {
         return authDataStore.getAuthToken()
     }
 
-    override suspend fun clearAuthToken() {
-        authDataStore.clearAuthToken()
+    override suspend fun getAuthTokenExpireTime(): Long? {
+        return authDataStore.getAuthTokenExpireTime()
+    }
+
+    override suspend fun clearAuthData() {
+        authDataStore.clearAuthData()
     }
 
     private suspend fun <T> wrapResponseWithErrorHandler(
@@ -52,10 +58,12 @@ class AuthenticationRepositoryImpl @Inject constructor(
             if (baseResponse != null && baseResponse.isSuccess) {
                 return baseResponse.value!!
             } else {
+                Log.i("Repo", "Throwable: ${baseResponse?.message}")
                 throw ErrorType.Server(baseResponse?.message!!)
             }
         } else {
             val errorResponse = response.errorBody()?.toString()
+            Log.i("Repo", "Throwable: ${response.errorBody()}")
             throw ErrorType.Server(errorResponse ?: "Error Network")
         }
     }
