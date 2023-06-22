@@ -75,8 +75,8 @@
                     setIcons="@{viewModel.state.isFullNameValid}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
-                    android:paddingEnd="@dimen/spacing_normal"
                     android:inputType="text"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onFullNameChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
@@ -117,7 +117,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="text"
-                    android:paddingEnd="@dimen/spacing_normal"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onUserNameChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -155,7 +155,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="textEmailAddress"
-                    android:paddingEnd="@dimen/spacing_normal"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onEmailChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -192,7 +192,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="textPassword"
-                    android:paddingEnd="@dimen/spacing_normal"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onPasswordChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -230,7 +230,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="textPassword"
-                    android:paddingEnd="@dimen/spacing_normal"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onConfirmPasswordChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
