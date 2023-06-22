@@ -32,15 +32,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/comments_title" />
 
-            <ImageButton
-                android:id="@+id/image_view_saved_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:background="@color/background"
-                android:padding="@dimen/spacing_normal"
-                android:src="@drawable/ic_like_v_two" />
         </androidx.appcompat.widget.Toolbar>
 
 
