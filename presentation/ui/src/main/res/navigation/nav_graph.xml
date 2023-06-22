@@ -19,6 +19,9 @@
             android:id="@+id/action_postsFragment_to_commentsFragment"
             app:destination="@id/commentsFragment"
             app:popUpTo="@id/postsFragment" />
+        <action
+            android:id="@+id/action_postsFragment_to_postBottomSheetFragment"
+            app:destination="@id/postBottomSheetFragment" />
 
     </fragment>
 
@@ -119,6 +122,14 @@
         <argument
             android:name="jobUiState"
             app:argType="com.cupcake.viewmodels.jobs.JobUiState" />
+    </dialog>
+    <dialog
+        android:id="@+id/postBottomSheetFragment"
+        android:name="com.cupcake.ui.posts.PostBottomSheetFragment"
+        android:label="PostBottomSheetFragment" >
+        <argument
+            android:name="postUiState"
+            app:argType="com.cupcake.viewmodels.posts.PostItemUIState"/>
     </dialog>
 
 
