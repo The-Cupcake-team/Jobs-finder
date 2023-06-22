@@ -1,5 +1,6 @@
 package com.cupcake.viewmodels.base
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.ErrorType
@@ -31,25 +32,30 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
                 val result = callee()
                 onSuccess(result)
             } catch (error: ErrorType.Network) {
+                Log.i("BaseViewModel", "Network: ${error.message}")
                 onError(BaseErrorUiState.Disconnected(error.message.toString())) //500
-            } catch (error: ErrorType) {
+            } catch (error: ErrorType.UnAuthorized) {
+                Log.i("BaseViewModel", "UnAuthorized: ${error.message}")
                 onError(BaseErrorUiState.UnAuthorized(error.message.toString()))
             } catch (error: ErrorType.Server) {
+                Log.i("BaseViewModel", "Server: ${error.message}")
                 onError(BaseErrorUiState.ServerError(error.message.toString()))
-            } catch (error: ErrorType.Unknown) {
-                onError(BaseErrorUiState.NoFoundError(error.message.toString()))
-            } catch (error: Throwable) {
-                onError(BaseErrorUiState.NoFoundError(error.message.toString()))
             } catch (error: ErrorType.InvalidFieldFullName) {
                 onError(BaseErrorUiState.InvalidFieldFullName(error.message.toString()))
-            } catch (error : ErrorType.InvalidFieldUserName){
+            } catch (error: ErrorType.InvalidFieldUserName) {
                 onError(BaseErrorUiState.InvalidFieldUserName(error.message.toString()))
-            } catch (error : ErrorType.InvalidFieldPassword){
+            } catch (error: ErrorType.InvalidFieldPassword) {
                 onError(BaseErrorUiState.InvalidFieldPassword(error.message.toString()))
-            } catch (error : ErrorType.InvalidFieldEmail){
+            } catch (error: ErrorType.InvalidFieldEmail) {
                 onError(BaseErrorUiState.InvalidFieldEmail(error.message.toString()))
-            }catch (error : ErrorType.InvalidFieldConfirmedPassword){
+            } catch (error: ErrorType.InvalidFieldConfirmedPassword) {
                 onError(BaseErrorUiState.InvalidFieldConfirmedPassword(error.message.toString()))
+            } catch (error: ErrorType.Unknown) {
+                Log.i("BaseViewModel", "Unknown: ${error.message}")
+                onError(BaseErrorUiState.NoFoundError(error.message.toString()))
+            } catch (error: Throwable) {
+                Log.i("BaseViewModel", "Throwable: ${error.message}")
+                onError(BaseErrorUiState.NoFoundError(error.message.toString()))
             }
         }
     }
