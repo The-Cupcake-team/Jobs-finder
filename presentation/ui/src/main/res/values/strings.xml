@@ -66,7 +66,7 @@
     <string name="public_state">public</string>
     <string name="post_hint">What\'s on your mind ?</string>
     <string name="camera">Camera</string>
-    <string name="video_photo">Video/Photo</string>
+    <string name="video_photo">Photo</string>
     <string name="personal_name">Bilal Alkhatib</string>
     <string name="jop_title">Android Developer</string>
     <string name="created_at">3hours ago</string>
@@ -117,6 +117,13 @@
     <string name="required_skills">Required Skills</string>
     <string name="popular_jobs">Popular Jobs</string>
     <string name="retry">Retry</string>
+    <string name="save_icon">save icon</string>
+    <string name="company_logo">company logo</string>
 
 
+    <string name="save">Save</string>
+    <string name="share">Share</string>
+    <string name="sharePost">Hello bro,Your Post is very awesome , select your App to share \n%1$s . </string>
+    <string name="saved_successfully">Saved Successfully</string>
+    <string name="saved_canceled">Saved Canceled</string>
 </resources>

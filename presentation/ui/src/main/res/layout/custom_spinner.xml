@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingVertical="@dimen/spacing_tiny"
+    android:paddingHorizontal="@dimen/spacing_small"
+    android:drawableStart="@drawable/ic_icon_global"
+    android:drawablePadding="@dimen/spacing_small"
+    android:layout_marginStart="@dimen/spacing_tiny"
+    android:textColor="@color/tertiary"
+    style="@style/Base.CardView"
+    >
+
+</TextView>

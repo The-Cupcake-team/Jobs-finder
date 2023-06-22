@@ -2,6 +2,8 @@ package com.cupcake.viewmodels.create_job
 
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Job
+import com.cupcake.models.JobSalary
+import com.cupcake.models.JobTitle
 import com.cupcake.usecase.CreateJobUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
@@ -27,14 +29,16 @@ class CreateJobViewModel @Inject constructor(
                 createJob(
                     Job(
                         id = "",
-                        jobTitleId = jobTitleMap[_state.value.jobFormUiState.jobTitleId]!!,
+                        jobTitle = JobTitle(_state.value.jobFormUiState.jobTitleUIState.id, _state.value.jobFormUiState.jobTitleUIState.title),
                         company = _state.value.jobFormUiState.company,
                         workType = _state.value.jobFormUiState.workType,
                         jobType = _state.value.jobFormUiState.jobType,
                         jobLocation = _state.value.jobFormUiState.jobLocation,
                         jobDescription = _state.value.jobFormUiState.jobDescription,
-                        jobSalary = _state.value.jobFormUiState.salary,
-                        createdAt = 1111111111
+                        jobSalary = JobSalary(maxSalary = _state.value.jobFormUiState.salary.maxSalary, minSalary = _state.value.jobFormUiState.salary.minSalary),
+                        createdAt = 1111111111,
+                        jobExperience = _state.value.jobFormUiState.experience,
+                        education = _state.value.jobFormUiState.education
                     )
                 )
             },
@@ -42,11 +46,6 @@ class CreateJobViewModel @Inject constructor(
             ::onCreateJobError
         )
     }
-
-    private val jobTitleMap = hashMapOf(
-        Pair("Android", 1),
-        Pair("backend developer", 2)
-    )
 
     private fun onCreateJobSuccess(result: Boolean) {
         _state.update { it.copy(isLoading = false) }

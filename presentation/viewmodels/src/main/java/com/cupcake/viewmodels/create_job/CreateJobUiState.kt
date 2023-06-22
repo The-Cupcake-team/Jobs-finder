@@ -11,7 +11,7 @@ data class CreateJobUiState(
     val error: BaseErrorUiState? = null,
 ) {
     data class JobFormUiState(
-        var jobTitleId: String = "",
+        var jobTitleUIState: JobTitleUIState = JobTitleUIState(),
         var company: String = "",
         var workType: String = "",
         var jobType: String = "",
@@ -23,6 +23,16 @@ data class CreateJobUiState(
         var endRangSalary: String = "",
         var experienceRequirement: String = "",
         var jobDescription: String = "",
-        var salary: Double = 0.0,
+        var salary: JobSalaryUIState = JobSalaryUIState(),
+    )
+
+    data class JobTitleUIState(
+        var id: String = "",
+        var title: String = "",
+    )
+
+    data class JobSalaryUIState(
+        var maxSalary: Double = 0.0,
+        var minSalary: Double = 0.0,
     )
 }

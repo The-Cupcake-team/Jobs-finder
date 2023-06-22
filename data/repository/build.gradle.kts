@@ -46,5 +46,4 @@ dependencies {
     implementation(DependencyProject.retrofit)
 
     implementation(DependencyProject.hilt)
-
 }

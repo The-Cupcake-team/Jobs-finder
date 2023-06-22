@@ -1,10 +1,12 @@
 package com.cupcake.viewmodels.jobs
 
+import android.os.Parcelable
+import com.cupcake.models.Job
+import com.cupcake.models.JobSalary
 import com.cupcake.models.JobTitle
-import com.cupcake.models.JobWithTitle
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.job_details.JobDetailsUiState
-import com.cupcake.viewmodels.job_details.JobsDetailsUiState
+import kotlinx.parcelize.Parcelize
 
 
 data class JobsUiState(
@@ -13,6 +15,7 @@ data class JobsUiState(
     val topSalaryJobs: List<JobUiState> = emptyList(),
     val onLocationJobs: List<JobUiState> = emptyList(),
     val isLoading: Boolean = true,
+    val isSavedJob: Boolean = false,
     val error: BaseErrorUiState? = null,
 )
 
@@ -21,16 +24,7 @@ data class ErrorUiState(
     val message: String
 )
 
-
-fun JobWithTitle.toJobUiState2() = JobDetailsUiState(
-    image = "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/e3/f27630d13511e88dd241e68ded0cea/K_logo_800x800.png?auto=format%2Ccompress&dpr=1",
-    title = this.jobTitle.title,
-    companyName = this.company,
-    detailsChip = listOf(this.workType, this.jobType),
-    location = this.jobLocation,
-    salary = this.salary
-)
-
+@Parcelize
 data class JobUiState(
     val id : String = "",
     val image: String = "",
@@ -40,7 +34,10 @@ data class JobUiState(
     val location: String = "",
     val salary: String = "",
     val createdAt: Long = 0,
-)
+    val jobExperience: String = "",
+    val education: String = "",
+): Parcelable
+
 
 data class JobTitleUiState(
     val id: String = "",
@@ -48,10 +45,25 @@ data class JobTitleUiState(
 )
 
 fun JobTitle.toJobTitleUiState() = JobTitleUiState(
-    id = this.id,
-    title = this.title
+    id = this.id ?: "",
+    title = this.title ?: ""
 )
 
+fun JobUiState.toJob(): Job{
+    return Job(
+        id = id,
+        jobTitle = JobTitle(title = title, id = id),
+        company = companyName,
+        createdAt = createdAt,
+        workType = detailsChip[0],
+        jobLocation = location,
+        jobType = detailsChip[1],
+        jobDescription = companyName,
+        jobSalary = JobSalary(minSalary = salary.toDouble(), maxSalary = salary.toDouble()),
+        jobExperience = jobExperience,
+        education = education
+    )
+}
 data class JobDetailUiState(
     val job: JobsDetailsUiState,
     val isLoading: Boolean = false,
@@ -71,14 +83,14 @@ data class JobsDetailsUiState(
 )
 
 
-fun JobWithTitle.toJobUiState() = JobUiState(
+fun Job.toJobUiState() = JobUiState(
     id = id,
     image = "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/e3/f27630d13511e88dd241e68ded0cea/K_logo_800x800.png?auto=format%2Ccompress&dpr=1",
-    title = this.jobTitle.title,
+    title = this.jobTitle.title ?: "",
     companyName = this.company,
     detailsChip = listOf(this.workType, this.jobType),
     location = this.jobLocation,
-    salary = this.salary
+    salary = this.jobSalary.toString()
 )
 
 

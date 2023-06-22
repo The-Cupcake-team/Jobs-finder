@@ -17,20 +17,21 @@
             android:id="@+id/card_view_expandable_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:backgroundTint="@color/surface"
             app:cardCornerRadius="@dimen/spacing_normal"
             app:cardElevation="@dimen/zero"
+            app:contentPadding="@dimen/job_details_card_cardCornerRadius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@color/cards"
-                android:orientation="vertical"
-                android:padding="@dimen/job_details_card_cardCornerRadius">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_view_description_title"
@@ -38,6 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/description"
+                    android:textColor="@color/color_text_primary"
                     app:drawableEndCompat="@drawable/ic_card_closed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +50,8 @@
                     style="@style/TextStyle.body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:textColor="@color/color_text_tertiary"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:textColor="@color/color_text_secondary"
                     android:visibility="gone"
                     tools:text="We are looking for a Loan Officer to evaluate, authorize approval or deny loan applications for people or for business. You will act as liaison between customers and our financial institution and you will help qualified applicants acquire loans in a timely manner." />
             </LinearLayout>
@@ -59,20 +61,21 @@
             android:id="@+id/card_view_expandable_qualification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:backgroundTint="@color/surface"
             app:cardCornerRadius="@dimen/spacing_normal"
             app:cardElevation="@dimen/zero"
+            app:contentPadding="@dimen/job_details_card_cardCornerRadius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_view_expandable_description">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@color/cards"
-                android:orientation="vertical"
-                android:padding="@dimen/job_details_card_cardCornerRadius">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_view_qualification_title"
@@ -80,6 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/qualification"
+                    android:textColor="@color/color_text_primary"
                     app:drawableEndCompat="@drawable/ic_card_closed" />
 
                 <TextView
@@ -87,10 +91,10 @@
                     style="@style/TextStyle.body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
                     android:drawablePadding="@dimen/spacing_medium"
+                    android:paddingTop="@dimen/spacing_medium"
                     android:text="@string/qualification_text"
-                    android:textColor="@color/color_text_tertiary"
+                    android:textColor="@color/color_text_secondary"
                     android:visibility="gone"
                     app:drawableStartCompat="@drawable/ic_point" />
             </LinearLayout>
@@ -100,9 +104,12 @@
             android:id="@+id/card_view_expandable_required_skills"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_medium"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:backgroundTint="@color/surface"
             app:cardCornerRadius="@dimen/spacing_normal"
             app:cardElevation="@dimen/zero"
+            app:contentPadding="@dimen/job_details_card_cardCornerRadius"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_view_expandable_qualification">
@@ -111,9 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:background="@color/cards"
-                android:orientation="vertical"
-                android:padding="@dimen/job_details_card_cardCornerRadius">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/text_view_required_skills_title"
@@ -121,13 +126,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/required_skills"
+                    android:textColor="@color/color_text_primary"
                     app:drawableEndCompat="@drawable/ic_card_closed" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/chip_Group_required_skills"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
                     android:orientation="horizontal"
                     android:visibility="gone">
 
@@ -143,7 +148,6 @@
                         style="@style/ChipStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_small"
                         android:text="@string/Graphic_Design" />
                 </com.google.android.material.chip.ChipGroup>
             </LinearLayout>

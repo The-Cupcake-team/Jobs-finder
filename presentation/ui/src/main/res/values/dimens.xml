@@ -20,6 +20,7 @@
     <dimen name="text_size_caption">12sp</dimen>
     <dimen name="text_size_small">10sp</dimen>
 
+
     <!--    cards-->
     <dimen name="card_horizontal_height">120dp</dimen>
     <dimen name="card_vertical_height">200dp</dimen>
@@ -53,13 +54,19 @@
     <dimen name="login_card_height">540dp</dimen>
     <dimen name="login_welcome_text_margin_top">80dp</dimen>
     <dimen name="edit_text_height">48dp</dimen>
+    <dimen name="bottom_sheet_drag_handle_view_height">4dp</dimen>
+    <dimen name="bottom_sheet_drag_handle_view_width">72dp</dimen>
 
     <dimen name="card_lago_job_details_top">30dp</dimen>
     <dimen name="text_view_job_details_title_top">48dp</dimen>
     <dimen name="tab_layout_job_details_and_dialog_height">40dp</dimen>
     <dimen name="elevation_job_details">1dp</dimen>
+    <dimen name="drawable_padding">8dp</dimen>
 
     <dimen name="size16">16sp</dimen>
+    <dimen name="size20">20sp</dimen>
     <dimen name="lottie_image_dimens">240dp</dimen>
+    <dimen name="job_details_button_height">48dp</dimen>
+    <dimen name="dialgo_height">138dp</dimen>
 
 </resources>

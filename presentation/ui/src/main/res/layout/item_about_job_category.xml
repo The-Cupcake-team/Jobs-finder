@@ -4,39 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
-            type="com.cupcake.viewmodels.job_details.JobViewModel" />
+            type="com.cupcake.viewmodels.job_details.JobDetailsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.cupcake.ui.jobs.AboutJobCategory">
+        tools:context="com.cupcake.ui.job_details.AboutJobCategory">
 
-        <com.cupcake.jobsfinder.ui.jobs.DetailsChipCustomView
+        <com.cupcake.ui.job_details.custom_view.DetailsChipCustomView
             android:id="@+id/layout_details_chip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:createdAt="@{viewModel.state.job.createdAt}"
+            app:experience="@{viewModel.state.job.experience}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:location="@{viewModel.jobsUIState.job.location}"
-            app:salary="@{viewModel.jobsUIState.job.salary}"
-            app:workType="@{viewModel.jobsUIState.job.workType}"
-            app:convertTime="@{viewModel.jobsUIState.job.createdAt}"
-            />
+            app:location="@{viewModel.state.job.location}"
+            app:salary="@{(`$` + String.valueOf(viewModel.state.job.salary) + `/mo`)}"
+            app:workType="@{viewModel.state.job.workType}" />
 
-        <com.cupcake.jobsfinder.ui.jobs.ExpandCardCustomView
+        <com.cupcake.ui.job_details.custom_view.ExpandCardCustomView
             android:id="@+id/card_view_expandable_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_medium"
-            app:cardDescription="@{viewModel.jobsUIState.job.jobDescription}"
+            android:layout_marginVertical="@dimen/spacing_normal"
+            app:cardDescription="@{viewModel.state.job.description}"
             app:layout_constraintEnd_toEndOf="@+id/layout_details_chip"
             app:layout_constraintStart_toStartOf="@+id/layout_details_chip"
             app:layout_constraintTop_toBottomOf="@id/layout_details_chip" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

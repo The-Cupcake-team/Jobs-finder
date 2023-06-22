@@ -7,6 +7,8 @@
     <color name="accent">#14FFFFFF</color>
     <color name="cards">#222222</color>
     <color name="blue_300">#303843</color>
+    <color name="white">#212121</color>
+
     <!-- Text colors -->
 
     <color name="surface">#222222</color>
@@ -19,7 +21,22 @@
     <color name="accent_cyan">#303738</color>
     <color name="accent_orange">#3D4433</color>
 
+    <color name="icon_toolbar_color">#FFFFFF</color>
+    <color name="expanded_chip_color">@color/surface</color>
+    <color name="expanded_chip_arrow_color">#61FFFFFF</color>
+    <color name="tab_layout_color">@color/blue_300</color>
+    <color name="chip_color">@color/blue_300</color>
+
+    <color name="hover">#0C0C0C</color>
+
+    <color name="cancel_color">@color/white</color>
     <color name="chip_color_and_tab_layout_color">#303843</color>
     <color name="boarder">#14FFFFFF</color>
+
+    <color name="icon_color">#656565</color>
+    <color name="icon_primary">#E1E1E1</color>
+
+    <color name="bottom_sheet_background">#0A0A0A</color>
+
 
 </resources>

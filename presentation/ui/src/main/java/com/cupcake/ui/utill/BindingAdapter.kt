@@ -1,6 +1,7 @@
 package com.cupcake.ui.utill
 
 
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.widget.Button
@@ -12,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
@@ -103,3 +105,19 @@ fun hideTextOnLoading(button: Button, text: String, state: Boolean) {
     } else
         button.text = text
 }
+
+@BindingAdapter("setIsSavedIcon")
+fun setIsSavedIcon(textView: TextView, isSaved: Boolean?) {
+    val drawable: Drawable? = if (isSaved == true) {
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_saved)
+    } else {
+        ContextCompat.getDrawable(textView.context, R.drawable.ic_save)
+    }
+    textView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null)
+}
+
+@BindingAdapter("dismissSwipeRefreshIf")
+fun dismissSwipeRefreshIf(swipeRefreshLayout: SwipeRefreshLayout, dismiss: Boolean) {
+    swipeRefreshLayout.isRefreshing = dismiss
+}
+

@@ -11,6 +11,7 @@ android {
     defaultConfig {
         minSdk = ConfigurationData.MIN_SDK_VERSION
 
+
         testInstrumentationRunner = ConfigurationData.TEST_INSTRUMENTATION_RUNNER
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -19,8 +20,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -40,7 +40,12 @@ dependencies {
     androidTestImplementation(DependencyProject.junitExtension)
     androidTestImplementation(DependencyProject.espresso)
 
+
     implementation(DependencyProject.hilt)
     kapt(DependencyProject.hiltCompiler)
     implementation(DependencyProject.dataStore)
+    implementation(DependencyProject.roomRuntime)
+    annotationProcessor(DependencyProject.roomCompiler)
+    kapt(DependencyProject.room)
+
 }

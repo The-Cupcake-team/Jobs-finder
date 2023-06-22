@@ -1,12 +1,13 @@
 package com.cupcake.repository
 
 import android.util.Log
+import com.cupcake.jobsfinder.local.daos.JobFinderDao
+import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.*
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
-import com.cupcake.remote.response.job.JobDto
 import com.cupcake.repository.mapper.toJob
-import com.cupcake.repository.mapper.toJobWithJobTitle
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
 import repo.JobFinderRepository
 import retrofit2.Response
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 
 class JobFinderRepositoryImpl @Inject constructor(
-    private val api: JobApiService
+    private val api: JobApiService,
+    private val jobFinderDao: JobFinderDao
 ) : JobFinderRepository {
 
 
@@ -84,19 +86,22 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun createJob(jobInfo: Job): Boolean {
         val response = api.createJob(
-            jobInfo.jobTitleId,
+            jobInfo.jobTitle.id?.toInt(),
             jobInfo.company,
             jobInfo.workType,
             jobInfo.jobLocation,
             jobInfo.jobType,
             jobInfo.jobDescription,
-            jobInfo.jobSalary
+            jobInfo.jobSalary.maxSalary,
+            jobInfo.jobSalary.minSalary,
+            jobInfo.jobExperience,
+            jobInfo.education
         )
         return response.isSuccessful
     }
 
-    override suspend fun getJobs(): List<JobWithTitle> {
-        return wrapResponseWithErrorHandler { api.getJobs() }.map { it.toJobWithJobTitle() }
+    override suspend fun getJobs(): List<Job> {
+        return wrapResponseWithErrorHandler { api.getJobs() }.map { it.toJob() }
     }
 
     override suspend fun getAllJobTitles(): List<JobTitle> {
@@ -105,6 +110,21 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun getJobById(jobId: String): Job {
         return wrapResponseWithErrorHandler { api.getJobById(jobId) }.toJob()
+    }
+
+    override suspend fun insertJob(job: Job) {
+        val jobEntity = job.toJobsEntity()
+        jobFinderDao.insertJob(jobEntity)
+    }
+
+    override suspend fun deleteJob(job: Job) {
+        val jobEntity = job.toJobsEntity()
+        jobFinderDao.deleteSavedJob(jobEntity)
+    }
+
+    override suspend fun getSavedJobById(id: String): Job? {
+        val jobEntity: JobsEntity? = jobFinderDao.getJopById(id)
+        return jobEntity?.toJob()
     }
 
 
