@@ -1,4 +1,4 @@
-package com.cupcake.usecase.login
+package com.cupcake.usecase.validation
 
 import javax.inject.Inject
 
