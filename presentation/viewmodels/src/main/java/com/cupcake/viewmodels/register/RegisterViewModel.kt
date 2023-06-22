@@ -1,7 +1,6 @@
 package com.cupcake.viewmodels.register
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.models.ErrorType
 import com.cupcake.models.User
 import com.cupcake.usecase.register.RegisterUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
@@ -43,153 +42,83 @@ class RegisterViewModel @Inject constructor(
     }
 
     private fun onRegisterError(error: BaseErrorUiState) {
-        updateState { it.copy(isLoading = false, error = error) }
-        viewModelScope.launch { _event.emit(RegisterEvent.ShowErrorMessage(error.errorCode)) }
+        when (error) {
+            is BaseErrorUiState.InvalidFieldConfirmedPassword -> {
+                updateState {
+                    it.copy(
+                        isLoading = false,
+                        confirmedPasswordError = error.errorCode,
+                        isConfirmedPasswordValid = false
+                    )
+                }
+            }
+
+            is BaseErrorUiState.InvalidFieldEmail -> {
+                updateState {
+                    it.copy(
+                        isLoading = false,
+                        emailError = error.errorCode,
+                        isEmailValid = false
+                    )
+                }
+            }
+
+            is BaseErrorUiState.InvalidFieldFullName -> {
+                updateState {
+                    it.copy(
+                        isLoading = false,
+                        fullNameError = error.errorCode,
+                        isFullNameValid = false
+                    )
+                }
+            }
+
+            is BaseErrorUiState.InvalidFieldPassword -> {
+                updateState {
+                    it.copy(
+                        isLoading = false,
+                        passwordError = error.errorCode,
+                        isPasswordValid = false
+                    )
+                }
+            }
+
+            is BaseErrorUiState.InvalidFieldUserName -> {
+                updateState {
+                    it.copy(
+                        isLoading = false,
+                        userNameError = error.errorCode,
+                        isUserNameValid = false
+                    )
+                }
+            }
+
+            else -> {
+                updateState { it.copy(isLoading = false, error = error) }
+                viewModelScope.launch { _event.emit(RegisterEvent.ShowErrorMessage(error.toString())) }
+            }
+        }
+
     }
 
     fun onFullNameChange(fullName: String) {
-        viewModelScope.launch {
-            try {
-                updateState {
-                    it.copy(
-                        fullName = fullName,
-                        fullNameError = "",
-                        isFullNameValid = true
-                    )
-                }
-                registerUseCase(
-                    fullName,
-                    _state.value.userName,
-                    _state.value.email,
-                    _state.value.password,
-                    _state.value.confirmedPassword
-                )
-            } catch (e: ErrorType) {
-                updateState {
-                    it.copy(
-                        fullName = fullName,
-                        fullNameError = (e as? ErrorType.InvalidFieldFullName)?.message ?: "",
-                        isFullNameValid = e !is ErrorType.InvalidFieldFullName
-                    )
-                }
-            }
-        }
+        updateState { it.copy(fullName = fullName) }
     }
 
     fun onUserNameChange(userName: String) {
-        viewModelScope.launch {
-            try {
-                updateState {
-                    it.copy(
-                        userName = userName,
-                        userNameError = "",
-                        isUserNameValid = true
-                    )
-                }
-                registerUseCase(
-                    _state.value.fullName,
-                    userName,
-                    _state.value.email,
-                    _state.value.password,
-                    _state.value.confirmedPassword
-                )
-            } catch (e: ErrorType) {
-                updateState {
-                    it.copy(
-                        userName = userName,
-                        userNameError = (e as? ErrorType.InvalidFieldUserName)?.message ?: "",
-                        isUserNameValid = e !is ErrorType.InvalidFieldUserName
-                    )
-                }
-            }
-        }
+        updateState { it.copy(userName = userName) }
     }
 
     fun onEmailChange(email: String) {
-        viewModelScope.launch {
-            try {
-                updateState {
-                    it.copy(
-                        email = email,
-                        emailError = "",
-                        isEmailValid = true
-                    )
-                }
-                registerUseCase(
-                    _state.value.fullName,
-                    _state.value.userName,
-                    email,
-                    _state.value.password,
-                    _state.value.confirmedPassword
-                )
-            } catch (e: ErrorType) {
-                updateState {
-                    it.copy(
-                        email = email,
-                        emailError = (e as? ErrorType.InvalidFieldEmail)?.message ?: "",
-                        isEmailValid= e !is ErrorType.InvalidFieldEmail
-                    )
-                }
-            }
-        }
+        updateState { it.copy(email = email) }
     }
 
     fun onPasswordChange(password: String) {
-        viewModelScope.launch {
-            try {
-                updateState {
-                    it.copy(
-                        password= password,
-                        passwordError = "",
-                        isPasswordValid = true
-                    )
-                }
-                registerUseCase(
-                    _state.value.fullName,
-                    _state.value.userName,
-                    _state.value.email,
-                    password,
-                    _state.value.confirmedPassword
-                )
-            } catch (e: ErrorType) {
-                updateState {
-                    it.copy(
-                        password = password,
-                        passwordError = (e as? ErrorType.InvalidFieldPassword)?.message ?: "",
-                        isPasswordValid = e !is ErrorType.InvalidFieldPassword
-                    )
-                }
-            }
-        }
+        updateState { it.copy(password = password) }
     }
 
     fun onConfirmPasswordChange(confirmPassword: String) {
-        viewModelScope.launch {
-            try {
-                updateState {
-                    it.copy(
-                        confirmedPassword = confirmPassword,
-                        confirmedPasswordError = "",
-                        isConfirmedPasswordValid = true
-                    )
-                }
-                registerUseCase(
-                    _state.value.fullName,
-                    _state.value.userName,
-                    _state.value.email,
-                    _state.value.password,
-                    confirmPassword
-                )
-            } catch (e: ErrorType) {
-                updateState {
-                    it.copy(
-                        confirmedPassword = confirmPassword,
-                        confirmedPasswordError = (e as? ErrorType.InvalidFieldConfirmedPassword)?.message ?: "",
-                        isConfirmedPasswordValid = e !is ErrorType.InvalidFieldConfirmedPassword
-                    )
-                }
-            }
-        }
+        updateState { it.copy(confirmedPassword = confirmPassword) }
     }
 
     fun onLoginClick() {

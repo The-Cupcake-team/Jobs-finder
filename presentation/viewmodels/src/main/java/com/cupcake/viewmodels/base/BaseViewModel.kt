@@ -40,6 +40,16 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
                 onError(BaseErrorUiState.NoFoundError(error.message.toString()))
             } catch (error: Throwable) {
                 onError(BaseErrorUiState.NoFoundError(error.message.toString()))
+            } catch (error: ErrorType.InvalidFieldFullName) {
+                onError(BaseErrorUiState.InvalidFieldFullName(error.message.toString()))
+            } catch (error : ErrorType.InvalidFieldUserName){
+                onError(BaseErrorUiState.InvalidFieldUserName(error.message.toString()))
+            } catch (error : ErrorType.InvalidFieldPassword){
+                onError(BaseErrorUiState.InvalidFieldPassword(error.message.toString()))
+            } catch (error : ErrorType.InvalidFieldEmail){
+                onError(BaseErrorUiState.InvalidFieldEmail(error.message.toString()))
+            }catch (error : ErrorType.InvalidFieldConfirmedPassword){
+                onError(BaseErrorUiState.InvalidFieldConfirmedPassword(error.message.toString()))
             }
         }
     }

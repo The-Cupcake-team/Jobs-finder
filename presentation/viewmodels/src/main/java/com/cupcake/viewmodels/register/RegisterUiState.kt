@@ -10,11 +10,11 @@ data class RegisterUiState(
     var confirmedPassword: String = "",
 
 
-    val isFullNameValid: Boolean = false,
-    val isUserNameValid: Boolean = false,
-    val isEmailValid: Boolean = false,
-    val isPasswordValid: Boolean = false,
-    val isConfirmedPasswordValid: Boolean = false,
+    val isFullNameValid: Boolean = true,
+    val isUserNameValid: Boolean = true,
+    val isEmailValid: Boolean = true,
+    val isPasswordValid: Boolean = true,
+    val isConfirmedPasswordValid: Boolean = true,
 
 
     val fullNameError: String = "",
