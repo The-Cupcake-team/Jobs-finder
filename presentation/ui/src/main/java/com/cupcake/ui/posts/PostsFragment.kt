@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
@@ -93,7 +94,9 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
     }
     private fun handlePostEvent(event: PostsEvent) {
         when (event) {
-            PostsEvent.OnNotificationClick -> Toast.makeText(context, "Notification", Toast.LENGTH_SHORT).show()
+            PostsEvent.OnNotificationClick -> {
+                findNavController().navigate(PostsFragmentDirections.actionPostsFragmentToNotificationFragment())
+            }
             PostsEvent.OnProfileClick -> Toast.makeText(context, "Profile", Toast.LENGTH_SHORT).show()
             PostsEvent.OnSearchClick -> Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
         }
