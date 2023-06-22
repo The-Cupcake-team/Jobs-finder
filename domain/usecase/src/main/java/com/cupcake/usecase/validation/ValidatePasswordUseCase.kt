@@ -5,19 +5,21 @@ import javax.inject.Inject
 
 
 class ValidatePasswordUseCase @Inject constructor() {
-    operator fun invoke(password: String) {
-        if (password.isEmpty() || password.isBlank()) {
-            throw ErrorType.InvalidFieldPassword(ERROR)
+    operator fun invoke(password: String): ErrorType.InvalidFieldPassword {
+        return if (password.isEmpty() || password.isBlank()) {
+            ErrorType.InvalidFieldPassword(ERROR)
         } else if (password.length < MINIMUM_LENGTH) {
-            throw ErrorType.InvalidFieldPassword(ERROR_LENGTH_SHORT)
+            ErrorType.InvalidFieldPassword(ERROR_LENGTH_SHORT)
         } else if (password.length > MAXIMUM_LENGTH) {
-            throw ErrorType.InvalidFieldPassword(ERROR_LENGTH_LARGE)
+            ErrorType.InvalidFieldPassword(ERROR_LENGTH_LARGE)
         } else if (!password.any { it.isLetter() }) {
-            throw ErrorType.InvalidFieldPassword(ERROR_LETTER)
+            ErrorType.InvalidFieldPassword(ERROR_LETTER)
         } else if (!password.any { it.isDigit() }) {
-            throw ErrorType.InvalidFieldPassword(ERROR_DIGIT)
+            ErrorType.InvalidFieldPassword(ERROR_DIGIT)
         } else if (!password.contains(Regex("[!@\$%*&]"))) {
-            throw ErrorType.InvalidFieldPassword(ERROR_SPECIAL_CHARACTER)
+            ErrorType.InvalidFieldPassword(ERROR_SPECIAL_CHARACTER)
+        } else {
+            ErrorType.InvalidFieldPassword("")
         }
     }
 

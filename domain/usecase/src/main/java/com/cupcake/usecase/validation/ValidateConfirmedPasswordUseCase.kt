@@ -4,11 +4,16 @@ import com.cupcake.models.ErrorType
 import javax.inject.Inject
 
 class ValidateConfirmedPasswordUseCase @Inject constructor() {
-    operator fun invoke(confirmedPassword: String, password: String) {
-        if (confirmedPassword.isBlank() || confirmedPassword.isEmpty()){
-            throw ErrorType.InvalidFieldConfirmedPassword(ERROR)
-        }else if (confirmedPassword != password) {
-            throw ErrorType.InvalidFieldConfirmedPassword(ERROR_NO_MATCHING)
+    operator fun invoke(
+        confirmedPassword: String,
+        password: String
+    ): ErrorType.InvalidFieldConfirmedPassword {
+        return if (confirmedPassword.isBlank() || confirmedPassword.isEmpty()) {
+            ErrorType.InvalidFieldConfirmedPassword(ERROR)
+        } else if (confirmedPassword != password) {
+            ErrorType.InvalidFieldConfirmedPassword(ERROR_NO_MATCHING)
+        } else {
+            ErrorType.InvalidFieldConfirmedPassword("")
         }
     }
 

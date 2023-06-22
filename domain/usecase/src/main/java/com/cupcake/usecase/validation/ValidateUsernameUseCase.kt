@@ -7,15 +7,17 @@ import javax.inject.Inject
 
 class ValidateUsernameUseCase @Inject constructor(
 ) {
-    operator fun invoke(username: String) {
-        if (username.isEmpty() || username.isBlank()) {
-            throw ErrorType.InvalidFieldUserName(ERROR)
+    operator fun invoke(username: String): ErrorType.InvalidFieldUserName {
+        return if (username.isEmpty() || username.isBlank()) {
+             ErrorType.InvalidFieldUserName(ERROR)
         } else if (username.length < MINIMUM_LENGTH) {
-            throw ErrorType.InvalidFieldUserName(ERROR_LENGTH_SHORT)
+             ErrorType.InvalidFieldUserName(ERROR_LENGTH_SHORT)
         } else if (username.length > MAXIMUM_LENGTH) {
-            throw ErrorType.InvalidFieldUserName(ERROR_LENGTH_LARGE)
+             ErrorType.InvalidFieldUserName(ERROR_LENGTH_LARGE)
         } else if (!Regex("^[a-zA-Z\\-]+$").matches(username)) {
-            throw ErrorType.InvalidFieldUserName(ERROR_LETTER)
+             ErrorType.InvalidFieldUserName(ERROR_LETTER)
+        } else {
+             ErrorType.InvalidFieldUserName("")
         }
 
     }

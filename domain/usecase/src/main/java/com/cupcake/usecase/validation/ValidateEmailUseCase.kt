@@ -4,12 +4,14 @@ import com.cupcake.models.ErrorType
 import javax.inject.Inject
 
 class ValidateEmailUseCase @Inject constructor() {
-    operator fun invoke(email: String) {
-        if (email.isBlank() || email.isEmpty()) {
-            throw ErrorType.InvalidFieldEmail(ERROR)
+    operator fun invoke(email: String): ErrorType.InvalidFieldEmail {
+        return if (email.isBlank() || email.isEmpty()) {
+            ErrorType.InvalidFieldEmail(ERROR)
         } /*else if (!REGEX.matches(email)) {
-            throw ErrorType.InvalidFieldEmail(INVALID_EMAIL)
-        }*/
+             ErrorType.InvalidFieldEmail(INVALID_EMAIL)
+        }*/ else {
+            ErrorType.InvalidFieldEmail("")
+        }
     }
 
     companion object {
