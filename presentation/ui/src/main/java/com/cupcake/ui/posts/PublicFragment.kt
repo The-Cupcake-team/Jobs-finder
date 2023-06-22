@@ -11,7 +11,7 @@ import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentPublicBinding
 import com.cupcake.viewmodels.posts.PostItemUIState
-import com.cupcake.viewmodels.posts.PostsEvent
+import com.cupcake.viewmodels.posts.SpecialPostsEvent
 import com.cupcake.viewmodels.posts.PublicPostsViewModel
 import kotlinx.coroutines.launch
 
@@ -44,11 +44,11 @@ class PublicFragment : BaseFragment<FragmentPublicBinding, PublicPostsViewModel>
         }
     }
 
-    private fun handlePostEvent(event: PostsEvent) {
+    private fun handlePostEvent(event: SpecialPostsEvent) {
         when (event) {
-            is PostsEvent.PostCommentClick -> navigateToCommentsFragment(event.id)
-            is PostsEvent.PostShareClick -> sharePost()
-            is PostsEvent.PostOptionsClick -> showBottomSheetDialog(event.model)
+            is SpecialPostsEvent.PostCommentClick -> navigateToCommentsFragment(event.id)
+            is SpecialPostsEvent.PostShareClick -> sharePost()
+            is SpecialPostsEvent.PostOptionsClick -> showBottomSheetDialog(event.model)
         }
     }
 
