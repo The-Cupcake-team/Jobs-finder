@@ -66,7 +66,7 @@
     <string name="public_state">public</string>
     <string name="post_hint">What\'s on your mind ?</string>
     <string name="camera">Camera</string>
-    <string name="video_photo">Video/Photo</string>
+    <string name="video_photo">Photo</string>
     <string name="personal_name">Bilal Alkhatib</string>
     <string name="jop_title">Android Developer</string>
     <string name="created_at">3hours ago</string>
