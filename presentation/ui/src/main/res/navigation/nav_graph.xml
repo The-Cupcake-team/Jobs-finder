@@ -81,7 +81,7 @@
             android:id="@+id/action_registerFragment_to_postsFragment"
             app:destination="@id/postsFragment" />
     </fragment>
-    <fragment
+
    <fragment
         android:id="@+id/commentsFragment"
         android:name="com.cupcake.ui.comment.CommentsFragment"

@@ -31,7 +31,7 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
                 val result = callee()
                 onSuccess(result)
             } catch (error: ErrorType.Network) {
-                onError(BaseErrorUiState.Disconnected(error.message.toString()))
+                onError(BaseErrorUiState.Disconnected(error.message.toString())) //500
             } catch (error: ErrorType) {
                 onError(BaseErrorUiState.UnAuthorized(error.message.toString()))
             } catch (error: ErrorType.Server) {

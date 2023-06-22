@@ -5,7 +5,6 @@ import com.cupcake.models.Job
 import com.cupcake.models.JobSalary
 import com.cupcake.models.JobTitle
 import com.cupcake.viewmodels.base.BaseErrorUiState
-import com.cupcake.viewmodels.job_details.JobDetailsUiState
 import kotlinx.parcelize.Parcelize
 
 
@@ -40,19 +39,19 @@ data class JobUiState(
 
 
 data class JobTitleUiState(
-    val id: String = "",
+    val id: Int = 0,
     val title: String = ""
 )
 
 fun JobTitle.toJobTitleUiState() = JobTitleUiState(
-    id = this.id ?: "",
+    id = id ?: -1,
     title = this.title ?: ""
 )
 
 fun JobUiState.toJob(): Job{
     return Job(
         id = id,
-        jobTitle = JobTitle(title = title, id = id),
+        jobTitle = JobTitle(title = title, id = id.toInt()),
         company = companyName,
         createdAt = createdAt,
         workType = detailsChip[0],
@@ -64,33 +63,23 @@ fun JobUiState.toJob(): Job{
         education = education
     )
 }
+
 data class JobDetailUiState(
     val job: JobsDetailsUiState,
     val isLoading: Boolean = false,
     val error: List<String> = emptyList()
-)
-
-data class JobsDetailsUiState(
-    val image: String = "",
-    val title: String = "",
-    val companyName: String = "",
-    val workType: String = "",
-    val jobType: String = "",
-    val location: String = "",
-    val salary: String = "",
-    val createdAt: Long = 0,
-    val jobDescription: String = ""
-)
-
-
-fun Job.toJobUiState() = JobUiState(
-    id = id,
-    image = "https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://coursera-course-photos.s3.amazonaws.com/e3/f27630d13511e88dd241e68ded0cea/K_logo_800x800.png?auto=format%2Ccompress&dpr=1",
-    title = this.jobTitle.title ?: "",
-    companyName = this.company,
-    detailsChip = listOf(this.workType, this.jobType),
-    location = this.jobLocation,
-    salary = this.jobSalary.toString()
-)
+) {
+    data class JobsDetailsUiState(
+        val image: String = "",
+        val title: String = "",
+        val companyName: String = "",
+        val workType: String = "",
+        val jobType: String = "",
+        val location: String = "",
+        val salary: String = "",
+        val createdAt: Long = 0,
+        val jobDescription: String = ""
+    )
+}
 
 

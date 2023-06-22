@@ -1,13 +1,16 @@
 package com.cupcake.viewmodels.create_job
 
+
 import androidx.lifecycle.viewModelScope
-import com.cupcake.models.Job
-import com.cupcake.models.JobSalary
-import com.cupcake.models.JobTitle
 import com.cupcake.usecase.CreateJobUseCase
+import com.cupcake.usecase.GetAllJobTitleUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
+import com.cupcake.viewmodels.jobs.JobTitleUiState
+import com.cupcake.viewmodels.jobs.toJobTitleUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
@@ -16,36 +19,61 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateJobViewModel @Inject constructor(
-    private val createJob: CreateJobUseCase
-) : BaseViewModel<CreateJobUiState>(CreateJobUiState()) {
+    private val createJob: CreateJobUseCase,
+    private val jobTitles: GetAllJobTitleUseCase
+) : BaseViewModel<CreateJobUiState>(CreateJobUiState()), CreateJobInteractionListener {
 
     private val _event = MutableSharedFlow<CreateJobEvent>()
     val event = _event.asSharedFlow()
 
+    private var searchJobTitle: Job? = null
     fun createJob() {
         _state.update { it.copy(isLoading = true) }
-        tryToExecute(
-            {
-                createJob(
-                    Job(
-                        id = "",
-                        jobTitle = JobTitle(_state.value.jobFormUiState.jobTitleUIState.id, _state.value.jobFormUiState.jobTitleUIState.title),
-                        company = _state.value.jobFormUiState.company,
-                        workType = _state.value.jobFormUiState.workType,
-                        jobType = _state.value.jobFormUiState.jobType,
-                        jobLocation = _state.value.jobFormUiState.jobLocation,
-                        jobDescription = _state.value.jobFormUiState.jobDescription,
-                        jobSalary = JobSalary(maxSalary = _state.value.jobFormUiState.salary.maxSalary, minSalary = _state.value.jobFormUiState.salary.minSalary),
-                        createdAt = 1111111111,
-                        jobExperience = _state.value.jobFormUiState.experience,
-                        education = _state.value.jobFormUiState.education
-                    )
-                )
-            },
-            ::onCreateJobSuccess,
-            ::onCreateJobError
-        )
+//        tryToExecute(
+//            {
+//                createJob(
+////                    Job(
+////                        id = "",
+////                        jobTitle = JobTitle(_state.value.jobFormUiState.jobTitleUIState.id, _state.value.jobFormUiState.jobTitleUIState.title),
+////                        company = _state.value.jobFormUiState.company,
+////                        workType = _state.value.jobFormUiState.workType,
+////                        jobType = _state.value.jobFormUiState.jobType,
+////                        jobLocation = _state.value.jobFormUiState.jobLocation,
+////                        jobDescription = _state.value.jobFormUiState.jobDescription,
+////                        jobSalary = JobSalary(maxSalary = _state.value.jobFormUiState.salary.maxSalary, minSalary = _state.value.jobFormUiState.salary.minSalary),
+////                        createdAt = 1111111111,
+////                        jobExperience = _state.value.jobFormUiState.experience,
+////                        education = _state.value.jobFormUiState.education
+////                    )
+//                )
+//            },
+//            ::onCreateJobSuccess,
+//            ::onCreateJobError
+//        )
     }
+
+
+//    fun createJob() {
+//        tryToExecute(
+//            {
+//                createJob(
+//                    Job(
+//                        id = "",
+//                        jobTitleId = jobTitleMap[_state.value.jobFormUiState.jobTitleId]!!,
+//                        company = _state.value.jobFormUiState.company,
+//                        workType = _state.value.jobFormUiState.workType,
+//                        jobType = _state.value.jobFormUiState.jobType,
+//                        jobLocation = _state.value.jobFormUiState.jobLocation,
+//                        jobDescription = _state.value.jobFormUiState.jobDescription,
+//                        jobSalary = _state.value.jobFormUiState.salary,
+//                        createdAt = 1111111111
+//                    )
+//                )
+//            },
+//            ::onCreateJobSuccess,
+//            ::onCreateJobError
+//        )
+//    }
 
     private fun onCreateJobSuccess(result: Boolean) {
         _state.update { it.copy(isLoading = false) }
@@ -71,34 +99,46 @@ class CreateJobViewModel @Inject constructor(
             is CreateJobEvent.HeaderButtonClicked -> {
                 onHeaderButtonClicked(event.index)
             }
+
         }
     }
 
-    private fun onHeaderButtonClicked(index: Int) {
+    override fun onHeaderButtonClicked(index: Int) {
         viewModelScope.launch {
             _event.emit(CreateJobEvent.HeaderButtonClicked(index))
         }
     }
 
-    private fun onChangeIndexViewPager(index: Int) {
+    override fun onNextClicked(state: Int) {
+        viewModelScope.launch {
+            _event.emit(CreateJobEvent.PageScrolled(state))
+        }
+    }
+
+    fun onChangeIndexViewPager(index: Int) {
+        viewModelScope.launch {
+            _event.emit(CreateJobEvent.PageScrolled(index))
+        }
         when (index) {
-            0 -> {
-                _state.update {
-                    it.copy(
-                        formNumber = "1 of 2",
-                        buttonText = "Next"
-                    )
-                }
+            PAGE_ONE -> _state.update { it.copy(buttonText = "Next", progressStep = 1) }
+            PAGE_TWO -> _state.update { it.copy(buttonText = "Post", progressStep = 0) }
+        }
+    }
+
+    fun onBack(index: Int) {
+        viewModelScope.launch {
+
+            if (index == 1) {
+            } else {
+                _event.emit(CreateJobEvent.PageScrolled(index))
             }
 
-            1 -> {
-                _state.update {
-                    it.copy(
-                        formNumber = "2 of 2",
-                        buttonText = "Post"
-                    )
-                }
-            }
+        }
+        when (index) {
+            PAGE_ONE -> _state.update { it.copy(buttonText = "Next", progressStep = 1) }
+            PAGE_TWO -> _state.update { it.copy(buttonText = "Post", progressStep = 0) }
+
+
         }
     }
 
@@ -143,6 +183,7 @@ class CreateJobViewModel @Inject constructor(
         }
     }
 
+
     fun onEducationChange(text: CharSequence) {
         _state.update {
             it.copy(
@@ -153,23 +194,63 @@ class CreateJobViewModel @Inject constructor(
         }
     }
 
-    fun onExperienceRequirementChange(text: CharSequence) {
+
+    fun onJobTitleChange(query: CharSequence) {
+        searchJobTitle?.cancel()
+        searchJobTitle = viewModelScope.launch {
+            delay(200)
+            tryToExecute(
+                { jobTitles(query.toString()).map { it.toJobTitleUiState() } },
+                ::onGetJobTitleSuccess,
+                ::onError,
+            )
+        }
+    }
+
+
+    private fun onGetJobTitleSuccess(jobTitles: List<JobTitleUiState>) {
         _state.update {
             it.copy(
+                isLoading = false,
                 jobFormUiState = it.jobFormUiState.copy(
-                    experienceRequirement = text.toString()
+                    jobTitles = jobTitles
                 )
             )
         }
     }
-    fun onSkillsChange(text: CharSequence) {
+
+    private fun onError(error: BaseErrorUiState) {
+        _state.update { it.copy(isLoading = false, error = error) }
+    }
+
+    fun onExperienceRequirementChange(text: CharSequence) {
+        _state.update { it.copy(jobFormUiState = it.jobFormUiState.copy(experienceRequirement = text.toString())) }
+    }
+
+    fun onSkillsChange(skills: List<String>) {
+        _state.update { it.copy(jobFormUiState = it.jobFormUiState.copy(
+            skills = skills
+        )) }
+    }
+
+
+
+    fun onChangeRangSalary(values: List<Float>) {
         _state.update {
             it.copy(
                 jobFormUiState = it.jobFormUiState.copy(
-                    skills = text.toString()
+                    salary = it.jobFormUiState.salary.copy(
+                        minSalary = values.first().toInt().toString(),
+                        maxSalary = values.last().toInt().toString()
+                    )
                 )
             )
         }
+    }
+
+    private companion object {
+        const val PAGE_ONE = 0
+        const val PAGE_TWO = 1
     }
 
 }
