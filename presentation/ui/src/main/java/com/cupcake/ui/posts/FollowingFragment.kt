@@ -12,7 +12,7 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentFollowingBinding
 import com.cupcake.viewmodels.posts.FollowingPostsViewModel
 import com.cupcake.viewmodels.posts.PostItemUIState
-import com.cupcake.viewmodels.posts.PostsEvent
+import com.cupcake.viewmodels.posts.SpecialPostsEvent
 import kotlinx.coroutines.launch
 
 class FollowingFragment : BaseFragment<FragmentFollowingBinding, FollowingPostsViewModel>(
@@ -44,11 +44,11 @@ class FollowingFragment : BaseFragment<FragmentFollowingBinding, FollowingPostsV
         }
     }
 
-    private fun handlePostEvent(event: PostsEvent) {
+    private fun handlePostEvent(event: SpecialPostsEvent) {
         when (event) {
-            is PostsEvent.PostCommentClick -> navigateToCommentsFragment("190d6e52-3ea5-4f1a-ad25-4487585b2ae5")
-            is PostsEvent.PostShareClick -> sharePost()
-            is PostsEvent.PostOptionsClick -> showBottomSheetDialog(event.model)
+            is SpecialPostsEvent.PostCommentClick -> navigateToCommentsFragment("190d6e52-3ea5-4f1a-ad25-4487585b2ae5")
+            is SpecialPostsEvent.PostShareClick -> sharePost()
+            is SpecialPostsEvent.PostOptionsClick -> showBottomSheetDialog(event.model)
         }
     }
 

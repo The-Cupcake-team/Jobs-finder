@@ -16,9 +16,9 @@ import javax.inject.Inject
 @HiltViewModel
 class FollowingPostsViewModel @Inject constructor(
     private val getFollowingPostsUseCase: GetFollowingPostsUseCase
-) : BaseViewModel<PostsUIState>(PostsUIState()), PostInteractionListener {
+) : BaseViewModel<PostsUIState>(PostsUIState()), SpecialPostInteractionListener {
 
-    private val _postEvent = MutableSharedFlow<Event<PostsEvent>>()
+    private val _postEvent = MutableSharedFlow<Event<SpecialPostsEvent>>()
     val postEvent = _postEvent.asSharedFlow()
 
     init {
@@ -65,7 +65,7 @@ class FollowingPostsViewModel @Inject constructor(
 
     override fun onCommentClick(id: String) {
         viewModelScope.launch {
-            _postEvent.emit(Event(PostsEvent.PostCommentClick(id)))
+            _postEvent.emit(Event(SpecialPostsEvent.PostCommentClick(id)))
         }
     }
 
@@ -85,13 +85,13 @@ class FollowingPostsViewModel @Inject constructor(
 
     override fun onClickShare(id: String) {
         viewModelScope.launch {
-            _postEvent.emit(Event(PostsEvent.PostShareClick(id)))
+            _postEvent.emit(Event(SpecialPostsEvent.PostShareClick(id)))
         }
     }
 
     override fun onOptionsClick(model: PostItemUIState) {
         viewModelScope.launch {
-            _postEvent.emit(Event(PostsEvent.PostOptionsClick(model)))
+            _postEvent.emit(Event(SpecialPostsEvent.PostOptionsClick(model)))
         }
     }
 
