@@ -1,15 +1,13 @@
 package com.cupcake.viewmodels.job_search
 
-import android.os.Parcelable
 import com.cupcake.models.Job
 import com.cupcake.viewmodels.base.BaseErrorUiState
-import kotlinx.parcelize.Parcelize
 
 data class JopSearchUIState(
     var searchInput: String = "",
     val searchResult: List<JobItemUiState> = emptyList(),
     val jobFilterUIState: JobFilterUIState = JobFilterUIState(),
-    val isLoading: Boolean = true,
+    val isLoading: Boolean = false,
     val error: BaseErrorUiState? = null,
 )
 

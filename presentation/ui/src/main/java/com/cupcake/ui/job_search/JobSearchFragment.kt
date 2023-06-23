@@ -10,10 +10,8 @@ import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.BottomSheetJobsSearchFilterBinding
 import com.cupcake.ui.databinding.FragmentJobSearchBinding
-import com.cupcake.ui.jobs.adapter.JobsAdapter
 import com.cupcake.viewmodels.job_search.JobSearchViewModel
 import com.cupcake.viewmodels.job_search.SearchJobEvent
-import com.cupcake.viewmodels.jobs.JobsEvent
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,6 +55,7 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
         bottomSheetBinding = BottomSheetJobsSearchFilterBinding.inflate(layoutInflater)
         dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(bottomSheetBinding.root)
+        dialog.setCancelable(false)
         bottomSheetBinding.setVariable(BR.viewModel, viewModel)
     }
 
@@ -64,10 +63,12 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
          lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
-                    is SearchJobEvent.JobCardClick -> dialog.dismiss()
+                    is SearchJobEvent.JobCardClick -> {}
                     is SearchJobEvent.OnApplyButtonClicked -> dialog.dismiss()
                     is SearchJobEvent.OnFilterClicked -> dialog.show()
-                    is SearchJobEvent.OnMoreOptionClickListener -> dialog.dismiss()
+                    is SearchJobEvent.OnMoreOptionClickListener -> {
+
+                    }
                 }
             }
         }
