@@ -1,13 +1,10 @@
 package com.cupcake.viewmodels.job_search
 
-import android.app.job.JobWorkItem
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.JobSearchFilterUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
-import com.cupcake.viewmodels.create_job.WorkType
-import com.cupcake.viewmodels.jobs.JobsViewModel_HiltModules
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -25,27 +22,27 @@ class JobSearchViewModel @Inject constructor(
     private val _salaryState: MutableStateFlow<SalaryUIState> =  MutableStateFlow(SalaryUIState())
 
     private fun getJobs() {
+        _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
-            _state.debounce(1500).collect{itemState ->
                 tryToExecute(
                     {jobSearchFilterUseCase(
-                        searchTitle = itemState.searchInput,
-                        location = itemState.jobFilterUIState.location,
-                        jobType = itemState.jobFilterUIState.jobType,
-                        workType = itemState.jobFilterUIState.workType,
-                        experienceLevel = itemState.jobFilterUIState.experience,
-                        salaryRange = Pair(itemState.jobFilterUIState.salary.minSalary.toDouble(),
-                            itemState.jobFilterUIState.salary.maxSalary.toDouble())
+                        searchTitle = _state.value.searchInput,
+                        location = _state.value.jobFilterUIState.location,
+                        jobType = _state.value.jobFilterUIState.jobType,
+                        workType = _state.value.jobFilterUIState.workType,
+                        experienceLevel = _state.value.jobFilterUIState.experience,
+                        salaryRange = Pair(_state.value.jobFilterUIState.salary.minSalary.toDouble(),
+                            _state.value.jobFilterUIState.salary.maxSalary.toDouble())
                     ).map { it.toJobItemUiState() }},
                     ::onSearchJobSuccess,
                     ::onError
                 )
-            }
+
         }
     }
 
     private fun onSearchJobSuccess(jobs: List<JobItemUiState>) {
-        _state.update { it.copy(searchResult = jobs, isLoading = false) }
+        _state.update { it.copy(searchResult = jobs, isLoading = false, error = null) }
         Log.v("hassanSearch", _state.value.toString())
     }
 
@@ -105,6 +102,10 @@ class JobSearchViewModel @Inject constructor(
         viewModelScope.launch {
             _event.emit(SearchJobEvent.OnMoreOptionClickListener(model))
         }
+    }
+
+    fun onRetryClicked(){
+        onApplyClicked()
     }
 
 }
