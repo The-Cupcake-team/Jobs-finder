@@ -11,7 +11,7 @@
 
         <variable
             name="listener"
-            type="com.cupcake.viewmodels.posts.PostInteractionListener" />
+            type="com.cupcake.viewmodels.posts.SpecialPostInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -31,7 +31,7 @@
                 style="@style/personalImageStyle"
                 android:layout_width="@dimen/profile_image_size"
                 android:layout_height="@dimen/profile_image_size"
-                android:src="@drawable/test_personal_image"
+                app:loadImage="@{item.profileImage}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewCreatedAt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +52,7 @@
                 style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/jop_title"
+                android:text="@{item.jobTitle}"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintStart_toStartOf="@+id/textViewPersonName"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPersonName" />
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                android:onClick="@{() -> listener.onOptionsClick()}"
+                android:onClick="@{() -> listener.onOptionsClick(item)}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewPersonName"
@@ -87,8 +87,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_normal"
+                android:paddingBottom="@dimen/spacing_small"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt"
+                app:layout_constraintBottom_toTopOf="@id/imageViewPostImage"
                 app:postFullText="@{item.description}"
                 app:postStartText="@{item.description}"
                 />
@@ -100,6 +102,7 @@
                 android:layout_marginBottom="@dimen/spacing_normal"
                 app:layout_constraintDimensionRatio="5:4"
                 android:scaleType="centerCrop"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/imageViewLike"
                 app:layout_constraintTop_toBottomOf="@+id/textViewContent"
                 tools:srcCompat="@drawable/test_post_image"

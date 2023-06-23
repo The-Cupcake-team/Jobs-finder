@@ -50,7 +50,12 @@ import com.cupcake.viewmodels.jobs.JobTitleUiState
 
 @BindingAdapter(value = ["app:loadImage"])
 fun loadImageCoil(image: ImageView, url: String?) {
-    image.load(url)
+    if ( url!!.isEmpty() ){
+        image.visibility = View.GONE
+    }else {
+        image.load(url)
+        image.visibility = View.VISIBLE
+    }
 }
 
 @BindingAdapter("setIcons")

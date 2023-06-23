@@ -13,7 +13,9 @@ import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toJobTitle
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
+import com.cupcake.repository.mapper.toPostsEntity
 import repo.JobFinderRepository
 import retrofit2.Response
 import javax.inject.Inject
@@ -144,24 +146,26 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun getFollowingPosts(): List<Post> {
         val fakePosts = listOf(
-            Post("1", System.currentTimeMillis().toString(), "One Piece 🏴‍☠️❤️‍🔥", "Sajjadio"),
-            Post("2", System.currentTimeMillis().toString(), "Sabahooooooo 👋", "amory"),
-            Post("4", System.currentTimeMillis().toString(), "here we are go 🤍❤️", "dada"),
-            Post(
-                "5",
-                System.currentTimeMillis().toString(),
-                "MY TEAM IS THE BEST 🧁🔝💖💖💖",
-                "ahmed mousa"
-            ),
-            Post(
-                "6",
-                System.currentTimeMillis().toString(),
-                "MY TEAM MATES ARE AWESOME 😍🤩💖",
-                "kaido"
-            ),
-            Post("7", System.currentTimeMillis().toString(), "FK you haters 🫵😎✊", "BK")
+            Post("1", "2023-06-23T13:56:42.584743", "One Piece 🏴‍☠️❤️‍🔥", "Sajjadio" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" ),
+            Post("2", "2023-06-23T13:56:42.584743", "Sabahooooooo 👋", "amory" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"),
+            Post("4", "2023-06-23T13:56:42.584743", "here we are go 🤍❤️", "dada" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80","Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"),
+            Post("5", "2023-06-23T13:56:42.584743", "MY TEAM IS THE BEST 🧁🔝💖💖💖", "ahmed mousa" ,"https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "home less" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"),
+            Post("6", "2023-06-23T13:56:42.584743", "MY TEAM MATES ARE AWESOME 😍🤩💖", "kaido" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"),
+            Post("7", "2023-06-23T13:56:42.584743", "The Chance 😎", "BK" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg")
         )
         return fakePosts
+    }
+
+    override suspend fun insertPost(post: Post) {
+        jobFinderDao.insertPost(post.toPostsEntity())
+    }
+
+    override suspend fun deletePost(post: Post) {
+        jobFinderDao.deleteSavedPost(post.toPostsEntity())
+    }
+
+    override suspend fun getSavedPostById(id: String): Post? {
+       return jobFinderDao.getPostById(id)?.toPost()
     }
 
     override suspend fun createPost(content: String): Post {
@@ -171,7 +175,6 @@ class JobFinderRepositoryImpl @Inject constructor(
     override suspend fun getPostById(id: String): Post {
         return wrapResponseWithErrorHandler { api.getPostById(id) }.toPost()
     }
-
     //endregion
     private suspend fun <T> wrapResponseWithErrorHandler(
         function: suspend () -> Response<BaseResponse<T>>

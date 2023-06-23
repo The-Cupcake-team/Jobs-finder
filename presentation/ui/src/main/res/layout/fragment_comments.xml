@@ -32,15 +32,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/comments_title" />
 
-            <ImageButton
-                android:id="@+id/image_view_saved_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:background="@color/background"
-                android:padding="@dimen/spacing_normal"
-                android:src="@drawable/ic_like_v_two" />
         </androidx.appcompat.widget.Toolbar>
 
 
@@ -52,7 +43,7 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
             app:showWhenIf="@{viewModel.state.isSuccess}"
-            android:src="@drawable/test_personal_image"
+            app:loadImage="@{viewModel.state.post.profileImage}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tool_bar"
             app:shapeAppearanceOverlay="@style/circleImageView" />
@@ -77,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_xxsmall"
             android:layout_marginEnd="@dimen/spacing_medium"
-            android:text="@string/jop_title"
+            android:text="@{viewModel.state.post.jobTitle}"
             app:showWhenIf="@{viewModel.state.isSuccess}"
             android:textColor="@color/color_text_secondary"
             app:layout_constraintEnd_toEndOf="parent"
@@ -108,7 +99,6 @@
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
             app:showWhenIf="@{viewModel.state.isSuccess}"
-            app:convertTime="@{viewModel.state.post.createAt}"
             android:textColor="@color/color_text_tertiary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_content_post"

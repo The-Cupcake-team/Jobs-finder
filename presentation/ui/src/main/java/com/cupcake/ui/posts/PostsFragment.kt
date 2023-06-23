@@ -2,7 +2,12 @@ package com.cupcake.ui.posts
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
@@ -10,10 +15,11 @@ import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.base.ViewPagerAdapter
 import com.cupcake.ui.databinding.FragmentPostsBinding
+import com.cupcake.viewmodels.posts.PostsEvent
 import com.cupcake.viewmodels.posts.PostsViewModel
-
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.launch
 import kotlin.math.abs
 
 class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
@@ -24,6 +30,7 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setPostsViewPagerAdapter()
+        observePostEvents()
     }
 
     private fun setPostsViewPagerAdapter() {
@@ -74,6 +81,26 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
             }
         }
         viewPager.setPageTransformer(transformer)
+    }
+    private fun observePostEvents() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.postEvent.collect { postEvent ->
+                    postEvent.getContentIfNotHandled()?.let { event ->
+                        handlePostEvent(event)
+                    }
+                }
+            }
+        }
+    }
+    private fun handlePostEvent(event: PostsEvent) {
+        when (event) {
+            PostsEvent.OnNotificationClick -> {
+                findNavController().navigate(PostsFragmentDirections.actionPostsFragmentToNotificationFragment())
+            }
+            PostsEvent.OnProfileClick -> Toast.makeText(context, "Profile", Toast.LENGTH_SHORT).show()
+            PostsEvent.OnSearchClick -> Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
+        }
     }
 
     companion object{
