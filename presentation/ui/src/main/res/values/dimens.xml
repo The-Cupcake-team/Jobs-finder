@@ -26,6 +26,7 @@
     <dimen name="card_vertical_height">200dp</dimen>
     <dimen name="card_vertical_width">320dp</dimen>
     <dimen name="card_post_height">364dp</dimen>
+    <dimen name="card_Profile_resume_height">56dp</dimen>
     <dimen name="card_radius">8dp</dimen>
 
     <!--    images-->

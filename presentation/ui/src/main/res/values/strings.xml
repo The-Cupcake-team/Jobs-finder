@@ -132,4 +132,11 @@
     <string name="resizable_text_read_less">Read less</string>
 
     <string name="rang_salary">%s K</string>
+
+
+    <!--    Profile      -->
+    <string name="employment">Employment</string>
+    <string name="languages">Languages</string>
+    <string name="course">Courses</string>
+
 </resources>
