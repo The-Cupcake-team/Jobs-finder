@@ -3,10 +3,12 @@ package com.cupcake.usecase.register
 import com.cupcake.models.ErrorType
 import com.cupcake.models.User
 import repo.AuthenticationRepository
+import repo.JobFinderRepository
 import javax.inject.Inject
 
 class RegisterUseCase @Inject constructor(
     private val authenticationRepository: AuthenticationRepository,
+    private val jobsFinderRepository: JobFinderRepository,
     private val validateRegisterForm: ValidateRegisterFormUseCase
 ) {
 
@@ -29,6 +31,8 @@ class RegisterUseCase @Inject constructor(
             authenticationRepository.register(fullName, userName, email, password, jobTitleId)
 
         authenticationRepository.saveAuthData(user.token)
+
+        jobsFinderRepository.saveProfileData(user.profile.avatar, user.profile.jobTitle.id)
 
         return user
     }
