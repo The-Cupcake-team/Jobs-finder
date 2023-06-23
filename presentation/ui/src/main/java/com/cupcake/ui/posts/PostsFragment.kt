@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
+import com.cupcake.ui.base.ViewPagerAdapter
 import com.cupcake.ui.databinding.FragmentPostsBinding
 import com.cupcake.viewmodels.posts.PostsViewModel
 
@@ -36,7 +37,7 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
         for (fragment in fragments.values) {
             fragmentList.add(fragment)
         }
-        val adapter = ViewPagerPostsAdapter(
+        val adapter = ViewPagerAdapter(
             fragmentManager = childFragmentManager,
             fragmentList = fragmentList,
             lifecycle = lifecycle
