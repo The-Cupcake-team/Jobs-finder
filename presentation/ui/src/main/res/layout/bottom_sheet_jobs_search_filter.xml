@@ -57,7 +57,7 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/spacing_normal"
             android:hint="@string/country_city"
-            android:text="@={viewModel.state.jobFilterUIState.location}"
+            android:onTextChanged="@{(text,start,before,count) -> viewModel.onLocationChange(text)}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewLocation" />
 
@@ -82,16 +82,18 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/on_site" />
+                android:text="@string/on_site"
+                android:onClick='@{() -> viewModel.onJobTypeChange("On-site")}'/>
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/hybrid" />
+                android:text="@string/hybrid"
+                android:onClick='@{() -> viewModel.onJobTypeChange("Hybird")}' />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
                 android:text="@string/remote"
-                />
+                android:onClick='@{() -> viewModel.onJobTypeChange("Remote")}' />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -116,23 +118,28 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/full_time" />
+                android:text="@string/full_time"
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Full-time")}' />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/part_time" />
+                android:text="@string/part_time"
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Part-time")}'/>
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/internship" />
+                android:text="@string/internship"
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Internship")}'/>
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/volunteer" />
+                android:text="@string/volunteer"
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Volunteer")}'/>
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/temporary" />
+                android:text="@string/temporary"
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Temporary")}'/>
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -157,23 +164,28 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/entry" />
+                android:text="@string/entry"
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Entry")}'/>
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/intermediate" />
+                android:text="@string/intermediate"
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Intermediate")}'/>
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/mid_level" />
+                android:text="@string/mid_level"
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Mid-level")}'/>
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/senior_level" />
+                android:text="@string/senior_level"
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Senior-level")}'/>
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/expert" />
+                android:text="@string/expert"
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Expert")}'/>
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
@@ -203,12 +215,13 @@
             android:id="@+id/minSalary"
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
-            android:text="@={viewModel.state.jobFilterUIState.salary.minSalary}"
+            android:text="0.0"
+            android:onTextChanged="@{(text,start,before,count) -> viewModel.onMinSalaryChange(text)}"
             android:paddingHorizontal="@dimen/spacing_medium"
             android:textColor="@color/primary"
             app:layout_constraintTop_toBottomOf="@id/textSalary"
@@ -228,11 +241,12 @@
             android:id="@+id/maxSalary"
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginStart="@dimen/spacing_normal"
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
-            android:text="@={viewModel.state.jobFilterUIState.salary.maxSalary}"
+            android:text="0.0"
+            android:onTextChanged="@{(text,start,before,count) -> viewModel.onMaxSalaryChange(text)}"
             android:paddingHorizontal="@dimen/spacing_medium"
             android:textColor="@color/primary"
             app:layout_constraintStart_toEndOf="@id/dividerRangSalary"

@@ -71,12 +71,13 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_job_search"
-            android:layout_width="@dimen/zero"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/zero"
-            android:layout_marginStart="@dimen/spacing_tiny"
+            android:layout_marginHorizontal="@dimen/spacing_tiny"
             android:layout_marginTop="@dimen/spacing_normal"
             android:orientation="vertical"
             android:paddingTop="@dimen/spacing_small"
+            app:items="@{viewModel.state.searchResult}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
