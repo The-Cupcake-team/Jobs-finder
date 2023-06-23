@@ -167,3 +167,17 @@ fun isRefresh(view: SwipeRefreshLayout , isRefresh: Boolean){
     view.isRefreshing = isRefresh
 }
 
+@BindingAdapter(value = ["app:showImage"])
+fun showImage(view: ImageView , imageData: Any?){
+    if (imageData != null){
+        view.visibility = View.VISIBLE
+        view.load(imageData) {
+            crossfade(true)
+            crossfade(1000)
+        }
+    }
+    else{
+        view.setImageDrawable(null)
+    }
+}
+
