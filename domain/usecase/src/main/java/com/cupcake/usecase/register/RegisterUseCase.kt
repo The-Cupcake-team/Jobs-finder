@@ -15,8 +15,9 @@ class RegisterUseCase @Inject constructor(
         userName: String,
         email: String,
         password: String,
-        confirmPassword: String
-    ) {
+        confirmPassword: String,
+        jobTitleId: Int
+    ): User {
 
         val isValid = validateRegisterForm(fullName, userName, email, password, confirmPassword)
 
@@ -24,8 +25,12 @@ class RegisterUseCase @Inject constructor(
             throw ErrorType.UnAuthorized(ERROR)
         }
 
-        val user = authenticationRepository.register(fullName, userName, email, password)
+        val user =
+            authenticationRepository.register(fullName, userName, email, password, jobTitleId)
+
         authenticationRepository.saveAuthData(user.token)
+
+        return user
     }
 
     companion object {
