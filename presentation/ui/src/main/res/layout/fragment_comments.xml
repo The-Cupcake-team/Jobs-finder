@@ -43,7 +43,7 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
             app:showWhenIf="@{viewModel.state.isSuccess}"
-            android:src="@drawable/test_personal_image"
+            app:loadImage="@{viewModel.state.post.profileImage}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tool_bar"
             app:shapeAppearanceOverlay="@style/circleImageView" />
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_xxsmall"
             android:layout_marginEnd="@dimen/spacing_medium"
-            android:text="@string/jop_title"
+            android:text="@{viewModel.state.post.jobTitle}"
             app:showWhenIf="@{viewModel.state.isSuccess}"
             android:textColor="@color/color_text_secondary"
             app:layout_constraintEnd_toEndOf="parent"

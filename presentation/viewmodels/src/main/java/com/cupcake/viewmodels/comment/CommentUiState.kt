@@ -13,8 +13,10 @@ data class CommentUiState(
     data class PostUiState(
         val id: String = "",
         val content: String = "",
-        val createAt: String = "",
+        val createdAt: String = "",
         val creatorName: String = "",
+        val profileImage: String = "",
+        val jobTitle: String = "",
         val comments: Int = 0,
         val isLiked: Boolean = false,
         val likes: Int = 0,
