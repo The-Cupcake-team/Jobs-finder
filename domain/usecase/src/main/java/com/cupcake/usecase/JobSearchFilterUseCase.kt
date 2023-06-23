@@ -9,6 +9,7 @@ class JobSearchFilterUseCase@Inject constructor(
 ){
 
     suspend operator fun invoke(
+        searchTitle: String = "",
         location: String = "",
         jobType: String = "",
         workType: String = "",
@@ -19,6 +20,7 @@ class JobSearchFilterUseCase@Inject constructor(
 
         val filteredJobs = allJobs
             .filter { job ->
+                filterJobTitle(job, searchTitle) &&
                 filterByLocation(job, location) &&
                         filterByJobType(job, jobType) &&
                         filterByWorkType(job, workType) &&
@@ -49,6 +51,10 @@ class JobSearchFilterUseCase@Inject constructor(
         return salaryRange?.let { (minSalary, maxSalary) ->
             job.jobSalary.minSalary >= minSalary && job.jobSalary.maxSalary <= maxSalary
         } ?: true
+    }
+
+    private fun filterJobTitle(job: Job, searchTitle: String): Boolean{
+        return job.jobTitle.title?.contains(searchTitle)!!
     }
 
 }
