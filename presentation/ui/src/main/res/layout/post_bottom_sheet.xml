@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.posts.bottom_sheet.PostBottomSheetViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottom_sheet_background"
+        >
+
+    <FrameLayout
+        android:id="@+id/bottomSheetsPosts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:shapeAppearance="@drawable/bottom_sheet_background"
+        android:background="@drawable/bottom_sheet_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="@dimen/zero">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="72dp"
+                android:layout_height="4dp"
+                app:circularflow_defaultRadius="@dimen/spacing_normal"
+                android:background="@drawable/divider_background"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginVertical="@dimen/spacing_medium"
+                app:layout_constraintBottom_toTopOf="@id/followTextView"
+                />
+
+            <Button
+                style="@style/Widget.Material3.Button.TextButton.Icon"
+                android:id="@+id/followTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:gravity="center_vertical"
+                app:iconSize="@dimen/spacing_large"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:textSize="@dimen/text_size_body"
+                android:text="@string/follow"
+                android:onClick="@{() -> viewModel.onFollowCLickListener()}"
+                app:icon="@drawable/ic_add"
+                app:iconTint="@color/primary"
+                android:textColor="@color/primary"
+                android:textAllCaps="false"
+                android:fontFamily="@font/worksans_regular"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/divider2"
+                app:layout_constraintTop_toBottomOf="@id/divider3"/>
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="@dimen/zero"
+                android:layout_height="1dp"
+                android:background="@color/boarder"
+                app:layout_constraintTop_toBottomOf="@id/followTextView"
+                app:layout_constraintStart_toStartOf="@id/followTextView"
+                app:layout_constraintEnd_toEndOf="@id/followTextView"
+                />
+
+            <Button
+                android:id="@+id/saveTextView"
+                style="@style/Widget.Material3.Button.TextButton.Icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:fontFamily="@font/worksans_regular"
+                android:gravity="center_vertical"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:onClick="@{() -> viewModel.onSaveListener()}"
+                android:text="@{viewModel.state.textSaved}"
+                android:textAllCaps="false"
+                android:textColor="@color/color_text_primary"
+                android:textSize="@dimen/text_size_body"
+                app:iconSize="@dimen/spacing_large"
+                setIsSavedIcon="@{viewModel.state.saved}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

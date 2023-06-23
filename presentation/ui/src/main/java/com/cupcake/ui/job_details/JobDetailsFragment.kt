@@ -7,14 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
+import com.cupcake.ui.base.ViewPagerAdapter
 import com.cupcake.ui.databinding.DialogBinding
 import com.cupcake.ui.databinding.FragmentJobDetailsBinding
-import com.cupcake.ui.jobs.adapter.ViewPagerJobDetailsAdapter
 import com.cupcake.viewmodels.job_details.JobDetailsViewModel
 import com.cupcake.viewmodels.job_details.JobDetailsFieldState
 import com.google.android.material.tabs.TabLayout
@@ -40,21 +41,27 @@ class JobDetailsFragment @Inject constructor(
         viewModel.getJobDetails(args.jobId.toString())
         viewModel.jobId = args.jobId.toString()
     }
-    private fun setJobAdapter(){
+    private fun setJobAdapter() {
+        val fragmentList = mutableListOf<Fragment>()
         val fragmentTasks = mapOf(
             ABOUT_JOB_FRAGMENT to AboutJobCategory(),
             ABOUT_CATEGORY_FRAGMENT to AboutCompanyCategory(),
         )
-        val adapter = ViewPagerJobDetailsAdapter(
-            fragmentManager = requireActivity().supportFragmentManager,
-            fragmentItems = fragmentTasks,
-            lifecycle = lifecycle,
-        )
-        binding.apply {
-            viewPagerCategory.adapter = adapter
-            setTabLayout(tabLayoutCategory, viewPagerCategory)
+        fragmentList.clear()
+
+        for (fragment in fragmentTasks.values) {
+            fragmentList.add(fragment)
         }
+        val adapter = ViewPagerAdapter(
+            fragmentManager = childFragmentManager,
+            fragmentList = fragmentList,
+            lifecycle = lifecycle
+        )
+        binding.viewPagerCategory.adapter = adapter
+        setTabLayout(binding.tabLayoutCategory, binding.viewPagerCategory)
     }
+
+
 
     private fun setTabLayout(tabLayoutCategory : TabLayout, viewPagerCategory : ViewPager2){
         val tabName = listOf("About job", " About company")
@@ -62,6 +69,8 @@ class JobDetailsFragment @Inject constructor(
             tab.text= tabName[position]
         }.attach()
     }
+
+
 
     private fun onClickApplyButton(){
         binding.buttonApplyJob.setOnClickListener {

@@ -17,15 +17,17 @@ object DependencyProject {
     private const val KOTLIN_COROUTINES_VERSION = "1.6.4"
     private const val LIFECYCLE_VERSION = "2.6.1"
     private const val KOTLIN_SERIALIZATION_VERSION = "1.5.0"
-    private const val NAVIGATION_VERSION = "2.5.3"
+    private const val NAVIGATION_VERSION = "2.6.0"
     private const val LOTTIE_VERSION = "6.0.1"
+    private const val swipeRefreshLayoutVersion = "1.1.0"
+    private const val DATASTORE_VERSION = "1.0.0"
     private const val ROOM_VERSION = "2.5.1"
-    private const val SWIPEREFRESHLAYOUT = "1.1.0"
 
     const val androidxCore = "androidx.core:core-ktx:$CORE_VERSION"
     const val compat = "androidx.appcompat:appcompat:$APP_COMPAT_VERSION"
     const val material = "com.google.android.material:material:$MATERIAL_VERSION"
     const val constraint = "androidx.constraintlayout:constraintlayout:$CONSTRAINT_LAYOUT_VERSION"
+    const val swipRefersh= "androidx.swiperefreshlayout:swiperefreshlayout:$swipeRefreshLayoutVersion"
 
     const val junit = "junit:junit:$JUNIT_VERSION"
     const val junitExtension = "androidx.test.ext:junit:$JUNIT_KTS_VERSION"
@@ -58,10 +60,12 @@ object DependencyProject {
 
     const val coil = "io.coil-kt:coil:$COIL_VERSION"
 
+    const val dataStore = "androidx.datastore:datastore-preferences:$DATASTORE_VERSION"
     const val roomRuntime = "androidx.room:room-runtime:$ROOM_VERSION"
     const val roomCompiler = "androidx.room:room-compiler:$ROOM_VERSION"
     const val room = "androidx.room:room-compiler:$ROOM_VERSION"
 
-    const val swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:$SWIPEREFRESHLAYOUT"
+
+
 
 }

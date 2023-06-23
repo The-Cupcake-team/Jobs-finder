@@ -9,7 +9,8 @@ android {
     compileSdk = ConfigurationData.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdk=ConfigurationData.MIN_SDK_VERSION
+        minSdk = ConfigurationData.MIN_SDK_VERSION
+
 
         testInstrumentationRunner = ConfigurationData.TEST_INSTRUMENTATION_RUNNER
         consumerProguardFiles("consumer-rules.pro")
@@ -24,8 +25,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = ConfigurationData.JAVA_VERSIONS_CODE
+        targetCompatibility = ConfigurationData.JAVA_VERSIONS_CODE
     }
     kotlinOptions {
         jvmTarget = ConfigurationData.JAVA_VERSIONS_CODE.toString()
@@ -35,11 +36,14 @@ android {
 dependencies {
     implementation(DependencyProject.androidxCore)
     implementation(DependencyProject.compat)
-
     testImplementation(DependencyProject.junit)
     androidTestImplementation(DependencyProject.junitExtension)
     androidTestImplementation(DependencyProject.espresso)
 
+
+    implementation(DependencyProject.hilt)
+    kapt(DependencyProject.hiltCompiler)
+    implementation(DependencyProject.dataStore)
     implementation(DependencyProject.roomRuntime)
     annotationProcessor(DependencyProject.roomCompiler)
     kapt(DependencyProject.room)

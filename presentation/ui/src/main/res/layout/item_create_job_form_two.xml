@@ -40,7 +40,7 @@
             android:lines="3"
             android:maxLines="5"
             android:afterTextChanged="@{(text) -> viewModel.onDescriptionChange(text)}"
-            android:text="@={viewModel.state.JobFormUiState.jobDescription}"
+            android:text="@{viewModel.state.JobFormUiState.jobDescription}"
             android:padding="@dimen/spacing_medium"
             android:textColorHint="@color/color_text_tertiary"
             app:layout_constraintStart_toStartOf="parent"
@@ -95,23 +95,50 @@
             app:layout_constraintStart_toStartOf="@+id/editeTextEducation"
             app:layout_constraintTop_toBottomOf="@+id/editeTextEducation" />
 
-        <EditText
-            android:id="@+id/editeTextSkills"
-            style="@style/TextStyle.Title"
+
+        <LinearLayout
+            android:id="@+id/skillLayoutGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:autofillHints=""
             android:background="@drawable/edite_text_skills_background"
-            android:hint="@string/skills"
-            android:inputType="text"
-            android:lines="1"
-            android:padding="@dimen/spacing_medium"
-            android:afterTextChanged="@{(text) -> viewModel.onSkillsChange(text)}"
-            android:textColorHint="@color/color_text_tertiary"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@+id/editeTextExperiences"
             app:layout_constraintStart_toStartOf="@+id/editeTextExperiences"
-            app:layout_constraintTop_toBottomOf="@+id/editeTextExperiences" />
+            app:layout_constraintTop_toBottomOf="@+id/editeTextExperiences">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupSkills"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                app:chipSpacingHorizontal="4dp"
+                app:chipSpacingVertical="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/rangeSliderSalary"
+                app:layout_constraintStart_toStartOf="@+id/rangeSliderSalary"
+                app:singleSelection="true">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <EditText
+                android:id="@+id/editeTextSkills"
+                style="@style/TextStyle.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:autofillHints=""
+                android:background="@drawable/edite_text_skills_background"
+                android:hint="@string/skills"
+                android:inputType="text"
+                android:lines="1"
+                android:padding="@dimen/spacing_medium"
+                android:textColorHint="@color/color_text_tertiary"
+                app:layout_constraintEnd_toEndOf="@+id/editeTextExperiences"
+                app:layout_constraintStart_toStartOf="@+id/editeTextExperiences"
+                app:layout_constraintTop_toBottomOf="@+id/editeTextExperiences" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/labelSalary"
@@ -120,17 +147,17 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
             android:text="@string/salary"
-            app:layout_constraintEnd_toEndOf="@+id/editeTextSkills"
-            app:layout_constraintStart_toStartOf="@+id/editeTextSkills"
-            app:layout_constraintTop_toBottomOf="@+id/editeTextSkills" />
+            app:layout_constraintEnd_toEndOf="@+id/skillLayoutGroup"
+            app:layout_constraintStart_toStartOf="@+id/skillLayoutGroup"
+            app:layout_constraintTop_toBottomOf="@+id/skillLayoutGroup" />
 
         <com.google.android.material.slider.RangeSlider
             android:id="@+id/rangeSliderSalary"
             android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:valueFrom="0.0"
-            android:valueTo="100.0"
+            android:valueFrom="0"
+            android:valueTo="10000"
             app:layout_constraintEnd_toEndOf="@+id/labelSalary"
             app:layout_constraintStart_toStartOf="@+id/labelSalary"
             app:layout_constraintTop_toBottomOf="@+id/labelSalary"
@@ -157,7 +184,7 @@
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
             android:paddingHorizontal="@dimen/spacing_medium"
-            android:text="@{viewModel.state.JobFormUiState.startRangSalary}"
+            android:text="@{@string/rang_salary(viewModel.state.JobFormUiState.salary.minSalary)}"
             android:textColor="@color/primary"
             app:layout_constraintEnd_toStartOf="@+id/dividerRangSalary"
             app:layout_constraintStart_toStartOf="@+id/rangeSliderSalary"
@@ -183,7 +210,7 @@
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
             android:paddingHorizontal="@dimen/spacing_medium"
-            android:text="@{viewModel.state.JobFormUiState.endRangSalary}"
+            android:text="@{@string/rang_salary(viewModel.state.JobFormUiState.salary.maxSalary)}"
             android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="@+id/minSalary"
             app:layout_constraintStart_toEndOf="@+id/dividerRangSalary"

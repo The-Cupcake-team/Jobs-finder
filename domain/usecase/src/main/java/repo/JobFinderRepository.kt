@@ -3,6 +3,7 @@ package repo
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Post
+import com.cupcake.models.Token
 
 interface JobFinderRepository {
 
@@ -35,7 +36,25 @@ interface JobFinderRepository {
 
     suspend fun getPostById(id: String): Post
 
+    suspend fun getFollowingPosts(): List<Post>
+
+    suspend fun insertPost(post: Post)
+
+    suspend fun deletePost(post: Post)
+
+    suspend fun getSavedPostById(id: String): Post?
+
 
     //endregion
 
+    // region DataStore
+    suspend fun saveProfileData(avatarUri: String, jobTitle: Int)
+
+    suspend fun getAvatarUri(): String?
+
+    suspend fun getJobTitle(): Int?
+
+    suspend fun clearProfileData()
+
+    //endregion
 }

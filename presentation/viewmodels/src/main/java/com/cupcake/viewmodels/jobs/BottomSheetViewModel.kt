@@ -2,6 +2,9 @@ package com.cupcake.viewmodels.jobs
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.cupcake.models.Job
+import com.cupcake.models.JobSalary
+import com.cupcake.models.JobTitle
 import com.cupcake.usecase.SaveJobUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,4 +46,22 @@ class BottomSheetViewModel @Inject constructor(
 
         }
     }
+
+    fun JobUiState.toJob(): Job {
+        return Job(
+            id = id,
+            jobTitle = JobTitle(title = title, id = 12213),
+            company = companyName,
+            createdAt = createdAt,
+            workType = detailsChip[0],
+            jobLocation = location,
+            jobType = detailsChip[1],
+            jobDescription = companyName,
+            jobSalary = JobSalary(minSalary = salary.toDouble(), maxSalary = salary.toDouble()),
+            jobExperience = jobExperience,
+            education = education,
+            skills = emptyList()
+        )
+    }
+
 }

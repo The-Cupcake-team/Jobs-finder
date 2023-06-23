@@ -1,6 +1,7 @@
 package com.cupcake.jobsfinder
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -30,6 +31,18 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragmentContainerView)
         binding.bottomNavigationBar.setupWithNavController(navController)
         onChangeItemButtonNavigationBarSelected(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.loginFragment, R.id.registerFragment ,R.id.notificationFragment-> {
+                    binding.bottomNavigationBar.visibility = View.GONE
+                }
+
+                else -> {
+                    binding.bottomNavigationBar.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     private fun onChangeItemButtonNavigationBarSelected(navController: NavController) {

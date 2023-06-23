@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.register.RegisterViewModel" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium"
+            tools:context="com.cupcake.ui.register.RegisterFragment">
+
+            <TextView
+                android:id="@+id/textViewSignUp"
+                style="@style/TextStyle.Heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xxlarge"
+                android:text="@string/sign_up"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewSignUpDescription"
+                style="@style/TextStyle.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:text="@string/more_feature"
+                android:textColor="@color/color_text_tertiary"
+                app:layout_constraintStart_toStartOf="@id/textViewSignUp"
+                app:layout_constraintTop_toBottomOf="@id/textViewSignUp" />
+
+            <TextView
+                android:id="@+id/textViewFirstName"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:text="@string/full_name"
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutFullName"
+                app:layout_constraintTop_toBottomOf="@id/textViewSignUpDescription" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutFullName"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:inputType="text"
+                android:textColorHint="@color/color_text_tertiary"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:helperText="@{viewModel.state.fullNameError}"
+                app:helperTextTextColor="@color/accent_red"
+                app:hintTextColor="@color/tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewFirstName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    setIcons="@{viewModel.state.isFullNameValid}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:fontFamily="@font/worksans_regular"
+                    android:inputType="text"
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onFullNameChange(text.toString())}"
+                    android:textSize="@dimen/text_size_body" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textViewUserName"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/user_name"
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutUserName"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutFullName" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutUserName"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:autofillHints="username"
+                android:inputType="text"
+                android:textColorHint="@color/color_text_tertiary"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:helperText="@{viewModel.state.userNameError}"
+                app:helperTextTextColor="@color/accent_red"
+                app:hintTextColor="@color/tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewUserName">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    setIcons="@{viewModel.state.isUserNameValid}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:fontFamily="@font/worksans_regular"
+                    android:inputType="text"
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onUserNameChange(text.toString())}"
+                    android:textSize="@dimen/text_size_body" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textViewJobTitle"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/job_title"
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutJobTitle"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:autofillHints="username"
+                android:inputType="text"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewJobTitle">
+
+                <AutoCompleteTextView
+                    style="@style/TextStyle.body"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_background"
+                    android:completionThreshold="1"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:labelFor="@id/textInputLayoutJobTitle"
+                    android:maxLines="1"
+                    android:onTextChanged="@{(text,start,before,count) -> viewModel.onJobTitleChange(text)}"
+                    android:padding="@dimen/spacing_medium"
+                    android:textColor="@color/color_text_primary"
+                    app:bindArrayAdapter="@{viewModel.state.jobTitles}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/textViewEmail"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/email"
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutJobTitle"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutJobTitle" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEmail"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:inputType="text"
+                android:textColorHint="@color/color_text_tertiary"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:helperText="@{viewModel.state.emailError}"
+                app:helperTextTextColor="@color/accent_red"
+                app:hintTextColor="@color/tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewEmail">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    setIcons="@{viewModel.state.isEmailValid}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:fontFamily="@font/worksans_regular"
+                    android:inputType="textEmailAddress"
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onEmailChange(text.toString())}"
+                    android:textSize="@dimen/text_size_body" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textViewPassword"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/password"
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutPassword"
+                style="@style/PasswordTextInputLayoutStyle"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:inputType="text"
+                android:textColorHint="@color/color_text_tertiary"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:helperText="@{viewModel.state.passwordError}"
+                app:helperTextTextColor="@color/accent_red"
+                app:hintTextColor="@color/tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewPassword">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:fontFamily="@font/worksans_regular"
+                    android:inputType="textPassword"
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onPasswordChange(text.toString())}"
+                    android:textSize="@dimen/text_size_body" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textViewConfirmPassword"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/confirm_password"
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutConfirmPassword"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutConfirmPassword"
+                style="@style/PasswordTextInputLayoutStyle"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:autofillHints="confirmedPassword"
+                android:inputType="text"
+                android:textColorHint="@color/color_text_tertiary"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:helperText="@{viewModel.state.confirmedPasswordError}"
+                app:helperTextTextColor="@color/accent_red"
+                app:hintTextColor="@color/tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:fontFamily="@font/worksans_regular"
+                    android:inputType="textPassword"
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onConfirmPasswordChange(text.toString())}"
+                    android:textSize="@dimen/text_size_body" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonSignup"
+                style="@style/normalButtonStyle"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/blue_500"
+                android:enabled="@{!viewModel.state.isLoading}"
+                android:onClick="@{() -> viewModel.register()}"
+                android:textAllCaps="false"
+                app:buttonText="@{@string/signup}"
+                app:isLoading="@{viewModel.state.isLoading}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutConfirmPassword" />
+
+            <TextView
+                android:id="@+id/textViewAlreadyHaveAccount"
+                style="@style/TextStyle.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:text="@string/already_have_account"
+                android:textColor="@color/color_text_tertiary"
+                app:layout_constraintEnd_toStartOf="@+id/textViewLogin"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonSignup" />
+
+            <TextView
+                android:id="@+id/textViewLogin"
+                style="@style/TextStyle.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.onLoginClick()}"
+                android:text="@string/sign_in"
+                android:textAllCaps="false"
+                android:textColor="@color/button_tint"
+                app:layout_constraintBottom_toBottomOf="@id/textViewAlreadyHaveAccount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewAlreadyHaveAccount"
+                app:layout_constraintTop_toTopOf="@id/textViewAlreadyHaveAccount"
+                app:rippleColor="@android:color/transparent" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/spacing_normal"
+                android:indeterminateTint="@color/blue_300"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/buttonSignup"
+                app:layout_constraintEnd_toEndOf="@id/buttonSignup"
+                app:layout_constraintStart_toStartOf="@id/buttonSignup"
+                app:layout_constraintTop_toTopOf="@id/buttonSignup"
+                app:showWhenIf="@{viewModel.state.isLoading}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

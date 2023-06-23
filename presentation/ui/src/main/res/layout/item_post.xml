@@ -11,13 +11,13 @@
 
         <variable
             name="listener"
-            type="com.cupcake.viewmodels.posts.PostInteractionListener" />
+            type="com.cupcake.viewmodels.posts.SpecialPostInteractionListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_normal"
         android:elevation="@dimen/zero">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
                 style="@style/personalImageStyle"
                 android:layout_width="@dimen/profile_image_size"
                 android:layout_height="@dimen/profile_image_size"
-                android:src="@drawable/test_personal_image"
+                app:loadImage="@{item.profileImage}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewCreatedAt"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_normal"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:text="@string/personal_name"
+                android:text="@{item.creatorName}"
                 app:layout_constraintStart_toEndOf="@+id/imageViewPerson"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +52,7 @@
                 style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/jop_title"
+                android:text="@{item.jobTitle}"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintStart_toStartOf="@+id/textViewPersonName"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPersonName" />
@@ -73,26 +73,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
+                android:onClick="@{() -> listener.onOptionsClick(item)}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewPersonName"
                 app:srcCompat="@drawable/ic_more"
                 app:tint="@color/secondary"/>
 
-            <TextView
+            <com.cupcake.ui.posts.custom_view.PostExpandableCard
                 android:id="@+id/textViewContent"
                 style="@style/TextStyle.body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:text="@{item.description}"
+                android:paddingBottom="@dimen/spacing_small"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt"
-                tools:text="@string/post_content" />
-
+                app:layout_constraintBottom_toTopOf="@id/imageViewPostImage"
+                app:postFullText="@{item.description}"
+                app:postStartText="@{item.description}"
+                />
             <ImageView
                 android:id="@+id/imageViewPostImage"
                 android:layout_width="match_parent"
@@ -101,6 +102,7 @@
                 android:layout_marginBottom="@dimen/spacing_normal"
                 app:layout_constraintDimensionRatio="5:4"
                 android:scaleType="centerCrop"
+                android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/imageViewLike"
                 app:layout_constraintTop_toBottomOf="@+id/textViewContent"
                 tools:srcCompat="@drawable/test_post_image"
@@ -124,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_small"
-                android:text="@string/likes_count"
+                android:text="@{String.valueOf(item.likes)}"
                 android:textColor="@color/color_text_tertiary"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLike"
                 app:layout_constraintStart_toEndOf="@+id/imageViewLike"
@@ -136,10 +138,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_normal"
+                app:isLiked="@{item.isLiked}"
+                android:onClick="@{() -> listener.onLikeClick(item.id)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:srcCompat="@drawable/ic_heart"
-                app:tint="@color/secondary"/>
+                app:srcCompat="@drawable/tabler_thumb" />
 
             <TextView
                 android:id="@+id/textViewCommentsCount"
@@ -158,10 +161,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
+                android:onClick="@{() -> listener.onClickShare(item.id)}"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewComment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageViewComment"
-                app:srcCompat="@drawable/ic_saved"
+                app:srcCompat="@drawable/ic_share"
                 app:tint="@color/secondary"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

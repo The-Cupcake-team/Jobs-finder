@@ -20,6 +20,7 @@
     <string name="followed">Followed</string>
     <string name="comments">comments</string>
     <string name="post_body">President cast election as choice between all our republicans who seek to impose a nationwide abortion ban and democrat</string>
+    <string name="comment">comment......</string>
 
     <!--    job location strings-->
     <string name="on_your_location">On your location</string>
@@ -42,9 +43,9 @@
     <string name="page_number_one">1 of 2</string>
     <string name="page_number_two">2 of 2</string>
     <string name="title">Title</string>
-    <string name="add_job_title">add job title</string>
+    <string name="add_job_title">Add job title</string>
     <string name="company">Company</string>
-    <string name="add_company_name">add company name</string>
+    <string name="add_company_name">Add company name</string>
     <string name="location">Location</string>
     <string name="country_city">Country, City</string>
     <string name="job_type">Job Type</string>
@@ -87,6 +88,7 @@
     <string name="sign_in">Sign In</string>
     <string name="already_have_account">Already have account?</string>
     <string name="phone_number">Phone number</string>
+    <string name="email">Email</string>
     <string name="more_feature">Fill the information for more feature</string>
     <string name="sign_up">Sign up</string>
     <string name="don_t_have_account">Don’t have account?</string>
@@ -125,6 +127,12 @@
     <string name="sharePost">Hello bro,Your Post is very awesome , select your App to share \n%1$s . </string>
     <string name="saved_successfully">Saved Successfully</string>
     <string name="saved_canceled">Saved Canceled</string>
-    <string name="clear">Clear</string>
-    <string name="done">Done</string>
+    <string name="comments_title">Comments (23)</string>
+    <string name="resizable_text_read_more">Read more…</string>
+    <string name="resizable_text_read_less">Read less</string>
+
+    <string name="rang_salary">%s K</string>
+    <string name="no_notification_yet">No notification yet</string>
+
+    <string name="offline">You Are Currently Offline</string>
 </resources>
