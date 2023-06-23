@@ -15,7 +15,7 @@ interface AuthenticationRepository {
     suspend fun login(
         userName: String,
         password: String
-    ): Token
+    ): User
 
     suspend fun saveAuthData(token: Token)
 
