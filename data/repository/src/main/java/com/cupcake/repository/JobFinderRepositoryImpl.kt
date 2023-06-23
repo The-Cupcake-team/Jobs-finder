@@ -2,8 +2,8 @@ package com.cupcake.repository
 
 import android.util.Log
 import com.cupcake.jobsfinder.local.daos.JobFinderDao
-import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.jobsfinder.local.datastore.ProfileDataStore
+import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
@@ -11,8 +11,9 @@ import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toJob
-import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toJobTitle
+import com.cupcake.repository.mapper.toJobTitleEntity
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
 import repo.JobFinderRepository
 import retrofit2.Response
@@ -25,74 +26,10 @@ class JobFinderRepositoryImpl @Inject constructor(
     private val profileDataStore: ProfileDataStore
 ) : JobFinderRepository {
 
-
     // region Job
-
-//	override suspend fun createJob(jobInfo: JobDto): Boolean {
-//		val response = api.createJob(
-//			jobInfo.jobTitleId,
-//			jobInfo.company,
-//			jobInfo.workType,
-//			jobInfo.jobLocation,
-//			jobInfo.jobType,
-//			jobInfo.jobDescription,
-//			jobInfo.jobSalary
-//			)
-//		return response.isSuccessful
-//	}
-//
-//
-//	override suspend fun getJobById(jobId: String): JobDto {
-//		return wrapResponseWithErrorHandler { api.getJobById(jobId) }
-//	}
-//
-//	//endregion
-//
-//
-//	// region Post
-//
-//
-//
-//
-//	// region Job
-//
-//
-//	//endregion
-//
-//
-//	// region Post
-//
-//
-//	override suspend fun getAllJobTitles(): List<JobTitleDto> {
-//		return wrapResponseWithErrorHandler { api.getAllJobTitle() }
-//	}
-//
-//
-//	// region Job
-//
-//
-//	//endregion
-//
-//
-//
-//	override suspend fun getAllPosts(): List<PostDto> {
-//		return wrapResponseWithErrorHandler { api.getPosts() }
-//	}
-//
-//
-//	override suspend fun getPostById(id: String): PostDto {
-//		return wrapResponseWithErrorHandler {
-//			api.getPostById(id)
-//		}
-//	}
-
-
-    //endregion
-
-
     override suspend fun createJob(jobInfo: Job): Boolean {
         val response = api.createJob(
-            jobInfo.jobTitle.id?.toInt(),
+            jobInfo.jobTitle.id,
             jobInfo.company,
             jobInfo.workType,
             jobInfo.jobLocation,
@@ -111,7 +48,12 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAllJobTitles(): List<JobTitle> {
-        return wrapResponseWithErrorHandler { api.getAllJobTitle() }.map { it.toJobTitle() }
+        return jobFinderDao.getJobTitles().map { it.toJobTitle() }
+    }
+
+    override suspend fun refreshJobTitles() {
+        wrapResponseWithErrorHandler { api.getAllJobTitle() }
+            .map { jobFinderDao.insertJobTitles(it.toJobTitleEntity()) }
     }
 
     override suspend fun getJobById(jobId: String): Job {
@@ -133,9 +75,10 @@ class JobFinderRepositoryImpl @Inject constructor(
         return jobEntity?.toJob()
     }
 
+    //endregion
+
 
     //region Post
-
 
     override suspend fun getAllPosts(): List<Post> {
         return wrapResponseWithErrorHandler { api.getPosts() }.map { it.toPost() }
@@ -173,6 +116,7 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     //endregion
+
     private suspend fun <T> wrapResponseWithErrorHandler(
         function: suspend () -> Response<BaseResponse<T>>
     ): T {
@@ -204,7 +148,7 @@ class JobFinderRepositoryImpl @Inject constructor(
         return profileDataStore.getAvatarUri()
     }
 
-    override suspend fun getJobTitle(): Int? {
+    override suspend fun getUserJobTitleId(): Int? {
         return profileDataStore.getJobTitle()
     }
 

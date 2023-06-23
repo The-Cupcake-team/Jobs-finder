@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
@@ -37,27 +38,33 @@ class CreateJobFragment : BaseFragment<FragmentCreateJobBinding, CreateJobViewMo
             viewPagerCreateJob.adapter = adapter
             onChangePageSelected()
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.state
-//                .flowWithLifecycle(viewLifecycleOwner.lifecycle)
-//                .collect { uiState ->
-//                    Log.v("ameerxyz","uiState ${uiState.progressStep}")
-//                    if (uiState.progressStep != 1) {
-//                        binding.viewPagerCreateJob.currentItem = 0
-//                    }else{
-//                        binding.viewPagerCreateJob.currentItem = 1
-//                    }
-//
-//                }
-            viewModel.event.flowWithLifecycle(viewLifecycleOwner.lifecycle).collect { event ->
-                Log.v("ameerxyz", "event ${event}")
-                event(event)
+
+        lifecycleScope.launch {
+            viewModel.event.collect {
+                handleCreateJobEvents(it)
             }
         }
+//        viewLifecycleOwner.lifecycleScope.launch {
+////            viewModel.state
+////                .flowWithLifecycle(viewLifecycleOwner.lifecycle)
+////                .collect { uiState ->
+////                    Log.v("ameerxyz","uiState ${uiState.progressStep}")
+////                    if (uiState.progressStep != 1) {
+////                        binding.viewPagerCreateJob.currentItem = 0
+////                    }else{
+////                        binding.viewPagerCreateJob.currentItem = 1
+////                    }
+////
+////                }
+//            viewModel.event.flowWithLifecycle(viewLifecycleOwner.lifecycle).collect { event ->
+//                Log.v("ameerxyz", "event ${event}")
+//                event(event)
+//            }
+//        }
 
     }
 
-    private fun event(event: CreateJobEvent) {
+    private fun handleCreateJobEvents(event: CreateJobEvent) {
         when (event) {
             is CreateJobEvent.PageScrolled -> {
                 if (event.index != 1) {
@@ -72,11 +79,10 @@ class CreateJobFragment : BaseFragment<FragmentCreateJobBinding, CreateJobViewMo
                     binding.viewPagerCreateJob.currentItem = 0
                 } else {
                     binding.viewPagerCreateJob.currentItem = 1
+                    viewModel.createJob()
+                    onClickBackNavigationIcon()
                 }
             }
-
-
-
         }
     }
 
@@ -88,6 +94,12 @@ class CreateJobFragment : BaseFragment<FragmentCreateJobBinding, CreateJobViewMo
                     viewModel?.handleEvent(CreateJobEvent.PageScrolled(position))
                 }
             })
+        }
+    }
+
+    private fun onClickBackNavigationIcon() {
+        binding.toolBar.setNavigationOnClickListener { view ->
+            view.findNavController().popBackStack()
         }
     }
 

@@ -2,10 +2,10 @@ package com.cupcake.models
 
 
 data class Job(
-    val id: String,
+    val id: String = "",
     val jobTitle: JobTitle,
     val company: String,
-    val createdAt: String,
+    val createdAt: String = "",
     val workType: String,
     val jobLocation: String,
     val jobType: String,

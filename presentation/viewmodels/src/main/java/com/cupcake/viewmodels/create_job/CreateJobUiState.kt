@@ -1,5 +1,7 @@
 package com.cupcake.viewmodels.create_job
 
+import com.cupcake.models.JobSalary
+import com.cupcake.models.JobTitle
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.jobs.JobTitleUiState
 
@@ -11,6 +13,7 @@ data class CreateJobUiState(
     val progressStep: Int = 0
 
 ) {
+
     data class JobFormUiState(
         var jobTitles: List<JobTitleUiState> = emptyList(),
         var jobTitleUIState: JobTitleUIState = JobTitleUIState(),
@@ -27,12 +30,12 @@ data class CreateJobUiState(
     )
 
     data class JobTitleUIState(
-        var id: String = "",
+        var id: Int = 1,
         var title: String = "",
     )
 
     data class JobSalaryUIState(
-        var maxSalary: String = "0",
-        var minSalary: String = "100000",
+        var maxSalary: Double = 0.0,
+        var minSalary: Double = 0.0,
     )
 }

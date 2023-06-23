@@ -1,9 +1,11 @@
 package com.cupcake.repository.mapper
 
+import com.cupcake.jobsfinder.local.entities.JobTitleEntity
 import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.Job
 import com.cupcake.models.JobSalary
 import com.cupcake.models.JobTitle
+import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.job.JobDto
 
 fun JobDto.toJobWithJobTitle(): Job {
@@ -41,7 +43,7 @@ private fun formatLargeNumber(number: Double): String {
 }
 
 
-fun Job.toJobsEntity(): JobsEntity{
+fun Job.toJobsEntity(): JobsEntity {
     return JobsEntity(
         id = id,
         jobId = jobTitle.id.toString(),
@@ -82,7 +84,21 @@ fun JobDto.toJob(): Job {
     )
 }
 
-fun JobsEntity.toJob(): Job{
+fun JobTitleEntity.toJobTitle(): JobTitle {
+    return JobTitle(
+        id = id,
+        title = title
+    )
+}
+
+fun JobTitleDto.toJobTitleEntity(): JobTitleEntity {
+    return JobTitleEntity(
+        id = id,
+        title = title
+    )
+}
+
+fun JobsEntity.toJob(): Job {
     return Job(
         id = id,
         jobTitle = JobTitle(
