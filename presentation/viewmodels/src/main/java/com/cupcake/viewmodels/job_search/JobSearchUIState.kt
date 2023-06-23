@@ -47,5 +47,5 @@ fun Job.toJobItemUiState() = JobItemUiState(
     companyName = this.company,
     detailsChip = listOf(this.workType, this.jobType),
     location = this.jobLocation,
-    salary = this.jobSalary.toString()
+    salary = "$${this.jobSalary.minSalary}-${this.jobSalary.maxSalary}"
 )
