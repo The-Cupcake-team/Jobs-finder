@@ -143,12 +143,12 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun getFollowingPosts(): List<Post> {
         val fakePosts = listOf(
-            Post("1", "2023-06-23T13:56:42.584743", "One Piece 🏴‍☠️❤️‍🔥", "Sajjadio"),
-            Post("2", "2023-06-23T13:56:42.584743", "Sabahooooooo 👋", "amory" ),
-            Post("4", "2023-06-23T13:56:42.584743", "here we are go 🤍❤️", "dada"),
-            Post("5", "2023-06-23T13:56:42.584743", "MY TEAM IS THE BEST 🧁🔝💖💖💖", "ahmed mousa"),
-            Post("6", "2023-06-23T13:56:42.584743", "MY TEAM MATES ARE AWESOME 😍🤩💖", "kaido"),
-            Post("7", "2023-06-23T13:56:42.584743", "FK you haters 🫵😎✊", "BK")
+            Post("1", "2023-06-23T13:56:42.584743", "One Piece 🏴‍☠️❤️‍🔥", "Sajjadio" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg" ),
+            Post("2", "2023-06-23T13:56:42.584743", "Sabahooooooo 👋", "amory" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"),
+            Post("4", "2023-06-23T13:56:42.584743", "here we are go 🤍❤️", "dada" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80","Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"),
+            Post("5", "2023-06-23T13:56:42.584743", "MY TEAM IS THE BEST 🧁🔝💖💖💖", "ahmed mousa" ,"https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "home less" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"),
+            Post("6", "2023-06-23T13:56:42.584743", "MY TEAM MATES ARE AWESOME 😍🤩💖", "kaido" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg"),
+            Post("7", "2023-06-23T13:56:42.584743", "The Chance 😎", "BK" , "https://images.unsplash.com/photo-1661956602153-23384936a1d3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80", "Developer" , "https://static.vecteezy.com/system/resources/previews/000/439/863/original/vector-users-icon.jpg")
         )
         return fakePosts
     }

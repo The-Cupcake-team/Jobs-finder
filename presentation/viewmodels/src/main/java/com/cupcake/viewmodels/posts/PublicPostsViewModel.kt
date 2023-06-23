@@ -68,7 +68,10 @@ class PublicPostsViewModel @Inject constructor(
             id = id,
             createdAt = createdAt,
             description = content,
-            creatorName = creatorName
+            creatorName = creatorName,
+            image = postImage,
+            jobTitle = jobTitle,
+            profileImage = profileImage
         )
     }
 

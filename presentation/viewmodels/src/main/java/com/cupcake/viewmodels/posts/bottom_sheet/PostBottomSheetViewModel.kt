@@ -52,7 +52,10 @@ class PostBottomSheetViewModel @Inject constructor(
             id = id,
             createdAt = createdAt,
             content = description,
-            creatorName = creatorName
+            creatorName = creatorName,
+            postImage = image,
+            jobTitle = jobTitle,
+            profileImage = profileImage
         )
     }
 

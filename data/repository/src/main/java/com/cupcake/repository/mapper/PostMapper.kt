@@ -9,7 +9,10 @@ fun PostsDto.toPost(): Post {
         id = id ?: "",
         createdAt = createdAt ?: "",
         content = content ?: "",
-        creatorName = author?.name ?:""
+        creatorName = author?.name ?:"",
+        postImage = image?.imageUrl ?: "",
+        jobTitle = author?.jobTitle ?: "",
+        profileImage = author?.avtar ?: ""
     )
 }
 
@@ -18,7 +21,10 @@ fun Post.toPostsEntity(): PostsEntity{
         id = id,
         createdAt = createdAt,
         content = content,
-        creatorName = creatorName
+        creatorName = creatorName,
+        postImage = postImage,
+        jobTitle =jobTitle,
+        profileImage = profileImage
     )
 }
 
@@ -28,7 +34,10 @@ fun PostsEntity.toPost(): Post{
         id = id,
         createdAt = createdAt,
         content = content,
-        creatorName = creatorName
+        creatorName = creatorName,
+        postImage = postImage,
+        jobTitle =jobTitle,
+        profileImage = profileImage
     )
 }
 
