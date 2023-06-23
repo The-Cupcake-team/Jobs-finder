@@ -20,14 +20,16 @@ class AuthenticationRepositoryImpl @Inject constructor(
         fullName: String,
         userName: String,
         email: String,
-        password: String
+        password: String,
+        jobTitleId: Int
     ): User {
         return wrapResponseWithErrorHandler {
             api.register(
                 fullName,
                 userName,
                 email,
-                password
+                password,
+                jobTitleId
             )
         }.toUser()
     }

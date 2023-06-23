@@ -8,7 +8,8 @@ interface AuthenticationRepository {
         fullName: String,
         userName: String,
         email: String,
-        password: String
+        password: String,
+        jobTitleId: Int
     ): User
 
     suspend fun saveAuthData(token: Token)
