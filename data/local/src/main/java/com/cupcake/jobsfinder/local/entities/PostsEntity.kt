@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class PostsEntity (
     @PrimaryKey
     val id: String,
-    val createdAt: Long,
+    val createdAt: String,
     val content: String,
     val creatorName: String
 )

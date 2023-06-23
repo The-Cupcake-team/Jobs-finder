@@ -2,6 +2,7 @@ package com.cupcake.remote
 
 import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
+import com.cupcake.remote.response.PostsDto
 import com.cupcake.remote.response.authentication.register.UserDto
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
@@ -33,8 +34,8 @@ interface JobApiService {
     ): Response<BaseResponse<Nothing>>
 
 
-    @GET("/posts")
-    suspend fun getPosts(): Response<BaseResponse<List<PostDto>>>
+    @GET("/public/posts")
+    suspend fun getPosts(): Response<BaseResponse<List<PostsDto>>>
 
     @POST("/jobs")
     suspend fun createJob(@Body job: JobDto): JobDto
@@ -57,12 +58,12 @@ interface JobApiService {
     @POST("/post")
     suspend fun createPost(
         @Field("content") content: String
-    ): Response<BaseResponse<PostDto>>
+    ): Response<BaseResponse<PostsDto>>
 
-    @GET("post/{postId}")
+    @GET("/public/post/{postId}")
     suspend fun getPostById(
         @Path("postId") postId: String
-    ): Response<BaseResponse<PostDto>>
+    ): Response<BaseResponse<PostsDto>>
 
     @GET("/posts")
     suspend fun getAllPosts(): List<PostDto>

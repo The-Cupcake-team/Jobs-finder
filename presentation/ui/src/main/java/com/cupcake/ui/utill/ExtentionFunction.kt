@@ -5,16 +5,14 @@ import androidx.annotation.RequiresApi
 import java.time.Duration
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun convert(timestamp: Long): String {
-    val currentTimestamp = System.currentTimeMillis()
-    val secondsAgo = (currentTimestamp - timestamp) / 1000
+fun convert(time: String): String {
+    val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+    val pastDateTime = LocalDateTime.parse(time, formatter)
+    val currentDateTime = LocalDateTime.now()
+    val duration = Duration.between(pastDateTime, currentDateTime)
 
-    val duration = Duration.ofSeconds(secondsAgo)
-    val formatter = DateTimeFormatter.ofPattern("h 'hours ago'", Locale.getDefault())
-    val formattedString = formatter.format(LocalDateTime.now().minus(duration))
-
-    return formattedString
+    val hours = duration.toHours()
+    return "$hours hours ago"
 }

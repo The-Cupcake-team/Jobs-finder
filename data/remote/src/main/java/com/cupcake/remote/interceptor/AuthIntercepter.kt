@@ -26,7 +26,7 @@ class AuthInterceptor @Inject constructor() : Interceptor {
     private companion object {
         const val AUTHORIZATION = "Authorization"
         const val BEARER = "bearer"
-         val TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJmYmZmZDA3NC03ZmRmLTQyYTYtYTMzMi1kZDI0OGFmZWFhNzMiLCJleHAiOjE2ODc2ODYyMjZ9.rOGfe0KsYJ-eGZaHMVss7u1Pw_LBUIcHdKkBlmXewiE"
+         val TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4ZTdiMDMxMC00Zjc1LTRhZGMtYTlmNS05NDdkMzFmYWZhYTQiLCJleHAiOjE2ODc3ODk5MTJ9.3MOI6qNV9PjH8T1Wq-2VTOl6gVlC_XR9jY1ezSPdf6c"
     }
 
 

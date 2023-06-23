@@ -21,9 +21,6 @@ import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.base.BaseErrorUiState
-import com.cupcake.viewmodels.posts.PostItemUIState
-import com.google.android.material.textfield.TextInputLayout
-
 import com.cupcake.viewmodels.jobs.JobTitleUiState
 
 
@@ -100,10 +97,9 @@ fun showDrawableErrorImage(view: ImageView, errorType: BaseErrorUiState?) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter(value = ["app:convertTime"])
-fun convertTime(view: TextView, time: Long) {
+fun convertTime(view: TextView, time: String) {
     view.text = convert(time)
 }
-
 
 @BindingAdapter(value = ["app:bindArrayAdapter"])
 fun bindArrayAdapter(view: AutoCompleteTextView, queryList: List<JobTitleUiState>?) {

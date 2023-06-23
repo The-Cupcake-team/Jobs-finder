@@ -17,7 +17,7 @@ data class PostsUIState(
 @Parcelize
 data class PostItemUIState(
     val id: String = "",
-    val createdAt: Long = 0,
+    val createdAt: String = "",
     val description: String = "",
     val creatorName: String = "",
     val likes: Int = 0,
