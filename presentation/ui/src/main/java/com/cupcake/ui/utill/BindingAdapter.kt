@@ -100,8 +100,8 @@ fun showDrawableErrorImage(view: ImageView, errorType: BaseErrorUiState?) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter(value = ["app:convertTime"])
-fun convertTime(view: TextView, time: Long) {
-    view.text = convert(time)
+fun convertTime(view: TextView, time: String?) {
+    view.text = time?.let { convert(it) }
 }
 
 

@@ -10,12 +10,13 @@ data class JobDto(
     val creatorId: String?,
     val jobTitle: JobTitleDto?,
     val company: String?,
-    val createdAt: Long?,
+    val createdAt: String?,
     val workType: String?,
     val jobLocation: String?,
     val jobType: String?,
     val jobDescription: String?,
     val jobSalary: JobSalaryDto?,
     val experience: String?,
-    val eduction: String?
+    val eduction: String?,
+    val skills: String?
 )

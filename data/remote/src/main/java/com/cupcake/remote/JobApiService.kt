@@ -80,8 +80,10 @@ interface JobApiService {
     suspend fun register(
         @Field("fullName") fullName: String,
         @Field("username") userName: String,
-        @Field("phoneNumber") phoneNumber: String,
+        @Field("email") email: String,
         @Field("password") password: String,
+        @Field("jobTitleId") jobTitleId: Int,
     ): Response<BaseResponse<UserDto>>
+
     // endregion
 }

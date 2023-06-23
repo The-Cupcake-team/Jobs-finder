@@ -13,6 +13,6 @@ data class CreatePostUiState(
     data class PostUiState(
         val id: String = "",
         val content: String = "",
-        val createAt: Long = 0L
+        val createAt: String = "",
     )
 }

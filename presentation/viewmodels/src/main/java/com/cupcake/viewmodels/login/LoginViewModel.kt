@@ -1,71 +1,74 @@
 package com.cupcake.viewmodels.login
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.models.ErrorType
-import com.cupcake.usecase.LoginUseCase
+import com.cupcake.usecase.login.LoginUseCase
+import com.cupcake.usecase.validation.ValidatePasswordUseCase
+import com.cupcake.usecase.validation.ValidateUsernameUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val login: LoginUseCase,
+    private val loginUseCase: LoginUseCase,
+    private val validateUsername: ValidateUsernameUseCase,
+    private val validatePassword: ValidatePasswordUseCase,
 ) : BaseViewModel<LoginUiState>(LoginUiState()) {
+
+    private val _event = MutableSharedFlow<LoginEvent>()
+    val event = _event.asSharedFlow()
+
     fun login() {
-        viewModelScope.launch {
-            try {
-                _state.update { it.copy(isLoading = true) }
-                _state.update {
-                    it.copy(
-                        userName = _state.value.userName,
-                        userNameError = "",
-                        isUserNameValid = true,
-                        password = _state.value.password,
-                        passwordError = "",
-                        isPasswordValid = true
-                    )
-                }
-                login(_state.value.userName, _state.value.password)
-
-
-                onSuccessLogin()
-            } catch (e: ErrorType) {
-
-//                _state.update {
-//                    it.copy(
-//                        userName = _state.value.userName,
-//                        password = _state.value.password,
-//                        userNameError = if (e is ErrorType.InvalidFieldUserName) e.messages else "",
-//                        passwordError = if (e is ErrorType.InvalidFieldPassword) e.messages else "",
-//                        isUserNameValid =  e !is  ErrorType.InvalidFieldUserName  ,
-//                        isPasswordValid = e !is ErrorType.InvalidFieldPassword
-//                    )
-//                }
-//                onErrorLogin(e.message ?: "Unknown error")
-
-            }
-        }
+        updateState { it.copy(isLoading = true) }
+        tryToExecute(
+            callee = {
+                loginUseCase(
+                    userName = state.value.userName,
+                    password = state.value.password,
+                )
+            },
+            onSuccess = ::onLoginSuccess,
+            onError = ::onLoginError
+        )
     }
-    private fun onErrorLogin(error: BaseErrorUiState) {
-        _state.update {
+
+    private fun onLoginSuccess(unit: Unit) {
+        updateState { it.copy(isLoading = false) }
+        viewModelScope.launch { _event.emit(LoginEvent.NavigateToHome) }
+    }
+
+    private fun onLoginError(error: BaseErrorUiState) {
+        updateState { it.copy(isLoading = false) }
+        viewModelScope.launch { _event.emit(LoginEvent.ShowErrorMessage(error.errorCode)) }
+    }
+
+    fun onUserNameChange(userName: String) {
+        val userNameValidation = validateUsername(userName)
+        updateState {
             it.copy(
-                isLoading = false,
-                error = error
+                userName = userName,
+                userNameError = userNameValidation.errorMessage,
+                isUserNameValid = userNameValidation.isValid
             )
         }
     }
 
-    private fun onSuccessLogin() {
-//        _state.update {
-//            it.copy(
-//                isLoading = false,
-//                error = "",
-//            )
-//        }
+    fun onPasswordChange(password: String) {
+        val passwordValidation = validatePassword(password)
+        updateState {
+            it.copy(
+                password = password,
+                passwordError = passwordValidation.errorMessage,
+                isPasswordValid = passwordValidation.isValid
+            )
+        }
+    }
+
+    fun onRegisterClick() {
+        viewModelScope.launch { _event.emit(LoginEvent.RegisterClick) }
     }
 }
