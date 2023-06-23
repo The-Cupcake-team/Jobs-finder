@@ -5,7 +5,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PostDto(
     val id: String?,
-    val createdAt: Long?,
+    val createdAt: String?,
     val content: String?,
-    val creatorName: String?
+    val author: AuthorDto?,
+    val creatorName: String?,
+    val image: ImageDto?
 )

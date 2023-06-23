@@ -1,5 +1,6 @@
 package com.cupcake.usecase.register
 
+import com.cupcake.models.ErrorType
 import com.cupcake.models.User
 import repo.AuthenticationRepository
 import javax.inject.Inject
@@ -15,13 +16,19 @@ class RegisterUseCase @Inject constructor(
         email: String,
         password: String,
         confirmPassword: String
-    ): User {
+    ) {
 
-        validateRegisterForm(fullName, userName, email, password, confirmPassword)
+        val isValid = validateRegisterForm(fullName, userName, email, password, confirmPassword)
+
+        if (!isValid) {
+            throw ErrorType.UnAuthorized(ERROR)
+        }
 
         val user = authenticationRepository.register(fullName, userName, email, password)
-        authenticationRepository.saveAuthToken(user.token)
+        authenticationRepository.saveAuthData(user.token)
+    }
 
-        return user
+    companion object {
+        const val ERROR = "Please Fill All Fields"
     }
 }

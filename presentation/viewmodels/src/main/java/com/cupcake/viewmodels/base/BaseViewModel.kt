@@ -1,5 +1,6 @@
 package com.cupcake.viewmodels.base
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.ErrorType
@@ -32,7 +33,7 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
                 onSuccess(result)
             } catch (error: ErrorType.Network) {
                 onError(BaseErrorUiState.Disconnected(error.message.toString())) //500
-            } catch (error: ErrorType) {
+            } catch (error: ErrorType.UnAuthorized) {
                 onError(BaseErrorUiState.UnAuthorized(error.message.toString()))
             } catch (error: ErrorType.Server) {
                 onError(BaseErrorUiState.ServerError(error.message.toString()))

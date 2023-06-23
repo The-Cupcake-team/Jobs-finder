@@ -10,9 +10,9 @@ data class CreatePostUiState(
     val error: BaseErrorUiState? = null,
 ) {
     data class PostUiState(
-        val id:String="",
+        val id: String = "",
         val content: String = "",
-        val createAt:Long= 0L,
+        val createAt: String = "",
     )
 
 }

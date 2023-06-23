@@ -14,7 +14,7 @@ data class PostsUIState(
 
 data class PostItemUIState(
     val id: String,
-    val createdAt: Long,
+    val createdAt: String,
     val description: String,
     val creatorName: String,
     val likes: Int = 0,
