@@ -2,7 +2,6 @@ package com.cupcake.remote
 
 import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
-import com.cupcake.remote.response.authentication.register.TokenDto
 import com.cupcake.remote.response.authentication.register.UserDto
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
@@ -11,7 +10,6 @@ import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -86,10 +84,5 @@ interface JobApiService {
         @Field("password") password: String,
     ): Response<BaseResponse<UserDto>>
 
-
-    @GET("/login")
-    suspend fun login(
-        @Header("Authorization") credentials: String
-    ): Response<BaseResponse<TokenDto>>
     // endregion
 }

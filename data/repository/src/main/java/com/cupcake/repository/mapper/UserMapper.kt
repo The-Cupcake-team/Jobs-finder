@@ -10,7 +10,7 @@ fun UserDto.toUser(): User {
         id = id,
         username = username,
         fullName = fullName,
-        email = phoneNumber,
+        email = email,
         isActive = isActive,
         createdAt = createdAt,
         token = Token(

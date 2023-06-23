@@ -1,6 +1,6 @@
 package com.cupcake.remote
 
-import com.cupcake.remote.response.authentication.register.TokenDto
+import com.cupcake.remote.response.authentication.register.UserDto
 import com.cupcake.remote.response.base.BaseResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -12,6 +12,6 @@ interface AuthApiService {
     @GET("/login")
     suspend fun login(
         @Header("Authorization") credentials: String
-    ): Response<BaseResponse<TokenDto>>
+    ): Response<BaseResponse<UserDto>>
 
 }
