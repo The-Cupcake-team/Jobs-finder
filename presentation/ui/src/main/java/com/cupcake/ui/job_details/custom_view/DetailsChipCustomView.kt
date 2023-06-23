@@ -28,7 +28,7 @@ class DetailsChipCustomView @JvmOverloads constructor(
         binding.textViewDetailsLocation.text = locationValue
     }
     @RequiresApi(Build.VERSION_CODES.O)
-    fun createdAt(time: Long) {
+    fun createdAt(time: String) {
         binding.textViewDetailsPostedOn.text = convert(time)
     }
 

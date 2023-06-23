@@ -59,7 +59,8 @@ class BottomSheetViewModel @Inject constructor(
             jobDescription = companyName,
             jobSalary = JobSalary(minSalary = salary.toDouble(), maxSalary = salary.toDouble()),
             jobExperience = jobExperience,
-            education = education
+            education = education,
+            skills = emptyList()
         )
     }
 
