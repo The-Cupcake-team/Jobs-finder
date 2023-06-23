@@ -46,7 +46,7 @@ class FollowingFragment : BaseFragment<FragmentFollowingBinding, FollowingPostsV
 
     private fun handlePostEvent(event: SpecialPostsEvent) {
         when (event) {
-            is SpecialPostsEvent.PostCommentClick -> navigateToCommentsFragment("190d6e52-3ea5-4f1a-ad25-4487585b2ae5")
+            is SpecialPostsEvent.PostCommentClick -> navigateToCommentsFragment("3ea28120-f8c3-463c-9e11-05f79f5ec0b0")
             is SpecialPostsEvent.PostShareClick -> sharePost()
             is SpecialPostsEvent.PostOptionsClick -> showBottomSheetDialog(event.model)
         }
