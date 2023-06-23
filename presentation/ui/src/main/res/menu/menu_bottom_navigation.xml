@@ -5,11 +5,11 @@
         android:enabled="true"
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
-    <item
-        android:id="@+id/createJobFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_message"
-        android:title="@string/messages" />
+<!--    <item-->
+<!--        android:id="@+id/createJobFragment"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_message"-->
+<!--        android:title="@string/messages" />-->
     <item
         android:id="@+id/createPostFragment"
         android:enabled="true"
