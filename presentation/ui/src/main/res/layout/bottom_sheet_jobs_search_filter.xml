@@ -90,7 +90,8 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/remote" />
+                android:text="@string/remote"
+                />
 
         </com.google.android.material.chip.ChipGroup>
 

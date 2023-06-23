@@ -8,7 +8,7 @@
     <data>
 
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.cupcake.viewmodels.job_search.JobSearchViewModel" />
 
     </data>
@@ -45,6 +45,7 @@
                 android:id="@+id/editTextSearchInput"
                 android:layout_width="@dimen/zero"
                 android:layout_height="@dimen/search_bar_height"
+                android:onTextChanged="@{(text,start,before,count) -> viewModel.onSearchInputChange(text)}"
                 android:drawableStart="@drawable/ic_search"
                 android:background="@drawable/background_search_bar"
                 android:hint="@string/search"
