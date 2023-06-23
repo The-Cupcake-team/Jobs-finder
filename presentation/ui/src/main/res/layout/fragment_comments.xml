@@ -99,7 +99,6 @@
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
             app:showWhenIf="@{viewModel.state.isSuccess}"
-            app:convertTime="@{viewModel.state.post.createAt}"
             android:textColor="@color/color_text_tertiary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
