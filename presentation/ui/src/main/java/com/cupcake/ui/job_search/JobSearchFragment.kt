@@ -43,8 +43,6 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
     }
 
 
-
-
     private fun showFilterSheet() {
         val bottomSheetBinding = BottomSheetJobsSearchFilterBinding.inflate(layoutInflater)
         val dialog = BottomSheetDialog(requireContext())
@@ -54,6 +52,5 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
             show()
         }
     }
-
 
 }

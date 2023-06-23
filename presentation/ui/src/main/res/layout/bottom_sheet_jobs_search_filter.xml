@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.job_search.JobSearchViewModel" />
@@ -58,6 +57,7 @@
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/spacing_normal"
             android:hint="@string/country_city"
+            android:text="@={viewModel.state.jobFilterUIState.location}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewLocation" />
 
@@ -199,18 +199,7 @@
 <!--            android:valueTo="100.0"-->
 <!--             />-->
 
-        <com.google.android.material.slider.RangeSlider
-            android:id="@+id/sliderRange"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:values="@array/custom_salary_range"
-            app:trackColorActive="@color/primary"
-            app:trackColorInactive="@color/secondary"
-            app:layout_constraintTop_toBottomOf="@id/textSalary"
-            android:valueFrom="0.0"
-            android:valueTo="100.0" />
-
-        <TextView
+        <EditText
             android:id="@+id/minSalary"
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
@@ -219,11 +208,11 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
+            android:text="@={viewModel.state.jobFilterUIState.salary.minSalary}"
             android:paddingHorizontal="@dimen/spacing_medium"
             android:textColor="@color/primary"
-            app:layout_constraintTop_toBottomOf="@id/sliderRange"
-            app:layout_constraintStart_toStartOf="@id/sliderRange" />
-<!--        android:text="@{viewModel.state.JobFormUiState.startRangSalary}"-->
+            app:layout_constraintTop_toBottomOf="@id/textSalary"
+            app:layout_constraintStart_toStartOf="@id/textSalary" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/dividerRangSalary"
@@ -235,7 +224,7 @@
             app:layout_constraintTop_toTopOf="@id/minSalary"
             app:layout_constraintBottom_toBottomOf="@id/minSalary" />
 
-        <TextView
+        <EditText
             android:id="@+id/maxSalary"
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
@@ -243,12 +232,12 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
+            android:text="@={viewModel.state.jobFilterUIState.salary.maxSalary}"
             android:paddingHorizontal="@dimen/spacing_medium"
             android:textColor="@color/primary"
             app:layout_constraintStart_toEndOf="@id/dividerRangSalary"
             app:layout_constraintTop_toTopOf="@id/minSalary"
             app:layout_constraintBottom_toBottomOf="@id/minSalary" />
-<!--        android:text="@{viewModel.state.JobFormUiState.endRangSalary}"-->
 
         <TextView
             android:id="@+id/labelUsdMonth"
@@ -258,8 +247,8 @@
             android:layout_marginEnd="@dimen/spacing_normal"
             android:text="@string/usd_month"
             android:textColor="@color/color_text_secondary"
-            app:layout_constraintEnd_toEndOf="@id/sliderRange"
-            app:layout_constraintTop_toBottomOf="@id/sliderRange" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textSalary" />
 
         <Button
             android:id="@+id/button_apply_job"
@@ -269,11 +258,10 @@
             android:text="@string/done"
             android:textAllCaps="false"
             android:layout_marginTop="@dimen/spacing_large"
+            android:onClick="@{()-> viewModel.onApplyClicked()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/minSalary"
             app:layout_constraintStart_toStartOf="parent" />
-<!--        app:showWhenIf="@{!viewModel.state.loading}"-->
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

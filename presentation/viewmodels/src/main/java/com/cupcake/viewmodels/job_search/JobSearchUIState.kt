@@ -6,7 +6,7 @@ import com.cupcake.viewmodels.base.BaseErrorUiState
 import kotlinx.parcelize.Parcelize
 
 data class JopSearchUIState(
-    val searchInput: String = "",
+    var searchInput: String = "",
     val searchResult: List<JobItemUiState> = emptyList(),
     val jobFilterUIState: JobFilterUIState = JobFilterUIState(),
     val isLoading: Boolean = true,
@@ -14,18 +14,17 @@ data class JopSearchUIState(
 )
 
 data class JobFilterUIState(
-    val location: String = "",
-    val jobType: String = "",
-    val workType: String = "",
-    val experience: String = "",
-    val salary: SalaryUIState = SalaryUIState(),
+    var location: String = "",
+    var jobType: String = "",
+    var workType: String = "",
+    var experience: String = "",
+    var salary: SalaryUIState = SalaryUIState(),
 )
 data class SalaryUIState(
-    val minSalary: Double = 0.0,
-    val maxSalary: Double = 0.0
+    var minSalary: String = "0.0",
+    var maxSalary: String = " 0.0"
 )
 
-@Parcelize
 data class JobItemUiState(
     val id : String = "",
     val image: String = "",
@@ -37,7 +36,7 @@ data class JobItemUiState(
     val createdAt: Long = 0,
     val jobExperience: String = "",
     val education: String = "",
-): Parcelable
+)
 
 
 
