@@ -12,6 +12,11 @@ interface AuthenticationRepository {
         jobTitleId: Int
     ): User
 
+    suspend fun login(
+        userName: String,
+        password: String
+    ): Token
+
     suspend fun saveAuthData(token: Token)
 
     suspend fun getAuthToken(): String?

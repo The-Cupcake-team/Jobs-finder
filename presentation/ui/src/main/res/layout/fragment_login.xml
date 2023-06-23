@@ -10,138 +10,170 @@
             type="com.cupcake.viewmodels.login.LoginViewModel" />
     </data>
 
-
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:fillViewport="true"
         android:background="@color/blue_tint">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/blue_tint"
-            >
+            android:background="@drawable/login_bitmap" />
 
-            <ImageView
-                android:id="@+id/imageBackground"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/login_welcome_image"
-                android:background="@drawable/login_factory"
-                android:scaleType="centerCrop"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/loginCard"
+            style="@style/CustomCardViewStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            app:cardBackgroundColor="@color/background"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <com.google.android.material.card.MaterialCardView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/zero"
-                android:layout_marginTop="@dimen/login_card_negative_margin"
-                android:backgroundTint="@color/background"
-                app:cardCornerRadius="@dimen/login_card_radius"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageBackground">
+                android:layout_height="match_parent"
+                android:scrollbars="none">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_medium">
 
                     <TextView
                         android:id="@+id/textViewWelcome"
-                        style="@style/WelcomeTextStyle"
+                        style="@style/TextStyle.Heading"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_huge"
                         android:text="@string/welcome_back"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/textViewLoginToJoin"
-                        style="@style/LoginToJoin"
+                        style="@style/TextStyle.body"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_normal"
                         android:text="@string/discover_your_career_with_our_app"
+                        android:textColor="@color/color_text_tertiary"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/containerUsername"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textViewUserName"
+                        style="@style/TextStyle.Title"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/spacing_medium"
-                        android:layout_marginTop="@dimen/spacing_xlarge"
-                        android:autofillHints="username"
-                        android:hint="@string/user_name"
+                        android:layout_marginTop="@dimen/spacing_huge"
+                        android:text="@string/user_name"
+                        app:layout_constraintStart_toStartOf="@id/textInputLayoutUserName"
+                        app:layout_constraintTop_toBottomOf="@id/textViewLoginToJoin" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayoutUserName"
+                        style="@style/TextInputLayoutStyle"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_normal"
                         android:inputType="text"
-                        android:textColorHint="@color/color_text_tertiary"
                         app:boxStrokeWidth="@dimen/zero"
                         app:boxStrokeWidthFocused="@dimen/zero"
                         app:helperText="@{viewModel.state.userNameError}"
                         app:helperTextTextColor="@color/accent_red"
                         app:hintTextColor="@color/tertiary"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewLoginToJoin">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewUserName">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/textInputUsername"
                             setIcons="@{viewModel.state.isUserNameValid}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/text_input_background"
-                            android:maxLines="1"
-                            android:text="@={viewModel.state.userName}" />
-
+                            android:drawablePadding="@dimen/spacing_normal"
+                            android:fontFamily="@font/worksans_regular"
+                            android:inputType="text"
+                            android:onTextChanged="@{(text, start, before, count) -> viewModel.onUserNameChange(text.toString())}"
+                            android:textSize="@dimen/text_size_body" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/container_password"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textViewPassword"
+                        style="@style/TextStyle.Title"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/spacing_medium"
                         android:layout_marginTop="@dimen/spacing_medium"
-                        android:autofillHints="password"
-                        android:hint="@string/password"
-                        android:textColorHint="@color/color_text_tertiary"
+                        android:text="@string/password"
+                        app:layout_constraintStart_toStartOf="@id/textInputLayoutPassword"
+                        app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayoutPassword"
+                        style="@style/PasswordTextInputLayoutStyle"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:inputType="text"
                         app:boxStrokeWidth="@dimen/zero"
                         app:boxStrokeWidthFocused="@dimen/zero"
                         app:helperText="@{viewModel.state.passwordError}"
                         app:helperTextTextColor="@color/accent_red"
                         app:hintTextColor="@color/tertiary"
-                        app:layout_constraintTop_toBottomOf="@+id/containerUsername">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textViewPassword">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/text_input_password"
-                            setIcons="@{viewModel.state.isPasswordValid}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/text_input_background"
+                            android:drawablePadding="@dimen/spacing_normal"
+                            android:fontFamily="@font/worksans_regular"
                             android:inputType="textPassword"
-                            android:lines="1"
-                            android:text="@={viewModel.state.password}" />
-
+                            android:onTextChanged="@{(text, start, before, count) -> viewModel.onPasswordChange(text.toString())}"
+                            android:textSize="@dimen/text_size_body" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/loginButton"
-                        style="@style/loginButtonStyle"
+                        style="@style/normalButtonStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_large"
-                        android:background="@drawable/background_button_login"
+                        android:backgroundTint="@color/blue_500"
+                        android:enabled="@{!viewModel.state.isLoading}"
                         android:onClick="@{() -> viewModel.login()}"
+                        android:textAllCaps="false"
+                        app:buttonText="@{@string/sign_in}"
+                        app:isLoading="@{viewModel.state.isLoading}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/container_password" />
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/spacing_normal"
+                        android:indeterminateTint="@color/blue_300"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/loginButton"
+                        app:layout_constraintEnd_toEndOf="@id/loginButton"
+                        app:layout_constraintStart_toStartOf="@id/loginButton"
+                        app:layout_constraintTop_toTopOf="@id/loginButton"
+                        app:showWhenIf="@{viewModel.state.isLoading}" />
 
                     <TextView
                         android:id="@+id/textViewDontHaveAccount"
-                        style="@style/TextStyle.caption"
+                        style="@style/TextStyle.body"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:layout_marginBottom="@dimen/spacing_medium"
                         android:text="@string/don_t_have_account"
+                        android:textColor="@color/color_text_tertiary"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/textView4"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintHorizontal_chainStyle="packed"
@@ -153,23 +185,19 @@
                         style="@style/TextStyle.body"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_small"
                         android:clickable="true"
                         android:focusable="true"
                         android:lines="1"
-                        android:text="@string/sign_up_here"
+                        android:onClick="@{() -> viewModel.onRegisterClick()}"
+                        android:text="@string/signup"
                         android:textColor="@color/button_tint"
                         app:layout_constraintBottom_toBottomOf="@+id/textViewDontHaveAccount"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toEndOf="@+id/textViewDontHaveAccount"
                         app:layout_constraintTop_toTopOf="@+id/textViewDontHaveAccount" />
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            </ScrollView>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

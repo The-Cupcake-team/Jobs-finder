@@ -84,5 +84,6 @@ interface JobApiService {
         @Field("password") password: String,
         @Field("jobTitleId") jobTitleId: Int,
     ): Response<BaseResponse<UserDto>>
+
     // endregion
 }
