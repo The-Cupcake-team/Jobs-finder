@@ -2,7 +2,6 @@ package com.cupcake.ui.register
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.cupcake.ui.R
@@ -10,6 +9,7 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentRegisterBinding
 import com.cupcake.viewmodels.register.RegisterEvent
 import com.cupcake.viewmodels.register.RegisterViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -29,7 +29,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
             viewModel.event.collect {
                 when (it) {
                     is RegisterEvent.LoginClick -> navigateToLogin()
-                    is RegisterEvent.ShowErrorMessage -> showToast(it.errorMessage)
+                    is RegisterEvent.ShowErrorMessage -> showSnackBar(it.errorMessage)
                     is RegisterEvent.NavigateToHome -> navigateToHome()
 
                 }
@@ -41,8 +41,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
         findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
     }
 
-    private fun showToast(errorMessage: String) {
-        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+    private fun showSnackBar(errorMessage: String) {
+        Snackbar.make(requireView(), errorMessage, Snackbar.LENGTH_LONG).show()
     }
 
     private fun navigateToHome() {

@@ -18,24 +18,24 @@ data class JobDetailsFieldState(
     val jobType: String = "",
     val location: String = "",
     val salary: Int = 0,
-    val createdAt: Long = 0,
+    val createdAt: String = "",
     val description: String = "",
     val experience: String = ""
 )
 
 fun Job.toJobsDetailsUiState(): JobDetailsFieldState {
     return JobDetailsFieldState(
-        id = this.id,
+        id = id,
         image = "",
-        title = this.jobTitle.title ?: "",
-        companyName = this.company,
-        workType = this.workType,
-        jobType = this.jobType,
-        location = this.jobLocation,
-        salary = this.jobSalary.maxSalary.toInt(),
-        createdAt = this.createdAt,
-        description = this.jobDescription,
-        experience = this.jobExperience
+        title = jobTitle.title ?: "",
+        companyName = company,
+        workType = workType,
+        jobType = jobType,
+        location = jobLocation,
+        salary = jobSalary.maxSalary.toInt(),
+        createdAt = createdAt,
+        description = jobDescription,
+        experience = jobExperience
     )
 }
 

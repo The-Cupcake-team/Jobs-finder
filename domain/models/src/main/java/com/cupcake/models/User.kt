@@ -5,7 +5,13 @@ data class User(
     val username: String,
     val fullName: String,
     val email: String,
+    val profile: Profile,
     val isActive: Boolean,
-    val createdAt: Long,
-    val token: String
+    val createdAt: String,
+    val token: Token
+)
+
+data class Token(
+    val token: String,
+    val expireTime: Long
 )

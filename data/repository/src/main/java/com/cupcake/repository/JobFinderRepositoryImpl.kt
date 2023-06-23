@@ -3,6 +3,7 @@ package com.cupcake.repository
 import android.util.Log
 import com.cupcake.jobsfinder.local.daos.JobFinderDao
 import com.cupcake.jobsfinder.local.entities.JobsEntity
+import com.cupcake.jobsfinder.local.datastore.ProfileDataStore
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
@@ -10,6 +11,7 @@ import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toJob
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toJobTitle
 import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
@@ -21,7 +23,8 @@ import javax.inject.Inject
 
 class JobFinderRepositoryImpl @Inject constructor(
     private val api: JobApiService,
-    private val jobFinderDao: JobFinderDao
+    private val jobFinderDao: JobFinderDao,
+    private val profileDataStore: ProfileDataStore
 ) : JobFinderRepository {
 
 
@@ -194,4 +197,24 @@ class JobFinderRepositoryImpl @Inject constructor(
         }
 
     }
+
+    // region DataStore
+    override suspend fun saveProfileData(avatarUri: String, jobTitle: Int) {
+        profileDataStore.saveProfileData(avatarUri, jobTitle)
+    }
+
+    override suspend fun getAvatarUri(): String? {
+        return profileDataStore.getAvatarUri()
+    }
+
+    override suspend fun getJobTitle(): Int? {
+        return profileDataStore.getJobTitle()
+    }
+
+    override suspend fun clearProfileData() {
+        profileDataStore.clearProfileData()
+    }
+
+    //endregion
+
 }

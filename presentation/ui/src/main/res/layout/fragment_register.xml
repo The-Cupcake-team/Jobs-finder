@@ -14,7 +14,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/accent">
+        android:background="@color/background"
+        android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -64,18 +65,19 @@
                 app:boxStrokeWidth="@dimen/zero"
                 app:boxStrokeWidthFocused="@dimen/zero"
                 app:helperText="@{viewModel.state.fullNameError}"
+                app:helperTextTextColor="@color/accent_red"
                 app:hintTextColor="@color/tertiary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:helperTextTextColor="@color/accent_red"
                 app:layout_constraintTop_toBottomOf="@id/textViewFirstName">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    setIcons="@{viewModel.state.isFullNameValid}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="text"
-                    setIcons="@{viewModel.state.isFullNameValid}"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onFullNameChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
 
@@ -103,31 +105,75 @@
                 app:boxStrokeWidth="@dimen/zero"
                 app:boxStrokeWidthFocused="@dimen/zero"
                 app:helperText="@{viewModel.state.userNameError}"
+                app:helperTextTextColor="@color/accent_red"
                 app:hintTextColor="@color/tertiary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:helperTextTextColor="@color/accent_red"
                 app:layout_constraintTop_toBottomOf="@id/textViewUserName">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    setIcons="@{viewModel.state.isUserNameValid}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="text"
-                    setIcons="@{viewModel.state.isUserNameValid}"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onUserNameChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/textViewPhoneNumber"
+                android:id="@+id/textViewJobTitle"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/job_title"
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutJobTitle"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:autofillHints="username"
+                android:inputType="text"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewJobTitle">
+
+                <AutoCompleteTextView
+                    style="@style/TextStyle.body"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_background"
+                    android:completionThreshold="1"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:labelFor="@id/textInputLayoutJobTitle"
+                    android:maxLines="1"
+                    android:onTextChanged="@{(text,start,before,count) -> viewModel.onJobTitleChange(text)}"
+                    android:padding="@dimen/spacing_medium"
+                    android:textColor="@color/color_text_primary"
+                    app:bindArrayAdapter="@{viewModel.state.jobTitles}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/textViewEmail"
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/email"
-                app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
-                app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName" />
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutJobTitle"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutJobTitle" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutEmail"
@@ -137,21 +183,22 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:inputType="text"
                 android:textColorHint="@color/color_text_tertiary"
-                app:helperText="@{viewModel.state.emailError}"
                 app:boxStrokeWidth="@dimen/zero"
                 app:boxStrokeWidthFocused="@dimen/zero"
+                app:helperText="@{viewModel.state.emailError}"
+                app:helperTextTextColor="@color/accent_red"
                 app:hintTextColor="@color/tertiary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:helperTextTextColor="@color/accent_red"
-                app:layout_constraintTop_toBottomOf="@id/textViewPhoneNumber">
+                app:layout_constraintTop_toBottomOf="@id/textViewEmail">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    setIcons="@{viewModel.state.isEmailValid}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="textEmailAddress"
-                    setIcons="@{viewModel.state.isEmailValid}"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onEmailChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -174,18 +221,19 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:inputType="text"
                 android:textColorHint="@color/color_text_tertiary"
-                app:helperText="@{viewModel.state.passwordError}"
                 app:boxStrokeWidth="@dimen/zero"
                 app:boxStrokeWidthFocused="@dimen/zero"
+                app:helperText="@{viewModel.state.passwordError}"
+                app:helperTextTextColor="@color/accent_red"
                 app:hintTextColor="@color/tertiary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:helperTextTextColor="@color/accent_red"
                 app:layout_constraintTop_toBottomOf="@id/textViewPassword">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="textPassword"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onPasswordChange(text.toString())}"
@@ -211,18 +259,19 @@
                 android:autofillHints="confirmedPassword"
                 android:inputType="text"
                 android:textColorHint="@color/color_text_tertiary"
-                app:helperText="@{viewModel.state.confirmedPasswordError}"
                 app:boxStrokeWidth="@dimen/zero"
                 app:boxStrokeWidthFocused="@dimen/zero"
+                app:helperText="@{viewModel.state.confirmedPasswordError}"
+                app:helperTextTextColor="@color/accent_red"
                 app:hintTextColor="@color/tertiary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:helperTextTextColor="@color/accent_red"
                 app:layout_constraintTop_toBottomOf="@id/textViewConfirmPassword">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="textPassword"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onConfirmPasswordChange(text.toString())}"
@@ -235,6 +284,7 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:backgroundTint="@color/blue_500"
                 android:enabled="@{!viewModel.state.isLoading}"
                 android:onClick="@{() -> viewModel.register()}"
                 android:textAllCaps="false"
@@ -279,7 +329,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="@dimen/spacing_normal"
-                android:indeterminateTint="@color/blue_500"
+                android:indeterminateTint="@color/blue_300"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/buttonSignup"
                 app:layout_constraintEnd_toEndOf="@id/buttonSignup"
