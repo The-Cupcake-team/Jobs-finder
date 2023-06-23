@@ -1,20 +1,20 @@
 package com.cupcake.usecase.validation
 
-import com.cupcake.models.ErrorType
+import com.cupcake.models.ValidationResult
 import javax.inject.Inject
 
 class ValidateFullNameUseCase @Inject constructor() {
-    operator fun invoke(fullName: String): ErrorType.InvalidFieldFullName {
+    operator fun invoke(fullName: String): ValidationResult {
         return if (fullName.isBlank() || fullName.isEmpty()) {
-            ErrorType.InvalidFieldFullName(ERROR)
+            ValidationResult(false, ERROR)
         } else if (fullName.length < MINIMUM_LENGTH) {
-            ErrorType.InvalidFieldFullName(ERROR_LENGTH_SHORT)
+            ValidationResult(false, ERROR_LENGTH_SHORT)
         } else if (fullName.length > MAXIMUM_LENGTH) {
-            ErrorType.InvalidFieldFullName(ERROR_LENGTH_LARGE)
+            ValidationResult(false, ERROR_LENGTH_LARGE)
         } else if (!Regex("^[a-zA-Z]+$").matches(fullName)) {
-            ErrorType.InvalidFieldFullName(LETTERS_ERROR)
+            ValidationResult(false, LETTERS_ERROR)
         } else {
-            return ErrorType.InvalidFieldFullName("")
+            ValidationResult(true, "")
         }
     }
 

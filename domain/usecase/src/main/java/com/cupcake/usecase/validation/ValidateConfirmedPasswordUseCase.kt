@@ -1,19 +1,19 @@
 package com.cupcake.usecase.validation
 
-import com.cupcake.models.ErrorType
+import com.cupcake.models.ValidationResult
 import javax.inject.Inject
 
 class ValidateConfirmedPasswordUseCase @Inject constructor() {
     operator fun invoke(
         confirmedPassword: String,
         password: String
-    ): ErrorType.InvalidFieldConfirmedPassword {
+    ): ValidationResult {
         return if (confirmedPassword.isBlank() || confirmedPassword.isEmpty()) {
-            ErrorType.InvalidFieldConfirmedPassword(ERROR)
+            ValidationResult(false, ERROR)
         } else if (confirmedPassword != password) {
-            ErrorType.InvalidFieldConfirmedPassword(ERROR_NO_MATCHING)
+            ValidationResult(false, ERROR_NO_MATCHING)
         } else {
-            ErrorType.InvalidFieldConfirmedPassword("")
+            ValidationResult(true)
         }
     }
 

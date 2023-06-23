@@ -1,7 +1,6 @@
 package com.cupcake.viewmodels.register
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.models.User
 import com.cupcake.usecase.register.RegisterUseCase
 import com.cupcake.usecase.validation.ValidateConfirmedPasswordUseCase
 import com.cupcake.usecase.validation.ValidateEmailUseCase
@@ -19,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase,
-    private val validateFullNameUseCase: ValidateFullNameUseCase,
+    private val validateFullName: ValidateFullNameUseCase,
     private val validateUsername: ValidateUsernameUseCase,
     private val validateEmail: ValidateEmailUseCase,
     private val validatePassword: ValidatePasswordUseCase,
@@ -46,148 +45,71 @@ class RegisterViewModel @Inject constructor(
         )
     }
 
-    private fun onRegisterSuccess(user: User) {
-        updateState { it.copy(isLoading = false, isUserRegistered = true) }
+    private fun onRegisterSuccess(unit: Unit) {
+        updateState { it.copy(isLoading = false) }
         viewModelScope.launch { _event.emit(RegisterEvent.NavigateToHome) }
     }
 
     private fun onRegisterError(error: BaseErrorUiState) {
-        when (error) {
-            is BaseErrorUiState.InvalidFieldConfirmedPassword -> {
-                updateState {
-                    it.copy(
-                        isLoading = false,
-                        confirmedPasswordError = error.errorCode,
-                        isConfirmedPasswordValid = false
-                    )
-                }
-            }
-
-            is BaseErrorUiState.InvalidFieldEmail -> {
-                updateState {
-                    it.copy(
-                        isLoading = false,
-                        emailError = error.errorCode,
-                        isEmailValid = false
-                    )
-                }
-            }
-
-            is BaseErrorUiState.InvalidFieldFullName -> {
-                updateState {
-                    it.copy(
-                        isLoading = false,
-                        fullNameError = error.errorCode,
-                        isFullNameValid = false
-                    )
-                }
-            }
-
-            is BaseErrorUiState.InvalidFieldPassword -> {
-                updateState {
-                    it.copy(
-                        isLoading = false,
-                        passwordError = error.errorCode,
-                        isPasswordValid = false
-                    )
-                }
-            }
-
-            is BaseErrorUiState.InvalidFieldUserName -> {
-                updateState {
-                    it.copy(
-                        isLoading = false,
-                        userNameError = error.errorCode,
-                        isUserNameValid = false
-                    )
-                }
-            }
-
-            else -> {
-                updateState { it.copy(isLoading = false, error = error) }
-                viewModelScope.launch { _event.emit(RegisterEvent.ShowError) }
-            }
-        }
+        updateState { it.copy(isLoading = false) }
+        viewModelScope.launch { _event.emit(RegisterEvent.ShowErrorMessage(error.errorCode)) }
     }
 
     fun onFullNameChange(fullName: String) {
-        val error = validateFullNameUseCase(fullName)
-        if (error.message!!.isNotBlank()) {
-            updateState {
-                it.copy(
-                    fullName = fullName,
-                    fullNameError = error.message.toString(),
-                    isFullNameValid = false
-                )
-            }
-        } else {
-            updateState { it.copy(fullName = fullName, fullNameError = "", isFullNameValid = true) }
+        val fullNameValidation = validateFullName(fullName)
+        updateState {
+            it.copy(
+                fullName = fullName,
+                fullNameError = fullNameValidation.errorMessage,
+                isFullNameValid = fullNameValidation.isValid
+            )
         }
     }
 
     fun onUserNameChange(userName: String) {
-        val error = validateUsername(userName)
-        if (error.message!!.isNotBlank()) {
-            updateState {
-                it.copy(
-                    userName = userName,
-                    userNameError = error.message.toString(),
-                    isUserNameValid = false
-                )
-            }
-        } else {
-            updateState { it.copy(fullName = userName, userNameError = "", isUserNameValid = true) }
+        val userNameValidation = validateUsername(userName)
+        updateState {
+            it.copy(
+                userName = userName,
+                userNameError = userNameValidation.errorMessage,
+                isUserNameValid = userNameValidation.isValid
+            )
         }
     }
 
     fun onEmailChange(email: String) {
-        val error = validateEmail(email)
-        if (error.message!!.isNotBlank()) {
-            updateState {
-                it.copy(
-                    email = email,
-                    emailError = error.message.toString(),
-                    isEmailValid = false
-                )
-            }
-        } else {
-            updateState { it.copy(email = email, emailError = "", isEmailValid = true) }
+        val emailValidation = validateEmail(email)
+        updateState {
+            it.copy(
+                email = email,
+                emailError = emailValidation.errorMessage,
+                isEmailValid = emailValidation.isValid
+            )
         }
     }
 
     fun onPasswordChange(password: String) {
-        val error = validatePassword(password)
-        if (error.message!!.isNotBlank()) {
-            updateState {
-                it.copy(
-                    password = password,
-                    passwordError = error.message.toString(),
-                    isPasswordValid = false
-                )
-            }
-        } else {
-            updateState { it.copy(password = password, passwordError = "", isPasswordValid = true) }
+        val passwordValidation = validatePassword(password)
+        updateState {
+            it.copy(
+                password = password,
+                passwordError = passwordValidation.errorMessage,
+                isPasswordValid = passwordValidation.isValid
+            )
         }
     }
 
     fun onConfirmPasswordChange(confirmPassword: String) {
-        val error = validateConfirmedPassword(confirmPassword, state.value.password)
-        if (error.message!!.isNotBlank()) {
-            updateState {
-                it.copy(
-                    confirmedPassword = confirmPassword,
-                    confirmedPasswordError = error.message.toString(),
-                    isConfirmedPasswordValid = false
-                )
-            }
-        } else {
-            updateState {
-                it.copy(
-                    confirmedPassword = confirmPassword,
-                    confirmedPasswordError = "",
-                    isConfirmedPasswordValid = true
-                )
-            }
+        val confirmPasswordValidation = validateConfirmedPassword(
+            password = state.value.password,
+            confirmedPassword = confirmPassword
+        )
+        updateState {
+            it.copy(
+                confirmedPassword = confirmPassword,
+                confirmedPasswordError = confirmPasswordValidation.errorMessage,
+                isConfirmedPasswordValid = confirmPasswordValidation.isValid
+            )
         }
     }
 

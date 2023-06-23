@@ -1,25 +1,24 @@
 package com.cupcake.usecase.validation
 
-import com.cupcake.models.ErrorType
+import com.cupcake.models.ValidationResult
 import javax.inject.Inject
 
-
 class ValidatePasswordUseCase @Inject constructor() {
-    operator fun invoke(password: String): ErrorType.InvalidFieldPassword {
+    operator fun invoke(password: String): ValidationResult {
         return if (password.isEmpty() || password.isBlank()) {
-            ErrorType.InvalidFieldPassword(ERROR)
+            ValidationResult(false, ERROR)
         } else if (password.length < MINIMUM_LENGTH) {
-            ErrorType.InvalidFieldPassword(ERROR_LENGTH_SHORT)
+            ValidationResult(false, ERROR_LENGTH_SHORT)
         } else if (password.length > MAXIMUM_LENGTH) {
-            ErrorType.InvalidFieldPassword(ERROR_LENGTH_LARGE)
+            ValidationResult(false, ERROR_LENGTH_LARGE)
         } else if (!password.any { it.isLetter() }) {
-            ErrorType.InvalidFieldPassword(ERROR_LETTER)
+            ValidationResult(false, ERROR_LETTER)
         } else if (!password.any { it.isDigit() }) {
-            ErrorType.InvalidFieldPassword(ERROR_DIGIT)
+            ValidationResult(false, ERROR_DIGIT)
         } else if (!password.contains(Regex("[!@\$%*&]"))) {
-            ErrorType.InvalidFieldPassword(ERROR_SPECIAL_CHARACTER)
+            ValidationResult(false, ERROR_SPECIAL_CHARACTER)
         } else {
-            ErrorType.InvalidFieldPassword("")
+            ValidationResult(true)
         }
     }
 
@@ -32,6 +31,5 @@ class ValidatePasswordUseCase @Inject constructor() {
         private const val ERROR_DIGIT = "Please write at least 1 digit"
         private const val ERROR_SPECIAL_CHARACTER = "Please write at least 1 special character"
         private const val ERROR = "Please enter a password"
-
     }
 }

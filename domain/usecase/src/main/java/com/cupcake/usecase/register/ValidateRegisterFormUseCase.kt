@@ -20,11 +20,11 @@ class ValidateRegisterFormUseCase @Inject constructor(
         email: String,
         password: String,
         confirmedPassword: String
-    ){
-        validateFullName(fullName)
-        validateUsername(userName)
-        validateEmail(email)
-        validatePassword(password)
-        validateConfirmedPassword(confirmedPassword, password)
+    ): Boolean {
+        return validateFullName(fullName).isValid &&
+                validateUsername(userName).isValid &&
+                validateEmail(email).isValid &&
+                validatePassword(password).isValid &&
+                validateConfirmedPassword(confirmedPassword, password).isValid
     }
 }

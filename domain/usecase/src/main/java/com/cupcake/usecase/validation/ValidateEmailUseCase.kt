@@ -1,16 +1,16 @@
 package com.cupcake.usecase.validation
 
-import com.cupcake.models.ErrorType
+import com.cupcake.models.ValidationResult
 import javax.inject.Inject
 
 class ValidateEmailUseCase @Inject constructor() {
-    operator fun invoke(email: String): ErrorType.InvalidFieldEmail {
+    operator fun invoke(email: String): ValidationResult {
         return if (email.isBlank() || email.isEmpty()) {
-            ErrorType.InvalidFieldEmail(ERROR)
+            ValidationResult(false, ERROR)
         } /*else if (!REGEX.matches(email)) {
-             ErrorType.InvalidFieldEmail(INVALID_EMAIL)
+            ValidationResult(false, INVALID_EMAIL)
         }*/ else {
-            ErrorType.InvalidFieldEmail("")
+            ValidationResult(true)
         }
     }
 

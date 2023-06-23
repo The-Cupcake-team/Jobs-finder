@@ -1,6 +1,5 @@
 package com.cupcake.repository
 
-import android.util.Log
 import com.cupcake.local.datastore.AuthDataStore
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Token
@@ -58,12 +57,10 @@ class AuthenticationRepositoryImpl @Inject constructor(
             if (baseResponse != null && baseResponse.isSuccess) {
                 return baseResponse.value!!
             } else {
-                Log.i("Repo", "Throwable: ${baseResponse?.message}")
                 throw ErrorType.Server(baseResponse?.message!!)
             }
         } else {
             val errorResponse = response.errorBody()?.toString()
-            Log.i("Repo", "Throwable: ${response.errorBody()}")
             throw ErrorType.Server(errorResponse ?: "Error Network")
         }
     }
