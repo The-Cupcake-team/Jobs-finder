@@ -4,16 +4,19 @@ import com.cupcake.local.datastore.AuthDataStore
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Token
 import com.cupcake.models.User
+import com.cupcake.remote.AuthApiService
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toToken
 import com.cupcake.repository.mapper.toUser
+import okhttp3.Credentials
 import repo.AuthenticationRepository
 import retrofit2.Response
 import javax.inject.Inject
 
 class AuthenticationRepositoryImpl @Inject constructor(
     private val api: JobApiService,
+    private val authService: AuthApiService,
     private val authDataStore: AuthDataStore
 ) : AuthenticationRepository {
 
@@ -33,12 +36,11 @@ class AuthenticationRepositoryImpl @Inject constructor(
         }.toUser()
     }
 
-    override suspend fun login(userName: String, password: String): Token {
+    override suspend fun login(username: String, password: String): Token {
         return wrapResponseWithErrorHandler {
-            api.login(
-                userName,
-                password
-            )
+            Credentials.basic(username, password).let { credentials ->
+                authService.login(credentials)
+            }
         }.toToken()
     }
 

@@ -11,9 +11,9 @@ import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface JobApiService {
 
@@ -85,12 +85,11 @@ interface JobApiService {
         @Field("phoneNumber") phoneNumber: String,
         @Field("password") password: String,
     ): Response<BaseResponse<UserDto>>
-    @FormUrlEncoded
+
 
     @GET("/login")
     suspend fun login(
-        @Field("username") userName: String,
-        @Field("password") password: String
+        @Header("Authorization") credentials: String
     ): Response<BaseResponse<TokenDto>>
     // endregion
 }
