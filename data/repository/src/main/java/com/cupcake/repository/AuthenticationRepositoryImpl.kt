@@ -6,6 +6,7 @@ import com.cupcake.models.Token
 import com.cupcake.models.User
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
+import com.cupcake.repository.mapper.toToken
 import com.cupcake.repository.mapper.toUser
 import repo.AuthenticationRepository
 import retrofit2.Response
@@ -30,6 +31,15 @@ class AuthenticationRepositoryImpl @Inject constructor(
                 password
             )
         }.toUser()
+    }
+
+    override suspend fun login(userName: String, password: String): Token {
+        return wrapResponseWithErrorHandler {
+            api.login(
+                userName,
+                password
+            )
+        }.toToken()
     }
 
     override suspend fun saveAuthData(token: Token) {

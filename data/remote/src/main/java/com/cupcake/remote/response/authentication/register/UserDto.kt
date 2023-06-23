@@ -10,5 +10,5 @@ data class UserDto(
     val phoneNumber : String,
     val isActive : Boolean,
     val createdAt : Long,
-    val token : Token
+    val token : TokenDto
 )
