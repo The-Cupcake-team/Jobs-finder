@@ -5,6 +5,7 @@ data class User(
     val username: String,
     val fullName: String,
     val email: String,
+    val profile: Profile,
     val isActive: Boolean,
     val createdAt: String,
     val token: Token

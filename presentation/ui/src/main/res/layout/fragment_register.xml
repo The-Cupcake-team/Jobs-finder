@@ -14,8 +14,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:background="@color/background">
+        android:background="@color/background"
+        android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -115,22 +115,65 @@
                     setIcons="@{viewModel.state.isUserNameValid}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="text"
-                    android:drawablePadding="@dimen/spacing_normal"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onUserNameChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/textViewPhoneNumber"
+                android:id="@+id/textViewJobTitle"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/job_title"
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutJobTitle"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:autofillHints="username"
+                android:inputType="text"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewJobTitle">
+
+                <AutoCompleteTextView
+                    style="@style/TextStyle.body"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_background"
+                    android:completionThreshold="1"
+                    android:focusable="true"
+                    android:inputType="text"
+                    android:labelFor="@id/textInputLayoutJobTitle"
+                    android:maxLines="1"
+                    android:onTextChanged="@{(text,start,before,count) -> viewModel.onJobTitleChange(text)}"
+                    android:padding="@dimen/spacing_medium"
+                    android:textColor="@color/color_text_primary"
+                    app:bindArrayAdapter="@{viewModel.state.jobTitles}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/textViewEmail"
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/email"
-                app:layout_constraintStart_toStartOf="@id/textInputLayoutEmail"
-                app:layout_constraintTop_toBottomOf="@id/textInputLayoutUserName" />
+                app:layout_constraintStart_toStartOf="@id/textInputLayoutJobTitle"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutJobTitle" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutEmail"
@@ -147,15 +190,15 @@
                 app:hintTextColor="@color/tertiary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewPhoneNumber">
+                app:layout_constraintTop_toBottomOf="@id/textViewEmail">
 
                 <com.google.android.material.textfield.TextInputEditText
                     setIcons="@{viewModel.state.isEmailValid}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="textEmailAddress"
-                    android:drawablePadding="@dimen/spacing_normal"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onEmailChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -190,9 +233,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="textPassword"
-                    android:drawablePadding="@dimen/spacing_normal"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onPasswordChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -228,9 +271,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="textPassword"
-                    android:drawablePadding="@dimen/spacing_normal"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onConfirmPasswordChange(text.toString())}"
                     android:textSize="@dimen/text_size_body" />
             </com.google.android.material.textfield.TextInputLayout>
