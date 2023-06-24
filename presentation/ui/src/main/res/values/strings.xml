@@ -138,5 +138,10 @@
     <string name="employment">Employment</string>
     <string name="languages">Languages</string>
     <string name="course">Courses</string>
+    <string name="recent_post">Recent posts</string>
+    <string name="see_all">See all</string>
+    <string name="saved_post">Saved posts</string>
+    <string name="recent_jobs">Recent jobs</string>
+    <string name="saved_jobs">Saved jobs</string>
 
 </resources>
