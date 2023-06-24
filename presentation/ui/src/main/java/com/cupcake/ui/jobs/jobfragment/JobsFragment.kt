@@ -10,6 +10,7 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentJobsBinding
 import com.cupcake.ui.jobs.JobsItem
 import com.cupcake.ui.jobs.adapter.JobsAdapter
+import com.cupcake.ui.profile.resume.ProfileResumeFragment
 import com.cupcake.viewmodels.jobs.JobUiState
 import com.cupcake.viewmodels.jobs.JobsEvent
 import com.cupcake.viewmodels.jobs.JobsUiState
@@ -114,5 +115,13 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
 
     private fun navigateToDirection(directions: NavDirections) {
         findNavController().navigate(directions)
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = ProfileResumeFragment().apply {
+            arguments = Bundle().apply {
+            }
+        }
     }
 }

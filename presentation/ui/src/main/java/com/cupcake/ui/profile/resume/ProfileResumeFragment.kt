@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.ui.R
@@ -11,27 +12,21 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfileResumeBinding
 import com.cupcake.ui.utill.makeGone
 import com.cupcake.ui.utill.makeVisible
-import com.cupcake.viewmodels.profile.resume.ResumeViewModel
+import com.cupcake.viewmodels.profile.resume.ProfileResumeViewModel
 
-class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, ResumeViewModel>(
+class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, ProfileResumeViewModel>(
     R.layout.fragment_profile_resume,
-    ResumeViewModel::class.java
+    ProfileResumeViewModel::class.java
 ) {
     override val LOG_TAG: String = "ResumeFragment"
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            educationCard.setOnClickListener { toggleRecyclerViewVisibility(educationRecyclerView, educationViewAddResumeItem) }
-            skillsCard.setOnClickListener { toggleRecyclerViewVisibility(skillsRecyclerView, skillsViewAddResumeItem) }
-            employmentCard.setOnClickListener { toggleRecyclerViewVisibility(employmentRecyclerView, employmentViewAddResumeItem) }
-            languagesCard.setOnClickListener { toggleRecyclerViewVisibility(languagesRecyclerView, languagesViewAddResumeItem) }
-            coursesCard.setOnClickListener { toggleRecyclerViewVisibility(coursesRecyclerView, coursesViewAddResumeItem) }
-        }
+        inti()
     }
 
-    private fun toggleRecyclerViewVisibility(recyclerView: RecyclerView, addResumeItem: ImageView) {
+    private fun toggleRecyclerViewVisibility(recyclerView: View, addResumeItem: ImageView) {
         if (recyclerView.visibility == View.GONE) {
-            TransitionManager.beginDelayedTransition(recyclerView, AutoTransition())
+            TransitionManager.beginDelayedTransition(recyclerView as ViewGroup?, AutoTransition())
             recyclerView.makeVisible()
             addResumeItem.setImageResource(R.drawable.ic_card_open)
         } else {
@@ -40,6 +35,15 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, ResumeV
         }
     }
 
+    fun  inti(){
+        binding.apply {
+            educationCard.setOnClickListener { toggleRecyclerViewVisibility(educationRecyclerViewP, educationViewAddResumeItem) }
+            skillsCard.setOnClickListener { toggleRecyclerViewVisibility(skillsRecyclerViewP, skillsViewAddResumeItem) }
+            employmentCard.setOnClickListener { toggleRecyclerViewVisibility(employmentRecyclerViewP, employmentViewAddResumeItem) }
+            languagesCard.setOnClickListener { toggleRecyclerViewVisibility(languagesRecyclerViewP, languagesViewAddResumeItem) }
+            coursesCard.setOnClickListener { toggleRecyclerViewVisibility(coursesRecyclerViewP, coursesViewAddResumeItem) }
+        }
+    }
     companion object {
         @JvmStatic
         fun newInstance() = ProfileResumeFragment().apply {
