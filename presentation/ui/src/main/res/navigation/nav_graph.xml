@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registerFragment">
+    app:startDestination="@id/profileFragment">
 
     <fragment
         android:id="@+id/createJobFragment"
@@ -120,6 +120,10 @@
             android:name="jobUiState"
             app:argType="com.cupcake.viewmodels.jobs.JobUiState" />
     </dialog>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.cupcake.ui.profile.ProfileFragment"
+        android:label="ProfileFragment" />
 
 
 </navigation>
