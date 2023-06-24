@@ -156,9 +156,7 @@ class JobFinderRepositoryImpl @Inject constructor(
         )
         return fakePosts
     }
-    override suspend fun getComments(id: String): List<Comment> {
-        return wrapResponseWithErrorHandler { api.getComments(id) }.map { it.toComment() }
-    }
+
 
 
     override suspend fun insertPost(post: Post) {
@@ -220,6 +218,24 @@ class JobFinderRepositoryImpl @Inject constructor(
         profileDataStore.clearProfileData()
     }
 
+    //endregion
+
+    //region Comments
+    override suspend fun createComment(postId: String, content: String): Boolean {
+        val response = api.createComment(postId, content)
+        if (response.isSuccessful) {
+            val baseResponse = response.body()
+            if (baseResponse != null && baseResponse.isSuccess) {
+                return true
+            } else {
+                throw ErrorType.Server(baseResponse?.message!!)
+            }
+        }
+        return false
+    }
+    override suspend fun getComments(id: String): List<Comment> {
+        return wrapResponseWithErrorHandler { api.getComments(id) }.map { it.toComment() }
+    }
     //endregion
 
 }

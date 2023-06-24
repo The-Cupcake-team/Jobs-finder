@@ -38,7 +38,6 @@ interface JobFinderRepository {
 
     suspend fun getFollowingPosts(): List<Post>
 
-    suspend fun getComments(id: String): List<Comment>
 
     suspend fun insertPost(post: Post)
 
@@ -58,5 +57,11 @@ interface JobFinderRepository {
 
     suspend fun clearProfileData()
 
+    //endregion
+
+    //region Comment
+    suspend fun getComments(id: String): List<Comment>
+
+    suspend fun createComment(postId: String, content: String): Boolean
     //endregion
 }
