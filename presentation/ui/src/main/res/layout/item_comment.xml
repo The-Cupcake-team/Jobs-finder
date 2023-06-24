@@ -104,7 +104,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
-            app:convertTime="@{item.createAt}"
+            app:convertTime="@{item.createdAt}"
             android:layout_marginEnd="@dimen/spacing_medium"
             tools:text="@string/created_at"
             android:text="@string/created_at"

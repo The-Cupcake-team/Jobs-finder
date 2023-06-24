@@ -34,13 +34,17 @@
             android:layout_gravity="start"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
+            android:onClick="@{() -> viewModel.onProfileClick()}"
             android:src="@drawable/test_personal_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <TextView
             android:id="@+id/editTextSearchInput"
             style="@style/homeSearchBarStyle"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="@{() -> viewModel.onSearchClick()}"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/search_home_height"
             android:backgroundTint="@color/background"
@@ -54,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_medium"
+            android:onClick="@{() -> viewModel.onNotificationClick()}"
             app:layout_constraintBottom_toBottomOf="@+id/editTextSearchInput"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editTextSearchInput"

@@ -18,7 +18,7 @@
             android:id="@+id/layout_details_chip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:createdAt="@{viewModel.state.job.createdAt}"
+
             app:experience="@{viewModel.state.job.experience}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -32,7 +32,7 @@ data class JobUiState(
     val detailsChip: List<String> = emptyList(),
     val location: String = "",
     val salary: String = "",
-    val createdAt: Long = 0,
+    val createdAt: String = "",
     val jobExperience: String = "",
     val education: String = "",
 ): Parcelable
@@ -60,7 +60,8 @@ fun JobUiState.toJob(): Job{
         jobDescription = companyName,
         jobSalary = JobSalary(minSalary = salary.toDouble(), maxSalary = salary.toDouble()),
         jobExperience = jobExperience,
-        education = education
+        education = education,
+        skills = emptyList(),
     )
 }
 
