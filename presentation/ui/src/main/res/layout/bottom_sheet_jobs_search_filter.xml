@@ -209,8 +209,8 @@
             android:valueFrom="1"
             android:valueTo="100000"
             app:onValueChange="@{(min, max) -> viewModel.onSalaryChange(min, max)}"
-            app:layout_constraintTop_toBottomOf="@id/textSalary"
-             />
+            app:layout_constraintTop_toBottomOf="@id/textSalary" />
+
 
         <TextView
             android:id="@+id/minSalary"
