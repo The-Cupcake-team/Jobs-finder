@@ -6,8 +6,8 @@
     </array>
 
         <array name="custom_salary_range">
-            <item>0.0</item>
-            <item>100.0</item>
+            <item>1</item>
+            <item>100000</item>
         </array>
 
 </resources>

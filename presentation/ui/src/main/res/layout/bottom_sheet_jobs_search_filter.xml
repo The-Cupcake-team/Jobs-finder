@@ -201,19 +201,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chipGroupExperience" />
 
-        <!--        <com.google.android.material.slider.RangeSlider-->
-        <!--            android:id="@+id/sliderRange"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            app:values="@array/initial_rang_salary"-->
-        <!--            app:trackActiveDrawable="@drawable/slider_track"-->
-        <!--            app:trackInactiveDrawable="@drawable/slider_track"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/textSalary"-->
-        <!--            android:valueFrom="0.0"-->
-        <!--            android:valueTo="100.0"-->
-        <!--             />-->
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/sliderRangeSalary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:values="@array/custom_salary_range"
+            android:valueFrom="1"
+            android:valueTo="100000"
+            app:onValueChange="@{(min, max) -> viewModel.onSalaryChange(min, max)}"
+            app:layout_constraintTop_toBottomOf="@id/textSalary"
+             />
 
-        <EditText
+        <TextView
             android:id="@+id/minSalary"
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
@@ -222,12 +221,12 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
-            android:onTextChanged="@{(text,start,before,count) -> viewModel.onMinSalaryChange(text)}"
             android:paddingHorizontal="@dimen/spacing_medium"
-            android:text="0.0"
+            android:text="@string/zero_number"
             android:textColor="@color/primary"
-            app:layout_constraintStart_toStartOf="@id/textSalary"
-            app:layout_constraintTop_toBottomOf="@id/textSalary" />
+            app:layout_constraintStart_toStartOf="@id/sliderRangeSalary"
+            app:layout_constraintTop_toBottomOf="@id/sliderRangeSalary" />
+<!--        android:onTextChanged="@{(text,start,before,count) -> viewModel.onMinSalaryChange(text)}"-->
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/dividerRangSalary"
@@ -239,7 +238,7 @@
             app:layout_constraintStart_toEndOf="@id/minSalary"
             app:layout_constraintTop_toTopOf="@id/minSalary" />
 
-        <EditText
+        <TextView
             android:id="@+id/maxSalary"
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
@@ -247,13 +246,14 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
-            android:onTextChanged="@{(text,start,before,count) -> viewModel.onMaxSalaryChange(text)}"
             android:paddingHorizontal="@dimen/spacing_medium"
-            android:text="0.0"
+            android:text="@string/zero_number"
             android:textColor="@color/primary"
             app:layout_constraintBottom_toBottomOf="@id/minSalary"
             app:layout_constraintStart_toEndOf="@id/dividerRangSalary"
             app:layout_constraintTop_toTopOf="@id/minSalary" />
+<!--        android:onTextChanged="@{(text,start,before,count) -> viewModel.onMaxSalaryChange(text)}"-->
+
 
         <TextView
             android:id="@+id/labelUsdMonth"
@@ -263,8 +263,9 @@
             android:layout_marginEnd="@dimen/spacing_normal"
             android:text="@string/usd_month"
             android:textColor="@color/color_text_secondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textSalary" />
+            app:layout_constraintBottom_toBottomOf="@+id/maxSalary"
+            app:layout_constraintEnd_toEndOf="@id/sliderRangeSalary"
+            app:layout_constraintTop_toTopOf="@+id/maxSalary" />
 
         <Button
             android:id="@+id/button_apply_job"

@@ -20,11 +20,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
+import com.cupcake.ui.job_search.OnRangeSliderValueChangeListener
 import com.cupcake.viewmodels.base.BaseErrorUiState
-import com.cupcake.viewmodels.posts.PostItemUIState
-import com.google.android.material.textfield.TextInputLayout
 
 import com.cupcake.viewmodels.jobs.JobTitleUiState
+import com.google.android.material.slider.RangeSlider
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -185,4 +185,22 @@ fun showImage(view: ImageView , imageData: Any?){
         view.setImageDrawable(null)
     }
 }
+
+@BindingAdapter("onValueChange")
+fun setRangeSliderOnValueChangeListener(
+    slider: RangeSlider,
+    onValueChange: OnRangeSliderValueChangeListener
+) {
+    slider.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener {
+        override fun onStartTrackingTouch(slider: RangeSlider) {}
+
+        override fun onStopTrackingTouch(slider: RangeSlider) {
+            val min = slider.values[0]
+            val max = slider.values[1]
+            onValueChange.onValueChange(min, max)
+        }
+    })
+}
+
+
 

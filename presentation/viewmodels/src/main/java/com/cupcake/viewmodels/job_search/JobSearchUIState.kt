@@ -19,8 +19,8 @@ data class JobFilterUIState(
     var salary: SalaryUIState = SalaryUIState(),
 )
 data class SalaryUIState(
-    var minSalary: String = "0.0",
-    var maxSalary: String = " 0.0"
+    var minSalary: Double = 0.0,
+    var maxSalary: Double = 0.0
 )
 
 data class JobItemUiState(

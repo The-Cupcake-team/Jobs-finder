@@ -20,6 +20,7 @@ class JobSearchViewModel @Inject constructor(
     private val _filterState: MutableStateFlow<JobFilterUIState> = MutableStateFlow(JobFilterUIState())
 
     private val _salaryState: MutableStateFlow<SalaryUIState> =  MutableStateFlow(SalaryUIState())
+    val salaryState: StateFlow<SalaryUIState> = _salaryState
 
     private fun getJobs() {
         _state.update { it.copy(isLoading = true, error = null) }
@@ -31,8 +32,8 @@ class JobSearchViewModel @Inject constructor(
                         jobType = _state.value.jobFilterUIState.jobType,
                         workType = _state.value.jobFilterUIState.workType,
                         experienceLevel = _state.value.jobFilterUIState.experience,
-                        salaryRange = Pair(_state.value.jobFilterUIState.salary.minSalary.toDouble(),
-                            _state.value.jobFilterUIState.salary.maxSalary.toDouble())
+                        salaryRange = Pair(_state.value.jobFilterUIState.salary.minSalary,
+                            _state.value.jobFilterUIState.salary.maxSalary)
                     ).map { it.toJobItemUiState() }},
                     ::onSearchJobSuccess,
                     ::onError
@@ -71,12 +72,8 @@ class JobSearchViewModel @Inject constructor(
         _filterState.update { it.copy(experience = level) }
     }
 
-    fun onMaxSalaryChange(maxSalary: CharSequence){
-        _salaryState.update { it.copy(maxSalary = maxSalary.toString()) }
-    }
-
-    fun onMinSalaryChange(minSalary: CharSequence){
-       _salaryState.update { it.copy(minSalary = minSalary.toString()) }
+    fun onSalaryChange(minSalary: Double, maxSalary: Double){
+        _salaryState.update { it.copy(minSalary = minSalary, maxSalary = maxSalary) }
     }
 
     fun onFilterClicked(){
