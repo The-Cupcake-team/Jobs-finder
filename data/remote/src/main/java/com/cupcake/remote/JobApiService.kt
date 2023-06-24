@@ -6,12 +6,16 @@ import com.cupcake.remote.response.PostsDto
 import com.cupcake.remote.response.authentication.register.UserDto
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface JobApiService {
@@ -54,11 +58,14 @@ interface JobApiService {
 
 
     // region Post
-    @FormUrlEncoded
-    @POST("/post")
+    @Multipart
+    @POST("/user/post")
     suspend fun createPost(
-        @Field("content") content: String
+        @Part("content") content: RequestBody,
+        @Part image: MultipartBody.Part?
     ): Response<BaseResponse<PostsDto>>
+
+
 
     @GET("/public/post/{postId}")
     suspend fun getPostById(
