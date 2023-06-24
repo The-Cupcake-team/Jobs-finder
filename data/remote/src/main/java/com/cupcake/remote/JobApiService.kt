@@ -38,10 +38,6 @@ interface JobApiService {
     @GET("/public/posts")
     suspend fun getPosts(): Response<BaseResponse<List<PostsDto>>>
 
-    @GET("/post/{postId}/comments")
-    suspend fun getComments(
-        @Path("postId") postId: String
-    ): Response<BaseResponse<List<CommentDto>>>
 
     @POST("/jobs")
     suspend fun createJob(@Body job: JobDto): JobDto
@@ -53,7 +49,7 @@ interface JobApiService {
 
     @GET("public/job/{id}")
     suspend fun getJobById(
-        @Path("id") jobId: String
+        @Path("id") jobId: String,
     ): Response<BaseResponse<JobDto>>
 
     //endregion
@@ -63,12 +59,12 @@ interface JobApiService {
     @FormUrlEncoded
     @POST("/post")
     suspend fun createPost(
-        @Field("content") content: String
+        @Field("content") content: String,
     ): Response<BaseResponse<PostsDto>>
 
     @GET("/public/post/{postId}")
     suspend fun getPostById(
-        @Path("postId") postId: String
+        @Path("postId") postId: String,
     ): Response<BaseResponse<PostsDto>>
 
     @GET("/posts")
@@ -93,4 +89,21 @@ interface JobApiService {
     ): Response<BaseResponse<UserDto>>
 
     // endregion
+
+    //region Comment
+
+    @GET("/post/{postId}/comments")
+    suspend fun getComments(
+        @Path("postId") postId: String,
+    ): Response<BaseResponse<List<CommentDto>>>
+
+    @FormUrlEncoded
+    @POST("/post/{postId}/comment")
+    suspend fun createComment(
+        @Path("postId") postId: String,
+        @Field("content") content: String,
+    ): Response<BaseResponse<*>>
+
+//endregion
+
 }
