@@ -1,7 +1,5 @@
 package com.cupcake.viewmodels.job_search
 
-import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.JobSearchFilterUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
@@ -13,7 +11,6 @@ import javax.inject.Inject
 @HiltViewModel
 class JobSearchViewModel @Inject constructor(
     private val jobSearchFilterUseCase: JobSearchFilterUseCase,
-    savedStateHandle: SavedStateHandle
 ) : BaseViewModel<JopSearchUIState>(JopSearchUIState()), JobsSearchInteractionListener {
 
     private val _event = MutableSharedFlow<SearchJobEvent>()
@@ -24,9 +21,6 @@ class JobSearchViewModel @Inject constructor(
     private val _salaryState: MutableStateFlow<SalaryUIState> =  MutableStateFlow(SalaryUIState())
     val salaryState: StateFlow<SalaryUIState> = _salaryState
 
-    init {
-        //getJobs()
-    }
     private fun getJobs() {
         _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
