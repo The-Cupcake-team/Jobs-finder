@@ -145,20 +145,6 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    fun onJobTitleChange(confirmPassword: String) {
-        val confirmPasswordValidation = validateConfirmedPassword(
-            password = state.value.password,
-            confirmedPassword = confirmPassword
-        )
-        updateState {
-            it.copy(
-                confirmedPassword = confirmPassword,
-                confirmedPasswordError = confirmPasswordValidation.errorMessage,
-                isConfirmedPasswordValid = confirmPasswordValidation.isValid
-            )
-        }
-    }
-
     fun onLoginClick() {
         viewModelScope.launch { _event.emit(RegisterEvent.LoginClick) }
     }
