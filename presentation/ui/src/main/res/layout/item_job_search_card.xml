@@ -21,15 +21,14 @@
         android:layout_marginHorizontal="@dimen/spacing_small"
         android:layout_marginVertical="@dimen/spacing_small"
         android:elevation="@dimen/zero"
-        app:cardElevation="@dimen/zero"
         android:onClick="@{() -> listener.onCardClickListener(item.id)}"
-        app:cardCornerRadius="@dimen/radius">
+        app:cardCornerRadius="@dimen/radius"
+        app:cardElevation="@dimen/zero">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cards"
-            >
+            android:background="@color/cards">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewCompanyProfile"
@@ -75,6 +74,7 @@
                 android:layout_marginEnd="@dimen/spacing_medium"
                 android:clickable="true"
                 android:focusable="true"
+                android:onClick="@{() -> listener.onImageViewMoreClickListener(item)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_more" />

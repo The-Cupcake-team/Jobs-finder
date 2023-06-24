@@ -10,5 +10,7 @@ sealed class SearchJobEvent {
 
     object OnClearButtonClicked : SearchJobEvent()
 
-    data class OnMoreOptionClickListener(val model:JopSearchUIState): SearchJobEvent()
+    data class OnMoreOptionClickListener(val model:JobItemUiState): SearchJobEvent()
+
+    data class OnShareJobClicked(val id: String) : SearchJobEvent()
 }

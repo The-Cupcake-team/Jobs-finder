@@ -1,5 +1,6 @@
 package com.cupcake.ui.job_search
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +12,7 @@ import com.cupcake.ui.BR
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.BottomSheetJobsSearchFilterBinding
+import com.cupcake.ui.databinding.BottomSheetSaveJobBinding
 import com.cupcake.ui.databinding.FragmentJobSearchBinding
 import com.cupcake.viewmodels.job_search.JobSearchViewModel
 import com.cupcake.viewmodels.job_search.SearchJobEvent
@@ -30,8 +32,10 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
 
     private val args: JobSearchFragmentArgs by navArgs()
 
-    private lateinit var dialog: BottomSheetDialog
-    private lateinit var bottomSheetBinding: BottomSheetJobsSearchFilterBinding
+    private lateinit var filterDialog: BottomSheetDialog
+    private lateinit var saveDialog: BottomSheetDialog
+    private lateinit var filterBottomSheetBinding: BottomSheetJobsSearchFilterBinding
+    private lateinit var saveJobBottomSheetsBinding: BottomSheetSaveJobBinding
     private lateinit var jobsEventJob: Job
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,20 +43,33 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
 
         binding.editTextSearchInput.setText(args.jobTitle)
         setUpAdapter()
-        setUpBottomSheet()
+        setUpFilterBottomSheet()
+        setUpSaveBottomSheet()
         onBackNavigationIconClicked()
         onSalaryChange()
         viewModel.initialSearchInput(args.jobTitle)
     }
 
-    override fun onResume() {
-        super.onResume()
-        handelJobsSearchEvent()
-    }
+
 
     private fun setUpAdapter() {
         val jobsAdapter = JobSearchAdapter(emptyList(), viewModel)
         binding.recyclerJobSearch.adapter = jobsAdapter
+    }
+
+    private fun setUpFilterBottomSheet(){
+        filterBottomSheetBinding = BottomSheetJobsSearchFilterBinding.inflate(layoutInflater)
+        filterDialog = BottomSheetDialog(requireContext())
+        filterDialog.setContentView(filterBottomSheetBinding.root)
+        filterDialog.setCancelable(false)
+        filterBottomSheetBinding.setVariable(BR.viewModel, viewModel)
+    }
+
+    private fun setUpSaveBottomSheet(){
+        saveJobBottomSheetsBinding = BottomSheetSaveJobBinding.inflate(layoutInflater)
+        saveDialog = BottomSheetDialog(requireContext())
+        saveDialog.setContentView(saveJobBottomSheetsBinding.root)
+        saveJobBottomSheetsBinding.setVariable(BR.viewModel, viewModel)
     }
 
     private fun onBackNavigationIconClicked() {
@@ -61,28 +78,32 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
         }
     }
 
-    private fun setUpBottomSheet(){
-        bottomSheetBinding = BottomSheetJobsSearchFilterBinding.inflate(layoutInflater)
-        dialog = BottomSheetDialog(requireContext())
-        dialog.setContentView(bottomSheetBinding.root)
-        dialog.setCancelable(false)
-        bottomSheetBinding.setVariable(BR.viewModel, viewModel)
+    private fun onSalaryChange(){
+        lifecycleScope.launch {
+            viewModel.salaryState.debounce(200).collect{
+                filterBottomSheetBinding.apply {
+                    minSalary.text = it.minSalary.toInt().toString()
+                    maxSalary.text = it.maxSalary.toInt().toString()
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handelJobsSearchEvent()
     }
 
     private fun handelJobsSearchEvent() {
         jobsEventJob = lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
-                    is SearchJobEvent.JobCardClick -> {
-                        handleJobCardClick(jobsEvent.id)
-                    }
-                    is SearchJobEvent.OnApplyButtonClicked -> dialog.dismiss()
-                    is SearchJobEvent.OnFilterClicked -> dialog.show()
-                    is SearchJobEvent.OnMoreOptionClickListener -> {
-                        //todo: handel show save job dialog
-                    }
-
-                    SearchJobEvent.OnClearButtonClicked -> onClearClicked()
+                    is SearchJobEvent.JobCardClick -> handleJobCardClick(jobsEvent.id)
+                    is SearchJobEvent.OnApplyButtonClicked -> dismissDialog(filterDialog)
+                    is SearchJobEvent.OnFilterClicked -> showDialog(filterDialog)
+                    is SearchJobEvent.OnMoreOptionClickListener ->  showDialog(saveDialog)
+                    is SearchJobEvent.OnClearButtonClicked -> onClearClicked()
+                    is SearchJobEvent.OnShareJobClicked -> sharePost(jobsEvent.id)
                 }
             }
         }
@@ -95,8 +116,9 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
     private fun navigateToDirection(directions: NavDirections) {
         findNavController().navigate(directions)
     }
+
     private fun onClearClicked(){
-        bottomSheetBinding.apply {
+        filterBottomSheetBinding.apply {
             chipGroupJopType.clearCheck()
             chipGroupWorkType.clearCheck()
             chipGroupExperience.clearCheck()
@@ -106,15 +128,21 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
         }
     }
 
-    private fun onSalaryChange(){
-        lifecycleScope.launch {
-            viewModel.salaryState.debounce(200).collect{
-                bottomSheetBinding.apply {
-                    minSalary.text = it.minSalary.toInt().toString()
-                    maxSalary.text = it.maxSalary.toInt().toString()
-                }
-            }
-        }
+    private fun sharePost(id: String) {
+        val intent = Intent(Intent.ACTION_SEND)
+        val base = "https://cup-cake-media-dw2pb.ondigitalocean.app/"
+        val shareBody = getString(R.string.sharePost, base.plus(id),)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, shareBody)
+        startActivity(intent)
+    }
+
+    private fun showDialog(bottomSheetDialog: BottomSheetDialog){
+        bottomSheetDialog.show()
+    }
+
+    private fun dismissDialog(bottomSheetDialog: BottomSheetDialog){
+        bottomSheetDialog.dismiss()
     }
 
     override fun onStop() {
