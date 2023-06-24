@@ -1,9 +1,9 @@
 package repo
 
+import com.cupcake.models.Comment
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Post
-import com.cupcake.models.Token
 
 interface JobFinderRepository {
 
@@ -37,6 +37,8 @@ interface JobFinderRepository {
     suspend fun getPostById(id: String): Post
 
     suspend fun getFollowingPosts(): List<Post>
+
+    suspend fun getComments(id: String): List<Comment>
 
     suspend fun insertPost(post: Post)
 
