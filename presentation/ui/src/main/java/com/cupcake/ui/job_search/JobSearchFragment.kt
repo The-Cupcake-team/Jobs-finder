@@ -3,7 +3,7 @@ package com.cupcake.ui.job_search
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.cupcake.ui.BR
 import com.cupcake.ui.R
@@ -14,6 +14,7 @@ import com.cupcake.viewmodels.job_search.JobSearchViewModel
 import com.cupcake.viewmodels.job_search.SearchJobEvent
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
 
@@ -32,23 +33,23 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setUpAdapter()
-        onBackButtonClicked()
-        setUpBottomSheet()
-        handelJobsSearchEvent()
         binding.editTextSearchInput.setText(args.jobTitle)
-
-    }
-
-    private fun onBackButtonClicked(){
-        binding.buttonBack.setOnClickListener {view ->
-            Navigation.findNavController(view).popBackStack()
-        }
+        setUpAdapter()
+        setUpBottomSheet()
+        onBackNavigationIconClicked()
+        handelJobsSearchEvent()
+        onSalaryChange()
     }
 
     private fun setUpAdapter() {
         val jobsAdapter = JobSearchAdapter(emptyList(), viewModel)
         binding.recyclerJobSearch.adapter = jobsAdapter
+    }
+
+    private fun onBackNavigationIconClicked() {
+        binding.toolBar.setNavigationOnClickListener { view ->
+            view.findNavController().popBackStack()
+        }
     }
 
     private fun setUpBottomSheet(){
@@ -84,6 +85,19 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
             chipGroupWorkType.clearCheck()
             chipGroupExperience.clearCheck()
             editTextLocation.setText("")
+            minSalary.text = ""
+            maxSalary.text = ""
+        }
+    }
+
+    private fun onSalaryChange(){
+        lifecycleScope.launch {
+            viewModel.salaryState.debounce(200).collect{
+                bottomSheetBinding.apply {
+                    minSalary.text = it.minSalary.toInt().toString()
+                    maxSalary.text = it.maxSalary.toInt().toString()
+                }
+            }
         }
     }
 
