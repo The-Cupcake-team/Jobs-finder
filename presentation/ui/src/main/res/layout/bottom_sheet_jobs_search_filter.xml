@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.job_search.JobSearchViewModel" />
@@ -29,15 +30,16 @@
 
         <TextView
             android:id="@+id/clear_text"
+            style="@style/TextStyle.body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
-            style="@style/TextStyle.body"
-            android:text="@string/clear"
             android:drawablePadding="@dimen/spacing_small"
-            app:layout_constraintTop_toBottomOf="@id/drag_handle"
+            android:onClick="@{() -> viewModel.onClearClicked()}"
+            android:text="@string/clear"
+            app:drawableStartCompat="@drawable/ic_clear"
             app:layout_constraintEnd_toEndOf="parent"
-            app:drawableStartCompat="@drawable/ic_clear" />
+            app:layout_constraintTop_toBottomOf="@id/drag_handle" />
 
         <TextView
             android:id="@+id/textViewLocation"
@@ -82,18 +84,18 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/on_site"
-                android:onClick='@{() -> viewModel.onJobTypeChange("On-site")}'/>
+                android:onClick='@{() -> viewModel.onJobTypeChange("On-site")}'
+                android:text="@string/on_site" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/hybrid"
-                android:onClick='@{() -> viewModel.onJobTypeChange("Hybird")}' />
+                android:onClick='@{() -> viewModel.onJobTypeChange("Hybird")}'
+                android:text="@string/hybrid" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/remote"
-                android:onClick='@{() -> viewModel.onJobTypeChange("Remote")}' />
+                android:onClick='@{() -> viewModel.onJobTypeChange("Remote")}'
+                android:text="@string/remote" />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -118,28 +120,28 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/full_time"
-                android:onClick='@{() -> viewModel.onWorkTypeChange("Full-time")}' />
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Full-time")}'
+                android:text="@string/full_time" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/part_time"
-                android:onClick='@{() -> viewModel.onWorkTypeChange("Part-time")}'/>
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Part-time")}'
+                android:text="@string/part_time" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/internship"
-                android:onClick='@{() -> viewModel.onWorkTypeChange("Internship")}'/>
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Internship")}'
+                android:text="@string/internship" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/volunteer"
-                android:onClick='@{() -> viewModel.onWorkTypeChange("Volunteer")}'/>
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Volunteer")}'
+                android:text="@string/volunteer" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/temporary"
-                android:onClick='@{() -> viewModel.onWorkTypeChange("Temporary")}'/>
+                android:onClick='@{() -> viewModel.onWorkTypeChange("Temporary")}'
+                android:text="@string/temporary" />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -164,28 +166,28 @@
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/entry"
-                android:onClick='@{() -> viewModel.onExperienceLevelChange("Entry")}'/>
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Entry")}'
+                android:text="@string/entry" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/intermediate"
-                android:onClick='@{() -> viewModel.onExperienceLevelChange("Intermediate")}'/>
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Intermediate")}'
+                android:text="@string/intermediate" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/mid_level"
-                android:onClick='@{() -> viewModel.onExperienceLevelChange("Mid-level")}'/>
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Mid-level")}'
+                android:text="@string/mid_level" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/senior_level"
-                android:onClick='@{() -> viewModel.onExperienceLevelChange("Senior-level")}'/>
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Senior-level")}'
+                android:text="@string/senior_level" />
 
             <com.google.android.material.chip.Chip
                 style="@style/chipStyle"
-                android:text="@string/expert"
-                android:onClick='@{() -> viewModel.onExperienceLevelChange("Expert")}'/>
+                android:onClick='@{() -> viewModel.onExperienceLevelChange("Expert")}'
+                android:text="@string/expert" />
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
@@ -199,17 +201,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chipGroupExperience" />
 
-<!--        <com.google.android.material.slider.RangeSlider-->
-<!--            android:id="@+id/sliderRange"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:values="@array/initial_rang_salary"-->
-<!--            app:trackActiveDrawable="@drawable/slider_track"-->
-<!--            app:trackInactiveDrawable="@drawable/slider_track"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/textSalary"-->
-<!--            android:valueFrom="0.0"-->
-<!--            android:valueTo="100.0"-->
-<!--             />-->
+        <!--        <com.google.android.material.slider.RangeSlider-->
+        <!--            android:id="@+id/sliderRange"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            app:values="@array/initial_rang_salary"-->
+        <!--            app:trackActiveDrawable="@drawable/slider_track"-->
+        <!--            app:trackInactiveDrawable="@drawable/slider_track"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/textSalary"-->
+        <!--            android:valueFrom="0.0"-->
+        <!--            android:valueTo="100.0"-->
+        <!--             />-->
 
         <EditText
             android:id="@+id/minSalary"
@@ -220,12 +222,12 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
-            android:text="0.0"
             android:onTextChanged="@{(text,start,before,count) -> viewModel.onMinSalaryChange(text)}"
             android:paddingHorizontal="@dimen/spacing_medium"
+            android:text="0.0"
             android:textColor="@color/primary"
-            app:layout_constraintTop_toBottomOf="@id/textSalary"
-            app:layout_constraintStart_toStartOf="@id/textSalary" />
+            app:layout_constraintStart_toStartOf="@id/textSalary"
+            app:layout_constraintTop_toBottomOf="@id/textSalary" />
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/dividerRangSalary"
@@ -233,9 +235,9 @@
             android:layout_height="1dp"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
+            app:layout_constraintBottom_toBottomOf="@id/minSalary"
             app:layout_constraintStart_toEndOf="@id/minSalary"
-            app:layout_constraintTop_toTopOf="@id/minSalary"
-            app:layout_constraintBottom_toBottomOf="@id/minSalary" />
+            app:layout_constraintTop_toTopOf="@id/minSalary" />
 
         <EditText
             android:id="@+id/maxSalary"
@@ -245,13 +247,13 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:background="@drawable/boarder_text_salary"
             android:gravity="center"
-            android:text="0.0"
             android:onTextChanged="@{(text,start,before,count) -> viewModel.onMaxSalaryChange(text)}"
             android:paddingHorizontal="@dimen/spacing_medium"
+            android:text="0.0"
             android:textColor="@color/primary"
+            app:layout_constraintBottom_toBottomOf="@id/minSalary"
             app:layout_constraintStart_toEndOf="@id/dividerRangSalary"
-            app:layout_constraintTop_toTopOf="@id/minSalary"
-            app:layout_constraintBottom_toBottomOf="@id/minSalary" />
+            app:layout_constraintTop_toTopOf="@id/minSalary" />
 
         <TextView
             android:id="@+id/labelUsdMonth"
@@ -269,13 +271,13 @@
             style="@style/normalButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="@dimen/job_details_button_height"
-            android:text="@string/done"
-            android:textAllCaps="false"
             android:layout_marginTop="@dimen/spacing_large"
             android:onClick="@{()-> viewModel.onApplyClicked()}"
+            android:text="@string/done"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/minSalary"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/minSalary" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

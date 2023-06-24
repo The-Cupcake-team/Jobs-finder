@@ -63,14 +63,27 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
          lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
-                    is SearchJobEvent.JobCardClick -> {}
+                    is SearchJobEvent.JobCardClick -> {
+                        //todo: hande navigation to job details
+                    }
                     is SearchJobEvent.OnApplyButtonClicked -> dialog.dismiss()
                     is SearchJobEvent.OnFilterClicked -> dialog.show()
                     is SearchJobEvent.OnMoreOptionClickListener -> {
-
+                        //todo: handel show save job dialog
                     }
+
+                    SearchJobEvent.OnClearButtonClicked -> onClearClicked()
                 }
             }
+        }
+    }
+
+    private fun onClearClicked(){
+        bottomSheetBinding.apply {
+            chipGroupJopType.clearCheck()
+            chipGroupWorkType.clearCheck()
+            chipGroupExperience.clearCheck()
+            editTextLocation.setText("")
         }
     }
 

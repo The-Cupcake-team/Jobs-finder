@@ -92,6 +92,10 @@ class JobSearchViewModel @Inject constructor(
         }
     }
 
+    fun onClearClicked(){
+        viewModelScope.launch { _event.emit(SearchJobEvent.OnClearButtonClicked) }
+    }
+
     override fun onCardClickListener(id: String) {
         viewModelScope.launch {
             _event.emit(SearchJobEvent.JobCardClick(id))
