@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cupcake.viewmodels.comment.CommentUiState.PostUiState" />
+            type="com.cupcake.viewmodels.comment.CommentUiState.CommentUiState" />
 
         <variable
             name="listener"
@@ -27,6 +27,7 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginEnd="@dimen/spacing_normal"
+            app:loadImage="@{item.profileImage}"
             android:src="@drawable/test_personal_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:text="@{item.creatorName}"
+            android:text="@{item.commentAuthor}"
             app:layout_constraintEnd_toStartOf="@+id/text_view_number_like"
             app:layout_constraintStart_toEndOf="@+id/image_view_person_image"
             app:layout_constraintTop_toTopOf="@+id/image_view_person_image" />
@@ -67,7 +68,7 @@
             app:layout_constraintStart_toEndOf="@+id/text_view_person_name"
             app:layout_constraintTop_toTopOf="@+id/text_view_person_name"
             app:layout_constraintVertical_bias="0.0"
-            android:text="@{String.valueOf(item.likes)}"
+            android:text="@{String.valueOf(item.totalLikes)}"
             tools:text="329" />
 
         <TextView
@@ -77,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_xxsmall"
             android:layout_marginEnd="@dimen/spacing_medium"
-            android:text="@string/jop_title"
+            android:text="@{item.jobTitle}"
             android:textColor="@color/color_text_secondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_person_name"
@@ -104,7 +105,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
-            app:convertTime="@{item.createdAt}"
+            app:convertTime="@{item.createAt}"
             android:layout_marginEnd="@dimen/spacing_medium"
             tools:text="@string/created_at"
             android:text="@string/created_at"
