@@ -1,7 +1,8 @@
 package com.cupcake.viewmodels.comment
 
+import com.cupcake.models.Comment
 import com.cupcake.models.Post
-import com.cupcake.usecase.GetFollowingPostsUseCase
+import com.cupcake.usecase.GetAllCommentsUseCase
 import com.cupcake.usecase.GetPostByIdUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
@@ -12,12 +13,10 @@ import javax.inject.Inject
 @HiltViewModel
 class CommentViewModel @Inject constructor(
     private val getPostById: GetPostByIdUseCase,
-    private val postsUseCase: GetFollowingPostsUseCase
+    private val commentsUseCase: GetAllCommentsUseCase
 ) : BaseViewModel<CommentUiState>(CommentUiState()), CommentInteractionListener {
 
-    init {
-        getCommentsPost()
-    }
+
 
     fun getPost(id: String) {
         updateState { it.copy(isLoading = true, isSuccess = false, error = null) }
@@ -36,20 +35,20 @@ class CommentViewModel @Inject constructor(
         updateState { it.copy(isLoading = false, error = error, isSuccess = false) }
     }
 
-    private fun getCommentsPost() {
+     fun getCommentsPost(id: String) {
         tryToExecute(
-            { postsUseCase() },
+            { commentsUseCase(id) },
             ::onGetCommentsPostSuccess,
             ::onGetCommentPostFailure
         )
     }
 
-    private fun onGetCommentsPostSuccess(posts: List<Post>) {
+    private fun onGetCommentsPostSuccess(comment: List<Comment>) {
         _state.update {
             it.copy(
                 isLoading = false,
                 error = null,
-                posts = posts.map { post -> post.toUiPost() })
+                comments = comment.map { comment -> comment.toCommentUiState() })
         }
     }
 
@@ -70,17 +69,31 @@ class CommentViewModel @Inject constructor(
             )
     }
 
-    override fun onLikeClick(id: String) {
-        _state.update { currentState ->
-            val updateComments=currentState.posts.map { post ->
-                if (post.id==id){
-                    post.copy(isLiked = !post.isLiked, likes = if (post.isLiked) post.likes-1 else post.likes+1)
-                }else{
-                    post
-                }
-            }
-            currentState.copy(posts = updateComments)
-        }
+
+    private fun Comment.toCommentUiState(): CommentUiState.CommentUiState{
+        return CommentUiState.CommentUiState(
+            id = id,
+            postId = postId,
+            totalLikes = totalLikes,
+            content = content,
+            createAt = createAt,
+            commentAuthor = commentAuthor,
+            jobTitle = jobTitle,
+            profileImage = profileImage
+        )
     }
+
+    override fun onLikeClick(id: String) {
+//        _state.update { currentState ->
+//            val updateComments=currentState.comments.map { comment ->
+//                if (comment.id==id){
+//                    post.copy(isLiked = !post.isLiked, likes = if (post.isLiked) post.likes-1 else post.likes+1)
+//                }else{
+//                    post
+//                }
+//            }
+//            currentState.copy(posts = updateComments)
+//        }
+   }
 
 }
