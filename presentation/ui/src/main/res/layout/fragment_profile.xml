@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/motionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/profile_cover"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_horizontal_height"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/profile_image" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/profile_image"
+            android:layout_height="@dimen/profile_image"
+            app:layout_constraintTop_toTopOf="@+id/profile_cover"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:layout_constraintVertical_bias="2.0"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_cover"
+            app:layout_constraintStart_toStartOf="@+id/profile_cover"
+            app:roundPercent="1.0"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_image"
+             />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/spacing_normal"
+            app:layout_constraintStart_toStartOf="@id/profile_cover"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image">
+
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/TextStyle.Title"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="khaled eid" />
+
+            <TextView
+                android:id="@+id/profile_job_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextStyle.body"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:textColor="@color/color_text_secondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name"
+                android:text="UI UX Designer / User Interface" />
+
+            <TextView
+                android:id="@+id/profile_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextStyle.caption"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:textColor="@color/color_text_secondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_job_title"
+                android:text="Al-Najaf, Iraq" />
+
+            <TextView
+                android:id="@+id/profile_link"
+                style="@style/TextStyle.caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:textColor="@color/color_text_foursome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_location"
+                android:text="www.Behance/mohammedAli.com" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            app:layout_constraintTop_toBottomOf="@+id/bio"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/spacing_medium"
+
+            app:layout_constraintStart_toStartOf="parent"
+            >
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tab_layout_height"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:tabGravity="fill"
+                app:tabIndicatorAnimationMode="linear"
+                app:tabIndicatorGravity="bottom"
+                app:tabIconTint="@color/color_text_foursome"
+                app:tabIndicatorColor="@color/color_text_foursome"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="@dimen/tab_indicator_height"
+                app:tabSelectedTextColor="@color/color_text_foursome"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                app:tabTextColor="@color/color_text_foursome"/>
+
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/zero"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tab_layout"
+                app:layout_constraintHeight_default="spread"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

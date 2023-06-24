@@ -60,7 +60,7 @@
                         android:layout_marginEnd="@dimen/spacing_normal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/education" />
+                        android:src="@drawable/education" />
 
                     <TextView
                         android:id="@+id/textViewResume"
@@ -138,7 +138,7 @@
                         android:layout_marginEnd="@dimen/spacing_normal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/skills" />
+                        android:src="@drawable/skills" />
 
                     <TextView
                         android:id="@+id/skillsViewResume"
@@ -216,7 +216,7 @@
                         android:layout_marginEnd="@dimen/spacing_normal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/employment" />
+                        android:src="@drawable/employment" />
 
                     <TextView
                         android:id="@+id/employmentViewResume"
@@ -293,7 +293,7 @@
                         android:layout_marginEnd="@dimen/spacing_normal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/languages" />
+                        android:src="@drawable/languages" />
 
                     <TextView
                         android:id="@+id/languagesViewResume"
@@ -372,7 +372,7 @@
                         android:layout_marginEnd="@dimen/spacing_normal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:src="@drawable/courses" />
+                        android:src="@drawable/courses" />
 
                     <TextView
                         android:id="@+id/coursesViewResume"
