@@ -1,6 +1,5 @@
 package com.cupcake.ui.job_search
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +11,6 @@ import com.cupcake.ui.BR
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.BottomSheetJobsSearchFilterBinding
-import com.cupcake.ui.databinding.BottomSheetSaveJobBinding
 import com.cupcake.ui.databinding.FragmentJobSearchBinding
 import com.cupcake.viewmodels.job_search.JobSearchViewModel
 import com.cupcake.viewmodels.job_search.SearchJobEvent
@@ -33,9 +31,7 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
     private val args: JobSearchFragmentArgs by navArgs()
 
     private lateinit var filterDialog: BottomSheetDialog
-    private lateinit var saveDialog: BottomSheetDialog
     private lateinit var filterBottomSheetBinding: BottomSheetJobsSearchFilterBinding
-    private lateinit var saveJobBottomSheetsBinding: BottomSheetSaveJobBinding
     private lateinit var jobsEventJob: Job
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +40,6 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
         binding.editTextSearchInput.setText(args.jobTitle)
         setUpAdapter()
         setUpFilterBottomSheet()
-        setUpSaveBottomSheet()
         onBackNavigationIconClicked()
         onSalaryChange()
         viewModel.initialSearchInput(args.jobTitle)
@@ -63,13 +58,6 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
         filterDialog.setContentView(filterBottomSheetBinding.root)
         filterDialog.setCancelable(false)
         filterBottomSheetBinding.setVariable(BR.viewModel, viewModel)
-    }
-
-    private fun setUpSaveBottomSheet(){
-        saveJobBottomSheetsBinding = BottomSheetSaveJobBinding.inflate(layoutInflater)
-        saveDialog = BottomSheetDialog(requireContext())
-        saveDialog.setContentView(saveJobBottomSheetsBinding.root)
-        saveJobBottomSheetsBinding.setVariable(BR.viewModel, viewModel)
     }
 
     private fun onBackNavigationIconClicked() {
@@ -101,9 +89,7 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
                     is SearchJobEvent.JobCardClick -> handleJobCardClick(jobsEvent.id)
                     is SearchJobEvent.OnApplyButtonClicked -> dismissDialog(filterDialog)
                     is SearchJobEvent.OnFilterClicked -> showDialog(filterDialog)
-                    is SearchJobEvent.OnMoreOptionClickListener ->  showDialog(saveDialog)
                     is SearchJobEvent.OnClearButtonClicked -> onClearClicked()
-                    is SearchJobEvent.OnShareJobClicked -> sharePost(jobsEvent.id)
                 }
             }
         }
@@ -126,15 +112,6 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
             minSalary.text = ""
             maxSalary.text = ""
         }
-    }
-
-    private fun sharePost(id: String) {
-        val intent = Intent(Intent.ACTION_SEND)
-        val base = "https://cup-cake-media-dw2pb.ondigitalocean.app/"
-        val shareBody = getString(R.string.sharePost, base.plus(id),)
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_TEXT, shareBody)
-        startActivity(intent)
     }
 
     private fun showDialog(bottomSheetDialog: BottomSheetDialog){

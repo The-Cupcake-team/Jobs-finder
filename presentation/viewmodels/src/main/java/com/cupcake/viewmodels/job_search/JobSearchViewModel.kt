@@ -24,9 +24,9 @@ class JobSearchViewModel @Inject constructor(
     private val _salaryState: MutableStateFlow<SalaryUIState> =  MutableStateFlow(SalaryUIState())
     val salaryState: StateFlow<SalaryUIState> = _salaryState
 
-    var jobUiState: JobItemUiState = savedStateHandle["jobItemUiState"] ?: JobItemUiState()
-
-
+    init {
+        //getJobs()
+    }
     private fun getJobs() {
         _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
@@ -49,9 +49,7 @@ class JobSearchViewModel @Inject constructor(
     }
 
     private fun onSearchJobSuccess(jobs: List<JobItemUiState>) {
-        Log.v("hassanSearch", _state.value.toString())
         _state.update { it.copy(searchResult = jobs, isLoading = false, error = null) }
-        Log.v("hassanSearch", _state.value.searchResult.toString())
     }
 
     private fun onError(error: BaseErrorUiState) {
@@ -59,8 +57,8 @@ class JobSearchViewModel @Inject constructor(
     }
 
     fun onSearchInputChange(newSearchInput: CharSequence){
-        //todo handel search change input
         _state.update { it.copy(searchInput = newSearchInput.toString()) }
+        getJobs()
     }
 
     fun initialSearchInput(jobTitle: String){
@@ -107,22 +105,6 @@ class JobSearchViewModel @Inject constructor(
         viewModelScope.launch {
             _event.emit(SearchJobEvent.JobCardClick(id))
         }
-    }
-
-    override fun onImageViewMoreClickListener(model: JobItemUiState) {
-        viewModelScope.launch {
-            _event.emit(SearchJobEvent.OnMoreOptionClickListener(model))
-        }
-    }
-
-    override fun onShareClickListener() {
-        viewModelScope.launch {
-            _event.emit(SearchJobEvent.OnShareJobClicked(jobUiState.id))
-        }
-    }
-
-    override fun onSaveListener() {
-        TODO("Not yet implemented")
     }
 
     fun onRetryClicked(){

@@ -45,7 +45,7 @@
             android:drawablePadding="@dimen/spacing_normal"
             android:hint="@string/search"
             android:inputType="text"
-            android:afterTextChanged="@{(text) -> viewModel.onSearchInputChange(text)}"
+            android:onTextChanged="@{(text,start,before,count) -> viewModel.onSearchInputChange(text)}"
             android:paddingStart="@dimen/spacing_medium"
             app:layout_constraintTop_toBottomOf="@+id/tool_bar"
              />

@@ -75,7 +75,7 @@ class JobSearchFilterUseCase@Inject constructor(
 
     private fun filterJobTitle(job: Job, searchTitle: String): Boolean{
         if(searchTitle.isNotEmpty()){
-            return job.jobTitle.title?.toLowerCase()?.contains(searchTitle) ?: true
+            return job.jobTitle.title?.contains(searchTitle, ignoreCase = true) ?: true
         }
         return true
     }
