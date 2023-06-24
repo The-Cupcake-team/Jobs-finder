@@ -1,14 +1,10 @@
 package com.cupcake.ui.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfileBinding
-import com.cupcake.ui.profile.resume.ResumeFragment
 import com.cupcake.viewmodels.profile.ProfileViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 

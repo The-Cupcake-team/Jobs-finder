@@ -3,20 +3,18 @@ package com.cupcake.ui.profile.resume
 import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
-import android.transition.Visibility
 import android.view.View
 import android.widget.ImageView
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
-import com.cupcake.ui.databinding.FragmentResumeBinding
+import com.cupcake.ui.databinding.FragmentProfileResumeBinding
 import com.cupcake.ui.utill.makeGone
 import com.cupcake.ui.utill.makeVisible
 import com.cupcake.viewmodels.profile.resume.ResumeViewModel
 
-class ResumeFragment : BaseFragment<FragmentResumeBinding, ResumeViewModel>(
-    R.layout.fragment_resume,
+class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, ResumeViewModel>(
+    R.layout.fragment_profile_resume,
     ResumeViewModel::class.java
 ) {
     override val LOG_TAG: String = "ResumeFragment"
@@ -44,7 +42,7 @@ class ResumeFragment : BaseFragment<FragmentResumeBinding, ResumeViewModel>(
 
     companion object {
         @JvmStatic
-        fun newInstance() = ResumeFragment().apply {
+        fun newInstance() = ProfileResumeFragment().apply {
             arguments = Bundle().apply {
             }
         }
