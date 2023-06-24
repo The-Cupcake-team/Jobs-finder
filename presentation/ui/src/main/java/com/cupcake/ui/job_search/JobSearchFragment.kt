@@ -3,7 +3,9 @@ package com.cupcake.ui.job_search
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.cupcake.ui.BR
 import com.cupcake.ui.R
@@ -14,6 +16,7 @@ import com.cupcake.viewmodels.job_search.JobSearchViewModel
 import com.cupcake.viewmodels.job_search.SearchJobEvent
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
@@ -29,6 +32,7 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
 
     private lateinit var dialog: BottomSheetDialog
     private lateinit var bottomSheetBinding: BottomSheetJobsSearchFilterBinding
+    private lateinit var jobsEventJob: Job
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,9 +41,13 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
         setUpAdapter()
         setUpBottomSheet()
         onBackNavigationIconClicked()
-        handelJobsSearchEvent()
         onSalaryChange()
         viewModel.initialSearchInput(args.jobTitle)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handelJobsSearchEvent()
     }
 
     private fun setUpAdapter() {
@@ -62,11 +70,11 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
     }
 
     private fun handelJobsSearchEvent() {
-         lifecycleScope.launch(Dispatchers.Main) {
+        jobsEventJob = lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { jobsEvent ->
                 when (jobsEvent) {
                     is SearchJobEvent.JobCardClick -> {
-                        //todo: hande navigation to job details
+                        handleJobCardClick(jobsEvent.id)
                     }
                     is SearchJobEvent.OnApplyButtonClicked -> dialog.dismiss()
                     is SearchJobEvent.OnFilterClicked -> dialog.show()
@@ -80,6 +88,13 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
         }
     }
 
+    private fun handleJobCardClick(id: String) {
+        navigateToDirection(JobSearchFragmentDirections.actionJobSearchFragmentToJobDetailsFragment(id))
+    }
+
+    private fun navigateToDirection(directions: NavDirections) {
+        findNavController().navigate(directions)
+    }
     private fun onClearClicked(){
         bottomSheetBinding.apply {
             chipGroupJopType.clearCheck()
@@ -102,4 +117,8 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        jobsEventJob.cancel()
+    }
 }
