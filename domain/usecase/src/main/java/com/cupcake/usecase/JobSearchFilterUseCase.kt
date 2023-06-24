@@ -1,5 +1,6 @@
 package com.cupcake.usecase
 
+import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import repo.JobFinderRepository
 import javax.inject.Inject
@@ -21,14 +22,17 @@ class JobSearchFilterUseCase@Inject constructor(
         val filteredJobs = allJobs
             .filter { job ->
                 filterJobTitle(job, searchTitle)
-                        || filterBySalaryRange(job, salaryRange)
-                        || filterByLocation(job, location)
-                        || filterByJobType(job, jobType)
-                        || filterByWorkType(job, workType)
-                        || filterByExperienceLevel(job, experienceLevel)
-
+                        && filterBySalaryRange(job, salaryRange)
+                        && filterByLocation(job, location)
+                        && filterByJobType(job, jobType)
+                        && filterByWorkType(job, workType)
+                        && filterByExperienceLevel(job, experienceLevel)
             }
-        return filteredJobs
+        if (!filteredJobs.isNullOrEmpty()){
+            return filteredJobs
+        }else{
+            throw ErrorType.Unknown("no result Found")
+        }
     }
 
 
@@ -36,44 +40,44 @@ class JobSearchFilterUseCase@Inject constructor(
         if(location.isNotEmpty()){
             return location?.let { job.jobLocation.contains(it, ignoreCase = true) } ?: true
         }
-        return false
+        return true
     }
 
     private fun filterByJobType(job: Job, jobType: String): Boolean {
         if (jobType.isNotEmpty()){
             return jobType?.let { job.jobType.equals(it, ignoreCase = true) } ?: true
         }
-        return false
+        return true
     }
 
     private fun filterByWorkType(job: Job, workType: String): Boolean {
         if(workType.isNotEmpty()){
             return workType?.let { job.workType.equals(it, ignoreCase = true) } ?: true
         }
-        return false
+        return true
     }
 
     private fun filterByExperienceLevel(job: Job, experienceLevel: String): Boolean {
         if(experienceLevel.isNotEmpty()){
             return experienceLevel?.let { job.jobExperience.equals(it, ignoreCase = true) } ?: true
         }
-        return false
+        return true
     }
 
     private fun filterBySalaryRange(job: Job, salaryRange: Pair<Double, Double>): Boolean {
        if(salaryRange.first > 0.0 && salaryRange.second > 0.0){
            return salaryRange?.let { (minSalary, maxSalary) ->
-               job.jobSalary.minSalary >= minSalary && job.jobSalary.maxSalary <= maxSalary
+               minSalary >= job.jobSalary.minSalary && maxSalary <= job.jobSalary.maxSalary
            } ?: true
        }
-        return false
+        return true
     }
 
     private fun filterJobTitle(job: Job, searchTitle: String): Boolean{
         if(searchTitle.isNotEmpty()){
             return job.jobTitle.title?.contains(searchTitle) ?: true
         }
-        return false
+        return true
     }
 
 }
