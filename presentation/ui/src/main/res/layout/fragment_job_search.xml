@@ -45,10 +45,10 @@
             android:drawablePadding="@dimen/spacing_normal"
             android:hint="@string/search"
             android:inputType="text"
-            android:onTextChanged="@{(text,start,before,count) -> viewModel.onSearchInputChange(text)}"
+            android:afterTextChanged="@{(text) -> viewModel.onSearchInputChange(text)}"
             android:paddingStart="@dimen/spacing_medium"
             app:layout_constraintTop_toBottomOf="@+id/tool_bar"
-            tools:layout_editor_absoluteX="16dp" />
+             />
 
             <ImageView
                 android:id="@+id/imageViewFilter"
@@ -100,17 +100,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:showWhenIf="@{viewModel.state.error != null}"
             bind:error="@{viewModel.state.error}" />
-
-        <TextView
-            style="@style/TextStyle.body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/noResultFound"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showWhenIf="@{viewModel.state.searchResult.isEmpty()}" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonTryAgain"

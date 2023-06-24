@@ -39,6 +39,7 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
         onBackNavigationIconClicked()
         handelJobsSearchEvent()
         onSalaryChange()
+        viewModel.initialSearchInput(args.jobTitle)
     }
 
     private fun setUpAdapter() {

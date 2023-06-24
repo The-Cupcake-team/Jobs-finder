@@ -43,8 +43,9 @@ class JobSearchViewModel @Inject constructor(
     }
 
     private fun onSearchJobSuccess(jobs: List<JobItemUiState>) {
-        _state.update { it.copy(searchResult = jobs, isLoading = false, error = null) }
         Log.v("hassanSearch", _state.value.toString())
+        _state.update { it.copy(searchResult = jobs, isLoading = false, error = null) }
+        Log.v("hassanSearch", _state.value.searchResult.toString())
     }
 
     private fun onError(error: BaseErrorUiState) {
@@ -54,6 +55,12 @@ class JobSearchViewModel @Inject constructor(
     fun onSearchInputChange(newSearchInput: CharSequence){
         //todo handel search change input
         _state.update { it.copy(searchInput = newSearchInput.toString()) }
+        getJobs()
+    }
+
+    fun initialSearchInput(arg: String){
+        _state.update { it.copy(searchInput = arg) }
+        getJobs()
     }
 
     fun onLocationChange(location: CharSequence){

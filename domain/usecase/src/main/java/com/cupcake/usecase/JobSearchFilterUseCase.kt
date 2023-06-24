@@ -31,7 +31,7 @@ class JobSearchFilterUseCase@Inject constructor(
         if (!filteredJobs.isNullOrEmpty()){
             return filteredJobs
         }else{
-            throw ErrorType.Unknown("no result Found")
+            throw ErrorType.Unknown("No Result Found")
         }
     }
 
