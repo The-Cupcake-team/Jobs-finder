@@ -1,7 +1,9 @@
 package com.cupcake.viewmodels.comment
 
+import android.util.Log
 import com.cupcake.models.Comment
 import com.cupcake.models.Post
+import com.cupcake.usecase.CreateCommentUseCase
 import com.cupcake.usecase.GetAllCommentsUseCase
 import com.cupcake.usecase.GetPostByIdUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
@@ -13,11 +15,12 @@ import javax.inject.Inject
 @HiltViewModel
 class CommentViewModel @Inject constructor(
     private val getPostById: GetPostByIdUseCase,
-    private val commentsUseCase: GetAllCommentsUseCase
+    private val commentsUseCase: GetAllCommentsUseCase,
+    private val createCommentUseCase: CreateCommentUseCase
 ) : BaseViewModel<CommentUiState>(CommentUiState()), CommentInteractionListener {
 
 
-
+    //region getPost
     fun getPost(id: String) {
         updateState { it.copy(isLoading = true, isSuccess = false, error = null) }
         tryToExecute(
@@ -34,7 +37,9 @@ class CommentViewModel @Inject constructor(
     private fun onErrorGetPost(error: BaseErrorUiState) {
         updateState { it.copy(isLoading = false, error = error, isSuccess = false) }
     }
+    //endregion
 
+    //region getComments
      fun getCommentsPost(id: String) {
         tryToExecute(
             { commentsUseCase(id) },
@@ -57,7 +62,33 @@ class CommentViewModel @Inject constructor(
             it.copy(isLoading = false, error = error)
         }
     }
+    //endregion
 
+    //region createComment
+    fun createComment(content: String) {
+        tryToExecute(
+            { createCommentUseCase(state.value.post.id, content) },
+            ::onCreateCommentSuccess,
+            ::onCreateCommentFailure
+        )
+    }
+    private fun onCreateCommentSuccess(comment: Boolean) {
+        _state.update {
+            it.copy(
+                isLoading = false,
+                error = null,
+            )
+        }
+        getCommentsPost(state.value.post.id)
+    }
+    private fun onCreateCommentFailure(error: BaseErrorUiState) {
+        _state.update {
+            it.copy(isLoading = false, error = error)
+        }
+    }
+    //endregion
+
+    //region mapper
     private fun Post.toUiPost(): CommentUiState.PostUiState {
         return CommentUiState.PostUiState(
             id = id,
@@ -82,18 +113,19 @@ class CommentViewModel @Inject constructor(
             profileImage = profileImage
         )
     }
+    //endregion
 
     override fun onLikeClick(id: String) {
-//        _state.update { currentState ->
-//            val updateComments=currentState.comments.map { comment ->
-//                if (comment.id==id){
-//                    post.copy(isLiked = !post.isLiked, likes = if (post.isLiked) post.likes-1 else post.likes+1)
-//                }else{
-//                    post
-//                }
-//            }
-//            currentState.copy(posts = updateComments)
-//        }
+        _state.update { currentState ->
+            val updateComments=currentState.comments.map { comment ->
+                if (comment.id==id){
+                    comment.copy(isLiked = !comment.isLiked, totalLikes = if (comment.isLiked) comment.totalLikes-1 else comment.totalLikes+1)
+                }else{
+                    comment
+                }
+            }
+            currentState.copy(comments = updateComments)
+        }
    }
 
 }
