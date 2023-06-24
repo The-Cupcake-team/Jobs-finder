@@ -35,7 +35,7 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
         }
     }
 
-    fun  inti(){
+    private fun  inti(){
         binding.apply {
             educationCard.setOnClickListener { toggleRecyclerViewVisibility(educationRecyclerViewP, educationViewAddResumeItem) }
             skillsCard.setOnClickListener { toggleRecyclerViewVisibility(skillsRecyclerViewP, skillsViewAddResumeItem) }
