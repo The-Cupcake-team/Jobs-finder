@@ -1,11 +1,11 @@
 package com.cupcake.models
 
 
-class Job(
+data class Job(
     val id: String,
     val jobTitle: JobTitle,
     val company: String,
-    val createdAt: Long,
+    val createdAt: String,
     val workType: String,
     val jobLocation: String,
     val jobType: String,
@@ -13,4 +13,5 @@ class Job(
     val jobSalary: JobSalary,
     val jobExperience: String,
     val education: String,
+    val skills: List<String>
 )

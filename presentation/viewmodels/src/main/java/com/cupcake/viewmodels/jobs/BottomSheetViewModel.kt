@@ -50,7 +50,7 @@ class BottomSheetViewModel @Inject constructor(
     fun JobUiState.toJob(): Job {
         return Job(
             id = id,
-            jobTitle = JobTitle(title = title, id = id.toInt()),
+            jobTitle = JobTitle(title = title, id = 12213),
             company = companyName,
             createdAt = createdAt,
             workType = detailsChip[0],
@@ -59,7 +59,8 @@ class BottomSheetViewModel @Inject constructor(
             jobDescription = companyName,
             jobSalary = JobSalary(minSalary = salary.toDouble(), maxSalary = salary.toDouble()),
             jobExperience = jobExperience,
-            education = education
+            education = education,
+            skills = emptyList()
         )
     }
 

@@ -1,5 +1,6 @@
 package repo
 
+import com.cupcake.models.Token
 import com.cupcake.models.User
 
 interface AuthenticationRepository {
@@ -7,12 +8,20 @@ interface AuthenticationRepository {
         fullName: String,
         userName: String,
         email: String,
+        password: String,
+        jobTitleId: Int
+    ): User
+
+    suspend fun login(
+        userName: String,
         password: String
     ): User
 
-    suspend fun saveAuthToken(token: String)
+    suspend fun saveAuthData(token: Token)
 
     suspend fun getAuthToken(): String?
 
-    suspend fun clearAuthToken()
+    suspend fun getAuthTokenExpireTime(): Long?
+
+    suspend fun clearAuthData()
 }

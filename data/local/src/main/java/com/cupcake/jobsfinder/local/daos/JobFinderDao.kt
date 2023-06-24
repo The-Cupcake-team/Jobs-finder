@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.cupcake.jobsfinder.local.entities.JobsEntity
+import com.cupcake.jobsfinder.local.entities.PostsEntity
 
 @Dao
 interface JobFinderDao {
@@ -17,4 +18,13 @@ interface JobFinderDao {
 
     @Delete
     fun deleteSavedJob(job: JobsEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertPost(Post: PostsEntity)
+
+    @Query("SELECT * FROM posts_table WHERE id = :id")
+    fun getPostById(id: String): PostsEntity?
+
+    @Delete
+    fun deleteSavedPost(Post: PostsEntity)
 }

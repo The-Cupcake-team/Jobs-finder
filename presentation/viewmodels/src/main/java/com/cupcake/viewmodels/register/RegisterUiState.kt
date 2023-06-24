@@ -1,6 +1,6 @@
 package com.cupcake.viewmodels.register
 
-import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.viewmodels.jobs.JobTitleUiState
 
 data class RegisterUiState(
     var fullName: String = "",
@@ -8,7 +8,7 @@ data class RegisterUiState(
     var email: String = "",
     var password: String = "",
     var confirmedPassword: String = "",
-
+    var jobTitleId: Int = 1,
 
     val isFullNameValid: Boolean = false,
     val isUserNameValid: Boolean = false,
@@ -16,21 +16,13 @@ data class RegisterUiState(
     val isPasswordValid: Boolean = false,
     val isConfirmedPasswordValid: Boolean = false,
 
-
     val fullNameError: String = "",
     val userNameError: String = "",
     val emailError: String = "",
     val passwordError: String = "",
     val confirmedPasswordError: String = "",
 
-    val fieldName: String = "",
-    val fieldError: String = "",
-    val isFieldValid: Boolean = false,
-
+    var jobTitles: List<JobTitleUiState> = emptyList(),
 
     val isLoading: Boolean = false,
-
-    val isUserRegistered: Boolean = false,
-
-    val error: BaseErrorUiState? = null,
 )

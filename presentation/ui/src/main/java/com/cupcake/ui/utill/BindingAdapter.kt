@@ -50,7 +50,12 @@ import com.cupcake.viewmodels.jobs.JobTitleUiState
 
 @BindingAdapter(value = ["app:loadImage"])
 fun loadImageCoil(image: ImageView, url: String?) {
-    image.load(url)
+    if ( url!!.isEmpty() ){
+        image.visibility = View.GONE
+    }else {
+        image.load(url)
+        image.visibility = View.VISIBLE
+    }
 }
 
 @BindingAdapter("setIcons")
@@ -100,8 +105,8 @@ fun showDrawableErrorImage(view: ImageView, errorType: BaseErrorUiState?) {
 
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter(value = ["app:convertTime"])
-fun convertTime(view: TextView, time: Long) {
-    view.text = convert(time)
+fun convertTime(view: TextView, time: String?) {
+    view.text = time?.let { convert(it) }
 }
 
 
@@ -165,5 +170,19 @@ fun isLiked(view: ImageView , isLiked: Boolean){
 @BindingAdapter(value = ["app:isRefresh"])
 fun isRefresh(view: SwipeRefreshLayout , isRefresh: Boolean){
     view.isRefreshing = isRefresh
+}
+
+@BindingAdapter(value = ["app:showImage"])
+fun showImage(view: ImageView , imageData: Any?){
+    if (imageData != null){
+        view.visibility = View.VISIBLE
+        view.load(imageData) {
+            crossfade(true)
+            crossfade(1000)
+        }
+    }
+    else{
+        view.setImageDrawable(null)
+    }
 }
 
