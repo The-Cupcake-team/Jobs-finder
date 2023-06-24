@@ -30,20 +30,21 @@ class JobSearchViewModel @Inject constructor(
     private fun getJobs() {
         _state.update { it.copy(isLoading = true, error = null) }
         viewModelScope.launch {
+            _state.debounce(1000).collect {
                 tryToExecute(
                     {jobSearchFilterUseCase(
-                        searchTitle = _state.value.searchInput,
-                        location = _state.value.jobFilterUIState.location,
-                        jobType = _state.value.jobFilterUIState.jobType,
-                        workType = _state.value.jobFilterUIState.workType,
-                        experienceLevel = _state.value.jobFilterUIState.experience,
-                        salaryRange = Pair(_state.value.jobFilterUIState.salary.minSalary,
-                            _state.value.jobFilterUIState.salary.maxSalary)
+                        searchTitle = it.searchInput,
+                        location = it.jobFilterUIState.location,
+                        jobType = it.jobFilterUIState.jobType,
+                        workType = it.jobFilterUIState.workType,
+                        experienceLevel = it.jobFilterUIState.experience,
+                        salaryRange = Pair(it.jobFilterUIState.salary.minSalary,
+                            it.jobFilterUIState.salary.maxSalary)
                     ).map { it.toJobItemUiState() }},
                     ::onSearchJobSuccess,
                     ::onError
                 )
-
+            }
         }
     }
 
@@ -60,12 +61,10 @@ class JobSearchViewModel @Inject constructor(
     fun onSearchInputChange(newSearchInput: CharSequence){
         //todo handel search change input
         _state.update { it.copy(searchInput = newSearchInput.toString()) }
-        getJobs()
     }
 
     fun initialSearchInput(jobTitle: String){
         _state.update { it.copy(searchInput = jobTitle) }
-        getJobs()
     }
 
     fun onLocationChange(location: CharSequence){
@@ -95,7 +94,6 @@ class JobSearchViewModel @Inject constructor(
     fun onApplyClicked(){
         _filterState.update { it.copy(salary = _salaryState.value) }
         _state.update { it.copy(jobFilterUIState = _filterState.value) }
-        getJobs()
         viewModelScope.launch {
             _event.emit(SearchJobEvent.OnApplyButtonClicked)
         }
