@@ -162,7 +162,7 @@
             app:shapeAppearanceOverlay="@style/circleImageView" />
 
         <EditText
-            android:id="@+id/edit_text_post_comments"
+            android:id="@+id/editTextPostComments"
             style="@style/edit_text_post_comments_style"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/search_home_height"
@@ -182,10 +182,11 @@
             android:clickable="true"
             android:focusable="true"
             android:text="@string/post"
+            android:onClick="@{() -> viewModel.createComment(editTextPostComments.getText().toString())}"
             android:textColor="@color/blue_500"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_text_post_comments"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextPostComments"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/edit_text_post_comments" />
+            app:layout_constraintTop_toTopOf="@+id/editTextPostComments" />
 
 
         <include
@@ -194,8 +195,10 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:showWhenIf="@{viewModel.state.isLoading}"
             bind:isLoading="@{viewModel.state.isLoading}" />
 
