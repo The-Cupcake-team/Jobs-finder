@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/profileFragment">
+    app:startDestination="@id/profileEducationFragment">
     <fragment
         android:id="@+id/createJobFragment"
         android:name="com.cupcake.ui.create_job.CreateJobFragment"
@@ -55,6 +55,21 @@
         <action
             android:id="@+id/action_jobsFragment_to_modalBottomSheet"
             app:destination="@id/modalBottomSheet" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileEducationFragment"
+        android:name="com.cupcake.ui.profile.ProfileEducationFragment"
+        tools:layout="@layout/fragment_profile_education"
+        android:label="ProfileEducationFragment">
+
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fromAddButton"
+            app:argType="boolean" />
     </fragment>
 
     <fragment
