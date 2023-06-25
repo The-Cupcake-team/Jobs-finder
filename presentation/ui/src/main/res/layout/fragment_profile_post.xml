@@ -46,7 +46,7 @@
             android:orientation="horizontal"
             android:clipToPadding="false"
             app:items="@{viewModel.state.recentPostsResult}"
-            tools:listitem="@layout/item_profile_recent_post"
+            tools:listitem="@layout/item_profile_horizontal_post"
             android:paddingHorizontal="@dimen/spacing_tiny"
             tools:itemCount="2"
             />
@@ -83,7 +83,7 @@
             app:items="@{viewModel.state.savedPostsResult}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
-            tools:listitem="@layout/item_profile_recent_post"
+            tools:listitem="@layout/item_profile_horizontal_post"
             tools:itemCount="2"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

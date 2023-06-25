@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_title_saved_post"
             tools:itemCount="2"
-            tools:listitem="@layout/item_profile_saved_post" />
+            tools:listitem="@layout/item_profile_vetrical_post" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

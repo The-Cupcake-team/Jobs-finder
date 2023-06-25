@@ -222,8 +222,8 @@ class JobFinderRepositoryImpl @Inject constructor(
         jobFinderDao.insertProfile(user.toProfileEntity())
     }
 
-    override suspend fun getProfile(id : String): UserProfile {
-       return jobFinderDao.getProfile(id).toProfile()
+    override suspend fun getProfile(): UserProfile {
+       return jobFinderDao.getProfile().toProfile()
     }
 
     override suspend fun getAllSavedPosts(): List<Post> {

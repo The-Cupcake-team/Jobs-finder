@@ -98,7 +98,7 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
             PostsEvent.OnNotificationClick -> {
                 findNavController().navigate(PostsFragmentDirections.actionPostsFragmentToNotificationFragment())
             }
-            PostsEvent.OnProfileClick -> Toast.makeText(context, "Profile", Toast.LENGTH_SHORT).show()
+            PostsEvent.OnProfileClick -> findNavController().navigate(PostsFragmentDirections.actionPostsFragmentToProfileFragment())
             PostsEvent.OnSearchClick -> Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
         }
     }

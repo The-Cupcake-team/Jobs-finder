@@ -20,8 +20,8 @@ class PostProfileViewModel @Inject constructor(
     private val getPostsSavedUseCase: GetPostSavedByIdUseCase,
     private val getAllUserPost:GetAllUserPostUseCase
 ) : BaseViewModel<PostsSavedUIState>(PostsSavedUIState()), PostProfileInterAction {
-    private val _postEvent = MutableSharedFlow<Event<PostProfileEvent>>()
-    val postEvent = _postEvent.asSharedFlow()
+//    private val _postEvent = MutableSharedFlow<Event<PostProfileEvent>>()
+//    val postEvent = _postEvent.asSharedFlow()
     init {
         getSavedPost()
         getUserPost()

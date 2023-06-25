@@ -36,7 +36,7 @@ interface JobFinderDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProfile(profileEntity: ProfileEntity)
 
-    @Query("SELECT * FROM profile_table WHERE id = :id")
-    fun getProfile(id: String): ProfileEntity
+    @Query("SELECT * FROM profile_table")
+    fun getProfile(): ProfileEntity
 
 }
