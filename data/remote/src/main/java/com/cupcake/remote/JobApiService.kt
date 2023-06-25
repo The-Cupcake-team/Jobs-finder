@@ -87,4 +87,8 @@ interface JobApiService {
     ): Response<BaseResponse<UserDto>>
 
     // endregion
+//    /user/posts
+
+    @GET("/user/posts")
+    suspend fun getAllUserPost():Response<BaseResponse<List<PostsDto>>>
 }
