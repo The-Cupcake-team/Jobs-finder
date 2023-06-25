@@ -3,7 +3,7 @@ package com.cupcake.viewmodels.comment
 import com.cupcake.viewmodels.base.BaseErrorUiState
 
 
-data class CommentUiState(
+data class CommentsUiState(
     val post:PostUiState = PostUiState(),
     val comments:List<CommentUiState> = emptyList(),
     val isLoading: Boolean = false,
@@ -31,6 +31,9 @@ data class CommentUiState(
         val commentAuthor: String = "",
         val isLiked: Boolean = false,
         val jobTitle: String = "",
-        val profileImage: String = ""
+        val profileImage: String = "",
+        val commentLoading: Boolean = false,
+        val commentError: Boolean = false,
+        val commentSuccess: Boolean = true,
     )
 }
