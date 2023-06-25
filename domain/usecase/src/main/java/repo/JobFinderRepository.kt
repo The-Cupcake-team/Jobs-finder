@@ -1,12 +1,6 @@
 package repo
 
-import com.cupcake.models.Job
-import com.cupcake.models.JobTitle
-import com.cupcake.models.Post
-import com.cupcake.models.Profile
-import com.cupcake.models.Token
-import com.cupcake.models.User
-import com.cupcake.models.UserProfile
+import com.cupcake.models.*
 
 interface JobFinderRepository {
 
@@ -65,6 +59,10 @@ interface JobFinderRepository {
 
     suspend fun insertProfile(user: User)
     suspend fun getProfile(id : String): UserProfile
-    // region Profile
 
+    suspend fun getEducation(educationId: String): Education
+    suspend fun addEducation(education: Education)
+    suspend fun updateEducation(education: Education)
+
+    // region Profile
 }
