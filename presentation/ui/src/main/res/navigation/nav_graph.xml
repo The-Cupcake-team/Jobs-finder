@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/profileFragment">
+    app:startDestination="@id/profilePostFragment">
     <fragment
         android:id="@+id/createJobFragment"
         android:name="com.cupcake.ui.create_job.CreateJobFragment"
@@ -157,6 +157,25 @@
         android:id="@+id/profileFragment"
         android:name="com.cupcake.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/profilePostFragment"
+        android:name="com.cupcake.ui.profile.posts.ProfilePostFragment"
+        android:label="ProfilePostFragment" >
+        <action
+            android:id="@+id/action_profilePostFragment_to_savedPostFragment"
+            app:destination="@id/savedPostFragment" />
+        <action
+            android:id="@+id/action_profilePostFragment_to_recentPostFragment"
+            app:destination="@id/recentPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recentPostFragment"
+        android:name="com.cupcake.ui.profile.posts.RecentPostFragment"
+        android:label="RecentPostFragment" />
+    <fragment
+        android:id="@+id/savedPostFragment"
+        android:name="com.cupcake.ui.profile.posts.SavedPostFragment"
+        android:label="SavedPostFragment" />
 
 
 </navigation>
