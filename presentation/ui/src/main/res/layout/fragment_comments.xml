@@ -119,6 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/zero"
             android:paddingVertical="@dimen/spacing_normal"
+            scrollToPosition="@{viewModel.state.comments.size()-1}"
             android:clipToPadding="false"
             android:orientation="vertical"
             app:showWhenIf="@{viewModel.state.isSuccess}"

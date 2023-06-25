@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cupcake.viewmodels.comment.CommentUiState.CommentUiState" />
+            type="com.cupcake.viewmodels.comment.CommentsUiState.CommentUiState" />
 
         <variable
             name="listener"
@@ -89,15 +89,16 @@
             style="@style/TextStyle.body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="@dimen/spacing_medium"
-            android:text="@{item.content}"
             android:ellipsize="end"
-            tools:text="@string/post_content"
+            android:text="@{item.content}"
             android:textColor="@color/color_text_primary"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/text_view_person_job_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_person_job_title" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_person_job_title"
+            tools:text="@string/post_content" />
 
         <TextView
             android:id="@+id/textViewCreatedAt"
@@ -105,15 +106,56 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
-            app:convertTime="@{item.createAt}"
             android:layout_marginEnd="@dimen/spacing_medium"
-            tools:text="@string/created_at"
+            android:layout_marginBottom="16dp"
             android:text="@string/created_at"
-            android:layout_marginBottom="@dimen/spacing_medium"
+            android:visibility="gone"
             android:textColor="@color/color_text_tertiary"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:convertTime="@{item.createAt}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
+            app:showWhenIf="@{item.commentSuccess}"
+            tools:text="@string/created_at" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/TextStyle.caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:layout_marginBottom="16dp"
+            android:text="posting..."
+            android:visibility="gone"
+            android:textColor="@color/color_text_tertiary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
+            app:showWhenIf="@{item.commentLoading}" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/TextStyle.caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:layout_marginBottom="16dp"
+            android:drawableStart="@drawable/ic_invaild"
+            android:drawablePadding="@dimen/spacing_small"
+            android:text="TryAgain"
+            android:clickable="true"
+            android:onClick="@{() -> listener.onTryAgainClick(item)}"
+            app:showWhenIf="@{item.commentError}"
+            android:textColor="@color/accent_red"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
+            android:focusable="true" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
