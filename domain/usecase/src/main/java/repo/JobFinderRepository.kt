@@ -3,7 +3,10 @@ package repo
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Post
+import com.cupcake.models.Profile
 import com.cupcake.models.Token
+import com.cupcake.models.User
+import com.cupcake.models.UserProfile
 
 interface JobFinderRepository {
 
@@ -57,4 +60,11 @@ interface JobFinderRepository {
     suspend fun clearProfileData()
 
     //endregion
+
+    // region Profile
+
+    suspend fun insertProfile(user: User)
+    suspend fun getProfile(id : String): UserProfile
+    // region Profile
+
 }

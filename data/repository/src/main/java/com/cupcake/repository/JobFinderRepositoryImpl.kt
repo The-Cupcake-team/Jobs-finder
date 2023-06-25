@@ -8,6 +8,9 @@ import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Post
+import com.cupcake.models.Profile
+import com.cupcake.models.User
+import com.cupcake.models.UserProfile
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toJob
@@ -16,6 +19,8 @@ import com.cupcake.repository.mapper.toJobTitle
 import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
 import com.cupcake.repository.mapper.toPostsEntity
+import com.cupcake.repository.mapper.toProfile
+import com.cupcake.repository.mapper.toProfileEntity
 import repo.JobFinderRepository
 import retrofit2.Response
 import javax.inject.Inject
@@ -213,6 +218,14 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun clearProfileData() {
         profileDataStore.clearProfileData()
+    }
+
+    override suspend fun insertProfile(user: User) {
+        jobFinderDao.insertProfile(user.toProfileEntity())
+    }
+
+    override suspend fun getProfile(id : String): UserProfile {
+       return jobFinderDao.getProfile(id).toProfile()
     }
 
     //endregion

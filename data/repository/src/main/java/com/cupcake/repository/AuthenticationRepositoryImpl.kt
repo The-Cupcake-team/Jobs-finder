@@ -3,6 +3,7 @@ package com.cupcake.repository
 import android.util.Log
 import com.cupcake.jobsfinder.local.datastore.AuthDataStore
 import com.cupcake.models.ErrorType
+import com.cupcake.models.Profile
 import com.cupcake.models.Token
 import com.cupcake.models.User
 import com.cupcake.remote.AuthApiService

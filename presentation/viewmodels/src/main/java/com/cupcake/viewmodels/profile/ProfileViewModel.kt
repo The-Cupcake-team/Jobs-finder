@@ -1,12 +1,55 @@
 package com.cupcake.viewmodels.profile
 
-import com.cupcake.usecase.login.LoginUseCase
-import com.cupcake.usecase.register.RegisterUseCase
+import androidx.lifecycle.viewModelScope
+import com.cupcake.models.Post
+import com.cupcake.models.Profile
+import com.cupcake.models.UserProfile
+import com.cupcake.usecase.ProfileUseCase
+import com.cupcake.usecase.validation.ValidateUsernameUseCase
+import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
+import com.cupcake.viewmodels.comment.CommentUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
+@HiltViewModel
+class ProfileViewModel @Inject constructor(
+    private val profileUseCase: ProfileUseCase,
+) : BaseViewModel<ProfileUISate>(ProfileUISate()) {
 
-class ProfileViewModel@Inject constructor(
 
-    ) : BaseViewModel<ProfileUISate>(ProfileUISate()) {
+    init {
+
+        viewModelScope.launch(Dispatchers.IO) {
+            getProfileData()
+        }
+
+    }
+
+    private suspend fun getProfileData() {
+        profileUseCase("034aa239-f819-45b6-8621-66e56b4fe770").toProfileUISate()
+            .apply {
+                updateState {
+                    it.copy(
+                        fullName =fullName,
+                        JobTitle=JobTitle,
+                        avatar=avatar,
+                    )
+                }
+            }
+    }
+
+    private fun UserProfile.toProfileUISate(): ProfileUISate {
+        return ProfileUISate(
+            avatar = avatar,
+            linkWebsite = linkWebsite,
+            location = location,
+            fullName = fullName,
+            JobTitle = jobTitles,
+        )
+    }
+
 
 }

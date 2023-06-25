@@ -94,7 +94,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/education_RecyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_normal"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -192,7 +192,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/skills_RecyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -295,7 +295,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/employment_RecyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -396,7 +396,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/languages_RecyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -406,7 +406,7 @@
                         />
                     <EditText
                         android:layout_width="@dimen/zero"
-                        android:layout_height="40dp"
+                        android:layout_height="@dimen/edite_text_height"
                         android:hint="@string/AddLanguage"
                         style="@style/TextStyle.caption"
                         android:background="@drawable/edite_radius"
@@ -446,10 +446,11 @@
                 android:elevation="@dimen/spacing_normal"
                 app:cardCornerRadius="@dimen/radius"
                 app:cardElevation="@dimen/spacing_normal"
+                app:layout_constraintVertical_bias=".0"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/languages"
-                app:layout_constraintVertical_bias=".0">
+                app:layout_constraintTop_toBottomOf="@+id/languages">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/courses_card"
@@ -512,7 +513,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/courses_RecyclerView"
                         android:layout_width="match_parent"
-                        android:layout_height="300dp"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

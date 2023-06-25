@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.profile.ProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,112 +20,141 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_horizontal_height"
             android:scaleType="centerCrop"
+            android:src="@drawable/profile_cover"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/profile_image" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/profile_image"
             android:layout_width="@dimen/profile_image"
             android:layout_height="@dimen/profile_image"
-            app:layout_constraintTop_toTopOf="@+id/profile_cover"
             android:layout_marginStart="@dimen/spacing_medium"
-            app:layout_constraintVertical_bias="2.0"
+
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_cover"
             app:layout_constraintBottom_toBottomOf="@+id/profile_cover"
             app:layout_constraintStart_toStartOf="@+id/profile_cover"
+            app:layout_constraintTop_toTopOf="@+id/profile_cover"
+            app:layout_constraintVertical_bias="2.0"
             app:roundPercent="1.0"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile_image"
-             />
+            app:showImage="@{viewModel.state.avatar}" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="@dimen/spacing_normal"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="@id/profile_cover"
             app:layout_constraintTop_toBottomOf="@+id/profile_image">
 
 
             <TextView
                 android:id="@+id/profile_name"
+                style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                style="@style/TextStyle.Title"
                 android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@{viewModel.state.fullName}"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:text="khaled eid" />
+                tools:text="khaled eid" />
 
             <TextView
                 android:id="@+id/profile_job_title"
+                style="@style/TextStyle.body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TextStyle.body"
                 android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@{viewModel.state.jobTitle}"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_name"
-                android:text="UI UX Designer / User Interface" />
+                tools:text="UI UX Designer / User Interface" />
 
             <TextView
                 android:id="@+id/profile_location"
+                style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/TextStyle.caption"
-                android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:text="@{viewModel.state.location}"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_job_title"
-                android:text="Al-Najaf, Iraq" />
+                tools:text="Al-Najaf, Iraq" />
 
             <TextView
                 android:id="@+id/profile_link"
                 style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:text="@{viewModel.state.linkWebsite}"
                 android:textColor="@color/color_text_foursome"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_location"
-                android:text="www.Behance/mohammedAli.com" />
+                tools:text="www.Behance/mohammedAli.com" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="@dimen/edit_text_profile_height"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            app:cardElevation="@dimen/edit_card_cardElevation"
+            app:cardCornerRadius="@dimen/edit_card_radius"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_cover">
+
+            <TextView
+                style="@style/TextStyle.body"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/spacing_normal"
+                android:drawablePadding="@dimen/spacing_normal"
+                android:text="@string/edite"
+                android:gravity="center"
+                android:textColor="@color/primary"
+
+                app:drawableStartCompat="@drawable/pen" />
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottom"
             android:layout_width="match_parent"
             android:layout_height="@dimen/zero"
-            app:layout_constraintTop_toBottomOf="@+id/bio"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginTop="@dimen/spacing_medium"
-
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            >
+
+            app:layout_constraintTop_toBottomOf="@+id/bio">
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/tab_layout_height"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="fill"
-                app:tabIndicatorAnimationMode="linear"
-                app:tabIndicatorGravity="bottom"
                 app:tabIconTint="@color/color_text_foursome"
+                app:tabIndicatorAnimationMode="linear"
                 app:tabIndicatorColor="@color/color_text_foursome"
                 app:tabIndicatorFullWidth="false"
+                app:tabIndicatorGravity="bottom"
                 app:tabIndicatorHeight="@dimen/tab_indicator_height"
                 app:tabSelectedTextColor="@color/color_text_foursome"
                 app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-                app:tabTextColor="@color/color_text_foursome"/>
+                app:tabTextColor="@color/color_text_foursome" />
 
 
             <androidx.viewpager2.widget.ViewPager2
@@ -130,9 +162,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/zero"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tab_layout"
                 app:layout_constraintHeight_default="spread"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

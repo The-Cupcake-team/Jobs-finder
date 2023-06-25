@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.jobsfinder.local.entities.PostsEntity
+import com.cupcake.jobsfinder.local.entities.ProfileEntity
 
 @Dao
 interface JobFinderDao {
@@ -27,4 +28,12 @@ interface JobFinderDao {
 
     @Delete
     fun deleteSavedPost(Post: PostsEntity)
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertProfile(profileEntity: ProfileEntity)
+
+    @Query("SELECT * FROM profile_table WHERE id = :id")
+    fun getProfile(id: String): ProfileEntity
+
 }
