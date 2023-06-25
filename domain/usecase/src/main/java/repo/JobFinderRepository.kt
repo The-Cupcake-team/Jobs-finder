@@ -64,5 +64,11 @@ interface JobFinderRepository {
     suspend fun addEducation(education: Education)
     suspend fun updateEducation(education: Education)
 
+    suspend fun getProfile(): UserProfile
     // region Profile
+
+    suspend fun getAllSavedPosts(): List<Post>
+
+    suspend fun getAllUserPost():List<Post>
+
 }

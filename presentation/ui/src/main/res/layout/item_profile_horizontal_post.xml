@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.cupcake.viewmodels.profile.post.ProfilePostItemUIState" />
+
+        <variable
+            name="listener"
+            type="com.cupcake.viewmodels.profile.post.PostProfileInterAction" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="304dp"
+        android:layout_height="118dp"
+        android:layout_marginHorizontal="@dimen/spacing_small"
+        app:cardCornerRadius="@dimen/spacing_normal"
+        app:cardElevation="@dimen/zero"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cards">
+            <TextView
+                android:id="@+id/text_view_profile_recent_post_created_at"
+                style="@style/TextStyle.caption"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:text="@{item.createdAt}"
+                android:textColor="@color/color_text_tertiary"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewPost"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="22/2/2023" />
+
+            <TextView
+                android:id="@+id/text_view_profile_recent_post_content"
+                style="@style/TextStyle.body"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:maxLines="2"
+                android:text="@{item.content}"
+                android:textColor="@color/color_text_primary"
+                app:layout_constraintEnd_toStartOf="@id/imageViewPost"
+                app:layout_constraintStart_toStartOf="@id/text_view_profile_recent_post_created_at"
+                app:layout_constraintTop_toBottomOf="@id/text_view_profile_recent_post_created_at"
+                tools:text="Visual design will also be a key focus area... " />
+
+            <TextView
+                android:id="@+id/text_view_likes_count"
+                style="@style/TextStyle.caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:text="@{String.valueOf(item.likes)}"
+                android:textColor="@color/color_text_tertiary"
+                app:layout_constraintBottom_toBottomOf="@+id/image_view_like"
+                app:layout_constraintStart_toEndOf="@+id/image_view_like"
+                app:layout_constraintTop_toTopOf="@+id/image_view_like"
+                tools:text="1.5K" />
+
+            <ImageView
+                android:id="@+id/image_view_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                app:isLiked="@{item.isLiked}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/text_view_profile_recent_post_created_at"
+                app:layout_constraintTop_toBottomOf="@id/text_view_profile_recent_post_content"
+                app:srcCompat="@drawable/tabler_thumb"
+                app:tint="@color/color_text_tertiary" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageViewPost"
+                android:layout_width="108dp"
+                android:layout_height="@dimen/zero"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_like"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_view_profile_recent_post_created_at"
+                app:loadImage="@{item.image}"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
+                tools:src="@drawable/test_post_image" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -26,6 +26,9 @@ interface JobFinderDao {
     @Query("SELECT * FROM posts_table WHERE id = :id")
     fun getPostById(id: String): PostsEntity?
 
+    @Query("SELECT * FROM posts_table")
+    fun getAllSavedPost():List<PostsEntity>
+
     @Delete
     fun deleteSavedPost(Post: PostsEntity)
 
@@ -33,7 +36,7 @@ interface JobFinderDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProfile(profileEntity: ProfileEntity)
 
-    @Query("SELECT * FROM profile_table WHERE id = :id")
-    fun getProfile(id: String): ProfileEntity
+    @Query("SELECT * FROM profile_table")
+    fun getProfile(): ProfileEntity
 
 }
