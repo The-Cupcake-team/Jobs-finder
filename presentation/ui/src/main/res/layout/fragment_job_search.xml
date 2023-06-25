@@ -6,6 +6,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.job_search.JobSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

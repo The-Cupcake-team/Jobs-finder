@@ -20,11 +20,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
+import com.cupcake.ui.utill.SalaryFormatter.Companion.formatSalary
 import com.cupcake.viewmodels.base.BaseErrorUiState
-import com.cupcake.viewmodels.posts.PostItemUIState
-import com.google.android.material.textfield.TextInputLayout
-
 import com.cupcake.viewmodels.jobs.JobTitleUiState
+import com.cupcake.viewmodels.jobs.JobUiState
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -185,4 +184,11 @@ fun showImage(view: ImageView , imageData: Any?){
         view.setImageDrawable(null)
     }
 }
+
+@BindingAdapter("salaryRange")
+fun setSalaryRange(textView: TextView, item: JobUiState) {
+    val formattedSalaryRange = formatSalary(minSalary = item.minSalary, maxSalary = item.maxSalary)
+    textView.text = formattedSalaryRange
+}
+
 
