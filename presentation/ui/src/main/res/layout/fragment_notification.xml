@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.notification.NotificationViewModel" />
@@ -18,6 +19,8 @@
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -27,10 +30,28 @@
                 style="@style/TextStyle.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notification" />
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@string/notification" />
+
 
         </androidx.appcompat.widget.Toolbar>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerViewNotification"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/spacing_normal"
+            app:items="@{viewModel.state.notificationList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tool_bar"
+            app:showWhenIf="@{viewModel.state.isSuccess}"
+            tools:listitem="@layout/item_notificaton" />
 
         <ImageView
             android:id="@+id/imageViewNotifications"
@@ -47,11 +68,11 @@
 
         <TextView
             android:id="@+id/textViewNotifications"
+            style="@style/TextStyle.caption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
             android:text="@string/no_notification_yet"
-            style="@style/TextStyle.caption"
             android:textColor="@color/color_text_tertiary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -135,4 +135,5 @@
     <string name="no_notification_yet">No notification yet</string>
 
     <string name="offline">You Are Currently Offline</string>
+    <string name="notification">Notification</string>
 </resources>

@@ -7,6 +7,7 @@ import com.cupcake.jobsfinder.local.datastore.ProfileDataStore
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
+import com.cupcake.models.Notifications
 import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
@@ -111,6 +112,39 @@ class JobFinderRepositoryImpl @Inject constructor(
         )
         return response.isSuccessful
     }
+
+    override suspend fun notifications(): List<Notifications> {
+        return listOf(
+            Notifications(
+                "ameer",
+                "test_personal_image.jpg",
+                "send a like",
+                "hi",
+                "2001/3/23",
+                "23"
+
+            ),
+            Notifications(
+                "ahmed",
+                "test_personal_image.jpg",
+                "send a like",
+                "hi",
+                "2001/3/23",
+                "23"
+
+            ),
+            Notifications(
+                "mostafa",
+                "test_personal_image.jpg",
+                "send a like",
+                "hi",
+                "2001/3/23",
+                "23"
+
+            )
+        )
+    }
+
 
     override suspend fun getJobs(): List<Job> {
         return wrapResponseWithErrorHandler { api.getJobs() }.map { it.toJob() }
