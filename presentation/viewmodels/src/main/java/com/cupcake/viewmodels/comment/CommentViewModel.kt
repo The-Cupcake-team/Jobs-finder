@@ -49,7 +49,8 @@ class CommentViewModel @Inject constructor(
             it.copy(
                 isLoading = false,
                 error = null,
-                posts = posts.map { post -> post.toUiPost() })
+                posts = posts.map { post -> post.toUiPost() }
+            )
         }
     }
 
