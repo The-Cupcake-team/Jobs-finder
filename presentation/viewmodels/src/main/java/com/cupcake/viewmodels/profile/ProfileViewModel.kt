@@ -1,5 +1,6 @@
 package com.cupcake.viewmodels.profile
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Post
 import com.cupcake.models.Profile
@@ -9,6 +10,7 @@ import com.cupcake.usecase.validation.ValidateUsernameUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
 import com.cupcake.viewmodels.comment.CommentUiState
+import com.cupcake.viewmodels.jobs.JobUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
@@ -20,6 +22,7 @@ class ProfileViewModel @Inject constructor(
 ) : BaseViewModel<ProfileUISate>(ProfileUISate()) {
 
 
+
     init {
 
         viewModelScope.launch(Dispatchers.IO) {
@@ -29,7 +32,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     private suspend fun getProfileData() {
-        profileUseCase("034aa239-f819-45b6-8621-66e56b4fe770").toProfileUISate()
+        profileUseCase().toProfileUISate()
             .apply {
                 updateState {
                     it.copy(

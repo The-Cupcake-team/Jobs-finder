@@ -62,7 +62,7 @@ interface JobFinderRepository {
     // region Profile
 
     suspend fun insertProfile(user: User)
-    suspend fun getProfile(id : String): UserProfile
+    suspend fun getProfile(): UserProfile
     // region Profile
 
     suspend fun getAllSavedPosts(): List<Post>

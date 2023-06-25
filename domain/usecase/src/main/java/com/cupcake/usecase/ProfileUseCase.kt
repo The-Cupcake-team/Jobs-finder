@@ -13,8 +13,8 @@ class ProfileUseCase@Inject constructor(
     private val jobsFinderRepository: JobFinderRepository,
 ) {
 
-    suspend operator fun invoke(id: String): UserProfile {
-       return jobsFinderRepository.getProfile(id)
+    suspend operator fun invoke(): UserProfile {
+       return jobsFinderRepository.getProfile()
     }
 
 }
