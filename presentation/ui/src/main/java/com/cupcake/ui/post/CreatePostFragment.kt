@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -27,6 +28,9 @@ import com.cupcake.viewmodels.post.CreatePostEvent
 import com.cupcake.viewmodels.post.CreatePostViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
+
 
 class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostViewModel>(
     R.layout.fragment_create_post,
@@ -56,12 +60,12 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         when (event) {
             CreatePostEvent.OnCameraClick -> checkPermissionAndOpenCamera()
             CreatePostEvent.OnPhotoClick -> checkPermissionAndOpenGallery()
-            CreatePostEvent.OnPostClick -> showSnackbar(POST_CREATED)
+            CreatePostEvent.OnPostClick -> showSnackbar()
         }
     }
 
-    private fun showSnackbar(message: String) {
-        Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
+    private fun showSnackbar() {
+        Snackbar.make(requireView(), POST_CREATED, Snackbar.LENGTH_LONG)
             .show()
     }
 
@@ -71,16 +75,52 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
             when (requestCode) {
                 REQUEST_CAMERA_CODE -> {
                     val bitmapImageFromCamera = data?.extras?.get("data") as Bitmap
-                    viewModel.handleImageResult(bitmapImageFromCamera)
+                    val imageFile = convertBitmapToFile(bitmapImageFromCamera)
+                    viewModel.handleImageResult(imageFile)
                 }
 
                 REQUEST_GALLERY_CODE -> {
                     val selectedImageUri = data?.data
-                    viewModel.handleImageResult(selectedImageUri)
+                    val imageFile = selectedImageUri?.let { convertUriToFile(context, it) }
+                    viewModel.handleImageResult(imageFile)
                 }
             }
         }
     }
+
+    private fun convertBitmapToFile(bitmap: Bitmap): File? {
+        return context?.let { context ->
+            val fileName = "${System.currentTimeMillis()}.png"
+            val file = File(context.cacheDir, fileName)
+            FileOutputStream(file).use { outputStream ->
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                outputStream.flush()
+            }
+            file
+        }
+    }
+
+
+    private fun convertUriToFile(context: Context?, uri: Uri): File? {
+        val inputStream = context?.contentResolver?.openInputStream(uri)
+        inputStream?.use { input ->
+            val fileName = "${System.currentTimeMillis()}.png"
+            val file = File(context.cacheDir, fileName)
+            val outputStream = FileOutputStream(file)
+            val buffer = ByteArray(4 * 1024)
+            while (true) {
+                val bytesRead = input.read(buffer)
+                if (bytesRead == -1) break
+                outputStream.write(buffer, 0, bytesRead)
+            }
+            outputStream.flush()
+            outputStream.close()
+            return file
+        }
+        return null
+    }
+
+
 
     private fun checkPermissionAndOpenCamera() {
         if (hasPermission(PERMISSION_CAMERA, PERMISSION_STORAGE)) {
@@ -113,6 +153,7 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         ActivityCompat.requestPermissions(requireActivity(), permissions, requestCode)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,

@@ -1,5 +1,6 @@
 package com.cupcake.viewmodels.post
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Post
 import com.cupcake.usecase.CreatePostUseCase
@@ -10,6 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,7 +25,7 @@ class CreatePostViewModel @Inject constructor(
     fun createPost(content: String) {
         updateState { it.copy(isLoading = true) }
         tryToExecute(
-            callee = { createPostUseCase(content) },
+            callee = { createPostUseCase(content,state.value.postImage) },
             onSuccess = ::onSuccessCreatePost,
             onError = ::onCreatePostError
         )
@@ -63,7 +65,7 @@ class CreatePostViewModel @Inject constructor(
         }
     }
 
-    fun handleImageResult(imageData: Any?) {
+    fun handleImageResult(imageData: File?) {
         updateState { it.copy(postImage = imageData, isImageSelectionCanceled = true) }
     }
 }
