@@ -1,8 +1,11 @@
 package com.cupcake.viewmodels.profile
 
+import android.os.Parcelable
 import com.cupcake.models.Education
 import com.cupcake.viewmodels.base.BaseErrorUiState
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class EducationUiState(
     val id: String = "",
     val title: String = "Add Eduction",
@@ -12,8 +15,7 @@ data class EducationUiState(
     var city: String = "",
     var startDate: String = "",
     var endDate: String = "" ,
-    val error: BaseErrorUiState? = null,
-)
+): Parcelable
 
 
 fun Education.toEducationUiState(): EducationUiState{

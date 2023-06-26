@@ -117,11 +117,4 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
         findNavController().navigate(directions)
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = ProfileResumeFragment().apply {
-            arguments = Bundle().apply {
-            }
-        }
-    }
 }

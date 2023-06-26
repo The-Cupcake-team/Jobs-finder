@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/profileFragment">
     <fragment
         android:id="@+id/createJobFragment"
         android:name="com.cupcake.ui.create_job.CreateJobFragment"
@@ -67,12 +67,12 @@
         android:label="ProfileEducationFragment">
 
         <argument
-            android:name="id"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
             android:name="fromAddButton"
             app:argType="boolean" />
+        <argument
+            android:name="education"
+            app:argType="com.cupcake.viewmodels.profile.EducationUiState"
+            app:nullable="true"/>
     </fragment>
 
     <fragment

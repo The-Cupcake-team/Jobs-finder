@@ -208,12 +208,6 @@ class JobFinderRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getEducation(educationId: String): Education {
-//        wrapResponseWithErrorHandler { api.getEducation(educationId) }.toEducation()
-        return Education("1", "Mechanical power Engineering", "shubra faculty of engineering",
-        "cairo", "2018", "2023")
-    }
-
     override suspend fun updateEducation(education: Education) {
         wrapResponseWithErrorHandler {
             api.updateEducation(

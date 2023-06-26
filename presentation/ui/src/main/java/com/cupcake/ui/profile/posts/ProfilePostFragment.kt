@@ -74,4 +74,12 @@ navigateToDirection(ProfilePostFragmentDirections.actionProfilePostFragmentToRec
             navigateToDirection(ProfilePostFragmentDirections.actionProfilePostFragmentToSavedPostFragment())
         }
     }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = ProfilePostFragment().apply {
+            arguments = Bundle().apply {
+            }
+        }
+    }
 }
