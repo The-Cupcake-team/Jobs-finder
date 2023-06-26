@@ -4,6 +4,7 @@ import android.util.Log
 import com.cupcake.jobsfinder.local.daos.JobFinderDao
 import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.jobsfinder.local.datastore.ProfileDataStore
+import com.cupcake.models.*
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
@@ -12,6 +13,7 @@ import com.cupcake.models.User
 import com.cupcake.models.UserProfile
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
+import com.cupcake.repository.mapper.*
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toJobTitle
@@ -179,6 +181,40 @@ class JobFinderRepositoryImpl @Inject constructor(
         return wrapResponseWithErrorHandler { api.getPostById(id) }.toPost()
     }
     //endregion
+
+    // region Profile
+
+    override suspend fun addEducation(education: Education) {
+        wrapResponseWithErrorHandler {
+            api.addEducation(
+                education = education.education!!,
+                school = education.school!!,
+                city = education.city!!,
+                startDate = education.startDate!!,
+                endDate = education.endDate!!
+            )
+        }
+    }
+
+    override suspend fun getEducation(educationId: String): Education {
+//        wrapResponseWithErrorHandler { api.getEducation(educationId) }.toEducation()
+        return Education("1", "Mechanical power Engineering", "shubra faculty of engineering",
+        "cairo", "2018", "2023")
+    }
+
+    override suspend fun updateEducation(education: Education) {
+        wrapResponseWithErrorHandler {
+            api.updateEducation(
+                educationId = education.id!!,
+                education = education.education!!,
+                school = education.school!!,
+                city = education.city!!,
+                startDate = education.startDate!!,
+                endDate = education.endDate!!
+            )
+        }
+    }
+    // endregion
     private suspend fun <T> wrapResponseWithErrorHandler(
         function: suspend () -> Response<BaseResponse<T>>
     ): T {
@@ -189,13 +225,10 @@ class JobFinderRepositoryImpl @Inject constructor(
                 Log.i("TAG", "base successful : ${baseResponse.value}")
                 return baseResponse.value!!
             } else {
-//                throw Throwable("Invalid response")
                 throw ErrorType.Server(baseResponse?.message!!)
-
             }
         } else {
             val errorResponse = response.errorBody()?.toString()
-//            throw Throwable(errorResponse ?: "Error Network")
             throw ErrorType.Server(errorResponse ?: "Error Network")
         }
 

@@ -1,5 +1,6 @@
 package com.cupcake.remote
 
+import com.cupcake.remote.response.EducationDto
 import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
 import com.cupcake.remote.response.PostsDto
@@ -12,6 +13,7 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface JobApiService {
@@ -85,6 +87,36 @@ interface JobApiService {
         @Field("password") password: String,
         @Field("jobTitleId") jobTitleId: Int,
     ): Response<BaseResponse<UserDto>>
+
+    // endregion
+
+    // region Profile
+
+    @FormUrlEncoded
+    @POST("/profile/education")
+    suspend fun addEducation(
+        @Field("degree") education: String,
+        @Field("school") school: String,
+        @Field("city") city: String,
+        @Field("startDate") startDate: String,
+        @Field("endDate") endDate: String
+    ):Response<BaseResponse<Nothing>>
+
+    @FormUrlEncoded
+    @PUT("/profile/education/{educationId}")
+    suspend fun updateEducation(
+        @Path("educationId") educationId: String,
+        @Field("degree") education: String,
+        @Field("school") school: String,
+        @Field("city") city: String,
+        @Field("startDate") startDate: String,
+        @Field("endDate") endDate: String
+    ):Response<BaseResponse<Nothing>>
+
+    @GET("/profile/education/{educationId}")
+    suspend fun getEducation(
+        @Path("educationId") educationId: String,
+    ):Response<BaseResponse<EducationDto>>
 
     // endregion
 //    /user/posts

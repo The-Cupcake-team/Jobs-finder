@@ -7,13 +7,8 @@ import com.cupcake.usecase.GetAllUserPostUseCase
 import com.cupcake.usecase.GetPostSavedByIdUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
-import com.cupcake.viewmodels.posts.SpecialPostsEvent
-import com.cupcake.viewmodels.utill.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel
 class PostProfileViewModel @Inject constructor(
@@ -53,7 +48,6 @@ class PostProfileViewModel @Inject constructor(
                 recentPostsResult = posts.map { post -> post.toPostItemUIState() },
             )
         }
-        Log.d("devo", " onGetPostsSuccess$posts")
     }
     private fun onGetSavedPostSuccess(users: List<Post>){
         _state.update {
@@ -66,7 +60,6 @@ class PostProfileViewModel @Inject constructor(
                 savedPostsResult = users.map { users -> users.toPostItemUIState() }.reversed(),
             )
         }
-        Log.d("devo", " onGetPostsSuccess$users")
     }
 
     private fun onGetPostsFailure(error: BaseErrorUiState) {
@@ -79,7 +72,6 @@ class PostProfileViewModel @Inject constructor(
                 isRefresh = false
             )
         }
-        Log.d("devo", " onGetPostsSuccess$error")
     }
 
     private fun Post.toPostItemUIState(): ProfilePostItemUIState {
@@ -91,16 +83,17 @@ class PostProfileViewModel @Inject constructor(
         )
     }
 
-    override fun onPostSavedClick() {
+
+    fun onRetryClicked(){
+        _state.update {it.copy(error = null, isLoading = true, isSuccess = false) }
+        getSavedPost()
+        getUserPost()
     }
 
-    override fun onPostRecentClick() {
+    fun onRefreshClicked(){
+        _state.update {it.copy(error = null, isRefresh = true,isSuccess = false) }
+        getSavedPost()
+        getUserPost()
     }
-
-
-//    fun onRetryClicked() {
-//        _state.update { it.copy(error = null, isLoading = true) }
-//        getSavedPost()
-//    }
 
 }

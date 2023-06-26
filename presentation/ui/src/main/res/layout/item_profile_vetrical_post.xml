@@ -18,7 +18,6 @@
         android:layout_width="match_parent"
         android:layout_height="118dp"
         android:layout_marginVertical="@dimen/spacing_normal"
-        android:paddingHorizontal="@dimen/spacing_normal"
         app:cardCornerRadius="@dimen/spacing_normal"
         app:cardElevation="@dimen/zero">
 
@@ -76,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_medium"
+                app:isLiked="@{item.isLiked}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/text_view_profile_recent_post_created_at"
                 app:layout_constraintTop_toBottomOf="@id/text_view_profile_recent_post_content"
