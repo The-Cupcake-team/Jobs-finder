@@ -9,6 +9,7 @@ import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfilePostBinding
 import com.cupcake.ui.profile.posts.adapter.PostAdapter
+import com.cupcake.ui.profile.resume.ProfileResumeFragment
 import com.cupcake.viewmodels.profile.post.PostProfileViewModel
 import kotlinx.coroutines.launch
 
@@ -47,6 +48,14 @@ navigateToDirection(ProfilePostFragmentDirections.actionProfilePostFragmentToRec
     private fun handleSeeAllSavedPostClick() {
         binding.textViewTitleSavedPostSeeAllPost.setOnClickListener {
             navigateToDirection(ProfilePostFragmentDirections.actionProfilePostFragmentToSavedPostFragment())
+        }
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = ProfilePostFragment().apply {
+            arguments = Bundle().apply {
+            }
         }
     }
 }

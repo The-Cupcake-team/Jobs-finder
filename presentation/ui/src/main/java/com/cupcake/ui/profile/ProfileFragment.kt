@@ -5,6 +5,7 @@ import android.view.View
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfileBinding
+import com.cupcake.ui.utill.makeGone
 import com.cupcake.viewmodels.profile.ProfileViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -19,6 +20,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding, ProfileViewModel>(
         init()
     }
     private fun init() {
+        binding.apply {
+        }
         val adapter = ProfileFragmentPageAdapter(
             requireActivity().supportFragmentManager,
             lifecycle,

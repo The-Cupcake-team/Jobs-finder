@@ -25,6 +25,7 @@
 
     <color name="chip_color">#E7EDF5</color>
     <color name="border_color">#14FFFFFF</color>
+    <color name="border_color_edite">#E5E7E9</color>
 
 
     <!-- Text colors -->

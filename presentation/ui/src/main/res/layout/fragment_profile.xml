@@ -15,30 +15,38 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.utils.widget.ImageFilterView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/profile_cover"
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_horizontal_height"
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile_cover"
+            android:scaleType="fitXY"
+            android:src="@drawable/background_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.utils.widget.ImageFilterView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/profile_image"
-            android:layout_width="@dimen/profile_image"
-            android:layout_height="@dimen/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ShapeAppearance.Material3.Corner.Full"
             android:layout_marginStart="@dimen/spacing_medium"
-
-            android:scaleType="centerCrop"
-            android:src="@drawable/profile_cover"
             app:layout_constraintBottom_toBottomOf="@+id/profile_cover"
             app:layout_constraintStart_toStartOf="@+id/profile_cover"
             app:layout_constraintTop_toTopOf="@+id/profile_cover"
+            app:cardBackgroundColor="@color/white"
             app:layout_constraintVertical_bias="2.0"
-            app:roundPercent="1.0"
-            app:showImage="@{viewModel.state.avatar}" />
+            app:cardCornerRadius="@dimen/profile_radius">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="@dimen/profile_image"
+            android:layout_height="@dimen/profile_image"
+            android:layout_margin="@dimen/spacing_xxsmall"
+            tools:src="@drawable/test_personal_image"
+
+            app:showImage="@{viewModel.state.avatar}"
+            app:shapeAppearanceOverlay="@style/ImageViewStyle"
+            />
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bio"
@@ -81,6 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:text="@{viewModel.state.location}"
                 android:textColor="@color/color_text_secondary"
@@ -95,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_normal"
+                android:visibility="gone"
                 android:text="@{viewModel.state.linkWebsite}"
                 android:textColor="@color/color_text_foursome"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,30 +113,22 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="@dimen/edit_text_profile_height"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            app:cardElevation="@dimen/edit_card_cardElevation"
-            app:cardCornerRadius="@dimen/edit_card_radius"
-            app:cardBackgroundColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_cover">
 
-            <TextView
-                style="@style/TextStyle.body"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/spacing_normal"
-                android:drawablePadding="@dimen/spacing_normal"
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_cover"
                 android:text="@string/edite"
-                android:gravity="center"
-                android:textColor="@color/primary"
+                app:icon="@drawable/pen"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                app:iconPadding="@dimen/spacing_normal"
+                style="@style/outlineButton.edite"
+                />
 
-                app:drawableStartCompat="@drawable/pen" />
-
-        </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottom"
@@ -135,7 +137,6 @@
             android:layout_marginTop="@dimen/spacing_medium"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toBottomOf="@+id/bio">
 
             <com.google.android.material.tabs.TabLayout
@@ -151,7 +152,8 @@
                 app:tabIndicatorColor="@color/color_text_foursome"
                 app:tabIndicatorFullWidth="false"
                 app:tabIndicatorGravity="bottom"
-                app:tabIndicatorHeight="@dimen/tab_indicator_height"
+                app:tabIndicatorHeight="@dimen/spacing_xxsmall"
+                android:background="@drawable/tab_border"
                 app:tabSelectedTextColor="@color/color_text_foursome"
                 app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
                 app:tabTextColor="@color/color_text_foursome" />
@@ -168,4 +170,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </layout>
