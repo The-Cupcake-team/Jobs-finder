@@ -14,6 +14,7 @@ import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toComment
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobTitle
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
 import com.cupcake.repository.mapper.toPostsEntity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

@@ -140,7 +140,8 @@ class CommentViewModel @Inject constructor(
             createdAt = createdAt,
             creatorName = creatorName,
             profileImage = profileImage,
-            jobTitle = jobTitle
+            jobTitle = jobTitle,
+            image = postImage
         )
     }
 

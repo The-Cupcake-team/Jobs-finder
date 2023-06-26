@@ -17,6 +17,7 @@ data class CommentsUiState(
         val creatorName: String = "",
         val profileImage: String = "",
         val jobTitle: String = "",
+        val image: String = "",
         val comments: Int = 0,
         val isLiked: Boolean = false,
         val likes: Int = 0,
