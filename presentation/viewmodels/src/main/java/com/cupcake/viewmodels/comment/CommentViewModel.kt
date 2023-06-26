@@ -1,6 +1,6 @@
 package com.cupcake.viewmodels.comment
 
-import android.util.Log
+
 import com.cupcake.models.Comment
 import com.cupcake.models.Post
 import com.cupcake.usecase.CreateCommentUseCase
@@ -23,7 +23,6 @@ class CommentViewModel @Inject constructor(
     //region getPost
     fun getPost(id: String) {
         updateState { it.copy(isLoading = true, isSuccess = false, error = null) }
-        Log.d("CommentViewModel", "getPost: $id")
         tryToExecute(
             callee = { getPostById(id) },
             onSuccess = ::onSuccessGetPost,
@@ -32,19 +31,16 @@ class CommentViewModel @Inject constructor(
     }
 
     private fun onSuccessGetPost(post: Post) {
-        Log.d("CommentViewModel", "onSuccessGetPost: $post")
         updateState { it.copy(isLoading = false, post = post.toUiPost(), isSuccess = true, error = null) }
     }
 
     private fun onErrorGetPost(error: BaseErrorUiState) {
-        Log.d("CommentViewModel", "onErrorGetPost: $error")
         updateState { it.copy(isLoading = false, error = error, isSuccess = false) }
     }
     //endregion
 
     //region getComments
     fun getCommentsPost(id: String) {
-        Log.d("CommentViewModel", "getCommentsPost: ${state.value.post.id}")
         tryToExecute(
             { commentsUseCase(id) },
             ::onGetCommentsPostSuccess,
@@ -53,7 +49,6 @@ class CommentViewModel @Inject constructor(
     }
 
     private fun onGetCommentsPostSuccess(comment: List<Comment>) {
-        Log.d("CommentViewModel", "onGetCommentsPostSuccess: $comment")
         _state.update {
             it.copy(
                 isLoading = false,
@@ -63,7 +58,6 @@ class CommentViewModel @Inject constructor(
     }
 
     private fun onGetCommentPostFailure(error: BaseErrorUiState) {
-        Log.d("CommentViewModel", "onGetCommentPostFailure: $error")
         _state.update {
             it.copy(isLoading = false, error = error)
         }
