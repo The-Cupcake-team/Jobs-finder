@@ -5,12 +5,14 @@ import com.cupcake.viewmodels.base.BaseErrorUiState
 import kotlinx.parcelize.Parcelize
 
 data class ProfileJobsUIState (
-    val RecentJobs: List<JobUiState> = emptyList(),
-    val SavedJobs: List<JobUiState> = emptyList(),
+    val RecentJobs: List<ProfileJobUiState> = emptyList(),
+    val SavedJobs: List<ProfileJobUiState> = emptyList(),
+    val isLoading: Boolean = true,
+    val error: BaseErrorUiState? = null
         )
 
 @Parcelize
-data class JobUiState(
+data class ProfileJobUiState(
     val id : String = "",
     val image: String = "",
     val title: String = "",
