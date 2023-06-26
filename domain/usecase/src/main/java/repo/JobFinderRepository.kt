@@ -68,5 +68,6 @@ interface JobFinderRepository {
     suspend fun getAllSavedPosts(): List<Post>
 
     suspend fun getAllUserPost():List<Post>
-
+    suspend fun getSavedJobs(): List<Job>
+    suspend fun getRecentJobs(): List<Job>
 }
