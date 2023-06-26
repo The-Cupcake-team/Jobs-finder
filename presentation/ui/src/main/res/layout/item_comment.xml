@@ -144,8 +144,6 @@
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_medium"
             android:layout_marginBottom="16dp"
-            android:drawableStart="@drawable/ic_invaild"
-            android:drawablePadding="@dimen/spacing_small"
             android:text="@string/not_send_tap_to_try_again"
             android:clickable="true"
             android:onClick="@{() -> listener.onTryAgainClick(item)}"
