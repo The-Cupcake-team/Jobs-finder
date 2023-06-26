@@ -29,6 +29,9 @@ interface JobFinderDao {
     @Query("SELECT * FROM posts_table")
     fun getAllSavedPost():List<PostsEntity>
 
+    @Query("SELECT * FROM jobs_table")
+    fun getSavedJobs():List<JobsEntity>
+
     @Delete
     fun deleteSavedPost(Post: PostsEntity)
 
