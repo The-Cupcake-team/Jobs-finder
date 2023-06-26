@@ -113,12 +113,9 @@ interface JobApiService {
         @Field("endDate") endDate: String
     ):Response<BaseResponse<Unit>>
 
-    @GET("/profile/education/{educationId}")
-    suspend fun getEducation(
-        @Path("educationId") educationId: String,
-    ):Response<BaseResponse<EducationDto>>
 
     // endregion
+
 //    /user/posts
 
     @GET("/user/posts")

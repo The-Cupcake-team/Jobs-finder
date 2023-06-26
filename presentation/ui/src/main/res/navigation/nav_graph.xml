@@ -67,12 +67,12 @@
         android:label="ProfileEducationFragment">
 
         <argument
-            android:name="id"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
             android:name="fromAddButton"
             app:argType="boolean" />
+        <argument
+            android:name="education"
+            app:argType="com.cupcake.viewmodels.profile.EducationUiState"
+            app:nullable="true"/>
     </fragment>
 
     <fragment

@@ -60,7 +60,6 @@ interface JobFinderRepository {
     suspend fun insertProfile(user: User)
     suspend fun getProfile(id : String): UserProfile
 
-    suspend fun getEducation(educationId: String): Education
     suspend fun addEducation(education: Education)
     suspend fun updateEducation(education: Education)
 

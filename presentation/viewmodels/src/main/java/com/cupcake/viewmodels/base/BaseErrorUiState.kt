@@ -1,5 +1,7 @@
 package com.cupcake.viewmodels.base
 
+import kotlinx.parcelize.Parcelize
+
 sealed class BaseErrorUiState(val errorCode: String) {
     class Disconnected(val error: String) : BaseErrorUiState(error)
     class UnAuthorized(val error: String) : BaseErrorUiState(error)

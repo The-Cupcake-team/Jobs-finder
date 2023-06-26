@@ -1,6 +1,5 @@
 package com.cupcake.viewmodels.profile
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.AddEducationUseCase
 import com.cupcake.usecase.GetEducationUseCase
@@ -24,10 +23,9 @@ class ProfileEducationViewModel @Inject constructor(
     private val _event = MutableSharedFlow<SaveEvent>()
     val event = _event.asSharedFlow()
 
-    fun updateMode(isAdded: Boolean, id: String) {
+    fun updateMode(isAdded: Boolean, educationUiState: EducationUiState) {
         if (!isAdded){
-            _state.update { it.copy(id = id, isAddState = false, title = "Edit Education") }
-            getEducationById(id)
+            _state.update { educationUiState.copy(isAddState = false, title = "Edit Education") }
         }
     }
 
@@ -59,26 +57,7 @@ class ProfileEducationViewModel @Inject constructor(
         )
     }
 
-    private fun getEducationById(id: String){
-        tryToExecute(
-            { getEducation("1").toEducationUiState() },
-            ::onGetEducationSuccess,
-            ::onError
-        )
-    }
-
-    private fun onGetEducationSuccess(educationUiState: EducationUiState) {
-        _state.update { it.copy(education = educationUiState.education,
-        school = educationUiState.school,
-        city = educationUiState.city,
-        startDate = educationUiState.startDate,
-        endDate = educationUiState.endDate)
-        }
-    }
-
-
     private fun onError(error: BaseErrorUiState) {
-        _state.update { it.copy(error = error) }
         viewModelScope.launch {
             _event.emit(SaveEvent.Error)
         }

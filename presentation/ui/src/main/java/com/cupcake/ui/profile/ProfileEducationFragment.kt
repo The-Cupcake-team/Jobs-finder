@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfileEducationBinding
+import com.cupcake.viewmodels.profile.EducationUiState
 import com.cupcake.viewmodels.profile.ProfileEducationViewModel
 import com.cupcake.viewmodels.profile.SaveEvent
 import kotlinx.coroutines.launch
@@ -19,7 +21,7 @@ class ProfileEducationFragment : BaseFragment<FragmentProfileEducationBinding, P
     override val LOG_TAG: String
         get() = TODO("Not yet implemented")
 
-//    private val args: ProfileEducationFragmentArgs by navArgs()
+    private val args: ProfileEducationFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeSaveEvent()
@@ -55,6 +57,6 @@ class ProfileEducationFragment : BaseFragment<FragmentProfileEducationBinding, P
 
     override fun onResume() {
         super.onResume()
-        viewModel.updateMode(true, "")
+        viewModel.updateMode(args.fromAddButton, args.education?: EducationUiState())
     }
 }
