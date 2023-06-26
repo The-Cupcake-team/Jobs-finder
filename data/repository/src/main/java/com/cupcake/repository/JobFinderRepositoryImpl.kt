@@ -13,7 +13,6 @@ import com.cupcake.models.User
 import com.cupcake.models.UserProfile
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
-import com.cupcake.repository.mapper.*
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toJobTitle
@@ -266,6 +265,10 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun insertProfile(user: User) {
         jobFinderDao.insertProfile(user.toProfileEntity())
+    }
+
+    override suspend fun getProfile(id: String): UserProfile {
+        TODO("Not yet implemented")
     }
 
     override suspend fun getProfile(): UserProfile {
