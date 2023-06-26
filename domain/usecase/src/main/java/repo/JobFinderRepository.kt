@@ -4,6 +4,7 @@ import com.cupcake.models.Comment
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Post
+import java.io.File
 
 interface JobFinderRepository {
 
@@ -30,14 +31,13 @@ interface JobFinderRepository {
 
     // region Post
 
-    suspend fun createPost(content: String): Post
+    suspend fun createPost(content: String, image: File?): Post
 
     suspend fun getAllPosts(): List<Post>
 
     suspend fun getPostById(id: String): Post
 
     suspend fun getFollowingPosts(): List<Post>
-
 
     suspend fun insertPost(post: Post)
 
