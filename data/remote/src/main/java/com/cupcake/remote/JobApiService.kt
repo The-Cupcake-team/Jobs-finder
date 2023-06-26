@@ -91,4 +91,7 @@ interface JobApiService {
 
     @GET("/user/posts")
     suspend fun getAllUserPost():Response<BaseResponse<List<PostsDto>>>
+
+    @GET("/user/Jobs")
+    suspend fun getRecentJobs():Response<BaseResponse<List<JobDto>>>
 }
