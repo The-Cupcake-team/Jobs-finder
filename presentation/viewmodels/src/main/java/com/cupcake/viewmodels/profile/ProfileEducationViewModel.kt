@@ -8,6 +8,8 @@ import com.cupcake.usecase.UpdateEducationUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,6 +21,8 @@ class ProfileEducationViewModel @Inject constructor(
     val updateEducation: UpdateEducationUseCase
 ) : BaseViewModel<EducationUiState>(EducationUiState()) {
 
+    private val _event = MutableSharedFlow<SaveEvent>()
+    val event = _event.asSharedFlow()
 
     fun updateMode(isAdded: Boolean, id: String) {
         if (!isAdded){
@@ -28,24 +32,38 @@ class ProfileEducationViewModel @Inject constructor(
     }
 
     private fun addEducation() {
+       tryToExecute(
+           {addEducation(_state.value.toEducation())},
+           ::onAddEducationSuccess,
+           ::onError
+       )
+    }
+
+    private fun onAddEducationSuccess(unit: Unit) {
         viewModelScope.launch {
-            addEducation(_state.value.toEducation())
+            _event.emit(SaveEvent.Added)
         }
-        Log.v("hassan","add  ${_state.value}")
+    }
+
+    private fun onUpdateEducationSuccess(unit: Unit) {
+        viewModelScope.launch {
+            _event.emit(SaveEvent.Updated)
+        }
     }
 
     private fun updateEducation() {
-        viewModelScope.launch {
-            updateEducation(_state.value.toEducation())
-        }
-        Log.v("hassan","updated  ${_state.value}")
+        tryToExecute(
+            {addEducation(_state.value.toEducation())},
+            ::onAddEducationSuccess,
+            ::onError
+        )
     }
 
     private fun getEducationById(id: String){
         tryToExecute(
             { getEducation("1").toEducationUiState() },
             ::onGetEducationSuccess,
-            ::onGetEducationFailure
+            ::onError
         )
     }
 
@@ -58,8 +76,12 @@ class ProfileEducationViewModel @Inject constructor(
         }
     }
 
-    private fun onGetEducationFailure(error: BaseErrorUiState) {
+
+    private fun onError(error: BaseErrorUiState) {
         _state.update { it.copy(error = error) }
+        viewModelScope.launch {
+            _event.emit(SaveEvent.Error)
+        }
     }
 
 

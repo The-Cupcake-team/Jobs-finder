@@ -100,7 +100,7 @@ interface JobApiService {
         @Field("city") city: String,
         @Field("startDate") startDate: String,
         @Field("endDate") endDate: String
-    ):Response<BaseResponse<Nothing>>
+    ):Response<BaseResponse<Unit>>
 
     @FormUrlEncoded
     @PUT("/profile/education/{educationId}")
@@ -111,7 +111,7 @@ interface JobApiService {
         @Field("city") city: String,
         @Field("startDate") startDate: String,
         @Field("endDate") endDate: String
-    ):Response<BaseResponse<Nothing>>
+    ):Response<BaseResponse<Unit>>
 
     @GET("/profile/education/{educationId}")
     suspend fun getEducation(
