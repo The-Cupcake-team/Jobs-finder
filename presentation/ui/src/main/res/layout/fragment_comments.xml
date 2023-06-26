@@ -27,10 +27,11 @@
             app:navigationIcon="@drawable/ic_back">
 
             <TextView
+                android:id="@+id/commentNumber"
                 style="@style/TextStyle.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/comments_title" />
+                android:text="@{@string/comments_title + '(' + viewModel.state.comments.size() + ')'}" /> />
 
         </androidx.appcompat.widget.Toolbar>
 

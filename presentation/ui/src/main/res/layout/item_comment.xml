@@ -146,7 +146,7 @@
             android:layout_marginBottom="16dp"
             android:drawableStart="@drawable/ic_invaild"
             android:drawablePadding="@dimen/spacing_small"
-            android:text="TryAgain"
+            android:text="@string/not_send_tap_to_try_again"
             android:clickable="true"
             android:onClick="@{() -> listener.onTryAgainClick(item)}"
             app:showWhenIf="@{item.commentError}"
