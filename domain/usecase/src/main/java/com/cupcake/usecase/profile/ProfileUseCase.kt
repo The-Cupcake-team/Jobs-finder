@@ -1,4 +1,4 @@
-package com.cupcake.usecase
+package com.cupcake.usecase.profile
 
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Profile

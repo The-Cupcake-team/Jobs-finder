@@ -12,6 +12,7 @@ import com.cupcake.models.Post
 import com.cupcake.models.User
 import com.cupcake.models.UserProfile
 import com.cupcake.remote.JobApiService
+import com.cupcake.remote.ProfileApiService
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.*
 import com.cupcake.repository.mapper.toJob
@@ -29,7 +30,8 @@ import javax.inject.Inject
 class JobFinderRepositoryImpl @Inject constructor(
     private val api: JobApiService,
     private val jobFinderDao: JobFinderDao,
-    private val profileDataStore: ProfileDataStore
+    private val profileDataStore: ProfileDataStore,
+    private val profileApiService: ProfileApiService
 ) : JobFinderRepository {
 
 
@@ -186,26 +188,34 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun addEducation(education: Education) {
         wrapResponseWithErrorHandler {
-            api.addEducation(
-                education = education.education!!,
+            profileApiService.addEducation(
+                degree = education.degree!!,
                 school = education.school!!,
                 city = education.city!!,
                 startDate = education.startDate!!,
                 endDate = education.endDate!!
+
             )
         }
     }
 
+    override suspend fun getAllEducations(): List<Education> {
+     return   wrapResponseWithErrorHandler { profileApiService.getAllEducation()}
+         .map { it.toEducation() }
+    }
+
+
     override suspend fun updateEducation(education: Education) {
         wrapResponseWithErrorHandler {
-            api.updateEducation(
+            profileApiService.updateEducation(
                 educationId = education.id!!,
-                education = education.education!!,
+                degree = education.degree!!,
                 school = education.school!!,
                 city = education.city!!,
                 startDate = education.startDate!!,
                 endDate = education.endDate!!
             )
+
         }
     }
     // endregion
@@ -247,10 +257,6 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun insertProfile(user: User) {
         jobFinderDao.insertProfile(user.toProfileEntity())
-    }
-
-    override suspend fun getProfile(id: String): UserProfile {
-        TODO("Not yet implemented")
     }
 
     override suspend fun getProfile(): UserProfile {

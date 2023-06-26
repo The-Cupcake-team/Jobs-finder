@@ -58,7 +58,7 @@
     <dimen name="job_details_chips_padding_vertical">18dp</dimen>
     <dimen name="card_details_chip_width">110dp</dimen>
     <dimen name="card_details_chip_height">100dp</dimen>
-    <dimen name="tab_layout_height">40dp</dimen>
+    <dimen name="tab_layout_height">44dp</dimen>
     <dimen name="edite_text_height">40dp</dimen>
 
     <dimen name="login_card_height">540dp</dimen>

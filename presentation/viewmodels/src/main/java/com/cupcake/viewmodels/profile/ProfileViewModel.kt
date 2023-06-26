@@ -1,19 +1,11 @@
 package com.cupcake.viewmodels.profile
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.cupcake.models.Post
-import com.cupcake.models.Profile
 import com.cupcake.models.UserProfile
-import com.cupcake.usecase.ProfileUseCase
-import com.cupcake.usecase.validation.ValidateUsernameUseCase
-import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.usecase.profile.ProfileUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
-import com.cupcake.viewmodels.comment.CommentUiState
-import com.cupcake.viewmodels.jobs.JobUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 @HiltViewModel

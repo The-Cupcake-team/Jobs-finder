@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.profile.resume.ProfileResumeViewModel" />
     </data>
 
     <LinearLayout
@@ -20,6 +22,7 @@
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:drawablePadding="@dimen/spacing_small"
+            android:text="@{viewModel.state.educationUiState.degree}"
             app:drawableEndCompat="@drawable/ic_pen_profile"
             tools:text="Computer Science degree" />
 
@@ -28,6 +31,7 @@
             style="@style/TextStyle.body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.state.educationUiState.school}"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
             android:textColor="@color/color_text_tertiary"
@@ -41,6 +45,7 @@
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_small"
             android:textColor="@color/color_text_tertiary"
+            android:text="@{viewModel.state.educationUiState.startDate}"
             tools:text="Sep 2010 - Aug 2013 " />
     </LinearLayout>
 </layout>

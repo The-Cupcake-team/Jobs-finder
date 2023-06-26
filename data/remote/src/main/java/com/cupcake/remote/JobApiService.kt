@@ -1,6 +1,5 @@
 package com.cupcake.remote
 
-import com.cupcake.remote.response.EducationDto
 import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
 import com.cupcake.remote.response.PostsDto

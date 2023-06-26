@@ -1,4 +1,4 @@
-package com.cupcake.usecase
+package com.cupcake.usecase.profile
 
 import com.cupcake.models.Education
 import repo.JobFinderRepository
@@ -13,7 +13,7 @@ class AddEducationUseCase @Inject constructor(
     }
 
     private fun validateEducation(education: Education){
-        validateField(education.education)
+        validateField(education.degree)
         validateField(education.school)
         validateField(education.startDate)
         validateField(education.city)

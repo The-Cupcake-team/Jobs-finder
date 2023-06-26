@@ -3,6 +3,7 @@ package com.cupcake.jobsfinder.di
 import com.cupcake.jobsfinder.BuildConfig
 import com.cupcake.remote.AuthApiService
 import com.cupcake.remote.JobApiService
+import com.cupcake.remote.ProfileApiService
 import com.cupcake.remote.interceptor.AuthInterceptor
 import dagger.Module
 import dagger.Provides
@@ -25,6 +26,15 @@ object NetworkModule {
 	): JobApiService {
 		return retrofitBuilderJobFinder(okHttpClient, gsonConverterFactory)
 			.create(JobApiService::class.java)
+	}
+
+	@Provides
+	fun provideProfileApiService(
+		@Named("OkHttpClient") okHttpClient: OkHttpClient,
+		gsonConverterFactory: GsonConverterFactory
+	): ProfileApiService {
+		return retrofitBuilderJobFinder(okHttpClient, gsonConverterFactory)
+			.create(ProfileApiService::class.java)
 	}
 
 	@Provides

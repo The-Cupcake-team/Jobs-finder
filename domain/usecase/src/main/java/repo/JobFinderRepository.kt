@@ -58,8 +58,8 @@ interface JobFinderRepository {
     // region Profile
 
     suspend fun insertProfile(user: User)
-    suspend fun getProfile(id : String): UserProfile
 
+    suspend fun getAllEducations(): List<Education>
     suspend fun addEducation(education: Education)
     suspend fun updateEducation(education: Education)
 
