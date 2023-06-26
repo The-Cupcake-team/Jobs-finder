@@ -9,20 +9,45 @@
             type="com.cupcake.viewmodels.create_job.CreateJobViewModel" />
     </data>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_close">
+
+            <TextView
+                android:id="@+id/next_button"
+                style="@style/TextStyle.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{()->viewModel.onChangeIndexViewPager(viewModel.state.progressStep)}"
+                android:padding="@dimen/spacing_normal"
+                android:stateListAnimator="@null"
+                android:text="@string/post"
+                android:textAllCaps="false"
+                android:textColor="@color/primary" />
+        </androidx.appcompat.widget.Toolbar>
 
         <TextView
             android:id="@+id/labelDescription"
             style="@style/TextStyle.Title"
             android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:text="@string/description"
-            app:layout_constraintBottom_toTopOf="@+id/editeTextDescription"
-            app:layout_constraintEnd_toEndOf="@+id/editeTextDescription"
-            app:layout_constraintStart_toStartOf="@+id/editeTextDescription" />
+            app:layout_constraintStart_toStartOf="@+id/editeTextDescription"
+            app:layout_constraintTop_toBottomOf="@id/tool_bar" />
 
         <EditText
             android:id="@+id/editeTextDescription"
@@ -32,6 +57,7 @@
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_large"
+            android:afterTextChanged="@{(text) -> viewModel.onDescriptionChange(text)}"
             android:autofillHints=""
             android:background="@drawable/card_background"
             android:gravity="top"
@@ -39,9 +65,8 @@
             android:labelFor="@+id/labelDescription"
             android:lines="3"
             android:maxLines="5"
-            android:afterTextChanged="@{(text) -> viewModel.onDescriptionChange(text)}"
-            android:text="@{viewModel.state.JobFormUiState.jobDescription}"
             android:padding="@dimen/spacing_medium"
+            android:text="@{viewModel.state.JobFormUiState.jobDescription}"
             android:textColorHint="@color/color_text_tertiary"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/labelDescription" />
@@ -54,7 +79,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
             android:text="@string/qualification"
-            app:layout_constraintEnd_toEndOf="@+id/editeTextDescription"
             app:layout_constraintStart_toStartOf="@+id/editeTextDescription"
             app:layout_constraintTop_toBottomOf="@+id/editeTextDescription" />
 
@@ -65,12 +89,12 @@
             android:layout_height="@dimen/zero"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="8dp"
+            android:afterTextChanged="@{(text) -> viewModel.onEducationChange(text)}"
             android:autofillHints=""
             android:background="@drawable/edite_text_education_background"
             android:hint="@string/education"
             android:inputType="text"
             android:labelFor="@+id/labelDescription"
-            android:afterTextChanged="@{(text) -> viewModel.onEducationChange(text)}"
             android:lines="1"
             android:padding="@dimen/spacing_medium"
             android:textColorHint="@color/color_text_tertiary"
@@ -83,13 +107,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
+            android:afterTextChanged="@{(text) -> viewModel.onExperienceRequirementChange(text)}"
             android:autofillHints=""
             android:background="@color/cards"
+            android:hint="@string/experiences_requirement"
             android:inputType="text"
             android:lines="1"
             android:padding="@dimen/spacing_medium"
-            android:hint="@string/experiences_requirement"
-            android:afterTextChanged="@{(text) -> viewModel.onExperienceRequirementChange(text)}"
             android:textColorHint="@color/color_text_tertiary"
             app:layout_constraintEnd_toEndOf="@+id/editeTextEducation"
             app:layout_constraintStart_toStartOf="@+id/editeTextEducation"
@@ -138,7 +162,6 @@
                 app:layout_constraintStart_toStartOf="@+id/editeTextExperiences"
                 app:layout_constraintTop_toBottomOf="@+id/editeTextExperiences" />
         </LinearLayout>
-
 
         <TextView
             android:id="@+id/labelSalary"
