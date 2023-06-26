@@ -234,6 +234,13 @@ class JobFinderRepositoryImpl @Inject constructor(
       return wrapResponseWithErrorHandler { api.getAllUserPost() }.map { it.toPost() }
     }
 
+    override suspend fun getSavedJobs(): List<Job> {
+        return jobFinderDao.getSavedJobs().map { it.toJob() }
+    }
+
+    override suspend fun getRecentJobs(): List<Job> {
+        return wrapResponseWithErrorHandler { api.getRecentJobs() }.map { it.toJob() }
+    }
 
     //endregion
 
