@@ -32,6 +32,7 @@
     <dimen name="card_Profile_resume_height">56dp</dimen>
     <dimen name="card_radius">8dp</dimen>
     <dimen name="edit_card_radius">8dp</dimen>
+    <dimen name="profile_radius">50dp</dimen>
 
     <!--    images-->
     <dimen name="profile_image_size">40dp</dimen>

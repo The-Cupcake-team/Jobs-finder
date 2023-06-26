@@ -285,6 +285,14 @@
         <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
     </style>
 
+    <style name="outlineButton.edite" parent="outlineButton">
+        <item name="strokeColor">@color/border_color_edite</item>
+        <item name="android:textAppearance">@style/TextStyle.body</item>
+
+    </style>
+
+
+
     <style name="edit_text_post_comments_style" parent="TextStyle.body">
         <item name="android:background">@drawable/background_search_bar</item>
         <item name="android:hint">@string/comment</item>
@@ -339,5 +347,13 @@
         <item name="android:textColor">@color/blue_500</item>
         <item name="android:text">@string/see_all</item>
     </style>
+
+    <style name="ImageViewStyle">
+        <item name="strokeWidth">2dp</item>
+        <item name="strokeColor">@color/accent_red</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 
 </resources>

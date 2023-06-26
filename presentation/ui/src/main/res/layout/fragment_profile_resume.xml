@@ -25,9 +25,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginVertical="@dimen/spacing_normal"
                 android:background="@color/background"
-                android:elevation="@dimen/spacing_normal"
                 app:cardCornerRadius="@dimen/radius"
-                app:cardElevation="@dimen/spacing_normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -73,7 +71,7 @@
                             android:layout_height="@dimen/spacing_large"
                             android:layout_marginVertical="@dimen/spacing_medium"
                             android:layout_marginStart="@dimen/spacing_medium"
-                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:layout_marginEnd="@dimen/spacing_medium"
                             android:src="@drawable/add"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -124,9 +122,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginVertical="@dimen/spacing_normal"
                 android:background="@color/background"
-                android:elevation="@dimen/spacing_normal"
                 app:cardCornerRadius="@dimen/radius"
-                app:cardElevation="@dimen/spacing_normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/education">
@@ -172,7 +168,7 @@
                             android:layout_height="@dimen/spacing_large"
                             android:layout_marginVertical="@dimen/spacing_medium"
                             android:layout_marginStart="@dimen/spacing_medium"
-                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:layout_marginEnd="@dimen/spacing_medium"
                             android:src="@drawable/add"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -225,9 +221,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginVertical="@dimen/spacing_normal"
                 android:background="@color/background"
-                android:elevation="@dimen/spacing_normal"
                 app:cardCornerRadius="@dimen/radius"
-                app:cardElevation="@dimen/spacing_normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/skills">
@@ -273,7 +267,7 @@
                             android:layout_height="@dimen/spacing_large"
                             android:layout_marginVertical="@dimen/spacing_medium"
                             android:layout_marginStart="@dimen/spacing_medium"
-                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:layout_marginEnd="@dimen/spacing_medium"
                             android:src="@drawable/add"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -327,9 +321,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginVertical="@dimen/spacing_normal"
-                android:elevation="@dimen/spacing_normal"
                 app:cardCornerRadius="@dimen/radius"
-                app:cardElevation="@dimen/spacing_normal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/employment">
@@ -375,7 +367,7 @@
                             android:layout_height="@dimen/spacing_large"
                             android:layout_marginVertical="@dimen/spacing_medium"
                             android:layout_marginStart="@dimen/spacing_medium"
-                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:layout_marginEnd="@dimen/spacing_medium"
                             android:src="@drawable/add"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -443,9 +435,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginVertical="@dimen/spacing_normal"
-                android:elevation="@dimen/spacing_normal"
                 app:cardCornerRadius="@dimen/radius"
-                app:cardElevation="@dimen/spacing_normal"
                 app:layout_constraintVertical_bias=".0"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -493,7 +483,7 @@
                             android:layout_height="@dimen/spacing_large"
                             android:layout_marginVertical="@dimen/spacing_medium"
                             android:layout_marginStart="@dimen/spacing_medium"
-                            android:layout_marginEnd="@dimen/spacing_normal"
+                            android:layout_marginEnd="@dimen/spacing_medium"
                             android:src="@drawable/add"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
