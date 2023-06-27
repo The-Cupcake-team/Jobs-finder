@@ -3,13 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/jobsFragment">
 
-    <fragment
-        android:id="@+id/createJobFragment"
-        android:name="com.cupcake.ui.create_job.CreateJobFragment"
-        android:label="CreateJobFragment"
-        tools:layout="@layout/fragment_create_job" />
 
     <fragment
         android:id="@+id/postsFragment"
@@ -43,7 +38,9 @@
             app:argType="string" />
         <action
             android:id="@+id/action_jobsFragment_to_createJobFormOneFragment"
-            app:destination="@id/createJobFormOneFragment" />
+            app:destination="@id/createJobFormOneFragment"
+            app:popUpTo="@id/jobsFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_jobsFragment_to_jobSearchFragment"
             app:destination="@id/jobSearchFragment"
@@ -120,8 +117,13 @@
 
     <fragment
         android:id="@+id/createJobFormOneFragment"
-        android:name="com.cupcake.ui.create_job.CreateJobFormOneFragment"
-        android:label="CreateJobFormOneFragment" />
+        android:name="com.cupcake.ui.create_job.CreateJobFormOneFragment">
+        <action
+            android:id="@+id/action_createJobFormOneFragment_to_createJobFormTwoFragment"
+            app:destination="@id/createJobFormTwoFragment"
+            app:popUpTo="@id/createJobFormOneFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/jobSearchFragment"
         android:name="com.cupcake.ui.job_search.JobSearchFragment"
@@ -159,6 +161,9 @@
         android:id="@+id/notificationFragment"
         android:name="com.cupcake.ui.notification.NotificationFragment"
         android:label="" />
+    <fragment
+        android:id="@+id/createJobFormTwoFragment"
+        android:name="com.cupcake.ui.create_job.CreateJobFormTwoFragment" />
 
 
 </navigation>
