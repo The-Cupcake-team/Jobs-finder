@@ -135,4 +135,8 @@
     <string name="no_notification_yet">No notification yet</string>
 
     <string name="offline">You Are Currently Offline</string>
+    <string name="done">Done</string>
+    <string name="clear">Clear</string>
+    <string name="noResultFound">No Result Found.</string>
+    <string name="zero_number">0</string>
 </resources>

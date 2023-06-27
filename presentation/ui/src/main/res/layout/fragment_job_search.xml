@@ -2,7 +2,9 @@
 
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -16,28 +18,101 @@
         android:layout_height="match_parent"
         android:background="@color/background">
 
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/back"
+            tools:layout_editor_absoluteX="16dp">
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+
         <EditText
             android:id="@+id/editTextSearchInput"
-            style="@style/searchBarStyle"
-            android:layout_width="@dimen/zero"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:background="@drawable/background_search_bar"
             android:drawableStart="@drawable/ic_search"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:paddingHorizontal="@dimen/spacing_medium"
-            android:paddingVertical="@dimen/spacing_tiny"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/buttonBack"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:drawablePadding="@dimen/spacing_normal"
+            android:hint="@string/search"
+            android:inputType="text"
+            android:onTextChanged="@{(text,start,before,count) -> viewModel.onSearchInputChange(text)}"
+            android:paddingStart="@dimen/spacing_medium"
+            app:layout_constraintTop_toBottomOf="@+id/tool_bar"
+             />
 
-        <ImageView
-            android:id="@+id/buttonBack"
+            <ImageView
+                android:id="@+id/imageViewFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                android:onClick="@{()-> viewModel.onFilterClicked()}"
+                android:src="@drawable/ic_filter"
+                app:layout_constraintBottom_toBottomOf="@id/editTextSearchInput"
+                app:layout_constraintEnd_toEndOf="@id/editTextSearchInput"
+                app:layout_constraintTop_toTopOf="@id/editTextSearchInput" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_job_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            android:layout_marginHorizontal="@dimen/spacing_tiny"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/spacing_small"
+            android:layout_marginTop="@dimen/spacing_normal"
+            app:items="@{viewModel.state.searchResult}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextSearchInput"
+            app:layout_constraintStart_toStartOf="parent"
+            app:showWhenIf="@{viewModel.state.error == null}"
+            tools:listitem="@layout/item_job_card" />
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/loading"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenIf="@{viewModel.state.loading}"
+            bind:isLoading="@{viewModel.state.loading}" />
+
+        <include
+            android:id="@+id/error"
+            layout="@layout/error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:src="@drawable/back"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextSearchInput"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenIf="@{viewModel.state.error != null}"
+            bind:error="@{viewModel.state.error}" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonTryAgain"
+            style="@style/outlineButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:onClick="@{() -> viewModel.onRetryClicked()}"
+            android:text="@string/retry"
+            app:circularflow_defaultRadius="@dimen/spacing_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error"
+            app:showWhenIf="@{viewModel.state.error != null}" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

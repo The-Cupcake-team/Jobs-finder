@@ -20,10 +20,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
+import com.cupcake.ui.job_search.OnRangeSliderValueChangeListener
+import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.viewmodels.jobs.JobTitleUiState
+import com.google.android.material.slider.RangeSlider
+
 import com.cupcake.ui.utill.SalaryFormatter.Companion.formatSalary
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.jobs.JobTitleUiState
 import com.cupcake.viewmodels.jobs.JobUiState
+
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -184,6 +190,25 @@ fun showImage(view: ImageView , imageData: Any?){
         view.setImageDrawable(null)
     }
 }
+
+
+@BindingAdapter("onValueChange")
+fun setRangeSliderOnValueChangeListener(
+    slider: RangeSlider,
+    onValueChange: OnRangeSliderValueChangeListener
+) {
+    slider.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener {
+        override fun onStartTrackingTouch(slider: RangeSlider) {}
+
+        override fun onStopTrackingTouch(slider: RangeSlider) {
+            val min = slider.values[0]
+            val max = slider.values[1]
+            onValueChange.onValueChange(min, max)
+        }
+    })
+}
+
+
 
 @BindingAdapter("salaryRange")
 fun setSalaryRange(textView: TextView, item: JobUiState) {
