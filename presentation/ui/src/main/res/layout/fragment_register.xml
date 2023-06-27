@@ -136,6 +136,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutJobTitle"
                 style="@style/TextInputLayoutStyle"
+                app:helperText="@{viewModel.state.jobTitleError}"
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
@@ -152,6 +153,7 @@
                     style="@style/TextStyle.body"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    setIcons="@{viewModel.state.isJobTitleValid}"
                     android:background="@drawable/edit_text_background"
                     android:completionThreshold="1"
                     android:focusable="true"

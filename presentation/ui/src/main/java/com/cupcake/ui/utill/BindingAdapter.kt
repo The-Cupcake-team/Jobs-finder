@@ -26,8 +26,6 @@ import com.cupcake.viewmodels.jobs.JobTitleUiState
 import com.google.android.material.slider.RangeSlider
 
 import com.cupcake.ui.utill.SalaryFormatter.Companion.formatSalary
-import com.cupcake.viewmodels.base.BaseErrorUiState
-import com.cupcake.viewmodels.jobs.JobTitleUiState
 import com.cupcake.viewmodels.jobs.JobUiState
 
 
@@ -127,12 +125,16 @@ fun bindArrayAdapter(view: AutoCompleteTextView, queryList: List<JobTitleUiState
             view.context,
             R.layout.item_job_title,
             it.map { jobTitle -> jobTitle.title })
-        if (it.isNotEmpty()) {
-            view.showDropDown()
-            view.setAdapter(historySearchAdapter)
+        view.setAdapter(historySearchAdapter)
+
+        view.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus && it.isNotEmpty()) {
+                view.showDropDown()
+            }
         }
     }
 }
+
 
 @BindingAdapter("app:setIconActionLeftToolBar")
 fun setIconAction(view: ImageButton, state: Int?) {

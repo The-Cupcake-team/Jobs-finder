@@ -23,7 +23,7 @@ interface JobApiService {
 
     // region Job
 
-    @POST("/job")
+    @POST("/user/job")
     @FormUrlEncoded
     suspend fun createJob(
         @Field("jobTitleId") jobTitleId: Int?,
@@ -36,6 +36,7 @@ interface JobApiService {
         @Field("maxSalary") maxSalary: Double?,
         @Field("experience") experience: String?,
         @Field("education") education: String?,
+        @Field("skills") skills: String?,
     ): Response<BaseResponse<Nothing>>
 
 

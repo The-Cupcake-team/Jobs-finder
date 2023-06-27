@@ -6,6 +6,7 @@ data class RegisterUiState(
     var fullName: String = "",
     var userName: String = "",
     var email: String = "",
+    var jobTitle: String = "",
     var password: String = "",
     var confirmedPassword: String = "",
     var jobTitleId: Int = 1,
@@ -13,12 +14,14 @@ data class RegisterUiState(
     val isFullNameValid: Boolean = false,
     val isUserNameValid: Boolean = false,
     val isEmailValid: Boolean = false,
+    val isJobTitleValid: Boolean = false,
     val isPasswordValid: Boolean = false,
     val isConfirmedPasswordValid: Boolean = false,
 
     val fullNameError: String = "",
     val userNameError: String = "",
     val emailError: String = "",
+    val jobTitleError: String = "",
     val passwordError: String = "",
     val confirmedPasswordError: String = "",
 
