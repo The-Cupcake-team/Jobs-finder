@@ -5,9 +5,9 @@ import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.viewmodels.profile.post.PostProfileInterAction
 import com.cupcake.viewmodels.profile.post.ProfilePostItemUIState
 
-class PostAdapter(
+class PostSavedAdapter(
     items: List<ProfilePostItemUIState>, listener: PostProfileInterAction,
 ) :
     BaseAdapter<ProfilePostItemUIState>(items, listener) {
-    override var layoutId: Int = R.layout.item_profile_horizontal_post
+    override var layoutId: Int = R.layout.item_profile_saved_post
 }

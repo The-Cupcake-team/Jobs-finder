@@ -188,15 +188,26 @@
         <action
             android:id="@+id/action_profilePostFragment_to_recentPostFragment"
             app:destination="@id/recentPostFragment" />
+        <action
+            android:id="@+id/action_profilePostFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/recentPostFragment"
         android:name="com.cupcake.ui.profile.posts.RecentPostFragment"
-        android:label="RecentPostFragment" />
+        android:label="RecentPostFragment" >
+        <action
+            android:id="@+id/action_recentPostFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/savedPostFragment"
         android:name="com.cupcake.ui.profile.posts.SavedPostFragment"
-        android:label="SavedPostFragment" />
+        android:label="SavedPostFragment" >
+        <action
+            android:id="@+id/action_savedPostFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+    </fragment>
 
 
 </navigation>
