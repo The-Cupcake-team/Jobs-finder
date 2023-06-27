@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
@@ -25,10 +26,12 @@ class RecentPostFragment : BaseFragment<FragmentRecentPostBinding,PostProfileVie
         super.onViewCreated(view, savedInstanceState)
         setUpAdapter()
         observePostEvents()
+        onClickBackNavigationIcon()
     }
     private fun setUpAdapter() {
         val recentPostAdapter= PostSeeAllRecentAdapter(emptyList(),viewModel)
         binding.recyclerViewRecentPost.adapter=recentPostAdapter
+        binding.recyclerViewRecentPost.itemAnimator = null
         lifecycleScope.launch{
             viewModel.state.collect{
                 recentPostAdapter.setData(it.recentPostsResult)
@@ -57,5 +60,10 @@ class RecentPostFragment : BaseFragment<FragmentRecentPostBinding,PostProfileVie
     }
     private fun navigateToDetailsPostFragment(postId: String) {
         navigateToDirection(RecentPostFragmentDirections.actionRecentPostFragmentToCommentsFragment(postId))
+    }
+    private fun onClickBackNavigationIcon() {
+        binding.toolBar.setNavigationOnClickListener { view ->
+            view.findNavController().popBackStack()
+        }
     }
 }

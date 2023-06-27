@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".profile.about_me.AboutMeProfileFragment">
+
+        <TextView
+            android:id="@+id/text_view_title_about_me"
+            style="@style/Text_view_title_profile_post_or_job"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_me"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/text_view_title_edit_click"
+            style="@style/TextStyle.body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableStartCompat="@drawable/ic_pen"
+            android:drawableTint="@color/secondary"
+            android:drawablePadding="@dimen/spacing_small"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_title_about_me"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/edite"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:textColor="@color/color_text_tertiary"
+            app:layout_constraintTop_toTopOf="@id/text_view_title_about_me" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutContent"
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium"
+            app:helperTextEnabled="true"
+            app:helperTextTextColor="@color/accent_red"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_title_edit_click">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextContent"
+                style="@style/TextStyle.body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/worksans_regular"
+                android:gravity="top"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:hint="@string/talk_about_your_self"
+                android:padding="@dimen/spacing_medium"
+                android:textColor="@color/color_text_primary"
+                android:textSize="@dimen/text_size_body"
+                tools:text="In a stunning turn of events, a team of international researchers claims to have made an extraordinary discovery beneath the icy peaks of Mount Everest. In what is being hailed as one of the most significant archaeological findings of the century, they have reportedly uncovered evidence of an ancient civilization that once thrived in the high Himalayas." />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
