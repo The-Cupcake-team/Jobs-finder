@@ -8,11 +8,11 @@
 
         <variable
             name="item"
-            type="com.cupcake.viewmodels.jobs.JobUiState" />
+            type="com.cupcake.viewmodels.job_search.JobItemUiState" />
 
         <variable
             name="listener"
-            type="com.cupcake.viewmodels.jobs.JobsListener" />
+            type="com.cupcake.viewmodels.job_search.JobsSearchInteractionListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -20,16 +20,16 @@
         android:layout_height="@dimen/card_horizontal_height"
         android:layout_marginHorizontal="@dimen/spacing_small"
         android:layout_marginVertical="@dimen/spacing_small"
+        android:paddingEnd="@dimen/spacing_medium"
         android:elevation="@dimen/zero"
-        app:cardElevation="@dimen/zero"
         android:onClick="@{() -> listener.onCardClickListener(item.id)}"
-        app:cardCornerRadius="@dimen/radius">
+        app:cardCornerRadius="@dimen/radius"
+        app:cardElevation="@dimen/zero">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cards"
-            >
+            android:background="@color/cards">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewCompanyProfile"
@@ -67,19 +67,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewJobTitle"
                 tools:text="Meta," />
 
-            <ImageView
-                android:id="@+id/imageViewMore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_marginEnd="@dimen/spacing_medium"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="@{() -> listener.onImageViewMoreClickListener(item)}"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_more" />
-
             <TextView
                 android:id="@+id/textViewJobType"
                 style="@style/TextStyle.caption"
@@ -95,7 +82,6 @@
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewWorkType"
                 app:layout_constraintEnd_toStartOf="@+id/textViewSalary"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/textViewWorkType"
                 app:layout_constraintTop_toTopOf="@+id/textViewWorkType"
                 tools:text="On site" />
@@ -126,17 +112,17 @@
                 style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
                 android:background="@drawable/background_chips_job_card"
                 android:backgroundTint="@color/accent_orange"
                 android:paddingHorizontal="@dimen/spacing_tiny"
                 android:paddingVertical="@dimen/spacing_normal"
-                app:salaryRange="@{item}"
+                android:text="@{item.salary}"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewJobType"
-                app:layout_constraintEnd_toEndOf="@+id/imageViewMore"
                 app:layout_constraintStart_toEndOf="@+id/textViewJobType"
                 app:layout_constraintTop_toTopOf="@+id/textViewJobType"
-                tools:text="20k-50k" />
+                tools:text="200000k-500000000000k" />
 
             <TextView
                 android:id="@+id/textViewLocation"
