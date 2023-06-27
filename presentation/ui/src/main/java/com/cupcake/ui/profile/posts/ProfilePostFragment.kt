@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfilePostBinding
+import com.cupcake.ui.profile.ProfileFragmentDirections
 import com.cupcake.ui.profile.posts.adapter.PostRecentAdapter
 import com.cupcake.ui.profile.posts.adapter.PostSavedAdapter
 import com.cupcake.viewmodels.profile.post.PostProfileEvent
@@ -70,7 +71,7 @@ class ProfilePostFragment : BaseFragment<FragmentProfilePostBinding, PostProfile
 
     private fun navigateToDetailsPostFragment(postId: String) {
         navigateToDirection(
-            ProfilePostFragmentDirections.actionProfilePostFragmentToCommentsFragment(
+            ProfileFragmentDirections.actionProfileFragmentToCommentsFragment(
                 postId
             )
         )
@@ -78,13 +79,15 @@ class ProfilePostFragment : BaseFragment<FragmentProfilePostBinding, PostProfile
 
     private fun handleSeeAllPostRecentClick() {
         binding.textViewTitleRecentPostSeeAllPost.setOnClickListener {
-            navigateToDirection(ProfilePostFragmentDirections.actionProfilePostFragmentToRecentPostFragment())
+            navigateToDirection(ProfileFragmentDirections.
+            actionProfileFragmentToRecentPostFragment())
         }
     }
 
     private fun handleSeeAllSavedPostClick() {
         binding.textViewTitleSavedPostSeeAllPost.setOnClickListener {
-            navigateToDirection(ProfilePostFragmentDirections.actionProfilePostFragmentToSavedPostFragment())
+            navigateToDirection(ProfileFragmentDirections
+                .actionProfileFragmentToSavedPostFragment())
         }
     }
 

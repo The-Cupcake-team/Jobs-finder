@@ -25,9 +25,9 @@ class AboutMeProfileFragment : BaseFragment<FragmentAboutMeProfileBinding, About
     }
     private fun navigateToEditAboutFragment() {
         binding.textViewTitleEditClick.setOnClickListener {
-        navigateToDirection(
-            AboutMeProfileFragmentDirections.actionAboutMeProfileFragmentToEditAboutMeProfileFragment()
-        )
+//        navigateToDirection(
+//            AboutMeProfileFragmentDirections.actionAboutMeProfileFragmentToEditAboutMeProfileFragment()
+//        )
     }
     }
 

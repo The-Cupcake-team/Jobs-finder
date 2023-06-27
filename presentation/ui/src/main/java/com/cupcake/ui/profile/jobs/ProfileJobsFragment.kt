@@ -40,7 +40,7 @@ class ProfileJobsFragment : BaseFragment<FragmentProfileJobsBinding, ProfileJobs
 
     private fun setUpAdapter() {
         jobsAdapter = ProfileJobsAdapter(emptyList(), viewModel)
-        binding.recyclerViewRecentPost.adapter = jobsAdapter
+        binding.recyclerViewRecentSaved.adapter = jobsAdapter
         loadProfileJobsAdapter()
     }
 

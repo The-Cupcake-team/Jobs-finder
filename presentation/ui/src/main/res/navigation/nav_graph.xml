@@ -178,23 +178,18 @@
         <action
             android:id="@+id/action_profileFragment_to_profileEducationFragment"
             app:destination="@id/profileEducationFragment" />
-    </fragment>
-
-
-    <fragment
-        android:id="@+id/profilePostFragment"
-        android:name="com.cupcake.ui.profile.posts.ProfilePostFragment"
-        android:label="ProfilePostFragment" >
         <action
-            android:id="@+id/action_profilePostFragment_to_savedPostFragment"
-            app:destination="@id/savedPostFragment" />
-        <action
-            android:id="@+id/action_profilePostFragment_to_recentPostFragment"
+            android:id="@+id/action_profileFragment_to_recentPostFragment"
             app:destination="@id/recentPostFragment" />
         <action
-            android:id="@+id/action_profilePostFragment_to_commentsFragment"
+            android:id="@+id/action_profileFragment_to_savedPostFragment"
+            app:destination="@id/savedPostFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_commentsFragment"
             app:destination="@id/commentsFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/recentPostFragment"
         android:name="com.cupcake.ui.profile.posts.RecentPostFragment"
