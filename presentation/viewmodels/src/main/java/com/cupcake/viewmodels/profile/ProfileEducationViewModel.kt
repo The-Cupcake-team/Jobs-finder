@@ -25,6 +25,8 @@ class ProfileEducationViewModel @Inject constructor(
     fun updateMode(isAdded: Boolean, educationUiState: EducationUiState) {
         if (!isAdded){
             _state.update { educationUiState.copy(isAddState = false, title = "Edit Education") }
+        }else{
+            _state.update { educationUiState.copy(isAddState = true, title = "Add Education") }
         }
     }
 
@@ -50,7 +52,7 @@ class ProfileEducationViewModel @Inject constructor(
 
     private fun updateEducation() {
         tryToExecute(
-            {addEducation(_state.value.toEducation())},
+            {updateEducation(_state.value.toEducation())},
             ::onAddEducationSuccess,
             ::onError
         )
