@@ -208,8 +208,7 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteSkills(id: String) {
-          api.deleteSkill(id)
-
+         wrapResponseWithErrorHandler { api.deleteSkill(id) }
 
     }
 

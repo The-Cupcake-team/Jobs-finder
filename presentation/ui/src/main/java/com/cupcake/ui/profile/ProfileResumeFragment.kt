@@ -6,14 +6,20 @@ import android.transition.TransitionManager
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfileResumeBinding
 import com.cupcake.ui.utill.makeGone
 import com.cupcake.ui.utill.makeVisible
+import com.cupcake.viewmodels.jobs.JobsEvent
 import com.cupcake.viewmodels.profile.ProfileResumeViewModel
+import com.cupcake.viewmodels.profile.ResumeEvent
+import com.cupcake.viewmodels.profile.resume.skill.SkillsUiState
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, ProfileResumeViewModel>(
@@ -23,12 +29,14 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
     override val LOG_TAG: String = "ResumeFragment"
     private lateinit var adapterEducation: EducationAdapter
     private lateinit var adapterSkills: SkillsAdapter
+    private lateinit  var sillsUiState: MutableList<SkillsUiState>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         inti()
         setupEducationsRecyclerView()
         setupSkillsRecyclerView()
+        handelResumeEvent()
     }
 
     private fun setupEducationsRecyclerView() {
@@ -81,6 +89,23 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
 //            employmentCard.setOnClickListener { toggleRecyclerViewVisibility(employmentRecyclerViewP, employmentViewAddResumeItem) }
 //            languagesCard.setOnClickListener { toggleRecyclerViewVisibility(languagesRecyclerViewP, languagesViewAddResumeItem) }
 //            coursesCard.setOnClickListener { toggleRecyclerViewVisibility(coursesRecyclerViewP, coursesViewAddResumeItem) }
+        }
+    }
+    private fun handelResumeEvent() {
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.event.collect { resumeEvent ->
+                when (resumeEvent) {
+                    is ResumeEvent.DeleteSkill -> {
+                        loadSkillsData()
+                    }
+
+                    is ResumeEvent.EditeEducation ->{
+                        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEducationFragment(
+                            resumeEvent.fromAddButton,resumeEvent.education
+                        ))
+                    }
+                }
+            }
         }
     }
     companion object {

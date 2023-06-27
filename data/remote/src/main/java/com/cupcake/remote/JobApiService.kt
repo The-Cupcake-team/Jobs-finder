@@ -12,6 +12,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -116,8 +117,8 @@ interface JobApiService {
     @GET("/profile/skills")
     suspend fun getAllSkills():Response<BaseResponse<List<SkillsDto>>>
 
-    @GET("/profile/skill/{skillId}")
-    suspend fun deleteSkill(@Path ("skillId") skillId : String)
+    @DELETE("/profile/skill/{id}")
+    suspend fun deleteSkill(@Path ("id") skillId : String):Response<BaseResponse<Unit>>
 
 
     @FormUrlEncoded

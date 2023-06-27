@@ -175,6 +175,9 @@
         android:id="@+id/profileFragment"
         android:name="com.cupcake.ui.profile.ProfileFragment"
         android:label="ProfileFragment">
+        <action
+            android:id="@+id/action_profileFragment_to_profileEducationFragment"
+            app:destination="@id/profileEducationFragment" />
     </fragment>
 
 

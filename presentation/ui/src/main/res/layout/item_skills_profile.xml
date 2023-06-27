@@ -11,7 +11,6 @@
             name="listener"
             type="com.cupcake.viewmodels.profile.resume.skill.SpecialSkillsInteractionListener" />
 
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +41,7 @@
             android:layout_height="@dimen/spacing_xxlarge"
             android:background="@drawable/item_skill_and_lagnuages_background"
             android:padding="@dimen/spacing_small"
+            android:onClick="@{()-> listener.deleteSkill(item.id)}"
             android:src="@drawable/ic_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/text_view_skill_or_language_name"
