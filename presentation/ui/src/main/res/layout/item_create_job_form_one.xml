@@ -17,318 +17,355 @@
 
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        android:orientation="vertical">
+        android:scrollbars="none">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/tool_bar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            app:navigationIcon="@drawable/ic_close">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_close">
+
+                <TextView
+                    android:id="@+id/next_button"
+                    style="@style/TextStyle.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{()->viewModel.onChangeIndexViewPager(viewModel.state.progressStep)}"
+                    android:padding="@dimen/spacing_normal"
+                    android:stateListAnimator="@null"
+                    android:text="@string/next"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary" />
+            </androidx.appcompat.widget.Toolbar>
+
 
             <TextView
-                android:id="@+id/next_button"
-                style="@style/TextStyle.Headline"
+                android:id="@+id/textViewTitle"
+                style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/spacing_medium"
-                android:clickable="true"
-                android:focusable="true"
-                android:onClick="@{()->viewModel.onChangeIndexViewPager(viewModel.state.progressStep)}"
-                android:padding="@dimen/spacing_normal"
-                android:stateListAnimator="@null"
-                android:text="@string/next"
-                android:textAllCaps="false"
-                android:textColor="@color/primary" />
-        </androidx.appcompat.widget.Toolbar>
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tool_bar" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none">
-
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutJobTitle"
+                style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingHorizontal="@dimen/spacing_medium">
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewTitle">
 
-                <TextView
-                    android:id="@+id/textViewTitle"
-                    style="@style/TextStyle.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="@string/title" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayoutJobTitle"
-                    style="@style/TextInputLayoutStyle"
+                <AutoCompleteTextView
+                    android:id="@+id/editTextJobTitleSearch"
+                    style="@style/TextStyle.body"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    app:endIconMode="clear_text">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/editTextJobTitleSearch"
-                        style="@style/TextStyle.body"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/edit_text_background"
-                        android:completionThreshold="1"
-                        android:focusable="true"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:onTextChanged="@{(text,start,before,count) -> viewModel.onJobTitleChange(text)}"
-                        android:padding="@dimen/spacing_medium"
-                        android:textColor="@color/color_text_primary"
-                        app:bindArrayAdapter="@{viewModel.state.jobFormUiState.jobTitles}"
-                        tools:ignore="LabelFor" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:id="@+id/textViewCompany"
-                    style="@style/TextStyle.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="@string/company"
-                    android:textColor="@color/color_text_primary" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayoutCompany"
-                    style="@style/TextInputLayoutStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:hint="@string/add_company_name"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_background"
+                    android:completionThreshold="1"
+                    android:focusable="true"
                     android:inputType="text"
-                    android:textColorHint="@color/color_text_tertiary"
-                    app:boxStrokeWidth="@dimen/zero"
-                    app:boxStrokeWidthFocused="@dimen/zero"
-                    app:hintTextColor="@color/tertiary">
+                    android:maxLines="1"
+                    android:onTextChanged="@{(text,start,before,count) -> viewModel.onJobTitleChange(text)}"
+                    android:padding="@dimen/spacing_medium"
+                    android:textColor="@color/color_text_primary"
+                    app:bindArrayAdapter="@{viewModel.state.jobFormUiState.jobTitles}"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawablePadding="@dimen/spacing_normal"
-                        android:fontFamily="@font/worksans_regular"
-                        android:inputType="text"
-                        android:textSize="@dimen/text_size_body" />
+            <TextView
+                android:id="@+id/textViewCompany"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/company"
+                android:textColor="@color/color_text_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutJobTitle" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutCompany"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:hint="@string/add_company_name"
+                android:inputType="text"
+                android:textColorHint="@color/color_text_tertiary"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:hintTextColor="@color/tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewCompany">
 
-                <TextView
-                    android:id="@+id/textViewLocation"
-                    style="@style/TextStyle.Title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="@string/location"
-                    android:textColor="@color/color_text_primary" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayoutLocation"
-                    style="@style/TextInputLayoutStyle"
+                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:hint="@string/country_city"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:fontFamily="@font/worksans_regular"
                     android:inputType="text"
-                    android:textColorHint="@color/color_text_tertiary"
-                    app:boxStrokeWidth="@dimen/zero"
-                    app:boxStrokeWidthFocused="@dimen/zero"
-                    app:endIconDrawable="@drawable/ic_pen"
-                    app:endIconMode="custom"
-                    app:hintTextColor="@color/tertiary">
+                    android:textSize="@dimen/text_size_body" />
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:drawablePadding="@dimen/spacing_normal"
-                        android:fontFamily="@font/worksans_regular"
-                        android:inputType="text"
-                        android:textSize="@dimen/text_size_body" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/textViewLocation"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/location"
+                android:textColor="@color/color_text_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutCompany" />
 
-                <TextView
-                    android:id="@+id/textViewJobType"
-                    style="@style/TextStyle.Title"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutLocation"
+                style="@style/TextInputLayoutStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:hint="@string/country_city"
+                android:inputType="text"
+                android:textColorHint="@color/color_text_tertiary"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:endIconDrawable="@drawable/ic_pen"
+                app:endIconMode="custom"
+                app:hintTextColor="@color/tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewLocation">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:fontFamily="@font/worksans_regular"
+                    android:inputType="text"
+                    android:textSize="@dimen/text_size_body" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textViewJobType"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/job_type"
+                android:textColor="@color/color_text_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutLocation" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupJopType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewJobType"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipOnSite"
+                    style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="@string/job_type"
-                    android:textColor="@color/color_text_primary" />
+                    android:checked="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.ON_SITE)}"
+                    android:text="@string/on_site" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupJopType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipOnSite"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.ON_SITE)}"
-                        android:text="@string/on_site" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipHybrid"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.HYBRID)}"
-                        android:text="@string/hybrid" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipRemote"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.REMOTE)}"
-                        android:text="@string/remote" />
-                </com.google.android.material.chip.ChipGroup>
-
-                <TextView
-                    android:id="@+id/textViewWorkType"
-                    style="@style/TextStyle.Title"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipHybrid"
+                    style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="@string/work_type"
-                    android:textColor="@color/color_text_primary" />
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.HYBRID)}"
+                    android:text="@string/hybrid" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupWorkType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipFullTime"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.FULL_TIME)}"
-                        android:text="@string/full_time" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipPartTime"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.PART_TIME)}"
-                        android:text="@string/part_time" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipInternship"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.INTERNSHIP)}"
-                        android:text="@string/internship" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipVolunteer"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.VOLUNTEER)}"
-                        android:text="@string/volunteer" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipTemporary"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.TEMPORARY)}"
-                        android:text="@string/temporary" />
-                </com.google.android.material.chip.ChipGroup>
-
-                <TextView
-                    android:id="@+id/textViewExperience"
-                    style="@style/TextStyle.Title"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipRemote"
+                    style="@style/ChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="@string/experience"
-                    android:textColor="@color/color_text_primary" />
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.REMOTE)}"
+                    android:text="@string/remote" />
+            </com.google.android.material.chip.ChipGroup>
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/chipGroupExperience"
-                    android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textViewWorkType"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/work_type"
+                android:textColor="@color/color_text_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chipGroupJopType" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupWorkType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewWorkType"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFullTime"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    app:selectionRequired="true"
-                    app:singleSelection="true">
+                    android:checkable="true"
+                    android:checked="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.FULL_TIME)}"
+                    android:text="@string/full_time" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipEntry"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:checked="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.ENTRY)}"
-                        android:text="@string/entry" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPartTime"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.PART_TIME)}"
+                    android:text="@string/part_time" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipIntermediate"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.INTERMEDIATE)}"
-                        android:text="@string/intermediate" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipInternship"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.INTERNSHIP)}"
+                    android:text="@string/internship" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipMidLevel"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.MID_LEVEL)}"
-                        android:text="@string/mid_level" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipVolunteer"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.VOLUNTEER)}"
+                    android:text="@string/volunteer" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipSeniorLevel"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.SENIOR_LEVEL)}"
-                        android:text="@string/senior_level" />
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipTemporary"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.TEMPORARY)}"
+                    android:text="@string/temporary" />
+            </com.google.android.material.chip.ChipGroup>
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipExpert"
-                        style="@style/ChipStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checkable="true"
-                        android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.EXPERT)}"
-                        android:text="@string/expert" />
-                </com.google.android.material.chip.ChipGroup>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textViewExperience"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:text="@string/experience"
+                android:textColor="@color/color_text_primary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chipGroupWorkType" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupExperience"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewExperience"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipEntry"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:checked="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.ENTRY)}"
+                    android:text="@string/entry" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipIntermediate"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.INTERMEDIATE)}"
+                    android:text="@string/intermediate" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMidLevel"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.MID_LEVEL)}"
+                    android:text="@string/mid_level" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSeniorLevel"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.SENIOR_LEVEL)}"
+                    android:text="@string/senior_level" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipExpert"
+                    style="@style/ChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.EXPERT)}"
+                    android:text="@string/expert" />
+            </com.google.android.material.chip.ChipGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
