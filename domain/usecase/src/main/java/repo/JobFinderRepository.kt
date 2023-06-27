@@ -58,8 +58,7 @@ interface JobFinderRepository {
     // region Profile
 
     suspend fun insertProfile(user: User)
-    suspend fun getProfile(id : String): UserProfile
-
+     suspend fun getAllEducations(): List<Education>
     suspend fun addEducation(education: Education)
     suspend fun updateEducation(education: Education)
 
@@ -71,4 +70,8 @@ interface JobFinderRepository {
     suspend fun getAllUserPost():List<Post>
     suspend fun getSavedJobs(): List<Job>
     suspend fun getRecentJobs(): List<Job>
+
+    suspend fun getAllSkills(): List<Skill>
+    suspend fun deleteSkills(id : String)
+
 }

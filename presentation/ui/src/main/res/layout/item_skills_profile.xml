@@ -4,6 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <variable
+            name="item"
+            type="com.cupcake.viewmodels.profile.resume.SkillsUiState" />
+        <variable
+            name="listener"
+            type="com.cupcake.viewmodels.profile.resume.SpecialSkillsInteractionListener" />
+
 
     </data>
 
@@ -21,6 +28,7 @@
             android:background="@drawable/item_skill_and_lagnuages_background"
             android:gravity="start|center"
             android:paddingStart="@dimen/spacing_medium"
+            android:text="@{item.skill}"
             android:textColor="@color/color_text_primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_delete_skill_or_language"

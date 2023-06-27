@@ -4,7 +4,7 @@ import com.cupcake.models.Education
 import repo.JobFinderRepository
 import javax.inject.Inject
 
-class AddEducationUseCase @Inject constructor(
+class EducationUseCase @Inject constructor(
     val repository: JobFinderRepository
 ) {
     suspend operator fun invoke(education: Education){
@@ -13,7 +13,7 @@ class AddEducationUseCase @Inject constructor(
     }
 
     private fun validateEducation(education: Education){
-        validateField(education.education)
+        validateField(education.degree)
         validateField(education.school)
         validateField(education.startDate)
         validateField(education.city)
@@ -27,4 +27,6 @@ class AddEducationUseCase @Inject constructor(
             throw Throwable("Fields can not be empty")
         }
     }
+
+
 }

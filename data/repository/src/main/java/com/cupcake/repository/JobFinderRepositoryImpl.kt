@@ -29,7 +29,7 @@ import javax.inject.Inject
 class JobFinderRepositoryImpl @Inject constructor(
     private val api: JobApiService,
     private val jobFinderDao: JobFinderDao,
-    private val profileDataStore: ProfileDataStore
+    private val profileDataStore: ProfileDataStore,
 ) : JobFinderRepository {
 
 
@@ -187,25 +187,44 @@ class JobFinderRepositoryImpl @Inject constructor(
     override suspend fun addEducation(education: Education) {
         wrapResponseWithErrorHandler {
             api.addEducation(
-                education = education.education!!,
+                degree = education.degree!!,
                 school = education.school!!,
                 city = education.city!!,
                 startDate = education.startDate!!,
                 endDate = education.endDate!!
+
             )
         }
     }
+
+    override suspend fun getAllEducations(): List<Education> {
+     return   wrapResponseWithErrorHandler { api.getAllEducation()}
+         .map { it.toEducation() }
+    }
+
+    override suspend fun getAllSkills(): List<Skill> {
+     return   wrapResponseWithErrorHandler { api.getAllSkills()}
+         .map { it.toSkill() }
+    }
+
+    override suspend fun deleteSkills(id: String) {
+          api.deleteSkill(id)
+
+
+    }
+
 
     override suspend fun updateEducation(education: Education) {
         wrapResponseWithErrorHandler {
             api.updateEducation(
                 educationId = education.id!!,
-                education = education.education!!,
+                degree = education.degree!!,
                 school = education.school!!,
                 city = education.city!!,
                 startDate = education.startDate!!,
                 endDate = education.endDate!!
             )
+
         }
     }
     // endregion
@@ -247,10 +266,6 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun insertProfile(user: User) {
         jobFinderDao.insertProfile(user.toProfileEntity())
-    }
-
-    override suspend fun getProfile(id: String): UserProfile {
-        TODO("Not yet implemented")
     }
 
     override suspend fun getProfile(): UserProfile {

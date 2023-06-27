@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.profile.resume.ProfileResumeViewModel" />
     </data>
 
     <ScrollView
@@ -94,6 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_normal"
+                        app:items="@{viewModel.state.educationUiState}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -194,7 +197,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/item_skills_and_lagnuages"
+                        tools:listitem="@layout/item_skills_profile"
 
                         />
 
@@ -394,7 +397,7 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        tools:listitem="@layout/item_skills_and_lagnuages"
+                        tools:listitem="@layout/item_skills_profile"
                         />
                     <EditText
                         android:layout_width="@dimen/zero"

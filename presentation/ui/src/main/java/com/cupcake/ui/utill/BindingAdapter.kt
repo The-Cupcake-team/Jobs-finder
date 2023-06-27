@@ -186,3 +186,34 @@ fun showImage(view: ImageView , imageData: Any?){
     }
 }
 
+@BindingAdapter("dateString")
+fun TextView.setFormattedDate(dateString: String?) {
+    val formattedDate = if (!dateString.isNullOrBlank()) {
+        val parts = dateString.split(".")
+        if (parts.size == 3) {
+            val month = when (parts[0].toIntOrNull()) {
+                1 -> "Jan"
+                2 -> "Feb"
+                3 -> "Mar"
+                4 -> "Apr"
+                5 -> "May"
+                6 -> "Jun"
+                7 -> "Jul"
+                8 -> "Aug"
+                9 -> "Sep"
+                10 -> "Oct"
+                11 -> "Nov"
+                12 -> "Dec"
+                else -> ""
+            }
+            val year = parts[2]
+            "$month $year"
+        } else {
+            ""
+        }
+    } else {
+        ""
+    }
+
+    text = formattedDate
+}
