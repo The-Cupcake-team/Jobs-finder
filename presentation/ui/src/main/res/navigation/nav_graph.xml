@@ -217,6 +217,15 @@
         <action
             android:id="@+id/action_profileFragment_to_commentsFragment"
             app:destination="@id/commentsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_jobProfileSeeAllFragment"
+            app:destination="@id/jobProfileSeeAllFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_jobProfileSeeAllSavedFragment"
+            app:destination="@id/jobProfileSeeAllSavedFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment" />
     </fragment>
 
 
@@ -235,6 +244,26 @@
         <action
             android:id="@+id/action_savedPostFragment_to_commentsFragment"
             app:destination="@id/commentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileJobsFragment"
+        android:name="com.cupcake.ui.profile.jobs.ProfileJobsFragment"
+        android:label="ProfileJobsFragment" />
+    <fragment
+        android:id="@+id/jobProfileSeeAllFragment"
+        android:name="com.cupcake.ui.profile.jobs.JobProfileSeeAllFragment"
+        android:label="JobProfileSeeAllFragment" >
+        <action
+            android:id="@+id/action_jobProfileSeeAllFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobProfileSeeAllSavedFragment"
+        android:name="com.cupcake.ui.profile.jobs.JobProfileSeeAllSavedFragment"
+        android:label="JobProfileSeeAllSavedFragment" >
+        <action
+            android:id="@+id/action_jobProfileSeeAllSavedFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment" />
     </fragment>
 
 

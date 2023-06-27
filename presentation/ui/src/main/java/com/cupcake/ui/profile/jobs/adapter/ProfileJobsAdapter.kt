@@ -32,12 +32,12 @@ class ProfileJobsAdapter(item: List<ProfileJobsItem>, private val listener: Prof
     }
 
     private fun bindRecentJobs(items: List<ProfileJobUiState>, holder: ItemViewHolder) {
-        val adapter = RecentJobs(items, listener)
+        val adapter = JobsProfileVerticalAdapter(items, listener)
         holder.binding.setVariable(BR.adapter, adapter)
     }
 
         private fun bindSavedJobs(items: List<ProfileJobUiState>, holder: ItemViewHolder) {
-        holder.binding.setVariable(BR.adapter, SavedJobs(items, listener))
+        holder.binding.setVariable(BR.adapter, JobsProfileHorizontalAdapter(items, listener))
     }
 
     override fun getItemViewType(position: Int): Int {

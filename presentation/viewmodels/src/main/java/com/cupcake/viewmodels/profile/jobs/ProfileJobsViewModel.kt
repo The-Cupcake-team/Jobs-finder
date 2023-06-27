@@ -7,6 +7,7 @@ import com.cupcake.usecase.profile_job.GetRecentJobsUseCase
 import com.cupcake.usecase.profile_job.GetSavedJobsUseCas
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
+import com.cupcake.viewmodels.utill.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -28,6 +29,7 @@ class ProfileJobsViewModel @Inject constructor(
         getSavedJobs()
 
     }
+
     private fun getRecentJobs() {
         tryToExecute(
             { getRecentJobsUseCase().map { it.toProfileJobUiState() } },
