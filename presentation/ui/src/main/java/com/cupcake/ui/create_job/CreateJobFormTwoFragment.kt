@@ -1,8 +1,9 @@
 package com.cupcake.ui.create_job
 
-//import com.cupcake.ui.utill.attachTo
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.ItemCreateJobFormTwoBinding
@@ -17,7 +18,7 @@ class CreateJobFormTwoFragment : BaseFragment<ItemCreateJobFormTwoBinding, Creat
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onChangeValueSlider()
-        chipGroupSkills()
+        NavigationUI.setupWithNavController(binding.toolBar, findNavController())
     }
 
     private fun onChangeValueSlider() {
@@ -28,9 +29,4 @@ class CreateJobFormTwoFragment : BaseFragment<ItemCreateJobFormTwoBinding, Creat
 
     }
 
-    private fun chipGroupSkills() {
-        binding.chipGroupSkills.attachTo(binding.editeTextSkills) { skills ->
-            viewModel.onSkillsChange(skills)
-        }
-    }
 }
