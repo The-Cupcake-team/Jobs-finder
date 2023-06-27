@@ -6,6 +6,7 @@ import com.cupcake.models.Post
 import com.cupcake.usecase.CreatePostUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
+import com.cupcake.viewmodels.posts.PostsEvent
 import com.cupcake.viewmodels.utill.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -25,7 +26,7 @@ class CreatePostViewModel @Inject constructor(
     fun createPost(content: String) {
         updateState { it.copy(isLoading = true) }
         tryToExecute(
-            callee = { createPostUseCase(content) },
+            callee = { createPostUseCase(content,state.value.postImage) },
             onSuccess = ::onSuccessCreatePost,
             onError = ::onCreatePostError
         )

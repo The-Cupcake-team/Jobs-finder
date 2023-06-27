@@ -23,8 +23,13 @@ import com.cupcake.repository.mapper.toPost
 import com.cupcake.repository.mapper.toPostsEntity
 import com.cupcake.repository.mapper.toProfile
 import com.cupcake.repository.mapper.toProfileEntity
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import repo.JobFinderRepository
 import retrofit2.Response
+import java.io.File
 import javax.inject.Inject
 
 
@@ -145,6 +150,7 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
 
+
     //region Post
 
 
@@ -179,8 +185,15 @@ class JobFinderRepositoryImpl @Inject constructor(
        return jobFinderDao.getPostById(id)?.toPost()
     }
 
-    override suspend fun createPost(content: String): Post {
-        return wrapResponseWithErrorHandler { api.createPost(content) }.toPost()
+    override suspend fun createPost(content: String, image: File?): Post {
+        val contentRequestBody = content.toRequestBody("text/plain".toMediaTypeOrNull())
+
+        val imagePart: MultipartBody.Part? = image?.let {
+            val imageRequestBody = it.asRequestBody("image/*".toMediaTypeOrNull())
+            MultipartBody.Part.createFormData("image", it.name, imageRequestBody)
+        }
+
+        return wrapResponseWithErrorHandler { api.createPost(contentRequestBody, imagePart) }.toPost()
     }
 
     override suspend fun getPostById(id: String): Post {

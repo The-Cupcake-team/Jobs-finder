@@ -20,7 +20,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
-import com.cupcake.ui.generated.callback.OnRangeSliderValueChangeListener
 import com.cupcake.ui.job_search.OnRangeSliderValueChangeListener
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.jobs.JobTitleUiState
