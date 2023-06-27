@@ -16,7 +16,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/card_horizontal_height"
         android:layout_marginHorizontal="@dimen/spacing_small"
         android:layout_marginVertical="@dimen/spacing_small"
@@ -130,13 +130,13 @@
                 android:backgroundTint="@color/accent_orange"
                 android:paddingHorizontal="@dimen/spacing_tiny"
                 android:paddingVertical="@dimen/spacing_normal"
-                android:text="@{`$` + item.salary}"
+                app:salaryRange="@{item}"
                 android:textColor="@color/color_text_secondary"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewJobType"
                 app:layout_constraintEnd_toEndOf="@+id/imageViewMore"
                 app:layout_constraintStart_toEndOf="@+id/textViewJobType"
                 app:layout_constraintTop_toTopOf="@+id/textViewJobType"
-                tools:text="200000k-5000000000000000k" />
+                tools:text="20k-50k" />
 
             <TextView
                 android:id="@+id/textViewLocation"
