@@ -170,4 +170,5 @@
     <string name="certificate_link">Certificate link</string>
     <string name="about_me">About me</string>
     <string name="talk_about_your_self">Talk about your self</string>
+    <string name="profile">Profile</string>
 </resources>
