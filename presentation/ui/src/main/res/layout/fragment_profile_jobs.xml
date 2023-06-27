@@ -11,38 +11,25 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background"
         tools:context=".profile.resume.ProfileJobsFragment">
 
-<!--        <TextView-->
-<!--            android:id="@+id/text_view_title_recent_post"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            style="@style/Text_view_title_profile_see_all"-->
-<!--            android:text="@string/recent_post"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/text_view_title_recent_post_see_all_post"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/text_view_title_recent_post"-->
-<!--            style="@style/Text_view_title_profile_see_all"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@id/text_view_title_recent_post"-->
-<!--            app:drawableEndCompat="@drawable/ic__arrow_right" />-->
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_recent_post"
+            android:id="@+id/recycler_view_recent_saved"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:clipToPadding="false"
             android:orientation="vertical"
+            android:paddingHorizontal="@dimen/spacing_tiny"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="2"
-            tools:listitem="@layout/item_profile_saved_jobs" />
+            tools:listitem="@layout/item_profile_saved_jobs"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            />
 
 <!--        <TextView-->
 <!--            android:id="@+id/text_view_title_saved_post"-->
