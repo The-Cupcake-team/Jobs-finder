@@ -157,6 +157,8 @@
     <string name="add_city_here">Add city here</string>
     <string name="start_date">Start date</string>
     <string name="end_date">End date</string>
+    <string name="position">Position</string>
+    <string name="certificate_link">Certificate link</string>
     <string name="about_me">About me</string>
     <string name="talk_about_your_self">Talk about your self</string>
 </resources>
