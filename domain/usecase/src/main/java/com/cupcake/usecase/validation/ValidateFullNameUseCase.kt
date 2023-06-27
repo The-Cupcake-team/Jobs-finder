@@ -11,6 +11,8 @@ class ValidateFullNameUseCase @Inject constructor() {
             ValidationResult(false, ERROR_LENGTH_SHORT)
         } else if (fullName.length > MAXIMUM_LENGTH) {
             ValidationResult(false, ERROR_LENGTH_LARGE)
+        } else if (!Regex("^[a-zA-Z\\-]+$").matches(fullName)) {
+            ValidationResult(false, ValidateFullNameUseCase.ERROR_LETTER)
         } else {
             ValidationResult(true, "")
         }
@@ -22,6 +24,7 @@ class ValidateFullNameUseCase @Inject constructor() {
         private const val MAXIMUM_LENGTH = 250
         private const val ERROR_LENGTH_SHORT = "Please write at least 6 length of full name"
         private const val ERROR_LENGTH_LARGE = "Please write at most 250 length of full name"
+        private const val ERROR_LETTER = "The user name must be only letters or dash"
         private const val ERROR = "Please enter a full name"
 
     }

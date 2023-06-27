@@ -20,11 +20,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
+import com.cupcake.ui.generated.callback.OnRangeSliderValueChangeListener
+import com.cupcake.ui.job_search.OnRangeSliderValueChangeListener
 import com.cupcake.viewmodels.base.BaseErrorUiState
-import com.cupcake.viewmodels.posts.PostItemUIState
-import com.google.android.material.textfield.TextInputLayout
-
 import com.cupcake.viewmodels.jobs.JobTitleUiState
+import com.google.android.material.slider.RangeSlider
+
+import com.cupcake.ui.utill.SalaryFormatter.Companion.formatSalary
+import com.cupcake.viewmodels.jobs.JobUiState
+
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -109,6 +113,11 @@ fun convertTime(view: TextView, time: String?) {
     view.text = time?.let { convert(it) }
 }
 
+@BindingAdapter("scrollToPosition")
+fun scrollToPosition(recyclerView: RecyclerView, position: Int) {
+    recyclerView.scrollToPosition(position)
+}
+
 
 @BindingAdapter(value = ["app:bindArrayAdapter"])
 fun bindArrayAdapter(view: AutoCompleteTextView, queryList: List<JobTitleUiState>?) {
@@ -117,12 +126,16 @@ fun bindArrayAdapter(view: AutoCompleteTextView, queryList: List<JobTitleUiState
             view.context,
             R.layout.item_job_title,
             it.map { jobTitle -> jobTitle.title })
-        if (it.isNotEmpty()) {
-            view.showDropDown()
-            view.setAdapter(historySearchAdapter)
+        view.setAdapter(historySearchAdapter)
+
+        view.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus && it.isNotEmpty()) {
+                view.showDropDown()
+            }
         }
     }
 }
+
 
 @BindingAdapter("app:setIconActionLeftToolBar")
 fun setIconAction(view: ImageButton, state: Int?) {
@@ -217,3 +230,29 @@ fun TextView.setFormattedDate(dateString: String?) {
 
     text = formattedDate
 }
+
+@BindingAdapter("onValueChange")
+fun setRangeSliderOnValueChangeListener(
+    slider: RangeSlider,
+    onValueChange: OnRangeSliderValueChangeListener
+) {
+    slider.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener {
+        override fun onStartTrackingTouch(slider: RangeSlider) {}
+
+        override fun onStopTrackingTouch(slider: RangeSlider) {
+            val min = slider.values[0]
+            val max = slider.values[1]
+            onValueChange.onValueChange(min, max)
+        }
+    })
+}
+
+
+
+@BindingAdapter("salaryRange")
+fun setSalaryRange(textView: TextView, item: JobUiState) {
+    val formattedSalaryRange = formatSalary(minSalary = item.minSalary, maxSalary = item.maxSalary)
+    textView.text = formattedSalaryRange
+}
+
+

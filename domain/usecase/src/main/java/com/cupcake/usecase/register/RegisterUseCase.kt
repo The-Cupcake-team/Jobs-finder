@@ -17,12 +17,13 @@ class RegisterUseCase @Inject constructor(
         fullName: String,
         userName: String,
         email: String,
+        jobTitle: String,
         password: String,
         confirmPassword: String,
         jobTitleId: Int
     ): User {
 
-        val isValid = validateRegisterForm(fullName, userName, email, password, confirmPassword)
+        val isValid = validateRegisterForm(fullName, userName, email, jobTitle, password, confirmPassword)
 
         if (!isValid) {
             throw ErrorType.UnAuthorized(ERROR)

@@ -1,6 +1,11 @@
 package repo
 
 import com.cupcake.models.*
+import com.cupcake.models.Comment
+import com.cupcake.models.Job
+import com.cupcake.models.JobTitle
+import com.cupcake.models.Post
+import java.io.File
 
 interface JobFinderRepository {
 
@@ -27,7 +32,7 @@ interface JobFinderRepository {
 
     // region Post
 
-    suspend fun createPost(content: String): Post
+    suspend fun createPost(content: String, image: File?): Post
 
     suspend fun getAllPosts(): List<Post>
 
@@ -53,6 +58,12 @@ interface JobFinderRepository {
 
     suspend fun clearProfileData()
 
+    //endregion
+
+    //region Comment
+    suspend fun getComments(id: String): List<Comment>
+
+    suspend fun createComment(postId: String, content: String): Boolean
     //endregion
 
     // region Profile
