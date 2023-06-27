@@ -76,6 +76,36 @@
     </fragment>
 
     <fragment
+        android:id="@+id/profileEmploymentFragment"
+        android:name="com.cupcake.ui.profile.ProfileEmploymentFragment"
+        tools:layout="@layout/fragment_profile_employment"
+        android:label="ProfileEmploymentFragment">
+
+        <argument
+            android:name="fromAddButton"
+            app:argType="boolean" />
+        <argument
+            android:name="employment"
+            app:argType="com.cupcake.viewmodels.profile.EmploymentUiState"
+            app:nullable="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileCourseFragment"
+        android:name="com.cupcake.ui.profile.ProfileCourseFragment"
+        tools:layout="@layout/fragment_profile_course"
+        android:label="ProfileCourseFragment">
+
+        <argument
+            android:name="fromAddButton"
+            app:argType="boolean" />
+        <argument
+            android:name="course"
+            app:argType="com.cupcake.viewmodels.profile.CourseUiState"
+            app:nullable="true"/>
+    </fragment>
+
+    <fragment
         android:id="@+id/createPostFragment"
         android:name="com.cupcake.ui.post.CreatePostFragment"
         tools:layout="@layout/fragment_create_post"
