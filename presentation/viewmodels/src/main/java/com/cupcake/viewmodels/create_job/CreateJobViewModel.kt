@@ -61,12 +61,9 @@ class CreateJobViewModel @Inject constructor(
             ::onCreateJobSuccess,
             ::onCreateJobError
         )
-        Log.d("CreateJobViewModel", "createJob: ${_state.value}")
-
     }
 
     private fun onCreateJobSuccess(result: Boolean) {
-        Log.d("CreateJobViewModel", "createJob: ${_state.value}")
         _state.update { it.copy(isLoading = false, error = null) }
     }
 
