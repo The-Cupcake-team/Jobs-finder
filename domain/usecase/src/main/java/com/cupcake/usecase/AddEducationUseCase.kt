@@ -1,4 +1,4 @@
-package com.cupcake.usecase.profile
+package com.cupcake.usecase
 
 import com.cupcake.models.Education
 import repo.JobFinderRepository
@@ -27,4 +27,6 @@ class AddEducationUseCase @Inject constructor(
             throw Throwable("Fields can not be empty")
         }
     }
+
+
 }

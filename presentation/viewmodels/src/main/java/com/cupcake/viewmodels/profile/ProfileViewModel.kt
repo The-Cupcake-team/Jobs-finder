@@ -2,7 +2,7 @@ package com.cupcake.viewmodels.profile
 
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.UserProfile
-import com.cupcake.usecase.profile.ProfileUseCase
+import com.cupcake.usecase.ProfileUseCase
 import com.cupcake.viewmodels.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

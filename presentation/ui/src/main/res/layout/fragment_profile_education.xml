@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/edit_text_height"
             android:layout_marginTop="@dimen/spacing_normal"
-            android:text="@={viewModel.state.education}"
+            android:text="@={viewModel.state.degree}"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textViewEducation" />

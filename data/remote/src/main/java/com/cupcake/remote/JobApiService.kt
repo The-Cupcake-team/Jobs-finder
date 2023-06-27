@@ -1,17 +1,24 @@
 package com.cupcake.remote
 
+import com.cupcake.remote.response.EducationDto
 import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
 import com.cupcake.remote.response.PostsDto
+import com.cupcake.remote.response.SkillsDto
 import com.cupcake.remote.response.authentication.register.UserDto
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface JobApiService {
@@ -57,8 +64,7 @@ interface JobApiService {
     @Multipart
     @POST("/user/post")
     suspend fun createPost(
-        @Part("content") content: RequestBody,
-        @Part image: MultipartBody.Part?
+        @Part("content") content: String,
     ): Response<BaseResponse<PostsDto>>
 
 
@@ -93,27 +99,6 @@ interface JobApiService {
 
     // region Profile
 
-    @FormUrlEncoded
-    @POST("/profile/education")
-    suspend fun addEducation(
-        @Field("degree") education: String,
-        @Field("school") school: String,
-        @Field("city") city: String,
-        @Field("startDate") startDate: String,
-        @Field("endDate") endDate: String
-    ):Response<BaseResponse<Unit>>
-
-    @FormUrlEncoded
-    @PUT("/profile/education/{educationId}")
-    suspend fun updateEducation(
-        @Path("educationId") educationId: String,
-        @Field("degree") education: String,
-        @Field("school") school: String,
-        @Field("city") city: String,
-        @Field("startDate") startDate: String,
-        @Field("endDate") endDate: String
-    ):Response<BaseResponse<Unit>>
-
 
     // endregion
 
@@ -124,4 +109,39 @@ interface JobApiService {
 
     @GET("/user/Jobs")
     suspend fun getRecentJobs():Response<BaseResponse<List<JobDto>>>
+
+    @GET("/profile/educations")
+    suspend fun getAllEducation():Response<BaseResponse<List<EducationDto>>>
+
+    @GET("/profile/skills")
+    suspend fun getAllSkills():Response<BaseResponse<List<SkillsDto>>>
+
+    @GET("/profile/skill/{skillId}")
+    suspend fun deleteSkill(@Path ("skillId") skillId : String)
+
+
+    @FormUrlEncoded
+    @POST("/profile/education")
+    suspend fun addEducation(
+        @Field("degree") degree: String,
+        @Field("school") school: String,
+        @Field("city") city: String,
+        @Field("startDate") startDate: String,
+        @Field("endDate") endDate: String
+    ):Response<BaseResponse<Nothing>>
+
+    @FormUrlEncoded
+    @PUT("/profile/education/{educationId}")
+    suspend fun updateEducation(
+        @Path("educationId") educationId: String,
+        @Field("degree") degree: String,
+        @Field("school") school: String,
+        @Field("city") city: String,
+        @Field("startDate") startDate: String,
+        @Field("endDate") endDate: String
+    ):Response<BaseResponse<Nothing>>
+
+
+
+
 }

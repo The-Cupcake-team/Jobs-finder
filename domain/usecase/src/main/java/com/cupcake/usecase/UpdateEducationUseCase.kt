@@ -1,4 +1,4 @@
-package com.cupcake.usecase.profile
+package com.cupcake.usecase
 
 import com.cupcake.models.Education
 import repo.JobFinderRepository

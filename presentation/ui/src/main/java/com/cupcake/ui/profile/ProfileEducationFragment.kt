@@ -8,9 +8,9 @@ import androidx.navigation.fragment.navArgs
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfileEducationBinding
-import com.cupcake.viewmodels.profile.resume.EducationUiState
+import com.cupcake.viewmodels.profile.EducationUiState
 import com.cupcake.viewmodels.profile.ProfileEducationViewModel
-import com.cupcake.viewmodels.profile.SaveEvent
+import com.cupcake.viewmodels.profile.resume.education.SaveEvent
 import kotlinx.coroutines.launch
 
 

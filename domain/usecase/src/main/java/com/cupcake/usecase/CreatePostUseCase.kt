@@ -10,9 +10,9 @@ class CreatePostUseCase @Inject constructor(
     private val repository: JobFinderRepository,
     private val validateField: ValidateFieldUseCase,
 ) {
-    suspend operator fun invoke(content: String, image: File?): Post {
+    suspend operator fun invoke(content: String): Post {
         validateField(content)
-        return repository.createPost(content, image)
+        return repository.createPost(content)
     }
 
 }

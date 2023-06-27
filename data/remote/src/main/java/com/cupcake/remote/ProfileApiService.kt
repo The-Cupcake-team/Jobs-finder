@@ -1,7 +1,7 @@
 package com.cupcake.remote
 
+import com.cupcake.remote.response.EducationDto
 import com.cupcake.remote.response.base.BaseResponse
-import com.cupcake.remote.response.profile.EducationDto
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

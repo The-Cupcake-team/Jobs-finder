@@ -25,7 +25,7 @@ class CreatePostViewModel @Inject constructor(
     fun createPost(content: String) {
         updateState { it.copy(isLoading = true) }
         tryToExecute(
-            callee = { createPostUseCase(content,state.value.postImage) },
+            callee = { createPostUseCase(content) },
             onSuccess = ::onSuccessCreatePost,
             onError = ::onCreatePostError
         )

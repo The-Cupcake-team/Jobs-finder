@@ -12,22 +12,17 @@ import com.cupcake.models.Post
 import com.cupcake.models.User
 import com.cupcake.models.UserProfile
 import com.cupcake.remote.JobApiService
-import com.cupcake.remote.ProfileApiService
 import com.cupcake.remote.response.base.BaseResponse
+import com.cupcake.repository.mapper.*
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toJobTitle
 import com.cupcake.repository.mapper.toPost
 import com.cupcake.repository.mapper.toPostsEntity
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import com.cupcake.repository.mapper.toProfile
 import com.cupcake.repository.mapper.toProfileEntity
 import repo.JobFinderRepository
 import retrofit2.Response
-import java.io.File
 import javax.inject.Inject
 
 
@@ -35,7 +30,6 @@ class JobFinderRepositoryImpl @Inject constructor(
     private val api: JobApiService,
     private val jobFinderDao: JobFinderDao,
     private val profileDataStore: ProfileDataStore,
-    private val profileApiService: ProfileApiService
 ) : JobFinderRepository {
 
 
@@ -179,17 +173,9 @@ class JobFinderRepositoryImpl @Inject constructor(
        return jobFinderDao.getPostById(id)?.toPost()
     }
 
-    override suspend fun createPost(content: String, image: File?): Post {
-        val contentRequestBody = content.toRequestBody("text/plain".toMediaTypeOrNull())
-
-        val imagePart: MultipartBody.Part? = image?.let {
-            val imageRequestBody = it.asRequestBody("image/*".toMediaTypeOrNull())
-            MultipartBody.Part.createFormData("image", it.name, imageRequestBody)
-        }
-
-        return wrapResponseWithErrorHandler { api.createPost(contentRequestBody, imagePart) }.toPost()
+    override suspend fun createPost(content: String): Post {
+        return wrapResponseWithErrorHandler { api.createPost(content) }.toPost()
     }
-
 
     override suspend fun getPostById(id: String): Post {
         return wrapResponseWithErrorHandler { api.getPostById(id) }.toPost()
@@ -200,7 +186,7 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun addEducation(education: Education) {
         wrapResponseWithErrorHandler {
-            profileApiService.addEducation(
+            api.addEducation(
                 degree = education.degree!!,
                 school = education.school!!,
                 city = education.city!!,
@@ -212,14 +198,25 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAllEducations(): List<Education> {
-     return   wrapResponseWithErrorHandler { profileApiService.getAllEducation()}
+     return   wrapResponseWithErrorHandler { api.getAllEducation()}
          .map { it.toEducation() }
+    }
+
+    override suspend fun getAllSkills(): List<Skill> {
+     return   wrapResponseWithErrorHandler { api.getAllSkills()}
+         .map { it.toSkill() }
+    }
+
+    override suspend fun deleteSkills(id: String) {
+          api.deleteSkill(id)
+
+
     }
 
 
     override suspend fun updateEducation(education: Education) {
         wrapResponseWithErrorHandler {
-            profileApiService.updateEducation(
+            api.updateEducation(
                 educationId = education.id!!,
                 degree = education.degree!!,
                 school = education.school!!,

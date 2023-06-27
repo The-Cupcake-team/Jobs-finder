@@ -1,9 +1,5 @@
 package repo
 
-import com.cupcake.models.Job
-import com.cupcake.models.JobTitle
-import com.cupcake.models.Post
-import java.io.File
 import com.cupcake.models.*
 
 interface JobFinderRepository {
@@ -31,7 +27,7 @@ interface JobFinderRepository {
 
     // region Post
 
-    suspend fun createPost(content: String, image: File?): Post
+    suspend fun createPost(content: String): Post
 
     suspend fun getAllPosts(): List<Post>
 
@@ -62,8 +58,7 @@ interface JobFinderRepository {
     // region Profile
 
     suspend fun insertProfile(user: User)
-
-    suspend fun getAllEducations(): List<Education>
+     suspend fun getAllEducations(): List<Education>
     suspend fun addEducation(education: Education)
     suspend fun updateEducation(education: Education)
 
@@ -75,4 +70,8 @@ interface JobFinderRepository {
     suspend fun getAllUserPost():List<Post>
     suspend fun getSavedJobs(): List<Job>
     suspend fun getRecentJobs(): List<Job>
+
+    suspend fun getAllSkills(): List<Skill>
+    suspend fun deleteSkills(id : String)
+
 }

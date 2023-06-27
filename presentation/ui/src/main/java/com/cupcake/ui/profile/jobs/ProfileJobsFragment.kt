@@ -10,6 +10,7 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfileJobsBinding
 import com.cupcake.ui.jobs.jobfragment.JobsFragmentDirections
 import com.cupcake.ui.profile.jobs.adapter.ProfileJobsAdapter
+import com.cupcake.ui.profile.posts.ProfilePostFragment
 import com.cupcake.viewmodels.profile.jobs.ProfileJobsUIState
 import com.cupcake.viewmodels.profile.jobs.ProfileJobsViewModel
 import kotlinx.coroutines.Dispatchers
@@ -91,5 +92,12 @@ class ProfileJobsFragment : BaseFragment<FragmentProfileJobsBinding, ProfileJobs
 
     private fun navigateToDirection(directions: NavDirections) {
         findNavController().navigate(directions)
+    }
+    companion object {
+        @JvmStatic
+        fun newInstance() = ProfileJobsFragment().apply {
+            arguments = Bundle().apply {
+            }
+        }
     }
 }

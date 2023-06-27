@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.cupcake.viewmodels.profile.resume.ProfileResumeViewModel" />
+<variable
+    name="item"
+    type="com.cupcake.viewmodels.profile.EducationUiState" />
+    <variable
+        name="listener"
+        type="com.cupcake.viewmodels.profile.resume.education.SpecialEducationInteractionListener" />
+
+
     </data>
 
     <LinearLayout
@@ -22,7 +27,7 @@
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:drawablePadding="@dimen/spacing_small"
-            android:text="@{viewModel.state.educationUiState.degree}"
+            android:text="@{item.degree}"
             app:drawableEndCompat="@drawable/ic_pen_profile"
             tools:text="Computer Science degree" />
 
@@ -31,21 +36,48 @@
             style="@style/TextStyle.body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.state.educationUiState.school}"
             android:layout_marginHorizontal="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
+            android:text="@{item.school +'.'+ item.city}"
             android:textColor="@color/color_text_tertiary"
             tools:text="University of kufa . Najaf" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_medium"
 
-        <TextView
-            android:id="@+id/text_view_number_year"
-            style="@style/TextStyle.body"
+    android:orientation="horizontal">
+    <TextView
+        android:id="@+id/startDate"
+        style="@style/TextStyle.body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:dateString="@{item.startDate}"
+        android:textColor="@color/color_text_tertiary"
+        tools:text="Sep 2010" />
+
+    <TextView
+        android:id="@+id/endDate"
+        style="@style/TextStyle.body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_small"
+        app:dateString="@{item.endDate}"
+        android:textColor="@color/color_text_tertiary"
+        tools:text="Aug 2013 " />
+
+</LinearLayout>
+
+
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/person_image_border_width"
+            android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginHorizontal="@dimen/spacing_medium"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:textColor="@color/color_text_tertiary"
-            android:text="@{viewModel.state.educationUiState.startDate}"
-            tools:text="Sep 2010 - Aug 2013 " />
+            android:background="@color/color_text_tertiary"/>
+
     </LinearLayout>
 </layout>
