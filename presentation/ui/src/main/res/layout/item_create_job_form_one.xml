@@ -44,8 +44,8 @@
                     android:layout_marginEnd="@dimen/spacing_medium"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="@{()->viewModel.onChangeIndexViewPager(viewModel.state.progressStep)}"
                     android:padding="@dimen/spacing_normal"
+                    android:onClick="@{() -> viewModel.onNextClicked()}"
                     android:stateListAnimator="@null"
                     android:text="@string/next"
                     android:textAllCaps="false"
@@ -128,6 +128,8 @@
                     android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="text"
+                    android:afterTextChanged="@{(text) -> viewModel.onCompanyChange(text)}"
+                    android:text="@{viewModel.state.jobFormUiState.company}"
                     android:textSize="@dimen/text_size_body" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -169,6 +171,8 @@
                     android:drawablePadding="@dimen/spacing_normal"
                     android:fontFamily="@font/worksans_regular"
                     android:inputType="text"
+                    android:afterTextChanged="@{(text) -> viewModel.onLocationChange(text)}"
+                    android:text="@{viewModel.state.jobFormUiState.jobLocation}"
                     android:textSize="@dimen/text_size_body" />
 
             </com.google.android.material.textfield.TextInputLayout>

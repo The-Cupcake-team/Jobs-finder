@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -27,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/back">
+                app:navigationIcon="@drawable/back"
+                tools:layout_editor_absoluteX="32dp">
 
                 <TextView
                     android:id="@+id/next_button"
@@ -38,7 +40,7 @@
                     android:layout_marginEnd="@dimen/spacing_medium"
                     android:clickable="true"
                     android:focusable="true"
-                    android:onClick="@{()->viewModel.onChangeIndexViewPager(viewModel.state.progressStep)}"
+                    android:onClick="@{() -> viewModel.createJob()}"
                     android:padding="@dimen/spacing_normal"
                     android:stateListAnimator="@null"
                     android:text="@string/post"
@@ -97,6 +99,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="8dp"
                 android:afterTextChanged="@{(text) -> viewModel.onEducationChange(text)}"
+                android:text="@{viewModel.state.JobFormUiState.education}"
                 android:autofillHints=""
                 android:background="@drawable/edite_text_education_background"
                 android:hint="@string/education"
@@ -120,6 +123,7 @@
                 android:hint="@string/experiences_requirement"
                 android:inputType="text"
                 android:lines="1"
+                android:text="@{viewModel.state.JobFormUiState.experienceRequirement}"
                 android:padding="@dimen/spacing_medium"
                 android:textColorHint="@color/color_text_tertiary"
                 app:layout_constraintEnd_toEndOf="@+id/editeTextEducation"
@@ -134,9 +138,11 @@
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="1dp"
                 android:autofillHints=""
+                android:afterTextChanged="@{(text) -> viewModel.onSkillsChange(text)}"
                 android:background="@drawable/edite_text_skills_background"
                 android:hint="@string/skills"
                 android:inputType="text"
+                android:text="@{viewModel.state.JobFormUiState.skills[0]}"
                 android:lines="1"
                 android:padding="@dimen/spacing_medium"
                 android:textColorHint="@color/color_text_tertiary"
