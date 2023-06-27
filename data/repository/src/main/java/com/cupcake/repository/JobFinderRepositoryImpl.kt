@@ -98,7 +98,7 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun createJob(jobInfo: Job): Boolean {
         val response = api.createJob(
-            jobInfo.jobTitle.id?.toInt(),
+            jobInfo.jobTitle.id,
             jobInfo.company,
             jobInfo.workType,
             jobInfo.jobLocation,
@@ -107,8 +107,10 @@ class JobFinderRepositoryImpl @Inject constructor(
             jobInfo.jobSalary.maxSalary,
             jobInfo.jobSalary.minSalary,
             jobInfo.jobExperience,
-            jobInfo.education
+            jobInfo.education,
+            jobInfo.skills[0]
         )
+        Log.d("JobFinderRepository", "createJob: ${response.body()?.message}")
         return response.isSuccessful
     }
 
