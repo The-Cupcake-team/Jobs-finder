@@ -21,6 +21,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentCreatePostBinding
@@ -40,6 +42,7 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        NavigationUI.setupWithNavController(binding.toolbarCreatePost, findNavController())
         setSpinnerAdapter()
         observePostState()
     }
@@ -119,7 +122,6 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         }
         return null
     }
-
 
 
     private fun checkPermissionAndOpenCamera() {

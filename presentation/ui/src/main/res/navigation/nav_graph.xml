@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_postsFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_postsFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
 
     </fragment>
 
@@ -111,8 +114,7 @@
     <fragment
         android:id="@+id/createPostFragment"
         android:name="com.cupcake.ui.post.CreatePostFragment"
-        tools:layout="@layout/fragment_create_post"
-        android:label="CreatePostFragment" />
+        tools:layout="@layout/fragment_create_post" />
 
     <fragment
         android:id="@+id/jobDetailsFragment"

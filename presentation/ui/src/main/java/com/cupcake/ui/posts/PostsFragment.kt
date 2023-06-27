@@ -82,6 +82,7 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
         }
         viewPager.setPageTransformer(transformer)
     }
+
     private fun observePostEvents() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -93,17 +94,24 @@ class PostsFragment : BaseFragment<FragmentPostsBinding, PostsViewModel>(
             }
         }
     }
+
     private fun handlePostEvent(event: PostsEvent) {
         when (event) {
             PostsEvent.OnNotificationClick -> {
                 findNavController().navigate(PostsFragmentDirections.actionPostsFragmentToNotificationFragment())
             }
+
             PostsEvent.OnProfileClick -> findNavController().navigate(PostsFragmentDirections.actionPostsFragmentToProfileFragment())
             PostsEvent.OnSearchClick -> Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
+            PostsEvent.OnFloatingActionClick -> navigateToCreatePost()
         }
     }
 
-    companion object{
+    private fun navigateToCreatePost() {
+        findNavController().navigate(PostsFragmentDirections.actionPostsFragmentToCreatePostFragment())
+    }
+
+    companion object {
         const val FOLLOWING_FRAGMENT = 1
         const val PUBLIC_FRAGMENT = 0
     }

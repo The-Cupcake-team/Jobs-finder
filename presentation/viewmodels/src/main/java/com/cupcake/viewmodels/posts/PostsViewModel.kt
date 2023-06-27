@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PostsViewModel  @Inject constructor() : BaseViewModel<PostsUIState>(PostsUIState()),PostInteractionListener
-{
+class PostsViewModel @Inject constructor() : BaseViewModel<PostsUIState>(PostsUIState()),
+    PostInteractionListener {
     private val _postEvent = MutableSharedFlow<Event<PostsEvent>>()
     val postEvent = _postEvent.asSharedFlow()
 
@@ -30,6 +30,12 @@ class PostsViewModel  @Inject constructor() : BaseViewModel<PostsUIState>(PostsU
     override fun onNotificationClick() {
         viewModelScope.launch {
             _postEvent.emit(Event(PostsEvent.OnNotificationClick))
+        }
+    }
+
+    fun onFloatingActionClickListener() {
+        viewModelScope.launch {
+            _postEvent.emit(Event(PostsEvent.OnFloatingActionClick))
         }
     }
 

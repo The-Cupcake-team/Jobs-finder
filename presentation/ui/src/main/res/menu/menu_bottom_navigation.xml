@@ -6,11 +6,13 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
 
+<!--
     <item
         android:id="@+id/createPostFragment"
         android:enabled="true"
         android:icon="@drawable/ic_circle_add"
         android:title="@string/post" />
+-->
 
 
     <item
@@ -23,6 +25,6 @@
         android:id="@+id/profileFragment"
         android:enabled="true"
         android:icon="@drawable/ic_profile"
-        android:title="@string/jobs" />
+        android:title="@string/profile" />
 
 </menu>
