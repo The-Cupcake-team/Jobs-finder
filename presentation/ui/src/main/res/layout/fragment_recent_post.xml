@@ -17,11 +17,22 @@
         android:background="@color/background"
         >
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/back"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toStartOf="parent">
+
+        </androidx.appcompat.widget.Toolbar>
         <TextView
         android:id="@+id/text_view_title_recent_post"
         style="@style/Text_view_title_profile_post_or_job"
         android:layout_width="@dimen/zero"
-            bind:layout_constraintTop_toTopOf="parent"
+            bind:layout_constraintTop_toBottomOf="@id/tool_bar"
             bind:layout_constraintStart_toStartOf="parent"
             bind:layout_constraintEnd_toEndOf="parent"
         android:layout_height="wrap_content"
@@ -46,6 +57,7 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:orientation="vertical"
                 app:items="@{viewModel.state.recentPostsResult}"
+                android:paddingHorizontal="@dimen/spacing_medium"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +90,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             app:showWhenIf="@{viewModel.state.error != null}"
-            bind:error="@{viewModel.state.error}" />
+            bind:error="@{viewModel.state.error}"
+            bind:layout_constraintTop_toBottomOf="@+id/tool_bar" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonTryAgain"
