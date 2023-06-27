@@ -42,6 +42,7 @@ class CreateJobFormOneFragment : BaseFragment<ItemCreateJobFormOneBinding, Creat
             CreateJobEvent.NextPage -> {
                 findNavController().navigate(CreateJobFormOneFragmentDirections.actionCreateJobFormOneFragmentToCreateJobFormTwoFragment())
             }
+            else -> {}
         }
     }
 

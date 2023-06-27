@@ -65,6 +65,9 @@ class CreateJobViewModel @Inject constructor(
 
     private fun onCreateJobSuccess(result: Boolean) {
         _state.update { it.copy(isLoading = false, error = null) }
+        viewModelScope.launch {
+            _event.emit(Event(CreateJobEvent.JobCreated))
+        }
     }
 
     private fun onCreateJobError(error: BaseErrorUiState) {
@@ -73,6 +76,9 @@ class CreateJobViewModel @Inject constructor(
                 isLoading = false,
                 error = error,
             )
+        }
+        viewModelScope.launch {
+            _event.emit(Event(CreateJobEvent.ShowError(error.errorCode)))
         }
     }
 
