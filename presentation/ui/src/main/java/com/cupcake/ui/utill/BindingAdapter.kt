@@ -26,8 +26,6 @@ import com.cupcake.viewmodels.jobs.JobTitleUiState
 import com.google.android.material.slider.RangeSlider
 
 import com.cupcake.ui.utill.SalaryFormatter.Companion.formatSalary
-import com.cupcake.viewmodels.base.BaseErrorUiState
-import com.cupcake.viewmodels.jobs.JobTitleUiState
 import com.cupcake.viewmodels.jobs.JobUiState
 
 
