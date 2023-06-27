@@ -22,9 +22,14 @@ import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.ui.job_search.OnRangeSliderValueChangeListener
 import com.cupcake.viewmodels.base.BaseErrorUiState
-
 import com.cupcake.viewmodels.jobs.JobTitleUiState
 import com.google.android.material.slider.RangeSlider
+
+import com.cupcake.ui.utill.SalaryFormatter.Companion.formatSalary
+import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.viewmodels.jobs.JobTitleUiState
+import com.cupcake.viewmodels.jobs.JobUiState
+
 
 
 //@BindingAdapter("app:setNavigationIcon")
@@ -186,6 +191,7 @@ fun showImage(view: ImageView , imageData: Any?){
     }
 }
 
+
 @BindingAdapter("onValueChange")
 fun setRangeSliderOnValueChangeListener(
     slider: RangeSlider,
@@ -202,5 +208,12 @@ fun setRangeSliderOnValueChangeListener(
     })
 }
 
+
+
+@BindingAdapter("salaryRange")
+fun setSalaryRange(textView: TextView, item: JobUiState) {
+    val formattedSalaryRange = formatSalary(minSalary = item.minSalary, maxSalary = item.maxSalary)
+    textView.text = formattedSalaryRange
+}
 
 
