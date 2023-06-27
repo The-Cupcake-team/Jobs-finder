@@ -2,7 +2,9 @@ package com.cupcake.jobsfinder
 
 import android.os.Bundle
 import android.view.View
+import android.window.SplashScreen
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -17,9 +19,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
     }
 
     override fun onResume() {
@@ -34,9 +36,11 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.loginFragment, R.id.registerFragment, R.id.notificationFragment,
+
+                R.id.loginFragment, R.id.registerFragment, R.id.notificationFragment ,
                 R.id.createJobFormOneFragment, R.id.createJobFormTwoFragment
                 -> {
+
                     binding.bottomNavigationBar.visibility = View.GONE
                 }
 

@@ -73,4 +73,6 @@ dependencies {
     annotationProcessor(DependencyProject.roomCompiler)
     kapt(DependencyProject.room)
 
+    implementation(DependencyProject.splashScreen)
+
 }

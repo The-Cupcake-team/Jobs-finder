@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace ="com.cupcake.ui"
-    compileSdk=ConfigurationData.COMPILE_SDK_VERSION
+    namespace = "com.cupcake.ui"
+    compileSdk = ConfigurationData.COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdk=ConfigurationData.MIN_SDK_VERSION
+        minSdk = ConfigurationData.MIN_SDK_VERSION
 
         testInstrumentationRunner = ConfigurationData.TEST_INSTRUMENTATION_RUNNER
         consumerProguardFiles("consumer-rules.pro")
@@ -20,7 +20,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -74,4 +77,5 @@ dependencies {
 
     implementation(DependencyProject.swipRefersh)
 
+    implementation(DependencyProject.splashScreen)
 }
