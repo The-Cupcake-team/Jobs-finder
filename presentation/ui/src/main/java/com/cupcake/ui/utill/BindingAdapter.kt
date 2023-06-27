@@ -114,6 +114,11 @@ fun convertTime(view: TextView, time: String?) {
     view.text = time?.let { convert(it) }
 }
 
+@BindingAdapter("scrollToPosition")
+fun scrollToPosition(recyclerView: RecyclerView, position: Int) {
+    recyclerView.scrollToPosition(position)
+}
+
 
 @BindingAdapter(value = ["app:bindArrayAdapter"])
 fun bindArrayAdapter(view: AutoCompleteTextView, queryList: List<JobTitleUiState>?) {

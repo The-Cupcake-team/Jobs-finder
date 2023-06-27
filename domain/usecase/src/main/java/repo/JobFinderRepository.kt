@@ -1,5 +1,6 @@
 package repo
 
+import com.cupcake.models.Comment
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Post
@@ -56,5 +57,11 @@ interface JobFinderRepository {
 
     suspend fun clearProfileData()
 
+    //endregion
+
+    //region Comment
+    suspend fun getComments(id: String): List<Comment>
+
+    suspend fun createComment(postId: String, content: String): Boolean
     //endregion
 }

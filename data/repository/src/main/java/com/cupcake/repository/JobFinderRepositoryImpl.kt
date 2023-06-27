@@ -2,17 +2,19 @@ package com.cupcake.repository
 
 import android.util.Log
 import com.cupcake.jobsfinder.local.daos.JobFinderDao
-import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.jobsfinder.local.datastore.ProfileDataStore
+import com.cupcake.jobsfinder.local.entities.JobsEntity
+import com.cupcake.models.Comment
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Post
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
+import com.cupcake.repository.mapper.toComment
 import com.cupcake.repository.mapper.toJob
-import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toJobTitle
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
 import com.cupcake.repository.mapper.toPostsEntity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -160,6 +162,8 @@ class JobFinderRepositoryImpl @Inject constructor(
         return fakePosts
     }
 
+
+
     override suspend fun insertPost(post: Post) {
         jobFinderDao.insertPost(post.toPostsEntity())
     }
@@ -227,6 +231,24 @@ class JobFinderRepositoryImpl @Inject constructor(
         profileDataStore.clearProfileData()
     }
 
+    //endregion
+
+    //region Comments
+    override suspend fun createComment(postId: String, content: String): Boolean {
+        val response = api.createComment(postId, content)
+        if (response.isSuccessful) {
+            val baseResponse = response.body()
+            if (baseResponse != null && baseResponse.isSuccess) {
+                return true
+            } else {
+                throw ErrorType.Server(baseResponse?.message!!)
+            }
+        }
+        return false
+    }
+    override suspend fun getComments(id: String): List<Comment> {
+        return wrapResponseWithErrorHandler { api.getComments(id) }.map { it.toComment() }
+    }
     //endregion
 
 }

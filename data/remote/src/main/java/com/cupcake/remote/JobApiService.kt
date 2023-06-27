@@ -1,5 +1,6 @@
 package com.cupcake.remote
 
+import com.cupcake.remote.response.CommentDto
 import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
 import com.cupcake.remote.response.PostsDto
@@ -51,7 +52,7 @@ interface JobApiService {
 
     @GET("public/job/{id}")
     suspend fun getJobById(
-        @Path("id") jobId: String
+        @Path("id") jobId: String,
     ): Response<BaseResponse<JobDto>>
 
     //endregion
@@ -69,7 +70,7 @@ interface JobApiService {
 
     @GET("/public/post/{postId}")
     suspend fun getPostById(
-        @Path("postId") postId: String
+        @Path("postId") postId: String,
     ): Response<BaseResponse<PostsDto>>
 
     @GET("/posts")
@@ -94,4 +95,21 @@ interface JobApiService {
     ): Response<BaseResponse<UserDto>>
 
     // endregion
+
+    //region Comment
+
+    @GET("/post/{postId}/comments")
+    suspend fun getComments(
+        @Path("postId") postId: String,
+    ): Response<BaseResponse<List<CommentDto>>>
+
+    @FormUrlEncoded
+    @POST("/post/{postId}/comment")
+    suspend fun createComment(
+        @Path("postId") postId: String,
+        @Field("content") content: String,
+    ): Response<BaseResponse<*>>
+
+//endregion
+
 }
