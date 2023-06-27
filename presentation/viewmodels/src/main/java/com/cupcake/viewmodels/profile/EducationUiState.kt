@@ -1,4 +1,4 @@
-package com.cupcake.viewmodels.profile.resume
+package com.cupcake.viewmodels.profile
 
 import android.os.Parcelable
 import com.cupcake.models.Education

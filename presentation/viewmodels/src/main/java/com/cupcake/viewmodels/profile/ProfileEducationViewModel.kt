@@ -1,12 +1,11 @@
 package com.cupcake.viewmodels.profile
 
 import androidx.lifecycle.viewModelScope
-import com.cupcake.usecase.profile.AddEducationUseCase
-import com.cupcake.usecase.profile.UpdateEducationUseCase
+import com.cupcake.usecase.AddEducationUseCase
+import com.cupcake.usecase.UpdateEducationUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
-import com.cupcake.viewmodels.profile.resume.EducationUiState
-import com.cupcake.viewmodels.profile.resume.toEducation
+import com.cupcake.viewmodels.profile.resume.education.SaveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -17,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileEducationViewModel @Inject constructor(
     val addEducation: AddEducationUseCase,
-    val updateEducation: UpdateEducationUseCase,
+    val updateEducation: UpdateEducationUseCase
 ) : BaseViewModel<EducationUiState>(EducationUiState()) {
 
     private val _event = MutableSharedFlow<SaveEvent>()

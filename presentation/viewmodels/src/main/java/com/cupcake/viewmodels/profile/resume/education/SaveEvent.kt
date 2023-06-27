@@ -1,4 +1,4 @@
-package com.cupcake.viewmodels.profile
+package com.cupcake.viewmodels.profile.resume.education
 
 sealed class SaveEvent{
     object Added: SaveEvent()
