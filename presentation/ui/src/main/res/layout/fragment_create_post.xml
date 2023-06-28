@@ -14,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/accent"
+        android:background="@color/background"
         tools:context="com.cupcake.ui.post.CreatePostFragment">
 
         <androidx.appcompat.widget.Toolbar
@@ -23,7 +23,8 @@
             android:layout_height="?actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/back">
 
             <Button
                 android:id="@+id/buttonCreatePost"

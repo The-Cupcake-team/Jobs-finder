@@ -1,5 +1,7 @@
 package repo
 
+import com.cupcake.models.*
+import com.cupcake.models.Comment
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Notifications
@@ -60,4 +62,30 @@ interface JobFinderRepository {
     suspend fun clearProfileData()
 
     //endregion
+
+    //region Comment
+    suspend fun getComments(id: String): List<Comment>
+
+    suspend fun createComment(postId: String, content: String): Boolean
+    //endregion
+
+    // region Profile
+
+    suspend fun insertProfile(user: User)
+     suspend fun getAllEducations(): List<Education>
+    suspend fun addEducation(education: Education)
+    suspend fun updateEducation(education: Education)
+
+    suspend fun getProfile(): UserProfile
+    // region Profile
+
+    suspend fun getAllSavedPosts(): List<Post>
+
+    suspend fun getAllUserPost():List<Post>
+    suspend fun getSavedJobs(): List<Job>
+    suspend fun getRecentJobs(): List<Job>
+
+    suspend fun getAllSkills(): List<Skill>
+    suspend fun deleteSkills(id : String)
+
 }

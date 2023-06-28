@@ -2,20 +2,28 @@ package com.cupcake.repository
 
 import android.util.Log
 import com.cupcake.jobsfinder.local.daos.JobFinderDao
-import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.jobsfinder.local.datastore.ProfileDataStore
+import com.cupcake.jobsfinder.local.entities.JobsEntity
+import com.cupcake.models.Comment
+import com.cupcake.models.*
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Notifications
 import com.cupcake.models.Post
+import com.cupcake.models.User
+import com.cupcake.models.UserProfile
 import com.cupcake.remote.JobApiService
 import com.cupcake.remote.response.base.BaseResponse
+import com.cupcake.repository.mapper.toComment
+import com.cupcake.repository.mapper.*
 import com.cupcake.repository.mapper.toJob
-import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toJobTitle
+import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
 import com.cupcake.repository.mapper.toPostsEntity
+import com.cupcake.repository.mapper.toProfile
+import com.cupcake.repository.mapper.toProfileEntity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -29,7 +37,7 @@ import javax.inject.Inject
 class JobFinderRepositoryImpl @Inject constructor(
     private val api: JobApiService,
     private val jobFinderDao: JobFinderDao,
-    private val profileDataStore: ProfileDataStore
+    private val profileDataStore: ProfileDataStore,
 ) : JobFinderRepository {
 
 
@@ -99,7 +107,7 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun createJob(jobInfo: Job): Boolean {
         val response = api.createJob(
-            jobInfo.jobTitle.id?.toInt(),
+            jobInfo.jobTitle.id,
             jobInfo.company,
             jobInfo.workType,
             jobInfo.jobLocation,
@@ -108,8 +116,10 @@ class JobFinderRepositoryImpl @Inject constructor(
             jobInfo.jobSalary.maxSalary,
             jobInfo.jobSalary.minSalary,
             jobInfo.jobExperience,
-            jobInfo.education
+            jobInfo.education,
+            jobInfo.skills[0]
         )
+        Log.d("JobFinderRepository", "createJob: ${response.body()?.message}")
         return response.isSuccessful
     }
 
@@ -174,6 +184,7 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
 
+
     //region Post
 
 
@@ -193,6 +204,8 @@ class JobFinderRepositoryImpl @Inject constructor(
         )
         return fakePosts
     }
+
+
 
     override suspend fun insertPost(post: Post) {
         jobFinderDao.insertPost(post.toPostsEntity())
@@ -217,11 +230,56 @@ class JobFinderRepositoryImpl @Inject constructor(
         return wrapResponseWithErrorHandler { api.createPost(contentRequestBody, imagePart) }.toPost()
     }
 
-
     override suspend fun getPostById(id: String): Post {
         return wrapResponseWithErrorHandler { api.getPostById(id) }.toPost()
     }
     //endregion
+
+    // region Profile
+
+    override suspend fun addEducation(education: Education) {
+        wrapResponseWithErrorHandler {
+            api.addEducation(
+                degree = education.degree!!,
+                school = education.school!!,
+                city = education.city!!,
+                startDate = education.startDate!!,
+                endDate = education.endDate!!
+
+            )
+        }
+    }
+
+    override suspend fun getAllEducations(): List<Education> {
+     return   wrapResponseWithErrorHandler { api.getAllEducation()}
+         .map { it.toEducation() }
+    }
+
+    override suspend fun getAllSkills(): List<Skill> {
+     return   wrapResponseWithErrorHandler { api.getAllSkills()}
+         .map { it.toSkill() }
+    }
+
+    override suspend fun deleteSkills(id: String) {
+         wrapResponseWithErrorHandler { api.deleteSkill(id) }
+
+    }
+
+
+    override suspend fun updateEducation(education: Education) {
+        wrapResponseWithErrorHandler {
+            api.updateEducation(
+                educationId = education.id!!,
+                degree = education.degree!!,
+                school = education.school!!,
+                city = education.city!!,
+                startDate = education.startDate!!,
+                endDate = education.endDate!!
+            )
+
+        }
+    }
+    // endregion
     private suspend fun <T> wrapResponseWithErrorHandler(
         function: suspend () -> Response<BaseResponse<T>>
     ): T {
@@ -232,13 +290,10 @@ class JobFinderRepositoryImpl @Inject constructor(
                 Log.i("TAG", "base successful : ${baseResponse.value}")
                 return baseResponse.value!!
             } else {
-//                throw Throwable("Invalid response")
                 throw ErrorType.Server(baseResponse?.message!!)
-
             }
         } else {
             val errorResponse = response.errorBody()?.toString()
-//            throw Throwable(errorResponse ?: "Error Network")
             throw ErrorType.Server(errorResponse ?: "Error Network")
         }
 
@@ -259,6 +314,48 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     override suspend fun clearProfileData() {
         profileDataStore.clearProfileData()
+    }
+
+    //endregion
+
+    //region Comments
+    override suspend fun createComment(postId: String, content: String): Boolean {
+        val response = api.createComment(postId, content)
+        if (response.isSuccessful) {
+            val baseResponse = response.body()
+            if (baseResponse != null && baseResponse.isSuccess) {
+                return true
+            } else {
+                throw ErrorType.Server(baseResponse?.message!!)
+            }
+        }
+        return false
+    }
+    override suspend fun getComments(id: String): List<Comment> {
+        return wrapResponseWithErrorHandler { api.getComments(id) }.map { it.toComment() }
+    }
+    override suspend fun insertProfile(user: User) {
+        jobFinderDao.insertProfile(user.toProfileEntity())
+    }
+
+    override suspend fun getProfile(): UserProfile {
+       return jobFinderDao.getProfile().toProfile()
+    }
+
+    override suspend fun getAllSavedPosts(): List<Post> {
+       return jobFinderDao.getAllSavedPost().map { it.toPost() }
+    }
+
+    override suspend fun getAllUserPost(): List<Post> {
+      return wrapResponseWithErrorHandler { api.getAllUserPost() }.map { it.toPost() }
+    }
+
+    override suspend fun getSavedJobs(): List<Job> {
+        return jobFinderDao.getSavedJobs().map { it.toJob() }
+    }
+
+    override suspend fun getRecentJobs(): List<Job> {
+        return wrapResponseWithErrorHandler { api.getRecentJobs() }.map { it.toJob() }
     }
 
     //endregion

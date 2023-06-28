@@ -1,8 +1,11 @@
 package com.cupcake.remote
 
+import com.cupcake.remote.response.CommentDto
+import com.cupcake.remote.response.EducationDto
 import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
 import com.cupcake.remote.response.PostsDto
+import com.cupcake.remote.response.SkillsDto
 import com.cupcake.remote.response.authentication.register.UserDto
 import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.remote.response.job.JobDto
@@ -10,11 +13,13 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
 
@@ -22,7 +27,7 @@ interface JobApiService {
 
     // region Job
 
-    @POST("/job")
+    @POST("/user/job")
     @FormUrlEncoded
     suspend fun createJob(
         @Field("jobTitleId") jobTitleId: Int?,
@@ -35,6 +40,7 @@ interface JobApiService {
         @Field("maxSalary") maxSalary: Double?,
         @Field("experience") experience: String?,
         @Field("education") education: String?,
+        @Field("skills") skills: String?,
     ): Response<BaseResponse<Nothing>>
 
 
@@ -51,7 +57,7 @@ interface JobApiService {
 
     @GET("public/job/{id}")
     suspend fun getJobById(
-        @Path("id") jobId: String
+        @Path("id") jobId: String,
     ): Response<BaseResponse<JobDto>>
 
     //endregion
@@ -69,7 +75,7 @@ interface JobApiService {
 
     @GET("/public/post/{postId}")
     suspend fun getPostById(
-        @Path("postId") postId: String
+        @Path("postId") postId: String,
     ): Response<BaseResponse<PostsDto>>
 
     @GET("/posts")
@@ -94,4 +100,69 @@ interface JobApiService {
     ): Response<BaseResponse<UserDto>>
 
     // endregion
+
+    //region Comment
+
+    @GET("/post/{postId}/comments")
+    suspend fun getComments(
+        @Path("postId") postId: String,
+    ): Response<BaseResponse<List<CommentDto>>>
+
+    @FormUrlEncoded
+    @POST("/post/{postId}/comment")
+    suspend fun createComment(
+        @Path("postId") postId: String,
+        @Field("content") content: String,
+    ): Response<BaseResponse<*>>
+
+//endregion
+
+
+    // region Profile
+
+
+    // endregion
+
+//    /user/posts
+
+    @GET("/user/posts")
+    suspend fun getAllUserPost():Response<BaseResponse<List<PostsDto>>>
+
+    @GET("/user/Jobs")
+    suspend fun getRecentJobs():Response<BaseResponse<List<JobDto>>>
+
+    @GET("/profile/educations")
+    suspend fun getAllEducation():Response<BaseResponse<List<EducationDto>>>
+
+    @GET("/profile/skills")
+    suspend fun getAllSkills():Response<BaseResponse<List<SkillsDto>>>
+
+    @DELETE("/profile/skill/{id}")
+    suspend fun deleteSkill(@Path ("id") skillId : String):Response<BaseResponse<Unit>>
+
+
+    @FormUrlEncoded
+    @POST("/profile/education")
+    suspend fun addEducation(
+        @Field("degree") degree: String,
+        @Field("school") school: String,
+        @Field("city") city: String,
+        @Field("startDate") startDate: String,
+        @Field("endDate") endDate: String
+    ):Response<BaseResponse<Nothing>>
+
+    @FormUrlEncoded
+    @PUT("/profile/education/{educationId}")
+    suspend fun updateEducation(
+        @Path("educationId") educationId: String,
+        @Field("degree") degree: String,
+        @Field("school") school: String,
+        @Field("city") city: String,
+        @Field("startDate") startDate: String,
+        @Field("endDate") endDate: String
+    ):Response<BaseResponse<Nothing>>
+
+
+
+
 }

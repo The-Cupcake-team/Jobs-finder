@@ -22,6 +22,7 @@ object DependencyProject {
     private const val swipeRefreshLayoutVersion = "1.1.0"
     private const val DATASTORE_VERSION = "1.0.0"
     private const val ROOM_VERSION = "2.5.1"
+    private const val SPLASH_SCREEN_VERSION = "1.0.0"
 
     const val androidxCore = "androidx.core:core-ktx:$CORE_VERSION"
     const val compat = "androidx.appcompat:appcompat:$APP_COMPAT_VERSION"
@@ -65,7 +66,7 @@ object DependencyProject {
     const val roomCompiler = "androidx.room:room-compiler:$ROOM_VERSION"
     const val room = "androidx.room:room-compiler:$ROOM_VERSION"
 
-
+    const val splashScreen = "androidx.core:core-splashscreen:$SPLASH_SCREEN_VERSION-beta02"
 
 
 }

@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="pure_white">#FFFFFFFF</color>
 
     <color name="surface">@color/white</color>
 
@@ -22,15 +23,16 @@
     <color name="blue_300">#E9EFF6</color>
 
 
-
     <color name="chip_color">#E7EDF5</color>
     <color name="border_color">#14FFFFFF</color>
+    <color name="border_color_edite">#E5E7E9</color>
 
 
     <!-- Text colors -->
     <color name="color_text_primary">#DE000000</color>
     <color name="color_text_secondary">#99000000</color>
     <color name="color_text_tertiary">#61000000</color>
+    <color name="color_text_foursome">#FF4B8CED</color>
 
 
     <!--Transparent color -->

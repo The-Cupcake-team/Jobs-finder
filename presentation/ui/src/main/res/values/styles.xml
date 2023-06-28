@@ -285,6 +285,14 @@
         <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
     </style>
 
+    <style name="outlineButton.edite" parent="outlineButton">
+        <item name="strokeColor">@color/border_color_edite</item>
+        <item name="android:textAppearance">@style/TextStyle.body</item>
+
+    </style>
+
+
+
     <style name="edit_text_post_comments_style" parent="TextStyle.body">
         <item name="android:background">@drawable/background_search_bar</item>
         <item name="android:hint">@string/comment</item>
@@ -323,4 +331,29 @@
         <item name="cornerSizeTopRight">@dimen/login_card_radius</item>
         <item name="cornerSizeTopLeft">@dimen/login_card_radius</item>
     </style>
+
+    <!-- profile screen -->
+    <style name="Text_view_title_profile_post_or_job" >
+        <item name="android:layout_marginTop">@dimen/spacing_medium</item>
+        <item name="android:layout_marginStart">@dimen/spacing_medium</item>
+        <item name="android:fontFamily">@font/worksans_semibold</item>
+        <item name="android:textSize">@dimen/text_size_headline</item>
+        <item name="android:textColor">@color/color_text_primary</item>
+    </style>
+    <style name="Text_view_title_profile_see_all" >
+        <item name="android:layout_marginEnd">@dimen/spacing_medium</item>
+        <item name="android:fontFamily">@font/worksans_regular</item>
+        <item name="android:textSize">@dimen/text_size_caption</item>
+        <item name="android:textColor">@color/blue_500</item>
+        <item name="android:text">@string/see_all</item>
+    </style>
+
+    <style name="ImageViewStyle">
+        <item name="strokeWidth">2dp</item>
+        <item name="strokeColor">@color/accent_red</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
 </resources>

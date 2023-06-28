@@ -25,6 +25,12 @@
         <action
             android:id="@+id/action_postsFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_postsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_postsFragment_to_createPostFragment"
+            app:destination="@id/createPostFragment" />
 
     </fragment>
 
@@ -43,7 +49,9 @@
             app:argType="string" />
         <action
             android:id="@+id/action_jobsFragment_to_createJobFormOneFragment"
-            app:destination="@id/createJobFormOneFragment" />
+            app:destination="@id/createJobFormOneFragment"
+            app:popUpTo="@id/jobsFragment"
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_jobsFragment_to_jobSearchFragment"
             app:destination="@id/jobSearchFragment"
@@ -59,10 +67,54 @@
     </fragment>
 
     <fragment
+        android:id="@+id/profileEducationFragment"
+        android:name="com.cupcake.ui.profile.ProfileEducationFragment"
+        tools:layout="@layout/fragment_profile_education"
+        android:label="ProfileEducationFragment">
+
+        <argument
+            android:name="fromAddButton"
+            app:argType="boolean" />
+        <argument
+            android:name="education"
+            app:argType="com.cupcake.viewmodels.profile.EducationUiState"
+            app:nullable="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileEmploymentFragment"
+        android:name="com.cupcake.ui.profile.ProfileEmploymentFragment"
+        tools:layout="@layout/fragment_profile_employment"
+        android:label="ProfileEmploymentFragment">
+
+        <argument
+            android:name="fromAddButton"
+            app:argType="boolean" />
+        <argument
+            android:name="employment"
+            app:argType="com.cupcake.viewmodels.profile.EmploymentUiState"
+            app:nullable="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileCourseFragment"
+        android:name="com.cupcake.ui.profile.ProfileCourseFragment"
+        tools:layout="@layout/fragment_profile_course"
+        android:label="ProfileCourseFragment">
+
+        <argument
+            android:name="fromAddButton"
+            app:argType="boolean" />
+        <argument
+            android:name="course"
+            app:argType="com.cupcake.viewmodels.profile.CourseUiState"
+            app:nullable="true"/>
+    </fragment>
+
+    <fragment
         android:id="@+id/createPostFragment"
         android:name="com.cupcake.ui.post.CreatePostFragment"
-        tools:layout="@layout/fragment_create_post"
-        android:label="CreatePostFragment" />
+        tools:layout="@layout/fragment_create_post" />
 
     <fragment
         android:id="@+id/jobDetailsFragment"
@@ -105,23 +157,28 @@
         android:id="@+id/loginFragment"
         android:name="com.cupcake.ui.login.LoginFragment"
         android:label="LoginFragment" >
-       <action
-           android:id="@+id/action_loginFragment_to_postsFragment"
-           app:destination="@id/postsFragment"
-           app:popUpTo="@id/loginFragment"
-           app:popUpToInclusive="true" />
-       <action
-           android:id="@+id/action_loginFragment_to_registerFragment"
-           app:destination="@id/registerFragment"
-           app:popUpTo="@id/loginFragment"
-           app:popUpToInclusive="true" />
-   </fragment>
+        <action
+            android:id="@+id/action_loginFragment_to_postsFragment"
+            app:destination="@id/postsFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 
     <fragment
         android:id="@+id/createJobFormOneFragment"
-        android:name="com.cupcake.ui.create_job.CreateJobFormOneFragment"
-        android:label="CreateJobFormOneFragment" />
+        android:name="com.cupcake.ui.create_job.CreateJobFormOneFragment">
+        <action
+            android:id="@+id/action_createJobFormOneFragment_to_createJobFormTwoFragment"
+            app:destination="@id/createJobFormTwoFragment"
+            app:popUpTo="@id/createJobFormOneFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/jobSearchFragment"
         android:name="com.cupcake.ui.job_search.JobSearchFragment"
@@ -132,6 +189,12 @@
             android:name="jobTitle"
             app:argType="string"
             android:defaultValue="" />
+        <action
+            android:id="@+id/action_jobSearchFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            />
     </fragment>
     <dialog
         android:id="@+id/modalBottomSheet"
@@ -153,6 +216,74 @@
         android:id="@+id/notificationFragment"
         android:name="com.cupcake.ui.notification.NotificationFragment"
         android:label="" />
+    <fragment
+        android:id="@+id/createJobFormTwoFragment"
+        android:name="com.cupcake.ui.create_job.CreateJobFormTwoFragment" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.cupcake.ui.profile.ProfileFragment"
+        android:label="ProfileFragment">
+        <action
+            android:id="@+id/action_profileFragment_to_profileEducationFragment"
+            app:destination="@id/profileEducationFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_recentPostFragment"
+            app:destination="@id/recentPostFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_savedPostFragment"
+            app:destination="@id/savedPostFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_jobProfileSeeAllFragment"
+            app:destination="@id/jobProfileSeeAllFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_jobProfileSeeAllSavedFragment"
+            app:destination="@id/jobProfileSeeAllSavedFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/recentPostFragment"
+        android:name="com.cupcake.ui.profile.posts.RecentPostFragment"
+        android:label="RecentPostFragment" >
+        <action
+            android:id="@+id/action_recentPostFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedPostFragment"
+        android:name="com.cupcake.ui.profile.posts.SavedPostFragment"
+        android:label="SavedPostFragment" >
+        <action
+            android:id="@+id/action_savedPostFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileJobsFragment"
+        android:name="com.cupcake.ui.profile.jobs.ProfileJobsFragment"
+        android:label="ProfileJobsFragment" />
+    <fragment
+        android:id="@+id/jobProfileSeeAllFragment"
+        android:name="com.cupcake.ui.profile.jobs.JobProfileSeeAllFragment"
+        android:label="JobProfileSeeAllFragment" >
+        <action
+            android:id="@+id/action_jobProfileSeeAllFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jobProfileSeeAllSavedFragment"
+        android:name="com.cupcake.ui.profile.jobs.JobProfileSeeAllSavedFragment"
+        android:label="JobProfileSeeAllSavedFragment" >
+        <action
+            android:id="@+id/action_jobProfileSeeAllSavedFragment_to_jobDetailsFragment"
+            app:destination="@id/jobDetailsFragment" />
+    </fragment>
 
 
 </navigation>

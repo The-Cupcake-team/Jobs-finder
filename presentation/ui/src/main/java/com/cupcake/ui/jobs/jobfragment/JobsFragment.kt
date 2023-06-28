@@ -115,4 +115,5 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     private fun navigateToDirection(directions: NavDirections) {
         findNavController().navigate(directions)
     }
+
 }

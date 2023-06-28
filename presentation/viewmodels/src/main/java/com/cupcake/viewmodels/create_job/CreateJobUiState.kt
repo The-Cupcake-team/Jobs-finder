@@ -12,27 +12,27 @@ data class CreateJobUiState(
 
 ) {
     data class JobFormUiState(
-        var jobTitles: List<JobTitleUiState> = emptyList(),
-        var jobTitleUIState: JobTitleUIState = JobTitleUIState(),
-        var company: String = "",
-        var workType: String = "",
-        var jobType: String = "",
-        var jobLocation: String = "",
-        val experience: String = "",
+        val jobTitles: List<JobTitleUiState> = emptyList(),
+        val jobTitleUIState: JobTitleUiState = JobTitleUiState(),
+        val company: String = "",
+        val workType: String = WorkType.FULL_TIME.value,
+        val jobType: String = JobType.ON_SITE.value,
+        val jobLocation: String = "",
+        val experience: String = ExperienceType.ENTRY.value,
         val education: String = "",
-        var skills: List<String> = emptyList(),
-        var experienceRequirement: String = "",
-        var jobDescription: String = "",
-        var salary: JobSalaryUIState = JobSalaryUIState(),
+        val skills: List<String> = emptyList(),
+        val experienceRequirement: String = "",
+        val jobDescription: String = "",
+        val salary: JobSalaryUIState = JobSalaryUIState(),
     )
 
     data class JobTitleUIState(
-        var id: String = "",
+        var id: Int = 1,
         var title: String = "",
     )
 
     data class JobSalaryUIState(
-        var maxSalary: String = "0",
-        var minSalary: String = "100000",
+        var maxSalary: Double = 0.0,
+        var minSalary: Double = 100000.0,
     )
 }

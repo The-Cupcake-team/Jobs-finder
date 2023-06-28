@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.profile.ProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/motionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_cover"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_horizontal_height"
+            android:scaleType="fitXY"
+            android:src="@drawable/background_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ShapeAppearance.Material3.Corner.Full"
+            android:layout_marginStart="@dimen/spacing_medium"
+            app:layout_constraintBottom_toBottomOf="@+id/profile_cover"
+            app:layout_constraintStart_toStartOf="@+id/profile_cover"
+            app:layout_constraintTop_toTopOf="@+id/profile_cover"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintVertical_bias="2.0"
+            app:cardCornerRadius="@dimen/profile_radius">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="@dimen/profile_image"
+            android:layout_height="@dimen/profile_image"
+            android:layout_margin="@dimen/spacing_xxsmall"
+            tools:src="@drawable/test_personal_image"
+
+            app:showImage="@{viewModel.state.avatar}"
+            app:shapeAppearanceOverlay="@style/ImageViewStyle"
+            />
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@id/profile_cover"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image">
+
+
+            <TextView
+                android:id="@+id/profile_name"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@{viewModel.state.fullName}"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="khaled eid" />
+
+            <TextView
+                android:id="@+id/profile_job_title"
+                style="@style/TextStyle.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@{viewModel.state.jobTitle}"
+                android:textColor="@color/color_text_secondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_name"
+                tools:text="UI UX Designer / User Interface" />
+
+            <TextView
+                android:id="@+id/profile_location"
+                style="@style/TextStyle.caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:text="@{viewModel.state.location}"
+                android:textColor="@color/color_text_secondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_job_title"
+                tools:text="Al-Najaf, Iraq" />
+
+            <TextView
+                android:id="@+id/profile_link"
+                style="@style/TextStyle.caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:visibility="gone"
+                android:text="@{viewModel.state.linkWebsite}"
+                android:textColor="@color/color_text_foursome"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_location"
+                tools:text="www.Behance/mohammedAli.com" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_cover"
+                android:text="@string/edite"
+                app:icon="@drawable/pen"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                app:iconPadding="@dimen/spacing_normal"
+                style="@style/outlineButton.edite"
+                />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            android:layout_marginTop="@dimen/spacing_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bio">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tab_layout_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabGravity="fill"
+                app:tabIconTint="@color/color_text_foursome"
+                app:tabIndicatorAnimationMode="linear"
+                app:tabIndicatorColor="@color/color_text_foursome"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorGravity="bottom"
+                app:tabIndicatorHeight="@dimen/spacing_xxsmall"
+                android:background="@drawable/tab_border"
+                app:tabSelectedTextColor="@color/color_text_foursome"
+                app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                app:tabTextColor="@color/color_text_foursome" />
+
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/zero"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_default="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

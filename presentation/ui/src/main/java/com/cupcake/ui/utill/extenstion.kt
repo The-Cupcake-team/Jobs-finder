@@ -107,3 +107,9 @@ private fun ChipGroup.addTag(tag: String, onRemoved: (View) -> Unit = {}) {
     }.root)
 }
 
+fun View.makeVisible(){
+    this.visibility = View.VISIBLE
+}
+fun View.makeGone(){
+    this.visibility=View.GONE
+}

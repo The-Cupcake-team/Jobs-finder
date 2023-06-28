@@ -13,9 +13,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"
-        tools:context=".comment.CommentsFragment">
+        android:layout_height="match_parent">
+
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tool_bar"
@@ -27,13 +26,27 @@
             app:navigationIcon="@drawable/ic_back">
 
             <TextView
+                android:id="@+id/commentNumber"
                 style="@style/TextStyle.Headline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/comments_title" />
+                android:text="@{@string/comments_title + '(' + viewModel.state.comments.size() + ')'}" />
 
         </androidx.appcompat.widget.Toolbar>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/zero"
+        android:background="@color/background"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar"
+        app:layout_constraintBottom_toTopOf="@id/dividerTwo"
+        android:scrollbars="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".comment.CommentsFragment">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image_view_person_image"
@@ -45,7 +58,7 @@
             app:showWhenIf="@{viewModel.state.isSuccess}"
             app:loadImage="@{viewModel.state.post.profileImage}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tool_bar"
+            app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/circleImageView" />
 
         <TextView
@@ -104,31 +117,76 @@
             app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
             app:layout_constraintTop_toBottomOf="@+id/text_view_content_post" />
 
+        <ImageView
+            android:id="@+id/imageViewPostDetailsImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            app:layout_constraintDimensionRatio="5:4"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
+            tools:srcCompat="@drawable/test_post_image"
+            app:loadImage="@{viewModel.state.post.image}"/>
+
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/divider"
-            android:layout_marginTop="@dimen/spacing_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:showWhenIf="@{viewModel.state.isSuccess}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_view_created_at" />
+            app:layout_constraintTop_toBottomOf="@id/imageViewPostDetailsImage" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RecyclerViewComments"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/zero"
+            android:layout_height="wrap_content"
             android:paddingVertical="@dimen/spacing_normal"
+            scrollToPosition="@{viewModel.state.comments.size()-1}"
             android:clipToPadding="false"
             android:orientation="vertical"
             app:showWhenIf="@{viewModel.state.isSuccess}"
-            app:items="@{viewModel.state.posts}"
+            app:items="@{viewModel.state.comments}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider"
-            app:layout_constraintBottom_toTopOf="@id/dividerTwo"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_comment" />
+
+
+        <include
+            android:id="@+id/loading"
+            layout="@layout/loading"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:showWhenIf="@{viewModel.state.isLoading}"
+            bind:isLoading="@{viewModel.state.isLoading}" />
+
+        <include
+            android:id="@+id/error"
+            bind:error="@{viewModel.state.error}"
+            layout="@layout/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:showWhenIf="@{viewModel.state.error != null}" />
+
+     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/dividerTwo"
@@ -136,7 +194,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/view_background_comment_bar" />
+            app:layout_constraintBottom_toTopOf="@id/view_background_comment_bar"
+            />
 
         <View
             android:id="@+id/view_background_comment_bar"
@@ -162,7 +221,7 @@
             app:shapeAppearanceOverlay="@style/circleImageView" />
 
         <EditText
-            android:id="@+id/edit_text_post_comments"
+            android:id="@+id/editTextPostComments"
             style="@style/edit_text_post_comments_style"
             android:layout_width="@dimen/zero"
             android:layout_height="@dimen/search_home_height"
@@ -182,36 +241,11 @@
             android:clickable="true"
             android:focusable="true"
             android:text="@string/post"
+            android:onClick="@{() -> viewModel.createComment(editTextPostComments.getText().toString()) +  editTextPostComments.setText(@string/empty)}"
             android:textColor="@color/blue_500"
-            app:layout_constraintBottom_toBottomOf="@+id/edit_text_post_comments"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextPostComments"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/edit_text_post_comments" />
-
-
-        <include
-            android:id="@+id/loading"
-            layout="@layout/loading"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:showWhenIf="@{viewModel.state.isLoading}"
-            bind:isLoading="@{viewModel.state.isLoading}" />
-
-        <include
-            android:id="@+id/error"
-            bind:error="@{viewModel.state.error}"
-            layout="@layout/error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:showWhenIf="@{viewModel.state.error != null}" />
+            app:layout_constraintTop_toTopOf="@+id/editTextPostComments" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -19,32 +20,59 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background">
+        android:background="@color/background"
+        android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/background"
-            android:paddingHorizontal="@dimen/spacing_medium">
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_close">
+
+                <TextView
+                    android:id="@+id/next_button"
+                    style="@style/TextStyle.Headline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="@dimen/spacing_normal"
+                    android:onClick="@{() -> viewModel.onNextClicked()}"
+                    android:stateListAnimator="@null"
+                    android:text="@string/next"
+                    android:textAllCaps="false"
+                    android:textColor="@color/primary" />
+            </androidx.appcompat.widget.Toolbar>
+
 
             <TextView
                 android:id="@+id/textViewTitle"
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/title"
-                android:textColor="@color/color_text_primary"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/tool_bar" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutJobTitle"
-                style="@style/CustomTextInputLayout"
+                style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
-                app:endIconMode="clear_text"
-                android:layout_height="@dimen/edit_text_height"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_normal"
+                app:endIconMode="clear_text"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewTitle">
 
@@ -61,7 +89,8 @@
                     android:onTextChanged="@{(text,start,before,count) -> viewModel.onJobTitleChange(text)}"
                     android:padding="@dimen/spacing_medium"
                     android:textColor="@color/color_text_primary"
-                    app:bindArrayAdapter="@{viewModel.state.jobFormUiState.jobTitles}" />
+                    app:bindArrayAdapter="@{viewModel.state.jobFormUiState.jobTitles}"
+                    tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -69,60 +98,103 @@
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/company"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textInputLayoutJobTitle" />
 
-            <EditText
-                android:id="@+id/editTextCompanyName"
-                style="@style/EditTextCreateJobStyle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutCompany"
+                style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_height"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:hint="@string/add_company_name"
-                android:text="@={viewModel.state.JobFormUiState.company}"
+                android:inputType="text"
+                android:textColorHint="@color/color_text_tertiary"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:hintTextColor="@color/tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewCompany" />
+                app:layout_constraintTop_toBottomOf="@id/textViewCompany">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:fontFamily="@font/worksans_regular"
+                    android:inputType="text"
+                    android:afterTextChanged="@{(text) -> viewModel.onCompanyChange(text)}"
+                    android:text="@{viewModel.state.jobFormUiState.company}"
+                    android:textSize="@dimen/text_size_body" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textViewLocation"
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/location"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editTextCompanyName" />
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutCompany" />
 
-            <EditText
-                android:id="@+id/editTextLocation"
-                style="@style/EditTextCreateJobStyle"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutLocation"
+                style="@style/TextInputLayoutStyle"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/edit_text_height"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_normal"
-                android:hint="@string/country_city"
-                android:text="@={viewModel.state.JobFormUiState.jobLocation}"
+                android:inputType="text"
+                android:textColorHint="@color/color_text_tertiary"
+                app:boxStrokeWidth="@dimen/zero"
+                app:boxStrokeWidthFocused="@dimen/zero"
+                app:endIconDrawable="@drawable/ic_pen"
+                app:endIconMode="custom"
+                app:hintTextColor="@color/tertiary"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textViewLocation" />
+                app:layout_constraintTop_toBottomOf="@id/textViewLocation">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawablePadding="@dimen/spacing_normal"
+                    android:fontFamily="@font/worksans_regular"
+                    android:inputType="text"
+                    android:afterTextChanged="@{(text) -> viewModel.onLocationChange(text)}"
+                    android:text="@{viewModel.state.jobFormUiState.jobLocation}"
+                    android:textSize="@dimen/text_size_body" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textViewJobType"
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/job_type"
                 android:textColor="@color/color_text_primary"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editTextLocation" />
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutLocation" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupJopType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewJobType"
                 app:selectionRequired="true"
                 app:singleSelection="true">
@@ -130,9 +202,9 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipOnSite"
                     style="@style/ChipStyle"
-                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:onCheckedChanged="@{() -> viewModel.onSelectJopType(JobType.ON_SITE)}"
                     android:text="@string/on_site" />
 
@@ -160,6 +232,7 @@
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/work_type"
                 android:textColor="@color/color_text_primary"
@@ -170,6 +243,10 @@
                 android:id="@+id/chipGroupWorkType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewWorkType"
                 app:selectionRequired="true"
                 app:singleSelection="true">
@@ -177,10 +254,10 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipFullTime"
                     style="@style/ChipStyle"
-                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
+                    android:checked="true"
                     android:onCheckedChanged="@{() -> viewModel.onSelectWorkType(WorkType.FULL_TIME)}"
                     android:text="@string/full_time" />
 
@@ -226,6 +303,7 @@
                 style="@style/TextStyle.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:text="@string/experience"
                 android:textColor="@color/color_text_primary"
@@ -236,6 +314,10 @@
                 android:id="@+id/chipGroupExperience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewExperience"
                 app:selectionRequired="true"
                 app:singleSelection="true">
@@ -243,10 +325,10 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipEntry"
                     style="@style/ChipStyle"
-                    android:checked="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checkable="true"
+                    android:checked="true"
                     android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.ENTRY)}"
                     android:text="@string/entry" />
 
@@ -286,7 +368,6 @@
                     android:onCheckedChanged="@{() -> viewModel.onSelectExperienceType(ExperienceType.EXPERT)}"
                     android:text="@string/expert" />
             </com.google.android.material.chip.ChipGroup>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

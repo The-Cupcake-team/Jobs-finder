@@ -30,7 +30,7 @@
 
     <color name="hover">#0C0C0C</color>
 
-    <color name="cancel_color">@color/white</color>
+    <color name="cancel_color">@color/pure_white</color>
     <color name="chip_color_and_tab_layout_color">#303843</color>
     <color name="boarder">#14FFFFFF</color>
 

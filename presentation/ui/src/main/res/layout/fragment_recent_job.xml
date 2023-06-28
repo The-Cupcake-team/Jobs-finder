@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="adapter"
+            type="com.cupcake.ui.profile.jobs.adapter.JobsProfileVerticalAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".profile.posts.RecentPostFragment"
+        android:background="@color/background"
+        >
+
+        <TextView
+            android:id="@+id/text_view_title_recent_post"
+            style="@style/Text_view_title_profile_post_or_job"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            android:text="@string/recent_jobs"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            app:layout_constraintEnd_toStartOf="@+id/text_view_title_recent_see_all_jobs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/text_view_title_recent_see_all_jobs"
+            style="@style/Text_view_title_profile_see_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            app:drawableEndCompat="@drawable/ic__arrow_right"
+            app:layout_constraintBottom_toBottomOf="@+id/text_view_title_recent_post"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_title_recent_post" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_recent_job"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:orientation="horizontal"
+            app:adapter="@{adapter}"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_title_recent_post"
+            tools:itemCount="5"
+            tools:listitem="@layout/item_profile_saved_jobs" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

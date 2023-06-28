@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.cupcake.viewmodels.profile.post.PostProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".profile.posts.RecentPostFragment"
+        android:background="@color/background"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/back"
+            bind:layout_constraintEnd_toEndOf="parent"
+            bind:layout_constraintStart_toStartOf="parent">
+
+        </androidx.appcompat.widget.Toolbar>
+        <TextView
+        android:id="@+id/text_view_title_recent_post"
+        style="@style/Text_view_title_profile_post_or_job"
+        android:layout_width="@dimen/zero"
+            bind:layout_constraintTop_toBottomOf="@id/tool_bar"
+            bind:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:text="@string/post" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayoutPosts"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero"
+            app:isRefresh="@{viewModel.state.isRefresh}"
+            bind:layout_constraintTop_toBottomOf="@id/text_view_title_recent_post"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            bind:layout_constraintBottom_toBottomOf="parent"
+            app:onRefreshListener="@{() -> viewModel.onRefreshClicked()}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_recent_post"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:orientation="vertical"
+                app:items="@{viewModel.state.recentPostsResult}"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title_recent_post"
+                app:showWhenIf="@{viewModel.state.isSuccess}"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_profile_see_all_recent_post" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        <include
+            android:id="@+id/loading"
+            layout="@layout/loading"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:showWhenIf="@{viewModel.state.loading}"
+            bind:isLoading="@{viewModel.state.loading}" />
+
+        <include
+            android:id="@+id/error"
+            layout="@layout/error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/buttonTryAgain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:showWhenIf="@{viewModel.state.error != null}"
+            bind:error="@{viewModel.state.error}"
+            bind:layout_constraintTop_toBottomOf="@+id/tool_bar" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonTryAgain"
+            style="@style/outlineButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:onClick="@{() -> viewModel.onRetryClicked()}"
+            android:text="@string/retry"
+            app:circularflow_defaultRadius="@dimen/spacing_large"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/error"
+            app:showWhenIf="@{viewModel.state.error != null}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

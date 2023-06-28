@@ -13,7 +13,7 @@ class ValidateJobFormUseCase @Inject constructor() {
 
     private fun validateField(field: String) {
         if (field.isBlank() || field.isEmpty()) {
-            throw Throwable("This field is required")
+            throw Throwable("All fields is required")
         }
         val regex = Regex("\\d")
         if (regex.containsMatchIn(field)) {
