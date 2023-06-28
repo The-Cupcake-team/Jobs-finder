@@ -25,7 +25,7 @@ class CreateJobFormOneFragment : BaseFragment<ItemCreateJobFormOneBinding, Creat
         NavigationUI.setupWithNavController(binding.toolBar, findNavController())
     }
 
-    fun observePostEvents() {
+    private fun observePostEvents() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.event.collect { event ->

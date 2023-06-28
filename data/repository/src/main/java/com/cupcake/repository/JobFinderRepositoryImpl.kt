@@ -5,17 +5,17 @@ import com.cupcake.jobsfinder.local.daos.JobFinderDao
 import com.cupcake.jobsfinder.local.datastore.ProfileDataStore
 import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.models.Comment
-import com.cupcake.models.*
+import com.cupcake.models.Education
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
 import com.cupcake.models.Post
+import com.cupcake.models.Skill
 import com.cupcake.models.User
 import com.cupcake.models.UserProfile
 import com.cupcake.remote.JobApiService
-import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toComment
-import com.cupcake.repository.mapper.*
+import com.cupcake.repository.mapper.toEducation
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobTitle
 import com.cupcake.repository.mapper.toJobsEntity
@@ -23,12 +23,12 @@ import com.cupcake.repository.mapper.toPost
 import com.cupcake.repository.mapper.toPostsEntity
 import com.cupcake.repository.mapper.toProfile
 import com.cupcake.repository.mapper.toProfileEntity
+import com.cupcake.repository.mapper.toSkill
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import repo.JobFinderRepository
-import retrofit2.Response
 import java.io.File
 import javax.inject.Inject
 
@@ -37,73 +37,10 @@ class JobFinderRepositoryImpl @Inject constructor(
     private val api: JobApiService,
     private val jobFinderDao: JobFinderDao,
     private val profileDataStore: ProfileDataStore,
-) : JobFinderRepository {
+) : JobFinderRepository, BaseRepository() {
 
 
-    // region Job
-
-//	override suspend fun createJob(jobInfo: JobDto): Boolean {
-//		val response = api.createJob(
-//			jobInfo.jobTitleId,
-//			jobInfo.company,
-//			jobInfo.workType,
-//			jobInfo.jobLocation,
-//			jobInfo.jobType,
-//			jobInfo.jobDescription,
-//			jobInfo.jobSalary
-//			)
-//		return response.isSuccessful
-//	}
-//
-//
-//	override suspend fun getJobById(jobId: String): JobDto {
-//		return wrapResponseWithErrorHandler { api.getJobById(jobId) }
-//	}
-//
-//	//endregion
-//
-//
-//	// region Post
-//
-//
-//
-//
-//	// region Job
-//
-//
-//	//endregion
-//
-//
-//	// region Post
-//
-//
-//	override suspend fun getAllJobTitles(): List<JobTitleDto> {
-//		return wrapResponseWithErrorHandler { api.getAllJobTitle() }
-//	}
-//
-//
-//	// region Job
-//
-//
-//	//endregion
-//
-//
-//
-//	override suspend fun getAllPosts(): List<PostDto> {
-//		return wrapResponseWithErrorHandler { api.getPosts() }
-//	}
-//
-//
-//	override suspend fun getPostById(id: String): PostDto {
-//		return wrapResponseWithErrorHandler {
-//			api.getPostById(id)
-//		}
-//	}
-
-
-    //endregion
-
-
+    //region job
     override suspend fun createJob(jobInfo: Job): Boolean {
         val response = api.createJob(
             jobInfo.jobTitle.id,
@@ -148,9 +85,9 @@ class JobFinderRepositoryImpl @Inject constructor(
         val jobEntity: JobsEntity? = jobFinderDao.getJopById(id)
         return jobEntity?.toJob()
     }
+    // endregion
 
-
-
+    
     //region Post
 
 
@@ -246,24 +183,7 @@ class JobFinderRepositoryImpl @Inject constructor(
         }
     }
     // endregion
-    private suspend fun <T> wrapResponseWithErrorHandler(
-        function: suspend () -> Response<BaseResponse<T>>
-    ): T {
-        val response = function()
-        if (response.isSuccessful) {
-            val baseResponse = response.body()
-            if (baseResponse != null && baseResponse.isSuccess) {
-                Log.i("TAG", "base successful : ${baseResponse.value}")
-                return baseResponse.value!!
-            } else {
-                throw ErrorType.Server(baseResponse?.message!!)
-            }
-        } else {
-            val errorResponse = response.errorBody()?.toString()
-            throw ErrorType.Server(errorResponse ?: "Error Network")
-        }
 
-    }
 
     // region DataStore
     override suspend fun saveProfileData(avatarUri: String, jobTitle: Int) {

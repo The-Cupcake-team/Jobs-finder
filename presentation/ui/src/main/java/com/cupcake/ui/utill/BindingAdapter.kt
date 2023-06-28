@@ -21,35 +21,12 @@ import coil.load
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseAdapter
 import com.cupcake.ui.job_search.OnRangeSliderValueChangeListener
+import com.cupcake.ui.utill.SalaryFormatter.Companion.formatSalary
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.jobs.JobTitleUiState
+import com.cupcake.viewmodels.jobs.JobUiState
 import com.google.android.material.slider.RangeSlider
 
-import com.cupcake.ui.utill.SalaryFormatter.Companion.formatSalary
-import com.cupcake.viewmodels.jobs.JobUiState
-
-
-
-//@BindingAdapter("app:setNavigationIcon")
-//fun setNavigationIcon(toolbar: Toolbar, idIcon: Int?) {
-//    toolbar.setNavigationIcon(
-//        idIcon.takeIf { it != null }?.let {
-//            idIcon
-//        } ?: R.drawable.ic_close
-//    )
-//
-//}
-
-//@BindingAdapter("app:showText")
-//fun showText(textView: TextView, resId: Int?) {
-//    textView.setText(resId.takeIf { it != null } ?: R.string.page_number_one)
-//}
-//
-//@BindingAdapter("app:showButtonText")
-//fun showButtonText(buttonView: Button, resId: Int?) {
-//    buttonView.text = resId?.let(buttonView.context::getString)
-//        ?: buttonView.context.getString(R.string.next)
-//}
 
 @BindingAdapter(value = ["app:loadImage"])
 fun loadImageCoil(image: ImageView, url: String?) {

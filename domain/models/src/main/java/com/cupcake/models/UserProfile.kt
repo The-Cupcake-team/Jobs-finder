@@ -7,4 +7,4 @@ data class UserProfile (
     var jobTitles: String,
     var location: String,
     var linkWebsite: String,
-        )
+)

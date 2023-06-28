@@ -8,7 +8,15 @@ import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.jobsfinder.local.entities.PostsEntity
 import com.cupcake.jobsfinder.local.entities.ProfileEntity
 
-@Database(entities = [JobsEntity::class, PostsEntity::class , ProfileEntity::class], version = 5 , exportSchema = false )
+@Database(
+    entities = [
+        JobsEntity::class,
+        PostsEntity::class,
+        ProfileEntity::class
+    ],
+    version = 5,
+    exportSchema = false
+)
 abstract class JobFinderDatabase: RoomDatabase() {
 
     abstract fun getJobFinderDao(): JobFinderDao

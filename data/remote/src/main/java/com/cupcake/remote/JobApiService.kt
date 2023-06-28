@@ -88,18 +88,6 @@ interface JobApiService {
     suspend fun getAllJobTitle(): Response<BaseResponse<List<JobTitleDto>>>
     // endregion
 
-    // region Authentication
-    @FormUrlEncoded
-    @POST("/register")
-    suspend fun register(
-        @Field("fullName") fullName: String,
-        @Field("username") userName: String,
-        @Field("email") email: String,
-        @Field("password") password: String,
-        @Field("jobTitleId") jobTitleId: Int,
-    ): Response<BaseResponse<UserDto>>
-
-    // endregion
 
     //region Comment
 

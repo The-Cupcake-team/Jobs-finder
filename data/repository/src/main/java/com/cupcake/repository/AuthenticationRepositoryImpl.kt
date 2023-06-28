@@ -1,25 +1,18 @@
 package com.cupcake.repository
 
-import android.util.Log
 import com.cupcake.jobsfinder.local.datastore.AuthDataStore
-import com.cupcake.models.ErrorType
-import com.cupcake.models.Profile
 import com.cupcake.models.Token
 import com.cupcake.models.User
 import com.cupcake.remote.AuthApiService
-import com.cupcake.remote.JobApiService
-import com.cupcake.remote.response.base.BaseResponse
 import com.cupcake.repository.mapper.toUser
 import okhttp3.Credentials
 import repo.AuthenticationRepository
-import retrofit2.Response
 import javax.inject.Inject
 
 class AuthenticationRepositoryImpl @Inject constructor(
-    private val api: JobApiService,
     private val authService: AuthApiService,
     private val authDataStore: AuthDataStore
-) : AuthenticationRepository {
+) : AuthenticationRepository, BaseRepository() {
 
     override suspend fun register(
         fullName: String,
@@ -29,7 +22,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         jobTitleId: Int
     ): User {
         return wrapResponseWithErrorHandler {
-            api.register(
+            authService.register(
                 fullName,
                 userName,
                 email,
@@ -63,25 +56,5 @@ class AuthenticationRepositoryImpl @Inject constructor(
         authDataStore.clearAuthData()
     }
 
-    private suspend fun <T> wrapResponseWithErrorHandler(
-        function: suspend () -> Response<BaseResponse<T>>
-    ): T {
-        val response = function()
-        if (response.isSuccessful) {
-            Log.v("ameerxy", "isSuccessful")
-            val baseResponse = response.body()
-            if (baseResponse != null && baseResponse.isSuccess) {
-                Log.v("ameerxy", "baseResponse.isSuccess")
-                return baseResponse.value!!
-            } else {
-                Log.v("ameerxy", "ErrorType.isSuccess")
 
-                throw ErrorType.Server(baseResponse?.message!!)
-            }
-        } else {
-            Log.v("ameerxy", " Error Network")
-            val errorResponse = response.errorBody()?.toString()
-            throw ErrorType.Server(errorResponse ?: "Error Network")
-        }
-    }
 }
