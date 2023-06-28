@@ -29,14 +29,11 @@
 
 ## Architecture
 
-🏗️ The app follows the recommended architecture guidelines by Google, which include:
-
 - 🏢 Model-View-ViewModel (MVVM) architecture pattern.
 - 🗄️ Repository pattern for data handling.
+- Use modularization layer
 
-
-
-![Architecture](https://developer.android.com/static/topic/libraries/architecture/images/mad-arch-overview-ui.png)
+![Architecture](https://github.com/The-Cupcake-team/Jobs-finder/assets/45900975/63fe025f-c706-4db8-932d-d4dcbcb47eb7)
 
 
 ## Usage
