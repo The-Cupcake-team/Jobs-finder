@@ -42,8 +42,20 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun onLoginError(error: BaseErrorUiState) {
-        updateState { it.copy(isLoading = false) }
-        viewModelScope.launch { _event.emit(LoginEvent.ShowErrorMessage(error.errorCode)) }
+        if (error is BaseErrorUiState.UnAuthorized) {
+            updateState {
+                it.copy(
+                    isLoading = false,
+                    userNameError = error.validationResults.component1().errorMessage,
+                    isUserNameValid = error.validationResults.component1().isValid,
+                    passwordError = error.validationResults.component2().errorMessage,
+                    isPasswordValid = error.validationResults.component2().isValid,
+                )
+            }
+        } else {
+            updateState { it.copy(isLoading = false) }
+            viewModelScope.launch { _event.emit(LoginEvent.ShowErrorMessage(error.errorCode)) }
+        }
     }
 
     fun onUserNameChange(userName: String) {

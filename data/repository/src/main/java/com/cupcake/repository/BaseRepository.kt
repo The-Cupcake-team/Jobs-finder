@@ -3,6 +3,7 @@ package com.cupcake.repository
 import android.util.Log
 import com.cupcake.models.ErrorType
 import com.cupcake.remote.response.base.BaseResponse
+import org.json.JSONObject
 import retrofit2.Response
 
 abstract class BaseRepository {
@@ -20,8 +21,8 @@ abstract class BaseRepository {
                 throw ErrorType.Server(baseResponse?.message!!)
             }
         } else {
-            val errorResponse = response.errorBody()?.toString()
-            throw ErrorType.Server(errorResponse ?: "Error Network")
+            val errorResponse = JSONObject(response.errorBody()?.string()!!)
+            throw ErrorType.Server(errorResponse.getString("message") ?: "Error Network")
         }
     }
 }
