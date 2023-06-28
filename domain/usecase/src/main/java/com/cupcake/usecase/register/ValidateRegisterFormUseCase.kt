@@ -1,5 +1,6 @@
 package com.cupcake.usecase.register
 
+import com.cupcake.models.ValidationResult
 import com.cupcake.usecase.validation.ValidateConfirmedPasswordUseCase
 import com.cupcake.usecase.validation.ValidateEmailUseCase
 import com.cupcake.usecase.validation.ValidateFullNameUseCase
@@ -23,12 +24,14 @@ class ValidateRegisterFormUseCase @Inject constructor(
         jobTitle: String,
         password: String,
         confirmedPassword: String
-    ): Boolean {
-        return validateFullName(fullName).isValid &&
-                validateUsername(userName).isValid &&
-                validateJobTitle(jobTitle).isValid &&
-                validateEmail(email).isValid &&
-                validatePassword(password).isValid &&
-                validateConfirmedPassword(confirmedPassword, password).isValid
+    ): List<ValidationResult> {
+        return listOf(
+            validateFullName(fullName),
+            validateUsername(userName),
+            validateJobTitle(jobTitle),
+            validateEmail(email),
+            validatePassword(password),
+            validateConfirmedPassword(confirmedPassword, password)
+        )
     }
 }
