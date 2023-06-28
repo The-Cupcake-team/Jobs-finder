@@ -54,6 +54,7 @@ class CommentViewModel @Inject constructor(
                 isLoading = false,
                 error = null,
                 comments = comment.map { comment -> comment.toCommentUiState() })
+
         }
     }
 

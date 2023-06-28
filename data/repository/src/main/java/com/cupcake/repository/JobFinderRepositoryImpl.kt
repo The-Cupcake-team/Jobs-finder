@@ -9,6 +9,7 @@ import com.cupcake.models.Education
 import com.cupcake.models.ErrorType
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
+import com.cupcake.models.Notifications
 import com.cupcake.models.Post
 import com.cupcake.models.Skill
 import com.cupcake.models.User
@@ -58,6 +59,39 @@ class JobFinderRepositoryImpl @Inject constructor(
         Log.d("JobFinderRepository", "createJob: ${response.body()?.message}")
         return response.isSuccessful
     }
+
+    override suspend fun notifications(): List<Notifications> {
+        return listOf(
+            Notifications(
+                "ameer",
+                "test_personal_image.jpg",
+                "send a like",
+                "hi",
+                "2001/3/23",
+                "23"
+
+            ),
+            Notifications(
+                "ahmed",
+                "test_personal_image.jpg",
+                "send a like",
+                "hi",
+                "2001/3/23",
+                "23"
+
+            ),
+            Notifications(
+                "mostafa",
+                "test_personal_image.jpg",
+                "send a like",
+                "hi",
+                "2001/3/23",
+                "23"
+
+            )
+        )
+    }
+
 
     override suspend fun getJobs(): List<Job> {
         return wrapResponseWithErrorHandler { api.getJobs() }.map { it.toJob() }

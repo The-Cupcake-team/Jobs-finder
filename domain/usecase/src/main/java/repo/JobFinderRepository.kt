@@ -4,6 +4,7 @@ import com.cupcake.models.*
 import com.cupcake.models.Comment
 import com.cupcake.models.Job
 import com.cupcake.models.JobTitle
+import com.cupcake.models.Notifications
 import com.cupcake.models.Post
 import java.io.File
 
@@ -13,6 +14,8 @@ interface JobFinderRepository {
     // region Job
 
     suspend fun createJob(jobInfo: Job): Boolean
+
+    suspend fun notifications(): List<Notifications>
 
     suspend fun getJobs(): List<Job>
 
