@@ -33,7 +33,7 @@
     <string name="send">إرسال</string>
     <string name="cancel">إلغاء</string>
     <string name="Experience">الخبرة</string>
-    <string name="intermediate">مشتوى متوسط</string>
+    <string name="intermediate">مستوى متوسط</string>
 
     <string name="page_number_one">1 من 2</string>
     <string name="page_number_two">2 من 2</string>
@@ -51,7 +51,7 @@
     <string name="internship">فترة تدريب</string>
     <string name="volunteer">متطوع</string>
     <string name="temporary">مؤقت</string>
-    <string name="experience">خبير</string>
+    <string name="experience">خبرة</string>
     <string name="senior_level">مستوى عالي</string>
     <string name="description">الوصف</string>
     <string name="add_description">أضف وصفاً</string>
