@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="item"
             type="com.cupcake.viewmodels.profile.resume.skill.SkillsUiState" />
+
         <variable
             name="listener"
             type="com.cupcake.viewmodels.profile.resume.skill.SpecialSkillsInteractionListener" />
@@ -22,13 +24,12 @@
             style="@style/TextStyle.body"
             android:layout_width="0dp"
             android:layout_height="@dimen/spacing_xxlarge"
-            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_normal"
             android:background="@drawable/item_skill_and_lagnuages_background"
             android:gravity="start|center"
             android:paddingStart="@dimen/spacing_medium"
             android:text="@{item.skill}"
-            android:textColor="@color/color_text_primary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/button_delete_skill_or_language"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,11 +41,12 @@
             android:layout_width="@dimen/spacing_xxlarge"
             android:layout_height="@dimen/spacing_xxlarge"
             android:background="@drawable/item_skill_and_lagnuages_background"
-            android:padding="@dimen/spacing_small"
             android:onClick="@{()-> listener.deleteSkill(item.id)}"
+            android:padding="@dimen/spacing_small"
             android:src="@drawable/ic_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/text_view_skill_or_language_name"
-            app:layout_constraintTop_toTopOf="@+id/text_view_skill_or_language_name" />
+            app:layout_constraintTop_toTopOf="@+id/text_view_skill_or_language_name"
+            app:tint="@color/tertiary" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

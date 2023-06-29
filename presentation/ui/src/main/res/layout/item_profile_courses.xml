@@ -7,13 +7,9 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -24,7 +20,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:drawablePadding="@dimen/spacing_small"
-                app:drawableEndCompat="@drawable/ic_pen"
+                app:drawableEndCompat="@drawable/pen"
                 tools:text="Computer Science degree" />
 
             <TextView
@@ -56,6 +52,15 @@
                 android:layout_marginTop="@dimen/spacing_small"
                 android:textColor="@color/color_text_secondary"
                 tools:text="Visual design will also be a key focus area, where you will explore the principles of typography, color theory, and layout composition." />
+
+            <View
+                android:id="@+id/coursesViewAddResumeItemBorder"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/person_image_border_width"
+                android:layout_marginHorizontal="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:background="@color/color_text_tertiary"
+                app:layout_constraintTop_toBottomOf="@id/coursesViewAddResumeItem" />
+
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
