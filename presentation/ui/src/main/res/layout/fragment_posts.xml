@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -22,46 +23,25 @@
             android:layout_gravity="start"
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
+            app:loadImage="@{viewModel.state.profileResult.avatar}"
             android:onClick="@{() -> viewModel.onProfileClick()}"
-            android:src="@drawable/test_personal_image"
+            android:background="@drawable/loading_anim"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/editTextSearchInput"
-            style="@style/homeSearchBarStyle"
-            android:layout_width="@dimen/zero"
-            android:layout_height="@dimen/search_home_height"
-            android:backgroundTint="@color/background"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:onClick="@{() -> viewModel.onSearchClick()}"
+            android:id="@+id/profile_name"
+            style="@style/TextStyle.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:text="@{viewModel.state.profileResult.fullName}"
+            android:textAlignment="center"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewProfileImage"
-            app:layout_constraintEnd_toStartOf="@+id/imageViewNotifications"
             app:layout_constraintStart_toEndOf="@+id/imageViewProfileImage"
-            app:layout_constraintTop_toTopOf="@+id/imageViewProfileImage" />
-
-        <ImageView
-            android:id="@+id/imageViewNotifications"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:onClick="@{() -> viewModel.onNotificationClick()}"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextSearchInput"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextSearchInput"
-            app:srcCompat="@drawable/ic_bell"
-            app:tint="@color/secondary" />
-
-        <ImageView
-            android:id="@+id/imageViewSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextSearchInput"
-            app:layout_constraintStart_toStartOf="@+id/editTextSearchInput"
-            app:layout_constraintTop_toTopOf="@+id/editTextSearchInput"
-            app:srcCompat="@drawable/ic_search" />
+            app:layout_constraintTop_toTopOf="@+id/imageViewProfileImage"
+            tools:text="khaled eid" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout_category"

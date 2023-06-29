@@ -1,10 +1,12 @@
 package com.cupcake.viewmodels.comment
 
 import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.viewmodels.profile.ProfileUISate
 
 
 data class CommentsUiState(
     val post:PostUiState = PostUiState(),
+    val profileResult: ProfileUISate = ProfileUISate(),
     val comments:List<CommentUiState> = emptyList(),
     val isLoading: Boolean = false,
     val error:BaseErrorUiState?=null,

@@ -30,6 +30,7 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageViewPerson"
                 style="@style/personalImageStyle"
+                android:background="@drawable/loading_anim"
                 android:layout_width="@dimen/profile_image_size"
                 android:layout_height="@dimen/profile_image_size"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewCreatedAt"
@@ -116,22 +117,12 @@
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:onClick="@{() -> listener.onCommentClick(item.id)}"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewLike"
-                app:layout_constraintStart_toEndOf="@+id/textViewLikesCount"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLike"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLike"
                 app:srcCompat="@drawable/ic_comment"
                 app:tint="@color/secondary" />
 
-            <TextView
-                android:id="@+id/textViewLikesCount"
-                style="@style/TextStyle.caption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:text="@{String.valueOf(item.likes)}"
-                android:textColor="@color/color_text_tertiary"
-                app:layout_constraintBottom_toBottomOf="@+id/imageViewLike"
-                app:layout_constraintStart_toEndOf="@+id/imageViewLike"
-                app:layout_constraintTop_toTopOf="@+id/imageViewLike" />
+
 
             <ImageView
                 android:id="@+id/imageViewLike"
@@ -145,24 +136,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/tabler_thumb" />
 
-            <TextView
-                android:id="@+id/textViewCommentsCount"
-                style="@style/TextStyle.caption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:text="@string/comments_count"
-                android:textColor="@color/color_text_tertiary"
-                app:layout_constraintBottom_toBottomOf="@+id/imageViewComment"
-                app:layout_constraintStart_toEndOf="@+id/imageViewComment"
-                app:layout_constraintTop_toTopOf="@+id/imageViewComment" />
+
 
             <ImageView
                 android:id="@+id/imageViewSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_medium"
-                android:onClick="@{() -> listener.onClickShare(item.id)}"
+                android:onClick="@{() -> listener.onClickShare(item.description)}"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewComment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageViewComment"
