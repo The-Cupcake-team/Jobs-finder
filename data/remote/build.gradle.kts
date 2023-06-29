@@ -55,4 +55,5 @@ dependencies {
 
     implementation(DependencyProject.hilt)
     kapt(DependencyProject.hiltCompiler)
+    implementation(DependencyProject.dataStore)
 }

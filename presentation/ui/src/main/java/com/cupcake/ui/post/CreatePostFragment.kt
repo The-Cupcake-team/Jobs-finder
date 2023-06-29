@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.cupcake.ui.R
@@ -28,7 +29,6 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentCreatePostBinding
 import com.cupcake.viewmodels.post.CreatePostEvent
 import com.cupcake.viewmodels.post.CreatePostViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -63,13 +63,13 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         when (event) {
             CreatePostEvent.OnCameraClick -> checkPermissionAndOpenCamera()
             CreatePostEvent.OnPhotoClick -> checkPermissionAndOpenGallery()
-            CreatePostEvent.OnPostClick -> showSnackbar()
+            CreatePostEvent.OnPostClick -> navigateToHome()
         }
     }
 
-    private fun showSnackbar() {
-        Snackbar.make(requireView(), POST_CREATED, Snackbar.LENGTH_LONG)
-            .show()
+    private fun navigateToHome() {
+        Toast.makeText(context, "Post created successfully", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToPostsFragment())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

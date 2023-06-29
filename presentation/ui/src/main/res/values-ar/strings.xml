@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Comon -->
+    <string name="search">البحث</string>
+    <string name="retry">أعد المحاولة</string>
+
+
+    <!--    bottom navigation-->
+    <string name="post">نشر</string>
+    <string name="home">الرئيسية</string>
+    <string name="messages">الرسائل</string>
+    <string name="jobs">الوظائف</string>
+    <string name="my_network">شبكتي</string>
+    <string name="profile">حسابي</string>
+
+    <!--    home & post strings-->
+    <string name="follow">تابع</string>
+    <string name="followed">أتابع</string>
+    <string name="comments">تعليقات</string>
+    <string name="comment">تعليق ......</string>
+
+    <!--    job location strings-->
+    <string name="on_site">من مقر الشركة</string>
+    <string name="remote">عن بُعد</string>
+    <string name="contract_type">نوع العقد</string>
+    <string name="Location">الموقع</string>
+    <string name="work_place">نوع الوظيفة</string>
+    <string name="Salary">الراتب</string>
+    <string name="posted_on">نشر على</string>
+    <string name="apply_btn">قدم الآن</string>
+    <string name="about_company">عن الشركة</string>
+    <string name="dialog_message">لإكمال الطلب، تحتاج إلى إرسال سيرتك الذاتية</string>
+    <string name="send">إرسال</string>
+    <string name="cancel">إلغاء</string>
+    <string name="Experience">الخبرة</string>
+    <string name="intermediate">مستوى متوسط</string>
+
+    <string name="page_number_one">1 من 2</string>
+    <string name="page_number_two">2 من 2</string>
+    <string name="title">عنوان</string>
+    <string name="add_job_title">أضف عنوان وظيفي</string>
+    <string name="company">الشركة</string>
+    <string name="add_company_name">أضف اسم الشركة</string>
+    <string name="location">الموقع</string>
+    <string name="country_city">الدولة، المدينة</string>
+    <string name="job_type">طبيعة الدوام</string>
+    <string name="hybrid">مزيج</string>
+    <string name="work_type">نوع الوظيفة</string>
+    <string name="full_time">دوام كامل</string>
+    <string name="part_time">دوام جزئي</string>
+    <string name="internship">فترة تدريب</string>
+    <string name="volunteer">متطوع</string>
+    <string name="temporary">مؤقت</string>
+    <string name="experience">خبرة</string>
+    <string name="senior_level">مستوى عالي</string>
+    <string name="description">الوصف</string>
+    <string name="add_description">أضف وصفاً</string>
+    <string name="qualification">المؤهل</string>
+    <string name="skills">المهرات</string>
+    <string name="salary">الراتب</string>
+    <string name="usd_month">دولار/شهر</string>
+    <string name="public_state">عام</string>
+    <string name="post_hint">بم تفكر؟</string>
+    <string name="camera">كاميرا</string>
+    <string name="video_photo">صورة</string>
+    <string name="personal_name">بلال الخطيب</string>
+    <string name="created_at">3س</string>
+    <string name="likes_count">10.5 ألف</string>
+
+
+    <!-- Jobs Screen-->
+    <string name="popular_jobs">الوظائف الأشهر</string>
+    <string name="recommended">موصى به</string>
+    <string name="top_salary">الأعلى في الراتب</string>
+    <string name="on_your_location">في موقعك</string>
+
+
+    <!-- Login & Signup Screens-->
+    <string name="full_name">الاسم كاملاً</string>
+    <string name="last_name">الاسم الأخير</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="password">كلمة المرور</string>
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="signup">سجّل حساب</string>
+    <string name="sign_in">سجّل دخول</string>
+    <string name="already_have_account">لديك حساب بالفعل؟</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="email">البريد الإلكتروني</string>
+    <string name="more_feature">املأ المعلومات لمزيد من الميزات</string>
+    <string name="sign_up">سجّل حساب</string>
+    <string name="don_t_have_account">ليس لديك حساب؟</string>
+    <string name="sign_up_here">سجّل حساب</string>
+    <string name="job_title">العنوان الوظيفي</string>
+    <string name="education">التعليم</string>
+    <string name="experiences">الخبرات</string>
+    <string name="experiences_requirement">متطلبات الخبرات</string>
+    <string name="experience_level">مستوى الخبرة</string>
+    <string name="entry">مبتدئ</string>
+    <string name="mid_level">مستوى متوسط</string>
+    <string name="senior_leve">مستوى متقدم</string>
+    <string name="expert">خبير</string>
+    <string name="your_skills">مهاراتك</string>
+    <string name="add_skills">أضِف مهارة</string>
+    <string name="next">التالي</string>
+    <string name="discover_your_career_with_our_app">اكتشف مستقبلك المهني مع تطبيقنا</string>
+    <string name="welcome_back">مرحبًا بعودتك</string>
+
+
+    <string name="applicants">المتقدمن</string>
+    <string name="required_skills">المهارات المطلوبة</string>
+
+
+
+    <!--    Profile      -->
+    <string name="employment">التوظيف</string>
+    <string name="languages">اللغات</string>
+    <string name="course">الدورات التدريبية</string>
+    <string name="recent_post">آخر المشاركات</string>
+    <string name="see_all">عرض الكل</string>
+    <string name="saved_post">المنشورات المحفوظة</string>
+    <string name="recent_jobs">آخر الوظائف</string>
+    <string name="saved_jobs">الوظائف المحفوظة</string>
+    <string name="no_notification_yet">لا إشعارات بَعد</string>
+    <string name="offline">أنت حاليا غير متصل</string>
+    <string name="notification">الإشعارات</string>
+    <string name="not_send_tap_to_try_again">لم يتم الإرسال، إضغط لإعادة المحاولة</string>
+    <string name="done">تم</string>
+    <string name="clear">إعادة تعيين</string>
+    <string name="noResultFound">لم يتم العثور على نتائج</string>
+    <string name="AddLanguage">أضف لغة</string>
+    <string name="edite">تعديل</string>
+    <string name="add_education">أضف شهادة</string>
+    <string name="add_education_here">أضف شهادة</string>
+    <string name="school">المدرسة</string>
+    <string name="add_school_here">أضف المدرسة هنا</string>
+    <string name="city">المدينة</string>
+    <string name="add_city_here">أضف مدينة</string>
+    <string name="start_date">تاريخ البدء</string>
+    <string name="end_date">تاريخ الإنتهاء</string>
+    <string name="position">المسمى الوظيفي</string>
+    <string name="certificate_link">رابط الشهادة</string>
+    <string name="about_me">نبذة عنّي</string>
+    <string name="talk_about_your_self">تحدث عن نفسك</string>
+
+
+
+    <!--  something else-->
+    <string name="save">حفظ</string>
+    <string name="share">مشاركة</string>
+    <string name="sharePost">مرحبًا يا صديقي، مشاركتك رائعة جدًا! اختر تطبيق للمشاركة</string>
+    <string name="saved_successfully">تم الحفظ بنجاح</string>
+    <string name="saved_canceled">تم إلغاء الحفظ</string>
+    <string name="comments_title">تعليقات</string>
+    <string name="resizable_text_read_more">إقرأ المزيد..</string>
+    <string name="resizable_text_read_less">عرض أقل</string>
+</resources>

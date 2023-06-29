@@ -1,10 +1,14 @@
 package com.cupcake.viewmodels.posts
 
 import androidx.lifecycle.viewModelScope
+import com.cupcake.models.JobTitle
 import com.cupcake.models.Post
+import com.cupcake.models.UserProfile
 import com.cupcake.usecase.GetPostsUseCase
+import com.cupcake.usecase.ProfileUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
+import com.cupcake.viewmodels.profile.ProfileUISate
 import com.cupcake.viewmodels.utill.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -16,6 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PublicPostsViewModel @Inject constructor(
     private val getPostsUseCase: GetPostsUseCase,
+    private val profileUseCase: ProfileUseCase,
 ) : BaseViewModel<PostsUIState>(PostsUIState()), SpecialPostInteractionListener {
 
     private val _postEvent = MutableSharedFlow<Event<SpecialPostsEvent>>()
@@ -48,18 +53,24 @@ class PublicPostsViewModel @Inject constructor(
 
     private fun onGetPostsFailure(error: BaseErrorUiState) {
         _state.update {
-            it.copy(isLoading = false, isError = true, error = error, isSuccess = false, isRefresh = false)
+            it.copy(
+                isLoading = false,
+                isError = true,
+                error = error,
+                isSuccess = false,
+                isRefresh = false
+            )
         }
     }
 
 
-    fun onRetryClicked(){
-        _state.update {it.copy(error = null, isLoading = true, isSuccess = false) }
+    fun onRetryClicked() {
+        _state.update { it.copy(error = null, isLoading = true, isSuccess = false) }
         getPosts()
     }
 
-    fun onRefreshClicked(){
-        _state.update {it.copy(error = null, isRefresh = true,isSuccess = false) }
+    fun onRefreshClicked() {
+        _state.update { it.copy(error = null, isRefresh = true, isSuccess = false) }
         getPosts()
     }
 
@@ -74,6 +85,8 @@ class PublicPostsViewModel @Inject constructor(
             profileImage = profileImage
         )
     }
+
+
 
     override fun onCommentClick(id: String) {
         viewModelScope.launch {

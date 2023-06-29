@@ -27,8 +27,8 @@ interface JobApiService {
 
     // region Job
 
-    @POST("/user/job")
     @FormUrlEncoded
+    @POST("/user/job")
     suspend fun createJob(
         @Field("jobTitleId") jobTitleId: Int?,
         @Field("company") company: String?,
@@ -41,16 +41,7 @@ interface JobApiService {
         @Field("experience") experience: String?,
         @Field("education") education: String?,
         @Field("skills") skills: String?,
-    ): Response<BaseResponse<Nothing>>
-
-
-    @GET("/public/posts")
-    suspend fun getPosts(): Response<BaseResponse<List<PostsDto>>>
-
-    @POST("/jobs")
-    suspend fun createJob(@Body job: JobDto): JobDto
-
-    // region Job
+    ): Response<BaseResponse<Unit>>
 
     @GET("/public/jobs")
     suspend fun getJobs(): Response<BaseResponse<List<JobDto>>>
@@ -59,6 +50,10 @@ interface JobApiService {
     suspend fun getJobById(
         @Path("id") jobId: String,
     ): Response<BaseResponse<JobDto>>
+
+    @GET("/user/Jobs")
+    suspend fun getRecentJobs(): Response<BaseResponse<List<JobDto>>>
+
 
     //endregion
 
@@ -71,6 +66,8 @@ interface JobApiService {
         @Part image: MultipartBody.Part?
     ): Response<BaseResponse<PostsDto>>
 
+    @GET("/public/posts")
+    suspend fun getPosts(): Response<BaseResponse<List<PostsDto>>>
 
 
     @GET("/public/post/{postId}")
@@ -78,10 +75,12 @@ interface JobApiService {
         @Path("postId") postId: String,
     ): Response<BaseResponse<PostsDto>>
 
-    @GET("/posts")
-    suspend fun getAllPosts(): List<PostDto>
+    @GET("/user/posts")
+    suspend fun getAllUserPost(): Response<BaseResponse<List<PostsDto>>>
+
 
     //endregion
+
 
     // region JobTitle
     @GET("/jobTitles")
@@ -101,32 +100,21 @@ interface JobApiService {
     suspend fun createComment(
         @Path("postId") postId: String,
         @Field("content") content: String,
-    ): Response<BaseResponse<*>>
+    ): Response<BaseResponse<Unit>>
 
-//endregion
+    //endregion
 
 
     // region Profile
 
-
-    // endregion
-
-//    /user/posts
-
-    @GET("/user/posts")
-    suspend fun getAllUserPost():Response<BaseResponse<List<PostsDto>>>
-
-    @GET("/user/Jobs")
-    suspend fun getRecentJobs():Response<BaseResponse<List<JobDto>>>
-
     @GET("/profile/educations")
-    suspend fun getAllEducation():Response<BaseResponse<List<EducationDto>>>
+    suspend fun getAllEducation(): Response<BaseResponse<List<EducationDto>>>
 
     @GET("/profile/skills")
-    suspend fun getAllSkills():Response<BaseResponse<List<SkillsDto>>>
+    suspend fun getAllSkills(): Response<BaseResponse<List<SkillsDto>>>
 
     @DELETE("/profile/skill/{id}")
-    suspend fun deleteSkill(@Path ("id") skillId : String):Response<BaseResponse<Unit>>
+    suspend fun deleteSkill(@Path("id") skillId: String): Response<BaseResponse<Unit>>
 
 
     @FormUrlEncoded
@@ -142,7 +130,7 @@ interface JobApiService {
         @Field("city") city: String,
         @Field("startDate") startDate: String,
         @Field("endDate") endDate: String
-    ):Response<BaseResponse<Nothing>>
+    ): Response<BaseResponse<Nothing>>
 
     @FormUrlEncoded
     @PUT("/profile/education/{educationId}")
@@ -155,8 +143,6 @@ interface JobApiService {
         @Field("endDate") endDate: String
     ):Response<BaseResponse<Unit>>
 
-
-
-
+    // endregion
 
 }
