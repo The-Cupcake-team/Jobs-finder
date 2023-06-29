@@ -17,6 +17,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -82,7 +85,7 @@ class CommentViewModel @Inject constructor(
     fun createComment(content: String) {
         val newComment = CommentsUiState.CommentUiState(
             content = content,
-            createAt = state.value.post.createdAt,
+            createAt = setTime(),
             commentAuthor = state.value.profileResult.fullName,
             jobTitle = state.value.profileResult.JobTitle,
             profileImage = state.value.profileResult.avatar,
@@ -105,7 +108,7 @@ class CommentViewModel @Inject constructor(
         _state.update { currentState ->
             val updatedComments = currentState.comments.map { existingComment ->
                 if (existingComment.commentLoading) {
-                    existingComment.copy(commentLoading = false, commentSuccess = success, commentError = false)
+                    existingComment.copy(commentLoading = false, commentSuccess = true, commentError = false)
                 } else {
                     existingComment
                 }
@@ -202,6 +205,12 @@ class CommentViewModel @Inject constructor(
             }
             currentState.copy(comments = updateComments)
         }
+    }
+
+    private fun setTime(): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault())
+        val currentDate = Date()
+        return dateFormat.format(currentDate)
     }
 
 
