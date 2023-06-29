@@ -21,6 +21,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.cupcake.ui.R
@@ -61,15 +62,23 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
 
     private fun handlePostEvent(event: CreatePostEvent) {
         when (event) {
-            CreatePostEvent.OnCameraClick -> checkPermissionAndOpenCamera()
-            CreatePostEvent.OnPhotoClick -> checkPermissionAndOpenGallery()
-            CreatePostEvent.OnPostClick -> showSnackbar()
+            is CreatePostEvent.OnCameraClick -> checkPermissionAndOpenCamera()
+            is CreatePostEvent.OnPhotoClick -> checkPermissionAndOpenGallery()
+            is CreatePostEvent.OnPostClick -> handelPostClick()
         }
     }
 
-    private fun showSnackbar() {
-        Snackbar.make(requireView(), POST_CREATED, Snackbar.LENGTH_LONG)
-            .show()
+    private fun handelPostClick() {
+        showSnackBar()
+        navigateToDirection(CreatePostFragmentDirections.actionCreatePostFragmentToPostsFragment())
+    }
+
+    private fun showSnackBar() {
+        Snackbar.make(requireView(), POST_CREATED, Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun navigateToDirection(directions: NavDirections) {
+        findNavController().navigate(directions)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

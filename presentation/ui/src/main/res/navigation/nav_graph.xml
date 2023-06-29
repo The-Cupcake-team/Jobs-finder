@@ -114,7 +114,17 @@
     <fragment
         android:id="@+id/createPostFragment"
         android:name="com.cupcake.ui.post.CreatePostFragment"
-        tools:layout="@layout/fragment_create_post" />
+        tools:layout="@layout/fragment_create_post" >
+        <action
+            android:id="@+id/action_createPostFragment_to_postsFragment"
+            app:destination="@id/postsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_createPostFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment"
+            app:popUpTo="@id/postsFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/jobDetailsFragment"
