@@ -29,7 +29,6 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentCreatePostBinding
 import com.cupcake.viewmodels.post.CreatePostEvent
 import com.cupcake.viewmodels.post.CreatePostViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -62,23 +61,15 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
 
     private fun handlePostEvent(event: CreatePostEvent) {
         when (event) {
-            is CreatePostEvent.OnCameraClick -> checkPermissionAndOpenCamera()
-            is CreatePostEvent.OnPhotoClick -> checkPermissionAndOpenGallery()
-            is CreatePostEvent.OnPostClick -> handelPostClick()
+            CreatePostEvent.OnCameraClick -> checkPermissionAndOpenCamera()
+            CreatePostEvent.OnPhotoClick -> checkPermissionAndOpenGallery()
+            CreatePostEvent.OnPostClick -> navigateToHome()
         }
     }
 
-    private fun handelPostClick() {
-        showSnackBar()
-        navigateToDirection(CreatePostFragmentDirections.actionCreatePostFragmentToPostsFragment())
-    }
-
-    private fun showSnackBar() {
-        Snackbar.make(requireView(), POST_CREATED, Snackbar.LENGTH_LONG).show()
-    }
-
-    private fun navigateToDirection(directions: NavDirections) {
-        findNavController().navigate(directions)
+    private fun navigateToHome() {
+        Toast.makeText(context, "Post created successfully", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToPostsFragment())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

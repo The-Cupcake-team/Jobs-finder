@@ -55,7 +55,7 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
-            app:showWhenIf="@{viewModel.state.isSuccess}"
+            app:showWhenIf="@{viewModel.state.error == null}"
             app:loadImage="@{viewModel.state.post.profileImage}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -94,15 +94,19 @@
             android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_medium"
             android:layout_marginEnd="@dimen/spacing_medium"
             android:ellipsize="end"
             android:maxLines="3"
-            app:showWhenIf="@{viewModel.state.isSuccess}"
             android:text="@{viewModel.state.post.content}"
             android:textColor="@color/color_text_primary"
+            app:layout_constraintBottom_toTopOf="@+id/divider"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/text_view_person_job_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_person_job_title" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_person_job_title"
+            app:layout_constraintVertical_bias="0.0"
+            app:showWhenIf="@{viewModel.state.isSuccess}" />
 
         <TextView
             android:id="@+id/text_view_created_at"
@@ -241,6 +245,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="@string/post"
+            android:enabled="@{editTextPostComments.text.toString().trim().length() > 0}"
             android:onClick="@{() -> viewModel.createComment(editTextPostComments.getText().toString()) +  editTextPostComments.setText(@string/empty)}"
             android:textColor="@color/blue_500"
             app:layout_constraintBottom_toBottomOf="@+id/editTextPostComments"

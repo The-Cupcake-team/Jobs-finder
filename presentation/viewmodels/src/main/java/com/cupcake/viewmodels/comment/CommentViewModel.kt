@@ -1,24 +1,40 @@
 package com.cupcake.viewmodels.comment
 
 
+import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Comment
 import com.cupcake.models.Post
+import com.cupcake.models.UserProfile
 import com.cupcake.usecase.CreateCommentUseCase
 import com.cupcake.usecase.GetAllCommentsUseCase
 import com.cupcake.usecase.GetPostByIdUseCase
+import com.cupcake.usecase.ProfileUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
+import com.cupcake.viewmodels.profile.ProfileUISate
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
 class CommentViewModel @Inject constructor(
     private val getPostById: GetPostByIdUseCase,
     private val commentsUseCase: GetAllCommentsUseCase,
-    private val createCommentUseCase: CreateCommentUseCase
+    private val createCommentUseCase: CreateCommentUseCase,
+    private val profileUseCase: ProfileUseCase
 ) : BaseViewModel<CommentsUiState>(CommentsUiState()), CommentInteractionListener {
 
+    init {
+        viewModelScope.launch {
+            getProfileData()
+        }
+    }
 
     //region getPost
     fun getPost(id: String) {
@@ -68,12 +84,11 @@ class CommentViewModel @Inject constructor(
     //region createComment
     fun createComment(content: String) {
         val newComment = CommentsUiState.CommentUiState(
-            postId = state.value.post.id,
             content = content,
-            createAt = state.value.post.createdAt,
-            commentAuthor = state.value.post.creatorName,
-            jobTitle = state.value.post.jobTitle,
-            profileImage = state.value.post.profileImage,
+            createAt = setTime(),
+            commentAuthor = state.value.profileResult.fullName,
+            jobTitle = state.value.profileResult.JobTitle,
+            profileImage = state.value.profileResult.avatar,
             commentLoading = true,
             commentSuccess = false
         )
@@ -93,7 +108,7 @@ class CommentViewModel @Inject constructor(
         _state.update { currentState ->
             val updatedComments = currentState.comments.map { existingComment ->
                 if (existingComment.commentLoading) {
-                    existingComment.copy(commentLoading = false, commentSuccess = success, commentError = false)
+                    existingComment.copy(commentLoading = false, commentSuccess = true, commentError = false)
                 } else {
                     existingComment
                 }
@@ -133,6 +148,25 @@ class CommentViewModel @Inject constructor(
     }
 //endregion
 
+    private suspend fun getProfileData() {
+        withContext(Dispatchers.IO) {
+            val profile = profileUseCase().toProfileUISate()
+            updateState {
+                it.copy(
+                    profileResult = profile,
+                )
+            }
+        }
+    }
+    private fun UserProfile.toProfileUISate(): ProfileUISate {
+        return ProfileUISate(
+            avatar = avatar,
+            linkWebsite = linkWebsite,
+            location = location,
+            fullName = fullName,
+            JobTitle = jobTitles,
+        )
+    }
 
     private fun Post.toUiPost(): CommentsUiState.PostUiState {
         return CommentsUiState.PostUiState(
@@ -171,6 +205,12 @@ class CommentViewModel @Inject constructor(
             }
             currentState.copy(comments = updateComments)
         }
+    }
+
+    private fun setTime(): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSS", Locale.getDefault())
+        val currentDate = Date()
+        return dateFormat.format(currentDate)
     }
 
 
