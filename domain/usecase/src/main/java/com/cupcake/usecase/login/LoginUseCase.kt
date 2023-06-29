@@ -18,7 +18,7 @@ class LoginUseCase @Inject constructor(
         }
 
         val user = authenticationRepository.login(userName, password)
-        authenticationRepository.saveAuthData(user.token)
+        authenticationRepository.saveAuthData(user.token, true)
         jobsFinderRepository.insertProfile(user)
         jobsFinderRepository.saveProfileData(user.profile.avatar, user.profile.jobTitle.id)
     }
