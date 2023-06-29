@@ -33,7 +33,7 @@ class ProfileResumeViewModel @Inject constructor(
 
     }
 
-    private fun getAllEducation() {
+    fun getAllEducation() {
         tryToExecute(
             { resumeUseCase.getAllEducations() },
             ::onGetEducationsSuccess,

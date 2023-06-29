@@ -181,6 +181,7 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
         super.onResume()
         handelResumeEvent()
         loadEducationData()
+        viewModel.getAllEducation()
         loadSkillsData()
         crateSkill()
     }
