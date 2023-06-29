@@ -19,6 +19,7 @@ import com.cupcake.repository.mapper.toComment
 import com.cupcake.repository.mapper.toEducation
 import com.cupcake.repository.mapper.toJob
 import com.cupcake.repository.mapper.toJobTitle
+import com.cupcake.repository.mapper.toJobTitleEntity
 import com.cupcake.repository.mapper.toJobsEntity
 import com.cupcake.repository.mapper.toPost
 import com.cupcake.repository.mapper.toPostsEntity
@@ -98,7 +99,16 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getAllJobTitles(): List<JobTitle> {
-        return wrapResponseWithErrorHandler { api.getAllJobTitle() }.map { it.toJobTitle() }
+        return jobFinderDao.getJobTitles().map { it.toJobTitle() }
+    }
+
+    override suspend fun refreshJobTitles() {
+        wrapResponseWithErrorHandler { api.getAllJobTitle() }
+            .map { jobFinderDao.insertJobTitles(it.toJobTitleEntity()) }
+    }
+
+    override suspend fun getUserJobTitleId(): Int? {
+        return profileDataStore.getJobTitle()
     }
 
     override suspend fun getJobById(jobId: String): Job {
@@ -121,7 +131,7 @@ class JobFinderRepositoryImpl @Inject constructor(
     }
     // endregion
 
-    
+
     //region Post
 
 

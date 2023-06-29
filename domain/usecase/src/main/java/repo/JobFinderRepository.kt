@@ -21,6 +21,10 @@ interface JobFinderRepository {
 
     suspend fun getAllJobTitles(): List<JobTitle>
 
+    suspend fun refreshJobTitles()
+
+    suspend fun getUserJobTitleId(): Int?
+
     suspend fun getJobById(jobId: String): Job
 
     suspend fun insertJob(job: Job)

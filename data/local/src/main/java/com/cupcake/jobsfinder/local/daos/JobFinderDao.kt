@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.cupcake.jobsfinder.local.entities.JobTitleEntity
 import com.cupcake.jobsfinder.local.entities.JobsEntity
 import com.cupcake.jobsfinder.local.entities.PostsEntity
 import com.cupcake.jobsfinder.local.entities.ProfileEntity
@@ -41,5 +42,12 @@ interface JobFinderDao {
 
     @Query("SELECT * FROM profile_table")
     fun getProfile(): ProfileEntity
+
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertJobTitles(jobsTitle: JobTitleEntity)
+
+    @Query("SELECT * FROM job_titles_table")
+    fun getJobTitles(): List<JobTitleEntity>
 
 }
