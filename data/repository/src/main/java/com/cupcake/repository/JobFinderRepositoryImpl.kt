@@ -202,6 +202,10 @@ class JobFinderRepositoryImpl @Inject constructor(
 
     }
 
+    override suspend fun createSkill(skill:String) {
+        wrapResponseWithErrorHandler { api.createSkill(skill) }
+    }
+
 
     override suspend fun updateEducation(education: Education) {
         wrapResponseWithErrorHandler {

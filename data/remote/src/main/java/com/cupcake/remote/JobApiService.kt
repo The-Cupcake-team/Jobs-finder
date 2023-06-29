@@ -130,6 +130,11 @@ interface JobApiService {
 
 
     @FormUrlEncoded
+    @POST("/profile/skill")
+    suspend  fun createSkill(@Field("skill") skill: String) :Response<BaseResponse<Unit>>
+
+
+    @FormUrlEncoded
     @POST("/profile/education")
     suspend fun addEducation(
         @Field("degree") degree: String,
@@ -149,6 +154,7 @@ interface JobApiService {
         @Field("startDate") startDate: String,
         @Field("endDate") endDate: String
     ):Response<BaseResponse<Nothing>>
+
 
 
 

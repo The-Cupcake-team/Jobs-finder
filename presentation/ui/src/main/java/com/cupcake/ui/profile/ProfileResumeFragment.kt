@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.transition.AutoTransition
 import android.transition.TransitionManager
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -59,10 +60,13 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
     }
 
     private fun loadSkillsData() {
+
         lifecycleScope.launch(Dispatchers.Main) {
             viewModel.state.collect { state ->
                 adapterSkills.setData(state.sillsUiState)
+
             }
+
         }
     }
 
@@ -139,6 +143,17 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
                                 resumeEvent.fromAddButton, resumeEvent.education
                             )
                         )
+                    }
+
+                    is ResumeEvent.AddEducation -> {
+                        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEducationFragment(
+                            resumeEvent.fromAddButton,resumeEvent.education
+                        ))
+                    }
+
+                    ResumeEvent.CrateSkill -> {
+
+
                     }
                 }
             }
