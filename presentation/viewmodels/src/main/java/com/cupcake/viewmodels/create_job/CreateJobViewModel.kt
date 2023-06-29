@@ -33,7 +33,7 @@ class CreateJobViewModel @Inject constructor(
     private var searchJobTitle: kotlinx.coroutines.Job? = null
     fun createJob() {
         _state.update { it.copy(isLoading = true) }
-        tryToExecute(
+        tryToExecuteDebounced(
             {
                 createJob(
                     Job(

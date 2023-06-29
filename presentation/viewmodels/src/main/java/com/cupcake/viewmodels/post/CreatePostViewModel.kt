@@ -38,6 +38,9 @@ class CreatePostViewModel @Inject constructor(
 
     private fun onSuccessCreatePost(post: Post) {
         updateState { it.copy(isLoading = false, post = post.toUiPost(), isPostCreated = true) }
+        viewModelScope.launch {
+            _postEvent.emit(Event(CreatePostEvent.OnPostClick))
+        }
     }
 
     private fun onCreatePostError(errorMessage: BaseErrorUiState) {
@@ -63,13 +66,6 @@ class CreatePostViewModel @Inject constructor(
     override fun onRemoveImageClick() {
         updateState { it.copy(postImage = null, isImageSelectionCanceled = false) }
     }
-
-    override fun onPostClick() {
-        viewModelScope.launch {
-            _postEvent.emit(Event(CreatePostEvent.OnPostClick))
-        }
-    }
-
     fun handleImageResult(imageData: File?) {
         updateState { it.copy(postImage = imageData, isImageSelectionCanceled = true) }
     }

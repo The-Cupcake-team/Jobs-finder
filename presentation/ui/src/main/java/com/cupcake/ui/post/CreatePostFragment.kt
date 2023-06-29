@@ -28,7 +28,6 @@ import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentCreatePostBinding
 import com.cupcake.viewmodels.post.CreatePostEvent
 import com.cupcake.viewmodels.post.CreatePostViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
@@ -63,13 +62,13 @@ class CreatePostFragment : BaseFragment<FragmentCreatePostBinding, CreatePostVie
         when (event) {
             CreatePostEvent.OnCameraClick -> checkPermissionAndOpenCamera()
             CreatePostEvent.OnPhotoClick -> checkPermissionAndOpenGallery()
-            CreatePostEvent.OnPostClick -> showSnackbar()
+            CreatePostEvent.OnPostClick -> navigateToHome()
         }
     }
 
-    private fun showSnackbar() {
-        Snackbar.make(requireView(), POST_CREATED, Snackbar.LENGTH_LONG)
-            .show()
+    private fun navigateToHome() {
+        Toast.makeText(context, "Post created successfully", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(CreatePostFragmentDirections.actionCreatePostFragmentToPostsFragment())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

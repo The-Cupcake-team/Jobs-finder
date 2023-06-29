@@ -6,5 +6,4 @@ interface CreatePostInteractionListener : BaseInteractionListener {
     fun onCameraClick()
     fun onPhotoClick()
     fun onRemoveImageClick()
-    fun onPostClick()
 }
