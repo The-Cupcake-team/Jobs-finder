@@ -23,10 +23,10 @@ abstract class BaseRepository {
                     throw ErrorType.Server(baseResponse?.message!!)
                 }
             } else {
-                val errorResponse = response.errorBody()?.toString()
-                throw ErrorType.Server("Network Error")
+                val errorResponse = JSONObject(response.errorBody()?.string()!!)
+                throw ErrorType.Server(errorResponse.getString("message") ?: "Network Error")
             }
-        }catch (e:UnknownHostException){
+        } catch (e: UnknownHostException) {
             throw ErrorType.Network("Network Error")
         }
     }
