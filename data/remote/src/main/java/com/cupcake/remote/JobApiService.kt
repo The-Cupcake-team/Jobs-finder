@@ -153,7 +153,7 @@ interface JobApiService {
         @Field("city") city: String,
         @Field("startDate") startDate: String,
         @Field("endDate") endDate: String
-    ):Response<BaseResponse<Nothing>>
+    ):Response<BaseResponse<Unit>>
 
 
 

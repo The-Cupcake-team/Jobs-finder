@@ -82,6 +82,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="@dimen/spacing_medium"
                         android:layout_marginVertical="@dimen/spacing_medium"
+                        android:onClick="@{()-> viewModel.addEducation()}"
                         android:src="@drawable/add_education"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -144,18 +145,35 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/skillsViewAddResumeItemBorder"
                         tools:listitem="@layout/item_skills_profile" />
+                    <EditText
+                        android:id="@+id/add_Skill_editeText"
+                        style="@style/TextStyle.caption"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="@dimen/edite_text_height"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:background="@drawable/edite_radius"
+                        android:hint="@string/AddSkill"
+                        android:paddingHorizontal="@dimen/spacing_medium"
+                        android:paddingVertical="@dimen/spacing_tiny"
+                        android:visibility="gone"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/add_skill_button"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/skills_RecyclerView" />
 
                     <ImageView
-                        android:id="@+id/skillsViewAdd"
+                        android:id="@+id/add_skill_button"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="@dimen/spacing_medium"
                         android:layout_marginVertical="@dimen/spacing_medium"
-                        android:src="@drawable/add_skills"
+                        android:src="@drawable/add_languages"
                         android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/skills_RecyclerView" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/skills_RecyclerView"  />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -215,8 +233,8 @@
 
                     <ImageView
                         android:id="@+id/employmentViewAdd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_width="138dp"
+                        android:layout_height="35dp"
                         android:layout_marginHorizontal="@dimen/spacing_medium"
                         android:layout_marginVertical="@dimen/spacing_medium"
                         android:src="@drawable/add_employment"
@@ -228,160 +246,6 @@
             </androidx.cardview.widget.CardView>
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/languages_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_normal"
-                app:cardBackgroundColor="@color/cards"
-                app:cardCornerRadius="@dimen/spacing_normal"
-                app:cardElevation="@dimen/zero"
-                app:contentPadding="@dimen/spacing_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/employment_card">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/languagesViewResume"
-                        style="@style/TextStyle.Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/spacing_normal"
-                        android:text="@string/languages"
-                        android:textColor="@color/color_text_primary"
-                        app:drawableEndCompat="@drawable/add"
-                        app:drawableStartCompat="@drawable/languages"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/languagesViewAddResumeItemBorder"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/person_image_border_width"
-                        android:layout_marginHorizontal="@dimen/spacing_medium"
-                        android:layout_marginTop="@dimen/spacing_medium"
-                        android:background="@color/color_text_tertiary"
-                        android:visibility="gone"
-                        app:layout_constraintTop_toBottomOf="@id/languagesViewResume" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/languages_RecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_normal"
-                        android:paddingHorizontal="@dimen/spacing_medium"
-                        android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/languagesViewAddResumeItemBorder"
-                        tools:listitem="@layout/item_skills_profile" />
-
-                    <EditText
-                        style="@style/TextStyle.caption"
-                        android:layout_width="@dimen/zero"
-                        android:layout_height="@dimen/edite_text_height"
-                        android:layout_marginEnd="@dimen/spacing_medium"
-                        android:background="@drawable/edite_radius"
-                        android:hint="@string/AddLanguage"
-                        android:paddingHorizontal="@dimen/spacing_medium"
-                        android:paddingVertical="@dimen/spacing_tiny"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/add_language"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/languages_RecyclerView" />
-
-                    <ImageView
-                        android:id="@+id/add_language"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="@dimen/spacing_medium"
-                        android:layout_marginVertical="@dimen/spacing_medium"
-                        android:src="@drawable/add_languages"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/languages_RecyclerView" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/courses_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_normal"
-                app:cardBackgroundColor="@color/cards"
-                app:cardCornerRadius="@dimen/spacing_normal"
-                app:cardElevation="@dimen/zero"
-                app:contentPadding="@dimen/spacing_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/languages_card">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/coursesViewResume"
-                        style="@style/TextStyle.Title"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/spacing_normal"
-                        android:text="@string/course"
-                        android:textColor="@color/color_text_primary"
-                        app:drawableEndCompat="@drawable/add"
-                        app:drawableStartCompat="@drawable/courses"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/coursesViewAddResumeItem"
-                        android:layout_width="@dimen/spacing_large"
-                        android:layout_height="@dimen/spacing_large"
-                        android:src="@drawable/add"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <View
-                        android:id="@+id/coursesViewAddResumeItemBorder"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/person_image_border_width"
-                        android:layout_marginHorizontal="@dimen/spacing_medium"
-                        android:layout_marginTop="@dimen/spacing_medium"
-                        android:background="@color/color_text_tertiary"
-                        android:visibility="gone"
-                        app:layout_constraintTop_toBottomOf="@id/coursesViewAddResumeItem" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/courses_RecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_normal"
-                        android:visibility="gone"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/coursesViewAddResumeItemBorder"
-                        tools:listitem="@layout/item_profile_courses" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="@dimen/spacing_medium"
-                        android:layout_marginVertical="@dimen/spacing_medium"
-                        android:src="@drawable/add_course"
-                        android:visibility="gone"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/courses_RecyclerView" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

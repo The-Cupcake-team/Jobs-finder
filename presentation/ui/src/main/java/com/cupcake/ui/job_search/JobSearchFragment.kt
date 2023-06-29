@@ -96,7 +96,7 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
     }
 
     private fun handleJobCardClick(id: String) {
-        navigateToDirection(JobSearchFragmentDirections.actionJobSearchFragmentToJobDetailsFragment(id))
+//        navigateToDirection(JobSearchFragmentDirections.actionJobSearchFragmentToJobDetailsFragment(id))
     }
 
     private fun navigateToDirection(directions: NavDirections) {

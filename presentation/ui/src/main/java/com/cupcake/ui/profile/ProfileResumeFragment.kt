@@ -7,6 +7,7 @@ import android.transition.TransitionManager
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -21,6 +22,7 @@ import com.cupcake.viewmodels.profile.ProfileResumeViewModel
 import com.cupcake.viewmodels.profile.ResumeEvent
 import com.cupcake.viewmodels.profile.resume.skill.SkillsUiState
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, ProfileResumeViewModel>(
@@ -30,14 +32,14 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
     override val LOG_TAG: String = "ResumeFragment"
     private lateinit var adapterEducation: EducationAdapter
     private lateinit var adapterSkills: SkillsAdapter
-    private lateinit var sillsUiState: MutableList<SkillsUiState>
+        private lateinit var jobsEventJob: Job
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         inti()
         setupEducationsRecyclerView()
         setupSkillsRecyclerView()
-        handelResumeEvent()
     }
 
     private fun setupEducationsRecyclerView() {
@@ -76,6 +78,7 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
         add: ImageView,
         textView: TextView,
         drawableStart: Drawable?,
+        addEditeText: EditText?,
         loadData: () -> Unit
     ) {
         if (recyclerView.visibility == View.GONE) {
@@ -83,6 +86,7 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
             add.makeVisible()
             recyclerView.makeVisible()
             divider.makeVisible()
+            addEditeText?.makeVisible()
             loadData()
             textView.setCompoundDrawablesWithIntrinsicBounds(
                 drawableStart,
@@ -94,6 +98,8 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
             recyclerView.makeGone()
             divider.makeGone()
             add.makeGone()
+            addEditeText?.makeGone()
+
             textView.setCompoundDrawablesWithIntrinsicBounds(
                 drawableStart,
                 null,
@@ -112,25 +118,24 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
                     educationViewAdd,
                     textViewResume,
                     ContextCompat.getDrawable(it.context, R.drawable.education),
+                    null
                 ) { loadEducationData() }
             }
             skillsViewResume.setOnClickListener {
                 toggleRecyclerViewVisibility(
                     skillsViewAddResumeItemBorder,
                     skillsRecyclerView,
-                    skillsViewAdd,
+                    addSkillButton,
                     skillsViewResume,
                     ContextCompat.getDrawable(it.context, R.drawable.skills),
+                    addSkillEditeText
                 ) { loadSkillsData() }
             }
-//            employmentCard.setOnClickListener { toggleRecyclerViewVisibility(employmentRecyclerViewP, employmentViewAddResumeItem) }
-//            languagesCard.setOnClickListener { toggleRecyclerViewVisibility(languagesRecyclerViewP, languagesViewAddResumeItem) }
-//            coursesCard.setOnClickListener { toggleRecyclerViewVisibility(coursesRecyclerViewP, coursesViewAddResumeItem) }
         }
     }
 
     private fun handelResumeEvent() {
-        lifecycleScope.launch(Dispatchers.Main) {
+        jobsEventJob=lifecycleScope.launch(Dispatchers.Main) {
             viewModel.event.collect { resumeEvent ->
                 when (resumeEvent) {
                     is ResumeEvent.DeleteSkill -> {
@@ -147,24 +152,42 @@ class ProfileResumeFragment : BaseFragment<FragmentProfileResumeBinding, Profile
 
                     is ResumeEvent.AddEducation -> {
                         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToProfileEducationFragment(
-                            resumeEvent.fromAddButton,resumeEvent.education
+                            true,null
                         ))
-                    }
-
-                    ResumeEvent.CrateSkill -> {
-
-
                     }
                 }
             }
         }
     }
 
+    private fun crateSkill(){
+        binding.addSkillButton.setOnClickListener {
+            if(binding.addSkillEditeText.text.isNotEmpty()){
+                viewModel.createSkill(binding.addSkillEditeText.text.toString())
+                loadSkillsData()
+            }
+        }
+
+    }
     companion object {
         @JvmStatic
         fun newInstance() = ProfileResumeFragment().apply {
             arguments = Bundle().apply {
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        handelResumeEvent()
+        loadEducationData()
+        loadSkillsData()
+        crateSkill()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        jobsEventJob.cancel()
+
     }
 }

@@ -49,10 +49,12 @@ class ProfileEducationFragment : BaseFragment<FragmentProfileEducationBinding, P
 
     private fun showAddedToast() {
         Toast.makeText(requireContext(), "Education Added Successfully", Toast.LENGTH_SHORT).show()
+
     }
 
     private fun showUpdatedToast() {
         Toast.makeText(requireContext(), "Education Updated Successfully", Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onResume() {

@@ -74,15 +74,18 @@ private fun setUpAdapter() {
     }
     private fun handleSeeAllJobRecentClick() {
         binding.textViewTitleRecentSeeAllJob.setOnClickListener {
-            navigateToDirection(
-                ProfileFragmentDirections.actionProfileFragmentToJobProfileSeeAllFragment())
+//            navigateToDirection(
+//                ProfileFragmentDirections.actionProfileFragmentToJobProfileSeeAllFragment())
+//
+
         }
     }
 
     private fun handleSeeAllJobSavedClick() {
         binding.textViewTitleSavedSeeAllJob.setOnClickListener {
-            navigateToDirection(
-                ProfileFragmentDirections.actionProfileFragmentToJobProfileSeeAllSavedFragment())
+//            navigateToDirection(
+//                ProfileFragmentDirections.actionProfileFragmentToJobProfileSeeAllSavedFragment())
+//
         }
     }
     companion object {

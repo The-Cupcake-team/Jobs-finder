@@ -44,7 +44,7 @@ class ProfileFragment : BaseFragment<com.cupcake.ui.databinding.FragmentProfileB
         )
 
         binding.viewPager.adapter = adapter
-        binding.viewPager.setUserInputEnabled(false)
+        binding.viewPager.isUserInputEnabled = false
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
                 0 -> tab.text = "Resume"

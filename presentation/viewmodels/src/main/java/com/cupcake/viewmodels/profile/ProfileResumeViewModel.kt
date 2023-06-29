@@ -50,7 +50,7 @@ class ProfileResumeViewModel @Inject constructor(
     }
 
 
-    private fun onDeleteSkillsSuccess(unit: Unit) {}
+    private fun onDeleteSkillsSuccess(unit: Unit) {getAllSkills()}
     private fun onGetSkillsSuccess(skill: List<Skill>) {
         _state.update {
             it.copy(
@@ -60,7 +60,7 @@ class ProfileResumeViewModel @Inject constructor(
 
     }
     private fun onCreateSkillsSuccess(unit: Unit) {
-
+        getAllSkills()
     }
 
 
@@ -77,7 +77,7 @@ class ProfileResumeViewModel @Inject constructor(
             { resumeUseCase.deleteSkills(id) },
             ::onDeleteSkillsSuccess,
             ::onError)
-        getAllSkills()
+
         viewModelScope.launch(Dispatchers.IO) {
             _event.emit(ResumeEvent.DeleteSkill)
         }
@@ -87,10 +87,7 @@ class ProfileResumeViewModel @Inject constructor(
             { resumeUseCase.createSkills(skill) },
             ::onCreateSkillsSuccess,
             ::onError)
-        getAllSkills()
-        viewModelScope.launch(Dispatchers.IO) {
-            _event.emit(ResumeEvent.CrateSkill)
-        }
+
     }
 
 
@@ -103,15 +100,15 @@ class ProfileResumeViewModel @Inject constructor(
     override fun editeEducation(education: EducationUiState, fromAddButton: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             _event.emit(ResumeEvent.EditeEducation(education))
-
         }
+
     }
 
     fun addEducation() {
         viewModelScope.launch (Dispatchers.IO){
             _event.emit(ResumeEvent.AddEducation())
-
         }
+
     }
 }
 
