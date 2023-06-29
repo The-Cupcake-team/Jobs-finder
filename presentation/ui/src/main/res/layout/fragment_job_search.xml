@@ -76,7 +76,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/editTextSearchInput"
             app:layout_constraintStart_toStartOf="parent"
-            app:showWhenIf="@{viewModel.state.error == null}"
+            app:showWhenIf="@{viewModel.state.error == null || !viewModel.state.loading}"
             tools:listitem="@layout/item_job_card" />
 
         <include
@@ -85,7 +85,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editTextSearchInput"
+            app:layout_constraintTop_toTopOf="parent"
             app:showWhenIf="@{viewModel.state.loading}"
             bind:isLoading="@{viewModel.state.loading}" />
 

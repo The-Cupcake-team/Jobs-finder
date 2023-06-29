@@ -2,11 +2,13 @@ package com.cupcake.viewmodels.posts
 
 import android.os.Parcelable
 import com.cupcake.viewmodels.base.BaseErrorUiState
+import com.cupcake.viewmodels.profile.ProfileUISate
 import kotlinx.parcelize.Parcelize
 
 
 data class PostsUIState(
     val postsResult: List<PostItemUIState> = emptyList(),
+    val profileResult: ProfileUISate = ProfileUISate(),
     val isLoading: Boolean = true,
     val isError: Boolean = false,
     val error: BaseErrorUiState? = null,

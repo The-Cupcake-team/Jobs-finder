@@ -74,7 +74,8 @@
                     android:layout_height="@dimen/profile_image_size"
                     android:layout_marginStart="@dimen/spacing_medium"
                     android:layout_marginTop="@dimen/spacing_medium"
-                    android:src="@drawable/test_personal_image"
+                    android:background="@drawable/loading_anim"
+                    app:loadImage="@{viewModel.state.profileResult.avatar}"
                     app:layout_constraintStart_toStartOf="@id/viewBackground"
                     app:layout_constraintTop_toTopOf="@id/viewBackground"
                     app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
@@ -85,7 +86,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/spacing_normal"
-                    android:text="@string/username"
+                    tools:text="@string/username"
+                    android:text="@{viewModel.state.profileResult.fullName}"
                     app:layout_constraintStart_toEndOf="@id/imageViewAvatar"
                     app:layout_constraintTop_toTopOf="@id/imageViewAvatar" />
 
@@ -103,7 +105,6 @@
                     style="@style/TextInputLayoutStyle"
                     android:layout_width="@dimen/zero"
                     android:layout_height="wrap_content"
-
                     android:padding="@dimen/spacing_medium"
                     app:helperTextEnabled="true"
                     app:helperTextTextColor="@color/accent_red"

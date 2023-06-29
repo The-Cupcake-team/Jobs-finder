@@ -47,7 +47,7 @@ class PublicFragment : BaseFragment<FragmentPublicBinding, PublicPostsViewModel>
     private fun handlePostEvent(event: SpecialPostsEvent) {
         when (event) {
             is SpecialPostsEvent.PostCommentClick -> navigateToCommentsFragment(event.id)
-            is SpecialPostsEvent.PostShareClick -> sharePost()
+            is SpecialPostsEvent.PostShareClick -> sharePost(event.id)
             is SpecialPostsEvent.PostOptionsClick -> showBottomSheetDialog(event.model)
         }
     }
@@ -57,10 +57,10 @@ class PublicFragment : BaseFragment<FragmentPublicBinding, PublicPostsViewModel>
         findNavController().navigate(action)
     }
 
-    private fun sharePost() {
+    private fun sharePost(content:String) {
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "This is my post to send.")
+            putExtra(Intent.EXTRA_TEXT, content)
             type = "text/plain"
         }
         startActivity(Intent.createChooser(shareIntent, "Share via"))
