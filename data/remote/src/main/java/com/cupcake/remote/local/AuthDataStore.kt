@@ -1,21 +1,19 @@
-package com.cupcake.jobsfinder.local.datastore
+package com.cupcake.remote.local
 
-import android.content.Context
+
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
-class AuthDataStore @Inject constructor(@ApplicationContext context: Context) {
-
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATASTORE_NAME)
-
-    private val dataStore = context.dataStore
+class AuthDataStore @Inject constructor(
+    private val dataStore: DataStore<Preferences>
+) {
 
     suspend fun saveAuthData(authToken: String, expireTime: Long) {
         dataStore.edit { preferences ->
@@ -24,9 +22,10 @@ class AuthDataStore @Inject constructor(@ApplicationContext context: Context) {
         }
     }
 
-    suspend fun getAuthToken(): String? {
-        val preferences = dataStore.data.first()
-        return preferences[TOKEN]
+    fun getAuthToken(): String? {
+        return runBlocking {
+            dataStore.data.map { it[TOKEN] }.first()
+        }
     }
 
     suspend fun getAuthTokenExpireTime(): Long? {
@@ -41,7 +40,6 @@ class AuthDataStore @Inject constructor(@ApplicationContext context: Context) {
     }
 
     companion object {
-        const val DATASTORE_NAME = "auth"
         val TOKEN = stringPreferencesKey("token")
         val EXPIRE_TIME = longPreferencesKey("expire_time")
     }

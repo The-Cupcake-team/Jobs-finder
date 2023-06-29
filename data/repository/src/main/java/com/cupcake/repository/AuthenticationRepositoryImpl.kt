@@ -1,6 +1,6 @@
 package com.cupcake.repository
 
-import com.cupcake.jobsfinder.local.datastore.AuthDataStore
+import com.cupcake.remote.local.AuthDataStore
 import com.cupcake.models.Token
 import com.cupcake.models.User
 import com.cupcake.remote.AuthApiService
