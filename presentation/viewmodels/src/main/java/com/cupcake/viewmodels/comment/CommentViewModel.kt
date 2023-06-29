@@ -100,6 +100,7 @@ class CommentViewModel @Inject constructor(
             }
             currentState.copy(comments = updatedComments)
         }
+        getCommentsPost(state.value.post.id)
     }
 
     private fun onCreateCommentFailure(error: BaseErrorUiState) {
