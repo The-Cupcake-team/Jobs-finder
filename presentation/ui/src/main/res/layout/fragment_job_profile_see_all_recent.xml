@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -29,10 +28,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/back"
-                bind:layout_constraintEnd_toEndOf="parent"
-                bind:layout_constraintStart_toStartOf="parent">
+                app:navigationIcon="@drawable/back">
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -44,53 +43,52 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_medium"
                 android:text="@string/recent_jobs"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                bind:layout_constraintBottom_toTopOf="@id/recycler_view_recent_job"
-                bind:layout_constraintEnd_toEndOf="parent"
-                bind:layout_constraintTop_toBottomOf="@id/tool_bar" />
+                app:layout_constraintTop_toBottomOf="@id/tool_bar" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_recent_job"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/zero"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:background="@color/background"
                 android:clipToPadding="false"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/spacing_medium"
                 android:paddingVertical="@dimen/spacing_normal"
                 app:items="@{viewModel.state.recentJobs}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_view_title_saved_post"
-                bind:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_title_saved_post"
                 tools:listitem="@layout/item_see_all_job_profile" />
 
             <include
                 android:id="@+id/loading"
                 layout="@layout/loading"
                 android:visibility="invisible"
+                app:isLoading="@{viewModel.state.loading}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:showWhenIf="@{viewModel.state.loading}"
-                bind:isLoading="@{viewModel.state.loading}" />
+                app:showWhenIf="@{viewModel.state.loading}" />
 
             <include
                 android:id="@+id/error"
                 layout="@layout/error"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:error="@{viewModel.state.error}"
                 app:layout_constraintBottom_toTopOf="@+id/buttonTryAgain"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tool_bar"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
-                app:showWhenIf="@{viewModel.state.error != null}"
-                bind:error="@{viewModel.state.error}"
-                bind:layout_constraintTop_toBottomOf="@+id/tool_bar" />
+                app:showWhenIf="@{viewModel.state.error != null}" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonTryAgain"

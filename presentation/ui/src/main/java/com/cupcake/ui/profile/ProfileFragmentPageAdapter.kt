@@ -20,7 +20,8 @@ class ProfileFragmentPageAdapter(
             0 -> ProfileResumeFragment.newInstance()
             1 -> ProfilePostFragment.newInstance()
             2 -> ProfileJobsFragment.newInstance()
-            else -> ProfileResumeFragment.newInstance()
+            else -> AboutMeProfileFragment.newInstance()
+
         }
     }
 }

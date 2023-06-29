@@ -43,9 +43,7 @@
             app:argType="string" />
         <action
             android:id="@+id/action_jobsFragment_to_createJobFormOneFragment"
-            app:destination="@id/createJobFormOneFragment"
-            app:popUpTo="@id/jobsFragment"
-            app:popUpToInclusive="false" />
+            app:destination="@id/createJobFormOneFragment" />
         <action
             android:id="@+id/action_jobsFragment_to_jobSearchFragment"
             app:destination="@id/jobSearchFragment"
@@ -126,11 +124,11 @@
         tools:layout="@layout/fragment_job_details"
         android:label="JobDetailsFragment" >
 
-          <argument
+        <argument
             android:name="jobId"
             app:argType="string"
             app:nullable="true" />
-     </fragment>
+    </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
@@ -148,7 +146,7 @@
             app:popUpToInclusive="true" />
     </fragment>
 
-   <fragment
+    <fragment
         android:id="@+id/commentsFragment"
         android:name="com.cupcake.ui.comment.CommentsFragment"
         android:label="">
@@ -157,7 +155,7 @@
             app:argType="string" />
     </fragment>
 
-   <fragment
+    <fragment
         android:id="@+id/loginFragment"
         android:name="com.cupcake.ui.login.LoginFragment"
         android:label="LoginFragment" >
@@ -176,13 +174,8 @@
 
     <fragment
         android:id="@+id/createJobFormOneFragment"
-        android:name="com.cupcake.ui.create_job.CreateJobFormOneFragment">
-        <action
-            android:id="@+id/action_createJobFormOneFragment_to_createJobFormTwoFragment"
-            app:destination="@id/createJobFormTwoFragment"
-            app:popUpTo="@id/createJobFormOneFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
+        android:name="com.cupcake.ui.create_job.CreateJobFormOneFragment"
+        android:label="CreateJobFormOneFragment" />
     <fragment
         android:id="@+id/jobSearchFragment"
         android:name="com.cupcake.ui.job_search.JobSearchFragment"
@@ -193,12 +186,6 @@
             android:name="jobTitle"
             app:argType="string"
             android:defaultValue="" />
-        <action
-            android:id="@+id/action_jobSearchFragment_to_jobDetailsFragment"
-            app:destination="@id/jobDetailsFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            />
     </fragment>
     <dialog
         android:id="@+id/modalBottomSheet"
@@ -220,9 +207,6 @@
         android:id="@+id/notificationFragment"
         android:name="com.cupcake.ui.notification.NotificationFragment"
         android:label="" />
-    <fragment
-        android:id="@+id/createJobFormTwoFragment"
-        android:name="com.cupcake.ui.create_job.CreateJobFormTwoFragment" />
 
     <fragment
         android:id="@+id/profileFragment"
@@ -241,14 +225,10 @@
             android:id="@+id/action_profileFragment_to_commentsFragment"
             app:destination="@id/commentsFragment" />
         <action
-            android:id="@+id/action_profileFragment_to_jobProfileSeeAllFragment"
-            app:destination="@id/jobProfileSeeAllFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_jobProfileSeeAllSavedFragment"
-            app:destination="@id/jobProfileSeeAllSavedFragment" />
-        <action
-            android:id="@+id/action_profileFragment_to_jobDetailsFragment"
-            app:destination="@id/jobDetailsFragment" />
+            android:id="@+id/action_profileFragment_to_editAboutMeProfileFragment2"
+            app:destination="@id/editAboutMeProfileFragment" />
+
+
     </fragment>
 
 

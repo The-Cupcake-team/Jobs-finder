@@ -39,4 +39,7 @@
 
     <color name="bottom_sheet_background">#0A0A0A</color>
 
+    <color name="border_color_edite">#14FFFFFF</color>
+
+
 </resources>

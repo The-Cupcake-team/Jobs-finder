@@ -38,7 +38,9 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
 
                 R.id.loginFragment, R.id.registerFragment, R.id.notificationFragment,
-                R.id.createJobFormOneFragment, R.id.createJobFormTwoFragment, R.id.createPostFragment
+                R.id.createJobFormOneFragment,
+               // R.id.createJobFormTwoFragment,
+                R.id.createPostFragment
                 -> {
 
                     binding.bottomNavigationBar.visibility = View.GONE

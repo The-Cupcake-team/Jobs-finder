@@ -48,7 +48,7 @@ class JobsFragment : BaseFragment<FragmentJobsBinding, JobsViewModel>(
     }
 
     private fun loadJobsAdapter() {
-        lifecycleScope.launch(Dispatchers.Main) {
+        jobsEventJob= lifecycleScope.launch(Dispatchers.Main) {
             viewModel.state.collect { state ->
                 val items = listOf(
                     loadPopularJobs(state),

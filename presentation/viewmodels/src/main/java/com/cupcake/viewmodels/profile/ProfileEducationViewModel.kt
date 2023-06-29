@@ -2,6 +2,7 @@ package com.cupcake.viewmodels.profile
 
 import androidx.lifecycle.viewModelScope
 import com.cupcake.usecase.AddEducationUseCase
+import com.cupcake.usecase.ResumeUseCase
 import com.cupcake.usecase.UpdateEducationUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileEducationViewModel @Inject constructor(
     val addEducation: AddEducationUseCase,
-    val updateEducation: UpdateEducationUseCase
+    val updateEducation: UpdateEducationUseCase,
+     val resumeUseCase: ResumeUseCase,
 ) : BaseViewModel<EducationUiState>(EducationUiState()) {
 
     private val _event = MutableSharedFlow<SaveEvent>()

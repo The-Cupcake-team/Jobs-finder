@@ -7,6 +7,8 @@ import androidx.navigation.fragment.findNavController
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentAboutMeProfileBinding
+import com.cupcake.ui.profile.ProfileFragmentDirections
+import com.cupcake.ui.profile.posts.ProfilePostFragment
 import com.cupcake.viewmodels.profile.about_me.AboutMeProfileViewModel
 
 
@@ -25,10 +27,17 @@ class AboutMeProfileFragment : BaseFragment<FragmentAboutMeProfileBinding, About
     }
     private fun navigateToEditAboutFragment() {
         binding.textViewTitleEditClick.setOnClickListener {
-//        navigateToDirection(
-//            AboutMeProfileFragmentDirections.actionAboutMeProfileFragmentToEditAboutMeProfileFragment()
-//        )
+        navigateToDirection(
+            ProfileFragmentDirections.actionProfileFragmentToEditAboutMeProfileFragment2()
+        )
     }
+    }
+    companion object {
+        @JvmStatic
+        fun newInstance() = AboutMeProfileFragment().apply {
+            arguments = Bundle().apply {
+            }
+        }
     }
 
 }

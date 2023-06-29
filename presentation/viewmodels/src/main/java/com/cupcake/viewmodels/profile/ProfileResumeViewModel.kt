@@ -25,61 +25,69 @@ class ProfileResumeViewModel @Inject constructor(
 
     private val _event = MutableSharedFlow<ResumeEvent>()
     val event = _event.asSharedFlow()
+
     init {
         getAllEducation()
         getAllSkills()
 
 
-
-
-
-
-
     }
-    private fun getAllEducation(){
+
+    fun getAllEducation() {
         tryToExecute(
-            { resumeUseCase.getAllEducations()},
+            { resumeUseCase.getAllEducations() },
             ::onGetEducationsSuccess,
             ::onError
         )
     }
-    private fun onGetEducationsSuccess(education : List<Education>) {
+
+    private fun onGetEducationsSuccess(education: List<Education>) {
         _state.update {
             it.copy(
-             educationUiState = education.map { education -> education.toEducationUiState() })
+                educationUiState = education.map { education -> education.toEducationUiState() })
         }
 
     }
 
 
-
-
-    private fun onDeleteSkillsSuccess(id: Unit) {}
-    private fun onGetSkillsSuccess(skill : List<Skill>) {
+    private fun onDeleteSkillsSuccess(unit: Unit) {getAllSkills()}
+    private fun onGetSkillsSuccess(skill: List<Skill>) {
         _state.update {
             it.copy(
-            sillsUiState  = skill.map { skill -> skill.toSkillsUiState() })
+                sillsUiState = skill.map { skill -> skill.toSkillsUiState() })
         }
         Log.d("TAG", "${skill.size}asdasdasdasd")
 
     }
-    private fun getAllSkills(){
+    private fun onCreateSkillsSuccess(unit: Unit) {
+        getAllSkills()
+    }
+
+
+    private fun getAllSkills() {
         tryToExecute(
-            { resumeUseCase.getAllSkills()},
+            { resumeUseCase.getAllSkills() },
             ::onGetSkillsSuccess,
             ::onError
         )
     }
+
     override fun deleteSkill(id: String) {
         tryToExecute(
-            { resumeUseCase.deleteSkills(id)},
+            { resumeUseCase.deleteSkills(id) },
             ::onDeleteSkillsSuccess,
-            ::onError
-        )
-        getAllSkills()
-        viewModelScope.launch (Dispatchers.IO){
+            ::onError)
+
+        viewModelScope.launch(Dispatchers.IO) {
             _event.emit(ResumeEvent.DeleteSkill)
         }
+    }
+     fun createSkill(skill:String) {
+        tryToExecute(
+            { resumeUseCase.createSkills(skill) },
+            ::onCreateSkillsSuccess,
+            ::onError)
+
     }
 
 
@@ -89,11 +97,18 @@ class ProfileResumeViewModel @Inject constructor(
     }
 
 
-    override  fun editeEducation(education: EducationUiState, fromAddButton: Boolean) {
-        viewModelScope.launch (Dispatchers.IO){
-           _event.emit(ResumeEvent.EditeEducation(education))
-
+    override fun editeEducation(education: EducationUiState, fromAddButton: Boolean) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _event.emit(ResumeEvent.EditeEducation(education))
         }
+
+    }
+
+    fun addEducation() {
+        viewModelScope.launch (Dispatchers.IO){
+            _event.emit(ResumeEvent.AddEducation())
+        }
+
     }
 }
 

@@ -10,20 +10,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/card_background">
+        android:background="@drawable/card_background"
+        android:paddingHorizontal="@dimen/spacing_medium">
 
         <TextView
             android:id="@+id/text_view_employment_title"
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:layout_marginBottom="@dimen/spacing_normal"
-            app:layout_constraintBottom_toTopOf="@+id/text_view_employment_company_name"
+            android:layout_marginTop="@dimen/spacing_normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread"
             tools:text="UI UX Design" />
 
         <TextView
@@ -31,8 +28,7 @@
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_normal"
-            app:layout_constraintBottom_toTopOf="@+id/text_view_employment_work_year"
+            android:layout_marginTop="@dimen/spacing_normal"
             app:layout_constraintStart_toStartOf="@id/text_view_employment_title"
             app:layout_constraintTop_toBottomOf="@+id/text_view_employment_title"
             tools:text="FaceBook" />
@@ -42,8 +38,7 @@
             style="@style/TextStyle.body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_normal"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/spacing_normal"
             app:layout_constraintStart_toStartOf="@+id/text_view_employment_company_name"
             app:layout_constraintTop_toBottomOf="@+id/text_view_employment_company_name"
             tools:text="Sep 2015 - Aug 2019 " />
@@ -55,6 +50,17 @@
             android:background="@drawable/ic_pen_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/text_view_employment_title" />
+
+        <View
+            android:id="@+id/employmentViewAddResumeItemBorder"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/person_image_border_width"
+            android:layout_marginTop="@dimen/spacing_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/color_text_tertiary"
+            app:layout_constraintTop_toBottomOf="@id/text_view_employment_work_year" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

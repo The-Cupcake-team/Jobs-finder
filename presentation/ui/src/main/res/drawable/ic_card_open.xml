@@ -5,6 +5,10 @@
     android:viewportHeight="24">
 
   <path
+      android:pathData="M4,0L20,0A4,4 0,0 1,24 4L24,20A4,4 0,0 1,20 24L4,24A4,4 0,0 1,0 20L0,4A4,4 0,0 1,4 0z"
+      android:fillColor="@color/expanded_chip_color"/>
+
+  <path
       android:pathData="M16,14L12,10L8,14"
       android:strokeLineJoin="round"
       android:strokeWidth="2"
