@@ -9,6 +9,7 @@
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.comment.CommentViewModel" />
+
         <import type="android.text.TextUtils" />
     </data>
 
@@ -35,171 +36,170 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/zero"
-        android:background="@color/background"
-        app:layout_constraintTop_toBottomOf="@id/tool_bar"
-        app:layout_constraintBottom_toTopOf="@id/dividerTwo"
-        android:scrollbars="vertical">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background"
-        tools:context=".comment.CommentsFragment">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_view_person_image"
-            android:layout_width="@dimen/profile_image_size"
-            android:layout_height="@dimen/profile_image_size"
-            android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="@dimen/spacing_normal"
-            app:showWhenIf="@{viewModel.state.error == null}"
-            app:loadImage="@{viewModel.state.post.profileImage}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/circleImageView" />
-
-        <TextView
-            android:id="@+id/text_view_person_name"
-            style="@style/TextStyle.Title"
-            android:layout_width="@dimen/zero"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:text="@{viewModel.state.post.creatorName}"
-            app:showWhenIf="@{viewModel.state.isSuccess}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_view_person_image"
-            app:layout_constraintTop_toTopOf="@+id/image_view_person_image" />
-
-        <TextView
-            android:id="@+id/text_view_person_job_title"
-            style="@style/TextStyle.body"
-            android:layout_width="@dimen/zero"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xxsmall"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:text="@{viewModel.state.post.jobTitle}"
-            app:showWhenIf="@{viewModel.state.isSuccess}"
-            android:textColor="@color/color_text_secondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/text_view_person_name"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_person_name" />
-
-        <TextView
-            android:id="@+id/text_view_content_post"
-            style="@style/TextStyle.body"
-            android:layout_width="@dimen/zero"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:text="@{viewModel.state.post.content}"
-            android:textColor="@color/color_text_primary"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/text_view_person_job_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_person_job_title"
-            app:layout_constraintVertical_bias="0.0"
-            app:showWhenIf="@{viewModel.state.isSuccess}" />
-
-        <TextView
-            android:id="@+id/text_view_created_at"
-            style="@style/TextStyle.caption"
-            android:layout_width="@dimen/zero"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            app:showWhenIf="@{viewModel.state.isSuccess}"
-            android:textColor="@color/color_text_tertiary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post" />
-
-        <ImageView
-            android:id="@+id/imageViewPostDetailsImage"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="@dimen/zero"
-            app:layout_constraintDimensionRatio="5:4"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:scaleType="centerCrop"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
-            tools:srcCompat="@drawable/test_post_image"
-            app:loadImage="@{viewModel.state.post.image}"/>
+            android:background="@color/background"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toTopOf="@id/dividerTwo"
+            app:layout_constraintTop_toBottomOf="@id/tool_bar">
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:showWhenIf="@{viewModel.state.isSuccess}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageViewPostDetailsImage" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background"
+                tools:context=".comment.CommentsFragment">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/RecyclerViewComments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/spacing_normal"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            app:showWhenIf="@{viewModel.state.isSuccess}"
-            app:items="@{viewModel.state.comments}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/item_comment" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/image_view_person_image"
+                    android:layout_width="@dimen/profile_image_size"
+                    android:layout_height="@dimen/profile_image_size"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:loadImage="@{viewModel.state.post.profileImage}"
+                    app:shapeAppearanceOverlay="@style/circleImageView"
+                    app:showWhenIf="@{viewModel.state.error == null}" />
+
+                <TextView
+                    android:id="@+id/text_view_person_name"
+                    style="@style/TextStyle.Title"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:text="@{viewModel.state.post.creatorName}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/image_view_person_image"
+                    app:layout_constraintTop_toTopOf="@+id/image_view_person_image"
+                    app:showWhenIf="@{viewModel.state.isSuccess}" />
+
+                <TextView
+                    android:id="@+id/text_view_person_job_title"
+                    style="@style/TextStyle.body"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_xxsmall"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:text="@{viewModel.state.post.jobTitle}"
+                    android:textColor="@color/color_text_secondary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_person_name"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_person_name"
+                    app:showWhenIf="@{viewModel.state.isSuccess}" />
+
+                <TextView
+                    android:id="@+id/text_view_content_post"
+                    style="@style/TextStyle.body"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="@{viewModel.state.post.content}"
+                    android:textColor="@color/color_text_primary"
+                    app:layout_constraintBottom_toTopOf="@+id/divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_person_job_title"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_person_job_title"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:showWhenIf="@{viewModel.state.isSuccess}" />
+
+                <TextView
+                    android:id="@+id/text_view_created_at"
+                    style="@style/TextStyle.caption"
+                    android:layout_width="@dimen/zero"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:textColor="@color/color_text_tertiary"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
+                    app:showWhenIf="@{viewModel.state.isSuccess}" />
+
+                <ImageView
+                    android:id="@+id/imageViewPostDetailsImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/zero"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/divider"
+                    app:layout_constraintDimensionRatio="5:4"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
+                    app:loadImage="@{viewModel.state.post.image}"
+                    tools:srcCompat="@drawable/test_post_image" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageViewPostDetailsImage"
+                    app:showWhenIf="@{viewModel.state.isSuccess}" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/RecyclerViewComments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:paddingVertical="@dimen/spacing_normal"
+                    app:items="@{viewModel.state.comments}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider"
+                    app:showWhenIf="@{viewModel.state.isSuccess}"
+                    tools:listitem="@layout/item_comment" />
 
 
-        <include
-            android:id="@+id/loading"
-            layout="@layout/loading"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:showWhenIf="@{viewModel.state.isLoading}"
-            bind:isLoading="@{viewModel.state.isLoading}" />
+                <include
+                    android:id="@+id/loading"
+                    layout="@layout/loading"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:showWhenIf="@{viewModel.state.isLoading}"
+                    bind:isLoading="@{viewModel.state.isLoading}" />
 
-        <include
-            android:id="@+id/error"
-            bind:error="@{viewModel.state.error}"
-            layout="@layout/error"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:showWhenIf="@{viewModel.state.error != null}" />
+                <include
+                    android:id="@+id/error"
+                    layout="@layout/error"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:showWhenIf="@{viewModel.state.error != null}"
+                    bind:error="@{viewModel.state.error}" />
 
-     </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
 
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/dividerTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@id/view_background_comment_bar"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <View
             android:id="@+id/view_background_comment_bar"
@@ -243,17 +243,15 @@
             android:layout_marginEnd="@dimen/spacing_medium"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
+            android:enabled="@{TextUtils.isEmpty(editTextPostComments.getText()) ? false : true}"
             android:focusable="true"
-            android:text="@string/post"
-            android:enabled="@{editTextPostComments.text.toString().trim().length() > 0}"
             android:onClick="@{() -> viewModel.createComment(editTextPostComments.getText().toString()) +  editTextPostComments.setText(@string/empty)}"
+            android:text="@string/post"
             android:textColor="@color/blue_500"
+            app:enableOnClickIfTextNotEmpty="@{editTextPostComments}"
             app:layout_constraintBottom_toBottomOf="@+id/editTextPostComments"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextPostComments"
-            app:enableOnClickIfTextNotEmpty="@{editTextPostComments}"
-            android:enabled="@{TextUtils.isEmpty(editTextPostComments.getText()) ? false : true}"
-            />
+            app:layout_constraintTop_toTopOf="@+id/editTextPostComments" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

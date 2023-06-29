@@ -37,7 +37,6 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:text="@{viewModel.state.profileResult.fullName}"
             android:textAlignment="center"
-            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/imageViewProfileImage"
             app:layout_constraintStart_toEndOf="@+id/imageViewProfileImage"
             app:layout_constraintTop_toTopOf="@+id/imageViewProfileImage"
