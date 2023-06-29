@@ -73,5 +73,6 @@ interface JobFinderRepository {
 
     suspend fun getAllSkills(): List<Skill>
     suspend fun deleteSkills(id : String)
+    suspend fun createSkill(skill:String)
 
 }

@@ -217,6 +217,11 @@
         <action
             android:id="@+id/action_profileFragment_to_commentsFragment"
             app:destination="@id/commentsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_editAboutMeProfileFragment2"
+            app:destination="@id/editAboutMeProfileFragment" />
+
+
     </fragment>
 
 
@@ -236,6 +241,10 @@
             android:id="@+id/action_savedPostFragment_to_commentsFragment"
             app:destination="@id/commentsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editAboutMeProfileFragment"
+        android:name="com.cupcake.ui.profile.about_me.EditAboutMeProfileFragment"
+        android:label="EditAboutMeProfileFragment" />
 
 
 </navigation>

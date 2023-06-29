@@ -22,6 +22,10 @@ class ResumeUseCase @Inject constructor(
         return  jobFinderRepository.deleteSkills(id)
     }
 
+    suspend fun createSkills(skill:String){
+        return  jobFinderRepository.createSkill(skill)
+    }
+
 
 
 }

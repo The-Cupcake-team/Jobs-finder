@@ -108,6 +108,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="@dimen/spacing_medium"
                         android:layout_marginVertical="@dimen/spacing_medium"
+                        android:onClick="@{()-> viewModel.addEducation()}"
                         android:src="@drawable/add_education"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -201,15 +202,32 @@
 
                         />
 
+                    <EditText
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="@dimen/edite_text_height"
+                        android:hint="@string/AddSkill"
+                        style="@style/TextStyle.caption"
+                        android:background="@drawable/edite_radius"
+                        android:paddingVertical="@dimen/spacing_tiny"
+                        android:paddingHorizontal="@dimen/spacing_medium"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/add_skill"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/skills_RecyclerView"/>
+
+
                     <ImageView
+                        android:id="@+id/add_skill"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginHorizontal="@dimen/spacing_medium"
                         android:layout_marginVertical="@dimen/spacing_medium"
-                        android:src="@drawable/add_skills"
+                        android:src="@drawable/add_languages"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/skills_RecyclerView" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
