@@ -1,6 +1,5 @@
 package com.cupcake.viewmodels.post
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Post
 import com.cupcake.models.UserProfile
@@ -8,7 +7,6 @@ import com.cupcake.usecase.CreatePostUseCase
 import com.cupcake.usecase.ProfileUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
-import com.cupcake.viewmodels.posts.PostsEvent
 import com.cupcake.viewmodels.profile.ProfileUISate
 import com.cupcake.viewmodels.utill.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +29,7 @@ class CreatePostViewModel @Inject constructor(
 
     fun createPost(content: String) {
         updateState { it.copy(isLoading = true) }
-        tryToExecute(
+        tryToExecuteDebounced(
             callee = { createPostUseCase(content,state.value.postImage) },
             onSuccess = ::onSuccessCreatePost,
             onError = ::onCreatePostError
