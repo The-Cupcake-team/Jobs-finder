@@ -9,6 +9,7 @@
         <variable
             name="viewModel"
             type="com.cupcake.viewmodels.comment.CommentViewModel" />
+        <import type="android.text.TextUtils" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -245,7 +246,10 @@
             android:textColor="@color/blue_500"
             app:layout_constraintBottom_toBottomOf="@+id/editTextPostComments"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextPostComments" />
+            app:layout_constraintTop_toTopOf="@+id/editTextPostComments"
+            app:enableOnClickIfTextNotEmpty="@{editTextPostComments}"
+            android:enabled="@{TextUtils.isEmpty(editTextPostComments.getText()) ? false : true}"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
