@@ -1,5 +1,6 @@
 package com.cupcake.repository
 
+import com.cupcake.models.ErrorType
 import com.cupcake.remote.local.AuthDataStore
 import com.cupcake.models.Token
 import com.cupcake.models.User
@@ -40,8 +41,8 @@ class AuthenticationRepositoryImpl @Inject constructor(
         }.toUser()
     }
 
-    override suspend fun saveAuthData(token: Token) {
-        authDataStore.saveAuthData(token.token, token.expireTime)
+    override suspend fun saveAuthData(token: Token, isLogged: Boolean) {
+        authDataStore.saveAuthData(token.token, token.expireTime, isLogged)
     }
 
     override suspend fun getAuthToken(): String? {
@@ -56,5 +57,10 @@ class AuthenticationRepositoryImpl @Inject constructor(
         authDataStore.clearAuthData()
     }
 
+
+
+    override suspend fun isLoggedIn(): Boolean {
+        return authDataStore.isLoggedIn() ?: false
+    }
 
 }

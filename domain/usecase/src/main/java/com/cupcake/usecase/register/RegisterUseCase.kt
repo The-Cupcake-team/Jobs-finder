@@ -32,7 +32,7 @@ class RegisterUseCase @Inject constructor(
         val user =
             authenticationRepository.register(fullName, userName, email, password, jobTitleId)
 
-        authenticationRepository.saveAuthData(user.token)
+        authenticationRepository.saveAuthData(user.token,true)
         jobFinderRepository.insertProfile(user)
 
         jobsFinderRepository.saveProfileData(user.profile.avatar, user.profile.jobTitle.id)

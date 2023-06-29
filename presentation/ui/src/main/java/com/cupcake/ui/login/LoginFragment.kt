@@ -12,6 +12,7 @@ import com.cupcake.viewmodels.login.LoginEvent
 import com.cupcake.viewmodels.login.LoginViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -33,7 +34,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
                     is LoginEvent.RegisterClick -> navigateToRegister()
                     is LoginEvent.ShowErrorMessage -> showSnackBar(it.errorMessage)
                     is LoginEvent.NavigateToHome -> navigateToHome()
-
                 }
             }
         }
