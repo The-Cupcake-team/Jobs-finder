@@ -1,16 +1,15 @@
 package com.cupcake.viewmodels.post
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.cupcake.models.Post
 import com.cupcake.usecase.CreatePostUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
 import com.cupcake.viewmodels.base.BaseViewModel
-import com.cupcake.viewmodels.posts.PostsEvent
 import com.cupcake.viewmodels.utill.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
@@ -34,6 +33,7 @@ class CreatePostViewModel @Inject constructor(
 
     private fun onSuccessCreatePost(post: Post) {
         updateState { it.copy(isLoading = false, post = post.toUiPost(), isPostCreated = true) }
+        viewModelScope.launch { _postEvent.emit(Event(CreatePostEvent.OnPostClick))}
     }
 
     private fun onCreatePostError(errorMessage: BaseErrorUiState) {
@@ -60,13 +60,17 @@ class CreatePostViewModel @Inject constructor(
         updateState { it.copy(postImage = null, isImageSelectionCanceled = false) }
     }
 
-    override fun onPostClick() {
-        viewModelScope.launch {
-            _postEvent.emit(Event(CreatePostEvent.OnPostClick))
-        }
-    }
-
     fun handleImageResult(imageData: File?) {
         updateState { it.copy(postImage = imageData, isImageSelectionCanceled = true) }
+    }
+
+
+    fun onRetryClicked(content: String){
+        _state.update {it.copy(error = null, isLoading = false) }
+        createPost(content)
+    }
+
+    fun onPostContentChange(){
+        _state.update {it.copy(error = null, isLoading = false) }
     }
 }
