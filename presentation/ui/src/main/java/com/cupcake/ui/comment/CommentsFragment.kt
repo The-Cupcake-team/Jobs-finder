@@ -21,6 +21,7 @@ class CommentsFragment : BaseFragment<FragmentCommentsBinding, CommentViewModel>
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setupCommentRecyclerView()
         viewModel.getPost(args.postID)
+        viewModel.getCommentsPost(args.postID)
         NavigationUI.setupWithNavController(binding.toolBar, findNavController())
     }
 

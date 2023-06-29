@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.cupcake.viewmodels.comment.CommentUiState.PostUiState" />
+            type="com.cupcake.viewmodels.comment.CommentsUiState.CommentUiState" />
 
         <variable
             name="listener"
@@ -27,6 +27,7 @@
             android:layout_marginStart="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginEnd="@dimen/spacing_normal"
+            app:loadImage="@{item.profileImage}"
             android:src="@drawable/test_personal_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:text="@{item.creatorName}"
+            android:text="@{item.commentAuthor}"
             app:layout_constraintEnd_toStartOf="@+id/text_view_number_like"
             app:layout_constraintStart_toEndOf="@+id/image_view_person_image"
             app:layout_constraintTop_toTopOf="@+id/image_view_person_image" />
@@ -67,7 +68,7 @@
             app:layout_constraintStart_toEndOf="@+id/text_view_person_name"
             app:layout_constraintTop_toTopOf="@+id/text_view_person_name"
             app:layout_constraintVertical_bias="0.0"
-            android:text="@{String.valueOf(item.likes)}"
+            android:text="@{String.valueOf(item.totalLikes)}"
             tools:text="329" />
 
         <TextView
@@ -77,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_xxsmall"
             android:layout_marginEnd="@dimen/spacing_medium"
-            android:text="@string/jop_title"
+            android:text="@{item.jobTitle}"
             android:textColor="@color/color_text_secondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_person_name"
@@ -88,15 +89,16 @@
             style="@style/TextStyle.body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="@dimen/spacing_medium"
-            android:text="@{item.content}"
             android:ellipsize="end"
-            tools:text="@string/post_content"
+            android:text="@{item.content}"
             android:textColor="@color/color_text_primary"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/text_view_person_job_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_person_job_title" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_person_job_title"
+            tools:text="@string/post_content" />
 
         <TextView
             android:id="@+id/textViewCreatedAt"
@@ -104,15 +106,54 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_small"
-            app:convertTime="@{item.createdAt}"
             android:layout_marginEnd="@dimen/spacing_medium"
-            tools:text="@string/created_at"
+            android:layout_marginBottom="16dp"
             android:text="@string/created_at"
-            android:layout_marginBottom="@dimen/spacing_medium"
+            android:visibility="gone"
             android:textColor="@color/color_text_tertiary"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:convertTime="@{item.createAt}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post" />
+            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
+            app:showWhenIf="@{item.commentSuccess}"
+            tools:text="@string/created_at" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/TextStyle.caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:layout_marginBottom="16dp"
+            android:text="posting..."
+            android:visibility="gone"
+            android:textColor="@color/color_text_tertiary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
+            app:showWhenIf="@{item.commentLoading}" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/TextStyle.caption"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:layout_marginBottom="16dp"
+            android:text="@string/not_send_tap_to_try_again"
+            android:clickable="true"
+            android:onClick="@{() -> listener.onTryAgainClick(item)}"
+            app:showWhenIf="@{item.commentError}"
+            android:textColor="@color/accent_red"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/text_view_content_post"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_content_post"
+            android:focusable="true" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -8,9 +8,9 @@ import androidx.navigation.fragment.findNavController
 import com.cupcake.ui.R
 import com.cupcake.ui.base.BaseFragment
 import com.cupcake.ui.databinding.FragmentProfileJobsBinding
-import com.cupcake.ui.jobs.jobfragment.JobsFragmentDirections
+import com.cupcake.ui.profile.ProfileFragmentDirections
 import com.cupcake.ui.profile.jobs.adapter.ProfileJobsAdapter
-import com.cupcake.ui.profile.posts.ProfilePostFragment
+import com.cupcake.ui.profile.jobs.adapter.JobsProfileHorizontalAdapter
 import com.cupcake.viewmodels.profile.jobs.ProfileJobsUIState
 import com.cupcake.viewmodels.profile.jobs.ProfileJobsViewModel
 import kotlinx.coroutines.Dispatchers
@@ -26,36 +26,26 @@ class ProfileJobsFragment : BaseFragment<FragmentProfileJobsBinding, ProfileJobs
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setUpAdapter()
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        handelJobsEvent()
-    }
-
-//    override fun onPause() {
-//        super.onPause()
-//        profileJobEvent.cancel()
-//    }
-
-    private fun setUpAdapter() {
-        jobsAdapter = ProfileJobsAdapter(emptyList(), viewModel)
-        binding.recyclerViewRecentSaved.adapter = jobsAdapter
-        loadProfileJobsAdapter()
+        handleSeeAllJobRecentClick()
+        handleSeeAllJobSavedClick()
     }
 
 
-    private fun loadProfileJobsAdapter() {
-        lifecycleScope.launch(Dispatchers.Main) {
-            viewModel.state.collect { state ->
-                val items = listOf(
-                    loadRecentJobs(state),
-                    loadSavedJobs(state)
-                )
-                jobsAdapter.setProfileJobsItems(items)
-            }
+
+private fun setUpAdapter() {
+    val recentJobAdapter = JobsProfileHorizontalAdapter(emptyList(), viewModel)
+    val savedJobAdapter = JobsProfileHorizontalAdapter(emptyList(), viewModel)
+    binding.recyclerViewRecentJpbs.adapter = recentJobAdapter
+    binding.recyclerViewSavedJobs.adapter = savedJobAdapter
+
+    lifecycleScope.launch {
+        viewModel.state.collect {
+            recentJobAdapter.setData(it.RecentJobs)
+            savedJobAdapter.setData(it.SavedJobs.reversed())
         }
     }
+}
+
 
     private fun loadRecentJobs(state: ProfileJobsUIState): ProfileJobsItem.RecentJobs {
         return ProfileJobsItem.RecentJobs(state.RecentJobs)
@@ -77,21 +67,23 @@ class ProfileJobsFragment : BaseFragment<FragmentProfileJobsBinding, ProfileJobs
 //        }
 //    }
 
-    private fun handleJobCardClick(id: String) {
-        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToJobDetailsFragment(id))
-    }
 
-    private fun handleJobChipClick(title: String) {
-        val action = JobsFragmentDirections.actionJobsFragmentToJobSearchFragment(title)
-        navigateToDirection(action)
-    }
-
-    private fun handleImageViewMoreClick(model: com.cupcake.viewmodels.profile.jobs.ProfileJobUiState) {
-//        navigateToDirection(JobsFragmentDirections.actionJobsFragmentToModalBottomSheet(model))
-    }
 
     private fun navigateToDirection(directions: NavDirections) {
         findNavController().navigate(directions)
+    }
+    private fun handleSeeAllJobRecentClick() {
+        binding.textViewTitleRecentSeeAllJob.setOnClickListener {
+            navigateToDirection(
+                ProfileFragmentDirections.actionProfileFragmentToJobProfileSeeAllFragment())
+        }
+    }
+
+    private fun handleSeeAllJobSavedClick() {
+        binding.textViewTitleSavedSeeAllJob.setOnClickListener {
+            navigateToDirection(
+                ProfileFragmentDirections.actionProfileFragmentToJobProfileSeeAllSavedFragment())
+        }
     }
     companion object {
         @JvmStatic

@@ -57,7 +57,7 @@ class BottomSheetViewModel @Inject constructor(
             jobLocation = location,
             jobType = detailsChip[1],
             jobDescription = companyName,
-            jobSalary = JobSalary(minSalary = salary.toDouble(), maxSalary = salary.toDouble()),
+            jobSalary = JobSalary(minSalary = minSalary, maxSalary = maxSalary),
             jobExperience = jobExperience,
             education = education,
             skills = emptyList()

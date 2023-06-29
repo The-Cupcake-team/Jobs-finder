@@ -1,6 +1,7 @@
 package com.cupcake.viewmodels.create_job
 
 sealed class CreateJobEvent {
-    data class PageScrolled(val index: Int) : CreateJobEvent()
-    data class HeaderButtonClicked(val index: Int) : CreateJobEvent()
+    object NextPage: CreateJobEvent()
+    object JobCreated: CreateJobEvent()
+    class ShowError(val message: String): CreateJobEvent()
 }

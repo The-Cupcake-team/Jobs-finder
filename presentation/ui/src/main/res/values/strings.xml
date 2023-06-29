@@ -127,9 +127,10 @@
     <string name="sharePost">Hello bro,Your Post is very awesome , select your App to share \n%1$s . </string>
     <string name="saved_successfully">Saved Successfully</string>
     <string name="saved_canceled">Saved Canceled</string>
-    <string name="comments_title">Comments (23)</string>
+    <string name="comments_title">Comments</string>
     <string name="resizable_text_read_more">Read more…</string>
     <string name="resizable_text_read_less">Read less</string>
+    <string name="empty"></string>
 
     <string name="rang_salary">%s K</string>
 
@@ -147,6 +148,14 @@
     <string name="no_notification_yet">No notification yet</string>
 
     <string name="offline">You Are Currently Offline</string>
+
+    <string name="not_send_tap_to_try_again">Not Send, tap to try again</string>
+
+    <string name="done">Done</string>
+    <string name="clear">Clear</string>
+    <string name="noResultFound">No Result Found.</string>
+    <string name="zero_number">0</string>
+
     <string name="AddLanguage">Add Language</string>
     <string name="AddSkill">Add Skill</string>
     <string name="edite">Edit</string>

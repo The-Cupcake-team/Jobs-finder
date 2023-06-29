@@ -1,5 +1,6 @@
 package com.cupcake.remote
 
+import com.cupcake.remote.response.CommentDto
 import com.cupcake.remote.response.EducationDto
 import com.cupcake.remote.response.JobTitleDto
 import com.cupcake.remote.response.PostDto
@@ -26,7 +27,7 @@ interface JobApiService {
 
     // region Job
 
-    @POST("/job")
+    @POST("/user/job")
     @FormUrlEncoded
     suspend fun createJob(
         @Field("jobTitleId") jobTitleId: Int?,
@@ -39,6 +40,7 @@ interface JobApiService {
         @Field("maxSalary") maxSalary: Double?,
         @Field("experience") experience: String?,
         @Field("education") education: String?,
+        @Field("skills") skills: String?,
     ): Response<BaseResponse<Nothing>>
 
 
@@ -55,7 +57,7 @@ interface JobApiService {
 
     @GET("public/job/{id}")
     suspend fun getJobById(
-        @Path("id") jobId: String
+        @Path("id") jobId: String,
     ): Response<BaseResponse<JobDto>>
 
     //endregion
@@ -65,14 +67,15 @@ interface JobApiService {
     @Multipart
     @POST("/user/post")
     suspend fun createPost(
-        @Part("content") content: String,
+        @Part("content") content: RequestBody,
+        @Part image: MultipartBody.Part?
     ): Response<BaseResponse<PostsDto>>
 
 
 
     @GET("/public/post/{postId}")
     suspend fun getPostById(
-        @Path("postId") postId: String
+        @Path("postId") postId: String,
     ): Response<BaseResponse<PostsDto>>
 
     @GET("/posts")
@@ -97,6 +100,23 @@ interface JobApiService {
     ): Response<BaseResponse<UserDto>>
 
     // endregion
+
+    //region Comment
+
+    @GET("/post/{postId}/comments")
+    suspend fun getComments(
+        @Path("postId") postId: String,
+    ): Response<BaseResponse<List<CommentDto>>>
+
+    @FormUrlEncoded
+    @POST("/post/{postId}/comment")
+    suspend fun createComment(
+        @Path("postId") postId: String,
+        @Field("content") content: String,
+    ): Response<BaseResponse<*>>
+
+//endregion
+
 
     // region Profile
 

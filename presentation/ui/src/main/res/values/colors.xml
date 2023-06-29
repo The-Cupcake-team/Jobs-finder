@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="pure_white">#FFFFFFFF</color>
 
     <color name="surface">@color/white</color>
 
@@ -20,7 +21,6 @@
     <color name="cards">#FFFFFF</color>
     <color name="blue_500">#5D97EF</color>
     <color name="blue_300">#E9EFF6</color>
-
 
 
     <color name="chip_color">#E7EDF5</color>

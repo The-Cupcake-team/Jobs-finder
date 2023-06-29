@@ -4,67 +4,94 @@
 
     <data>
         <variable
-            name="viewmodel"
+            name="viewModel"
             type="com.cupcake.viewmodels.profile.jobs.ProfileJobsViewModel" />
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/background"
-        tools:context=".profile.resume.ProfileJobsFragment">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_recent_saved"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/spacing_tiny"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_profile_saved_jobs"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            />
+            android:layout_height="match_parent"
 
-<!--        <TextView-->
-<!--            android:id="@+id/text_view_title_saved_post"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@string/saved_post"-->
-<!--            style="@style/Text_view_title_profile_see_all"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/recycler_view_recent_post" />-->
+            tools:context=".profile.resume.ProfileJobsFragment">
 
-<!--        <TextView-->
-<!--            android:id="@+id/text_view_title_saved_post_see_all_post"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/text_view_title_saved_post"-->
-<!--            style="@style/Text_view_title_profile_see_all"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@id/text_view_title_saved_post"-->
-<!--            app:drawableEndCompat="@drawable/ic__arrow_right" />-->
+            <TextView
+                android:id="@+id/text_view_title_recent_jobs"
+                style="@style/Text_view_title_profile_post_or_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recent_jobs"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/recycler_view_saved_post"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="@color/background"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/text_view_title_saved_post_see_all_post"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/text_view_title_saved_post"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/text_view_title_saved_post"-->
-<!--            android:layout_marginTop="@dimen/spacing_normal"-->
-<!--            android:layout_marginHorizontal="@dimen/spacing_medium"-->
-<!--            app:items="@{item.state.savedJobs}"-->
-<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--            android:orientation="horizontal"-->
-<!--            tools:listitem="@layout/item_profile_saved_jobs"-->
-<!--            tools:itemCount="2" />-->
+            <TextView
+                android:id="@+id/text_view_title_recent_see_all_job"
+                style="@style/Text_view_title_profile_see_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                app:drawableEndCompat="@drawable/ic__arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_title_recent_jobs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_view_title_recent_jobs" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_recent_jpbs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_tiny"
+                app:items="@{viewModel.state.recentJobs}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title_recent_jobs"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_profile_saved_jobs" />
+
+            <TextView
+                android:id="@+id/text_view_title_saved_jobs"
+                style="@style/Text_view_title_profile_post_or_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saved_post"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recycler_view_recent_jpbs" />
+
+            <TextView
+                android:id="@+id/text_view_title_saved_see_all_job"
+                style="@style/Text_view_title_profile_see_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:drawableEndCompat="@drawable/ic__arrow_right"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_title_saved_jobs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_view_title_saved_jobs" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_saved_jobs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:background="@color/background"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_tiny"
+                app:items="@{viewModel.state.savedJobs}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_title_saved_jobs"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_profile_saved_jobs" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

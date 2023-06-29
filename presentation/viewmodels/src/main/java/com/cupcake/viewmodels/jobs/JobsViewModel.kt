@@ -130,7 +130,8 @@ class JobsViewModel @Inject constructor(
         companyName = this.company,
         detailsChip = listOf(this.workType, this.jobType),
         location = this.jobLocation,
-        salary = this.jobSalary.toString()
+        minSalary = this.jobSalary.minSalary,
+        maxSalary = this.jobSalary.maxSalary
     )
 
 }

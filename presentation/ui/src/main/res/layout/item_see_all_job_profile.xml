@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="item"
+            type="com.cupcake.viewmodels.profile.jobs.ProfileJobUiState" />
+
+        <variable
+            name="listener"
+            type="com.cupcake.viewmodels.profile.jobs.ProfileJobListener"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/card_horizontal_height"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        app:cardCornerRadius="@dimen/spacing_normal"
+        app:cardElevation="@dimen/zero"
+        android:onClick="@{() -> listener.onCardClickListener(item.id)}"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cards"
+            >
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageViewCompanyProfile"
+                android:layout_width="@dimen/profile_image_size"
+                android:layout_height="@dimen/profile_image_size"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{item.image}"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Small"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/textViewJobTitle"
+                style="@style/TextStyle.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@{item.title}"
+                android:textColor="@color/color_text_primary"
+                app:layout_constraintStart_toEndOf="@+id/imageViewCompanyProfile"
+                app:layout_constraintTop_toTopOf="@+id/imageViewCompanyProfile"
+                tools:text="UI/UX Designer" />
+
+            <TextView
+                android:id="@+id/textViewCompanyName"
+                style="@style/TextStyle.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{item.companyName + `,`}"
+                android:textColor="@color/color_text_secondary"
+                app:layout_constraintStart_toStartOf="@+id/textViewJobTitle"
+                app:layout_constraintTop_toBottomOf="@+id/textViewJobTitle"
+                tools:text="Meta," />
+
+            <ImageView
+                android:id="@+id/imageViewMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{() -> listener.onImageViewMoreClickListener(item)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_more" />
+
+            <TextView
+                android:id="@+id/textViewJobType"
+                style="@style/TextStyle.caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_chips_job_card"
+                android:backgroundTint="@color/accent_cyan"
+                android:paddingHorizontal="@dimen/spacing_tiny"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@{item.detailsChip[0]}"
+                android:textColor="@color/color_text_secondary"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewWorkType"
+                app:layout_constraintEnd_toStartOf="@+id/textViewSalary"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textViewWorkType"
+                app:layout_constraintTop_toTopOf="@+id/textViewWorkType"
+                tools:text="On site" />
+
+            <TextView
+                android:id="@+id/textViewWorkType"
+                style="@style/TextStyle.caption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:background="@drawable/background_chips_job_card"
+                android:backgroundTint="@color/accent_purple"
+                android:paddingHorizontal="@dimen/spacing_tiny"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@{item.detailsChip[1]}"
+                android:textColor="@color/color_text_secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textViewJobType"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@+id/imageViewCompanyProfile"
+                app:layout_constraintTop_toBottomOf="@+id/textViewCompanyName"
+                tools:text="Full time" />
+
+            <TextView
+                android:id="@+id/textViewSalary"
+                style="@style/TextStyle.caption"
+                android:layout_width="@dimen/zero"
+                android:layout_height="@dimen/zero"
+                android:background="@drawable/background_chips_job_card"
+                android:backgroundTint="@color/accent_orange"
+                android:paddingHorizontal="@dimen/spacing_tiny"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@{`$`+item.salary}"
+                android:textColor="@color/color_text_secondary"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewJobType"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewMore"
+                app:layout_constraintStart_toEndOf="@+id/textViewJobType"
+                app:layout_constraintTop_toTopOf="@+id/textViewJobType"
+                tools:text="200000k-5000000000000000k" />
+
+            <TextView
+                android:id="@+id/textViewLocation"
+                style="@style/TextStyle.body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:text="@{item.location}"
+                android:textColor="@color/color_text_secondary"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textViewCompanyName"
+                app:layout_constraintStart_toEndOf="@+id/textViewCompanyName"
+                tools:text="Iraq" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

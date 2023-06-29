@@ -7,6 +7,7 @@ import com.cupcake.usecase.register.RegisterUseCase
 import com.cupcake.usecase.validation.ValidateConfirmedPasswordUseCase
 import com.cupcake.usecase.validation.ValidateEmailUseCase
 import com.cupcake.usecase.validation.ValidateFullNameUseCase
+import com.cupcake.usecase.validation.ValidateJobTitleUseCase
 import com.cupcake.usecase.validation.ValidatePasswordUseCase
 import com.cupcake.usecase.validation.ValidateUsernameUseCase
 import com.cupcake.viewmodels.base.BaseErrorUiState
@@ -29,6 +30,7 @@ class RegisterViewModel @Inject constructor(
     private val validateFullName: ValidateFullNameUseCase,
     private val validateUsername: ValidateUsernameUseCase,
     private val validateEmail: ValidateEmailUseCase,
+    private val validateJobTitle: ValidateJobTitleUseCase,
     private val validatePassword: ValidatePasswordUseCase,
     private val validateConfirmedPassword: ValidateConfirmedPasswordUseCase
 ) : BaseViewModel<RegisterUiState>(RegisterUiState()) {
@@ -46,6 +48,7 @@ class RegisterViewModel @Inject constructor(
                     fullName = state.value.fullName,
                     userName = state.value.userName,
                     email = state.value.email,
+                    jobTitle = state.value.jobTitle,
                     password = state.value.password,
                     confirmPassword = state.value.confirmedPassword,
                     jobTitleId = state.value.jobTitleId
@@ -62,14 +65,20 @@ class RegisterViewModel @Inject constructor(
     }
 
     fun onJobTitleChange(query: CharSequence) {
-        searchJobTitle?.cancel()
-        searchJobTitle = viewModelScope.launch {
-            delay(200)
-            tryToExecute(
-                { jobTitles(query.toString()).map { it.toJobTitleUiState() } },
-                ::onGetJobTitleSuccess,
-                ::onError
-            )
+        if (validateJobTitle(query.toString()).isValid){
+            searchJobTitle?.cancel()
+            searchJobTitle = viewModelScope.launch {
+                //delay(200)
+                tryToExecute(
+                    { jobTitles(query.toString()).map { it.toJobTitleUiState() } },
+                    ::onGetJobTitleSuccess,
+                    ::onError
+                )
+            }
+        }else{
+            updateState {
+                it.copy(isJobTitleValid = false)
+            }
         }
     }
 
@@ -77,7 +86,8 @@ class RegisterViewModel @Inject constructor(
         _state.update {
             it.copy(
                 jobTitles = jobTitles,
-                jobTitleId = jobTitles.firstOrNull()?.id ?: 1
+                jobTitleId = jobTitles.firstOrNull()?.id ?: 1,
+                isJobTitleValid = jobTitles.isNotEmpty()
             )
         }
     }

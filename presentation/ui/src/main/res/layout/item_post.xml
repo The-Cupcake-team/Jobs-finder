@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:elevation="@dimen/zero">
+        app:cardCornerRadius="@dimen/zero"
+        app:cardElevation="@dimen/zero">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -31,10 +32,10 @@
                 style="@style/personalImageStyle"
                 android:layout_width="@dimen/profile_image_size"
                 android:layout_height="@dimen/profile_image_size"
-                app:loadImage="@{item.profileImage}"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewCreatedAt"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{item.profileImage}" />
 
             <TextView
                 android:id="@+id/textViewPersonName"
@@ -62,8 +63,8 @@
                 style="@style/TextStyle.caption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:convertTime="@{item.createdAt}"
                 android:textColor="@color/color_text_tertiary"
+                app:convertTime="@{item.createdAt}"
                 app:layout_constraintStart_toStartOf="@+id/textViewJopTitle"
                 app:layout_constraintTop_toBottomOf="@+id/textViewJopTitle"
                 tools:text="@string/created_at" />
@@ -78,7 +79,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textViewPersonName"
                 app:srcCompat="@drawable/ic_more"
-                app:tint="@color/secondary"/>
+                app:tint="@color/secondary" />
 
             <com.cupcake.ui.posts.custom_view.PostExpandableCard
                 android:id="@+id/textViewContent"
@@ -89,24 +90,24 @@
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:paddingBottom="@dimen/spacing_small"
                 android:textColor="@color/color_text_primary"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt"
                 app:layout_constraintBottom_toTopOf="@id/imageViewPostImage"
+                app:layout_constraintTop_toBottomOf="@+id/textViewCreatedAt"
                 app:postFullText="@{item.description}"
-                app:postStartText="@{item.description}"
-                />
+                app:postStartText="@{item.description}" />
+
             <ImageView
                 android:id="@+id/imageViewPostImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/zero"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_normal"
-                app:layout_constraintDimensionRatio="5:4"
                 android:scaleType="centerCrop"
                 android:visibility="gone"
                 app:layout_constraintBottom_toTopOf="@+id/imageViewLike"
+                app:layout_constraintDimensionRatio="5:4"
                 app:layout_constraintTop_toBottomOf="@+id/textViewContent"
-                tools:srcCompat="@drawable/test_post_image"
-                app:loadImage="@{item.image}"/>
+                app:loadImage="@{item.image}"
+                tools:srcCompat="@drawable/test_post_image" />
 
             <ImageView
                 android:id="@+id/imageViewComment"
@@ -118,7 +119,7 @@
                 app:layout_constraintStart_toEndOf="@+id/textViewLikesCount"
                 app:layout_constraintTop_toTopOf="@+id/imageViewLike"
                 app:srcCompat="@drawable/ic_comment"
-                app:tint="@color/secondary"/>
+                app:tint="@color/secondary" />
 
             <TextView
                 android:id="@+id/textViewLikesCount"
@@ -138,8 +139,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_normal"
-                app:isLiked="@{item.isLiked}"
                 android:onClick="@{() -> listener.onLikeClick(item.id)}"
+                app:isLiked="@{item.isLiked}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/tabler_thumb" />
@@ -166,7 +167,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/imageViewComment"
                 app:srcCompat="@drawable/ic_share"
-                app:tint="@color/secondary"/>
+                app:tint="@color/secondary" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
