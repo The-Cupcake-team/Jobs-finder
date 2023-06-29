@@ -37,7 +37,6 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.editTextSearchInput.setText(args.jobTitle)
         setUpAdapter()
         setUpFilterBottomSheet()
         onBackNavigationIconClicked()
@@ -79,6 +78,7 @@ class JobSearchFragment : BaseFragment<FragmentJobSearchBinding, JobSearchViewMo
 
     override fun onResume() {
         super.onResume()
+        viewModel.setSearchText(args.jobTitle)
         handelJobsSearchEvent()
     }
 

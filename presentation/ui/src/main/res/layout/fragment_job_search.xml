@@ -44,6 +44,7 @@
             android:drawablePadding="@dimen/spacing_normal"
             android:hint="@string/search"
             android:inputType="text"
+            android:text="@{viewModel.state.searchInput}"
             android:onTextChanged="@{(text,start,before,count) -> viewModel.onSearchInputChange(text)}"
             android:paddingStart="@dimen/spacing_medium"
             app:layout_constraintTop_toBottomOf="@+id/tool_bar"
@@ -81,12 +82,10 @@
         <include
             android:id="@+id/loading"
             layout="@layout/loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSearchInput"
+            app:layout_constraintTop_toTopOf="parent"
             app:showWhenIf="@{viewModel.state.loading}"
             bind:isLoading="@{viewModel.state.loading}" />
 
@@ -98,7 +97,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextSearchInput"
             app:showWhenIf="@{viewModel.state.error != null}"
             bind:error="@{viewModel.state.error}" />
 
