@@ -1,19 +1,23 @@
 package com.cupcake.remote.interceptor
 
+import com.cupcake.remote.local.AuthDataStore
 import okhttp3.CacheControl
 import okhttp3.Interceptor
 import okhttp3.Response
+import java.security.AuthProvider
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthInterceptor @Inject constructor() : Interceptor {
+class AuthInterceptor @Inject constructor(
+    private val authDataStore: AuthDataStore
+) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
             .newBuilder()
             .cacheControl(cacheControl)
-            .header(AUTHORIZATION, "$BEARER $TOKEN")
+            .header(AUTHORIZATION, "$BEARER ${authDataStore.getAuthToken()}")
             .build()
         return chain.proceed(request)
     }
@@ -26,7 +30,6 @@ class AuthInterceptor @Inject constructor() : Interceptor {
     private companion object {
         const val AUTHORIZATION = "Authorization"
         const val BEARER = "bearer"
-         val TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4ZTdiMDMxMC00Zjc1LTRhZGMtYTlmNS05NDdkMzFmYWZhYTQiLCJleHAiOjE2ODgwNjM1OTd9.lcuM3HUouS3X-dN6yjVu1eR_a0ZIvrUST_ATkBLNB7k"
     }
 
 

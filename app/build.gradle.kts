@@ -52,6 +52,7 @@ dependencies {
     implementation(project(Modules.PRESENTATION_UI))
 
     implementation(DependencyProject.androidxCore)
+    implementation(DependencyProject.compat)
     testImplementation(DependencyProject.junit)
     androidTestImplementation(DependencyProject.junitExtension)
     androidTestImplementation(DependencyProject.espresso)
@@ -74,5 +75,7 @@ dependencies {
     kapt(DependencyProject.room)
 
     implementation(DependencyProject.splashScreen)
+
+    implementation(DependencyProject.dataStore)
 
 }

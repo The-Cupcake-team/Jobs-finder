@@ -1,5 +1,6 @@
 package com.cupcake.usecase.login
 
+import com.cupcake.models.ValidationResult
 import com.cupcake.usecase.validation.ValidatePasswordUseCase
 import com.cupcake.usecase.validation.ValidateUsernameUseCase
 import javax.inject.Inject
@@ -11,8 +12,10 @@ class ValidateLoginFormUseCase @Inject constructor(
     operator fun invoke(
         userName: String,
         password: String
-    ): Boolean {
-        return validateUsername(userName).isValid &&
-                validatePassword(password).isValid
+    ): List<ValidationResult> {
+        return listOf(
+            validateUsername(userName),
+            validatePassword(password)
+        )
     }
 }

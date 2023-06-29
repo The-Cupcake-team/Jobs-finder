@@ -288,9 +288,7 @@
     <style name="outlineButton.edite" parent="outlineButton">
         <item name="strokeColor">@color/border_color_edite</item>
         <item name="android:textAppearance">@style/TextStyle.body</item>
-
     </style>
-
 
 
     <style name="edit_text_post_comments_style" parent="TextStyle.body">
@@ -306,12 +304,12 @@
     </style>
 
 
-
     <!-- set the rounded drawable as background to your bottom sheet -->
     <style name="BaseBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="bottomSheetStyle">@style/BottomSheet</item>
     </style>
+
     <style name="BottomSheet" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/rounded_dialog</item>
     </style>
@@ -330,17 +328,20 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopRight">@dimen/login_card_radius</item>
         <item name="cornerSizeTopLeft">@dimen/login_card_radius</item>
+        <item name="cornerSizeBottomRight">@dimen/zero</item>
+        <item name="cornerSizeBottomLeft">@dimen/zero</item>
     </style>
 
     <!-- profile screen -->
-    <style name="Text_view_title_profile_post_or_job" >
+    <style name="Text_view_title_profile_post_or_job">
         <item name="android:layout_marginTop">@dimen/spacing_medium</item>
         <item name="android:layout_marginStart">@dimen/spacing_medium</item>
         <item name="android:fontFamily">@font/worksans_semibold</item>
         <item name="android:textSize">@dimen/text_size_headline</item>
         <item name="android:textColor">@color/color_text_primary</item>
     </style>
-    <style name="Text_view_title_profile_see_all" >
+
+    <style name="Text_view_title_profile_see_all">
         <item name="android:layout_marginEnd">@dimen/spacing_medium</item>
         <item name="android:fontFamily">@font/worksans_regular</item>
         <item name="android:textSize">@dimen/text_size_caption</item>

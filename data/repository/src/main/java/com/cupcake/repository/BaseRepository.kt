@@ -3,6 +3,7 @@ package com.cupcake.repository
 import android.util.Log
 import com.cupcake.models.ErrorType
 import com.cupcake.remote.response.base.BaseResponse
+import org.json.JSONObject
 import retrofit2.Response
 import java.net.UnknownHostException
 
@@ -25,7 +26,6 @@ abstract class BaseRepository {
                 val errorResponse = response.errorBody()?.toString()
                 throw ErrorType.Server("Network Error")
             }
-
         }catch (e:UnknownHostException){
             throw ErrorType.Network("Network Error")
         }

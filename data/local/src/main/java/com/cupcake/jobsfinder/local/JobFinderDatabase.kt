@@ -14,7 +14,7 @@ import com.cupcake.jobsfinder.local.entities.ProfileEntity
         PostsEntity::class,
         ProfileEntity::class
     ],
-    version = 5,
+    version = 1,
     exportSchema = false
 )
 abstract class JobFinderDatabase: RoomDatabase() {

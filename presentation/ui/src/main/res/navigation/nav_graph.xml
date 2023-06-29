@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/createJobFragment"
@@ -114,7 +114,17 @@
     <fragment
         android:id="@+id/createPostFragment"
         android:name="com.cupcake.ui.post.CreatePostFragment"
-        tools:layout="@layout/fragment_create_post" />
+        tools:layout="@layout/fragment_create_post" >
+        <action
+            android:id="@+id/action_createPostFragment_to_postsFragment"
+            app:destination="@id/postsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_createPostFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment"
+            app:popUpTo="@id/postsFragment"/>
+    </fragment>
 
     <fragment
         android:id="@+id/jobDetailsFragment"
@@ -283,6 +293,18 @@
         <action
             android:id="@+id/action_jobProfileSeeAllSavedFragment_to_jobDetailsFragment"
             app:destination="@id/jobDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.cupcake.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_postsFragment"
+            app:destination="@id/postsFragment" />
     </fragment>
 
 

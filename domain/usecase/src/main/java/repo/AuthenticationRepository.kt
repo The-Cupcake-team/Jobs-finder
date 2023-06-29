@@ -17,11 +17,12 @@ interface AuthenticationRepository {
         password: String
     ): User
 
-    suspend fun saveAuthData(token: Token)
+    suspend fun saveAuthData(token: Token, isLogged : Boolean)
 
     suspend fun getAuthToken(): String?
 
     suspend fun getAuthTokenExpireTime(): Long?
 
     suspend fun clearAuthData()
+    suspend fun isLoggedIn() : Boolean
 }

@@ -11,14 +11,14 @@ class LoginUseCase @Inject constructor(
     private val authenticationRepository: AuthenticationRepository
 ) {
     suspend operator fun invoke(userName: String, password: String) {
-        val isValid = validateLoginForm(userName, password)
+        val validationResults = validateLoginForm(userName, password)
 
-        if (!isValid) {
-            throw ErrorType.UnAuthorized(ERROR)
+        if (validationResults.any { !it.isValid }) {
+            throw ErrorType.UnAuthorized(validationResults)
         }
 
         val user = authenticationRepository.login(userName, password)
-        authenticationRepository.saveAuthData(user.token)
+        authenticationRepository.saveAuthData(user.token, true)
         jobsFinderRepository.insertProfile(user)
         jobsFinderRepository.saveProfileData(user.profile.avatar, user.profile.jobTitle.id)
     }

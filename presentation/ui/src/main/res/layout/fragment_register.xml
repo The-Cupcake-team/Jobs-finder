@@ -136,7 +136,6 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutJobTitle"
                 style="@style/TextInputLayoutStyle"
-                app:helperText="@{viewModel.state.jobTitleError}"
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_normal"
@@ -145,15 +144,17 @@
                 app:boxStrokeWidth="@dimen/zero"
                 app:boxStrokeWidthFocused="@dimen/zero"
                 app:endIconMode="clear_text"
+                app:helperText="@{viewModel.state.jobTitleError}"
+                app:helperTextTextColor="@color/accent_red"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewJobTitle">
 
                 <AutoCompleteTextView
                     style="@style/TextStyle.body"
+                    setIcons="@{viewModel.state.isJobTitleValid}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    setIcons="@{viewModel.state.isJobTitleValid}"
                     android:background="@drawable/edit_text_background"
                     android:completionThreshold="1"
                     android:focusable="true"
@@ -328,8 +329,8 @@
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:elevation="@dimen/spacing_normal"
                 android:indeterminateTint="@color/blue_300"
                 android:visibility="gone"

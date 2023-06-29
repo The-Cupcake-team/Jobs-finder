@@ -13,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -70,6 +71,7 @@ class CreatePostViewModel @Inject constructor(
         updateState { it.copy(postImage = imageData, isImageSelectionCanceled = true) }
     }
 
+
     init {
         viewModelScope.launch {
             getProfileData()
@@ -93,5 +95,16 @@ class CreatePostViewModel @Inject constructor(
             fullName = fullName,
             JobTitle = jobTitles,
         )
+
+    }
+
+
+    fun onRetryClicked(content: String){
+        _state.update {it.copy(error = null, isLoading = false) }
+        createPost(content)
+    }
+
+    fun onPostContentChange(){
+        _state.update {it.copy(error = null, isLoading = false) }
     }
 }

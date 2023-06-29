@@ -11,7 +11,6 @@ android {
     defaultConfig {
         minSdk = ConfigurationData.MIN_SDK_VERSION
 
-
         testInstrumentationRunner = ConfigurationData.TEST_INSTRUMENTATION_RUNNER
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -34,8 +33,6 @@ android {
 }
 
 dependencies {
-    implementation(DependencyProject.androidxCore)
-    implementation(DependencyProject.compat)
     testImplementation(DependencyProject.junit)
     androidTestImplementation(DependencyProject.junitExtension)
     androidTestImplementation(DependencyProject.espresso)
