@@ -6,12 +6,6 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/createJobFragment"
-        android:name="com.cupcake.ui.create_job.CreateJobFragment"
-        android:label="CreateJobFragment"
-        tools:layout="@layout/fragment_create_job" />
-
-    <fragment
         android:id="@+id/postsFragment"
         android:name="com.cupcake.ui.posts.PostsFragment"
         android:label="PostsFragment" >
