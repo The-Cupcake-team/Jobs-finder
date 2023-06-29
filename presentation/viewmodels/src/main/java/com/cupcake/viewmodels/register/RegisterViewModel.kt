@@ -16,7 +16,6 @@ import com.cupcake.viewmodels.jobs.JobTitleUiState
 import com.cupcake.viewmodels.jobs.toJobTitleUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.update
@@ -29,10 +28,10 @@ class RegisterViewModel @Inject constructor(
     private val jobTitles: GetAllJobTitleUseCase,
     private val validateFullName: ValidateFullNameUseCase,
     private val validateUsername: ValidateUsernameUseCase,
-    private val validateEmail: ValidateEmailUseCase,
     private val validateJobTitle: ValidateJobTitleUseCase,
+    private val validateEmail: ValidateEmailUseCase,
     private val validatePassword: ValidatePasswordUseCase,
-    private val validateConfirmedPassword: ValidateConfirmedPasswordUseCase
+    private val validateConfirmedPassword: ValidateConfirmedPasswordUseCase,
 ) : BaseViewModel<RegisterUiState>(RegisterUiState()) {
 
     private val _event = MutableSharedFlow<RegisterEvent>()
@@ -65,19 +64,27 @@ class RegisterViewModel @Inject constructor(
     }
 
     fun onJobTitleChange(query: CharSequence) {
-        if (validateJobTitle(query.toString()).isValid){
+        val validateJobTitle = validateJobTitle(query.toString())
+        updateState {
+            it.copy(
+                jobTitleError = validateJobTitle.errorMessage,
+                isJobTitleValid = validateJobTitle.isValid
+            )
+        }
+
+        getJobTitles(validateJobTitle.isValid, query.toString())
+    }
+
+    private fun getJobTitles(isValid: Boolean, query: String) {
+        if (isValid) {
             searchJobTitle?.cancel()
             searchJobTitle = viewModelScope.launch {
                 //delay(200)
                 tryToExecute(
-                    { jobTitles(query.toString()).map { it.toJobTitleUiState() } },
+                    { jobTitles(query).map { it.toJobTitleUiState() } },
                     ::onGetJobTitleSuccess,
                     ::onError
                 )
-            }
-        }else{
-            updateState {
-                it.copy(isJobTitleValid = false)
             }
         }
     }
@@ -86,71 +93,93 @@ class RegisterViewModel @Inject constructor(
         _state.update {
             it.copy(
                 jobTitles = jobTitles,
-                jobTitleId = jobTitles.firstOrNull()?.id ?: 1,
+                jobTitle = jobTitles.firstOrNull()?.title ?: "",
+                jobTitleId = jobTitles.firstOrNull()?.id ?: 0,
                 isJobTitleValid = jobTitles.isNotEmpty()
             )
         }
     }
 
     private fun onError(error: BaseErrorUiState) {
-        updateState { it.copy(isLoading = false) }
-        viewModelScope.launch { _event.emit(RegisterEvent.ShowErrorMessage(error.errorCode)) }
+        if (error is BaseErrorUiState.UnAuthorized) {
+            updateState {
+                it.copy(
+                    isLoading = false,
+                    fullNameError = error.validationResults.component1().errorMessage,
+                    isFullNameValid = error.validationResults.component1().isValid,
+                    userNameError = error.validationResults.component2().errorMessage,
+                    isUserNameValid = error.validationResults.component2().isValid,
+                    jobTitleError = error.validationResults.component3().errorMessage,
+                    isJobTitleValid = error.validationResults.component3().isValid,
+                    emailError = error.validationResults.component4().errorMessage,
+                    isEmailValid = error.validationResults.component4().isValid,
+                    passwordError = error.validationResults.component5().errorMessage,
+                    isPasswordValid = error.validationResults.component5().isValid,
+                    confirmedPasswordError = error.validationResults[5].errorMessage,
+                    isConfirmedPasswordValid = error.validationResults[5].isValid
+                )
+            }
+        } else {
+            updateState { it.copy(isLoading = false) }
+            viewModelScope.launch { _event.emit(RegisterEvent.ShowErrorMessage(error.errorCode)) }
+        }
+
     }
 
     fun onFullNameChange(fullName: String) {
-        val fullNameValidation = validateFullName(fullName)
+        val validationResult = validateFullName(fullName)
         updateState {
             it.copy(
                 fullName = fullName,
-                fullNameError = fullNameValidation.errorMessage,
-                isFullNameValid = fullNameValidation.isValid
+                fullNameError = validationResult.errorMessage,
+                isFullNameValid = validationResult.isValid
             )
         }
     }
 
     fun onUserNameChange(userName: String) {
-        val userNameValidation = validateUsername(userName)
+        val validationResult = validateUsername(userName)
         updateState {
             it.copy(
                 userName = userName,
-                userNameError = userNameValidation.errorMessage,
-                isUserNameValid = userNameValidation.isValid
+                userNameError = validationResult.errorMessage,
+                isUserNameValid = validationResult.isValid
             )
         }
     }
 
     fun onEmailChange(email: String) {
-        val emailValidation = validateEmail(email)
+        val validationResult = validateEmail(email)
         updateState {
             it.copy(
                 email = email,
-                emailError = emailValidation.errorMessage,
-                isEmailValid = emailValidation.isValid
+                emailError = validationResult.errorMessage,
+                isEmailValid = validationResult.isValid
             )
         }
     }
 
     fun onPasswordChange(password: String) {
-        val passwordValidation = validatePassword(password)
+        val validationResult = validatePassword(password)
         updateState {
             it.copy(
                 password = password,
-                passwordError = passwordValidation.errorMessage,
-                isPasswordValid = passwordValidation.isValid
+                passwordError = validationResult.errorMessage,
+                isPasswordValid = validationResult.isValid
             )
         }
     }
 
     fun onConfirmPasswordChange(confirmPassword: String) {
-        val confirmPasswordValidation = validateConfirmedPassword(
+        val validationResult = validateConfirmedPassword(
             password = state.value.password,
             confirmedPassword = confirmPassword
         )
         updateState {
             it.copy(
                 confirmedPassword = confirmPassword,
-                confirmedPasswordError = confirmPasswordValidation.errorMessage,
-                isConfirmedPasswordValid = confirmPasswordValidation.isValid
+                confirmedPasswordError = validationResult.errorMessage,
+                isConfirmedPasswordValid = validationResult.isValid
             )
         }
     }

@@ -34,7 +34,7 @@ abstract class BaseViewModel<STATE>(initialUiState: STATE) : ViewModel() {
             } catch (error: ErrorType.Network) {
                 onError(BaseErrorUiState.Disconnected(error.message.toString())) //500
             } catch (error: ErrorType.UnAuthorized) {
-                onError(BaseErrorUiState.UnAuthorized(error.message.toString()))
+                onError(BaseErrorUiState.UnAuthorized(error.validationResults))
             } catch (error: ErrorType.Server) {
                 onError(BaseErrorUiState.ServerError(error.message.toString()))
             } catch (error: ErrorType.Unknown) {

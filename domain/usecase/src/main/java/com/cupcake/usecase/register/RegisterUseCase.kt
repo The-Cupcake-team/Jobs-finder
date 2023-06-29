@@ -23,10 +23,11 @@ class RegisterUseCase @Inject constructor(
         jobTitleId: Int
     ): User {
 
-        val isValid = validateRegisterForm(fullName, userName, email, jobTitle, password, confirmPassword)
+        val validationResult =
+            validateRegisterForm(fullName, userName, email, jobTitle, password, confirmPassword)
 
-        if (!isValid) {
-            throw ErrorType.UnAuthorized(ERROR)
+        if (validationResult.any { !it.isValid }) {
+            throw ErrorType.UnAuthorized(validationResult)
         }
 
         val user =
